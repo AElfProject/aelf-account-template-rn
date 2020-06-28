@@ -1,9 +1,10 @@
 import ListComponent from './ListComponent';
 import Touchable from './Touchable';
 import WordRotation from './WordRotation';
-
-export{
+// import CommonHeader from './CommonHeader'
+export {
     WordRotation,
     Touchable,
-    ListComponent
+    ListComponent,
+    // CommonHeader
 }

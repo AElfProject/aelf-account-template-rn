@@ -3,6 +3,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../Home'
 import MineScreen from "../Mine";
+import { pixelSize } from "../../utils/device";
 const Tab = createBottomTabNavigator();
 
 const tabNav = [
@@ -32,7 +33,7 @@ const TabNavigatorStack = () => (
             inactiveTintColor: Colors.fontBlack,
             style: {
                 borderTopColor: "#ececec",
-                borderWidth: pTd(1)
+                borderWidth: pixelSize
             },
             keyboardHidesTabBar: true    //hide tab
         }}>

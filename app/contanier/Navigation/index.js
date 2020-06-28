@@ -9,7 +9,6 @@ const Stack = createStackNavigator();
 const stackNav = [
     { name: 'Tab', component: Tab },
 ];
-
 const NavigationMain = () => (
     <NavigationContainer ref={navigationService.setTopLevelNavigator}>
         <Stack.Navigator

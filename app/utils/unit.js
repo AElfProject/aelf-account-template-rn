@@ -8,7 +8,7 @@ const uiWidthPx = 750;
 
 // px 转 dp（设计稿中的 px 转 rn 中的 dp）
 const pTd = (uiElePx) => {
-    return uiElePx * deviceWidthDp / uiWidthPx;
+    return Math.round(uiElePx * deviceWidthDp / uiWidthPx);
 }
-
+global.pTd = pTd
 export default pTd

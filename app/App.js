@@ -4,8 +4,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import createStore from './redux';
-import NavigationMain from './contanier/Navigation'
-import './config/globalBind';
+import NavigationMain from './contanier/Navigation';
 
 const { store, persistor } = createStore();
 

@@ -1,4 +1,4 @@
-export default {
+const Colors = {
     primaryColor: "#817AFD", //网页主要颜色
 
     borderColor: "#d8d8d8", //边框颜色
@@ -12,3 +12,5 @@ export default {
     btnDefault: "",
     btnColor: "#8FC323", //绿色按钮
 };
+global.Colors = Colors;
+export default Colors;

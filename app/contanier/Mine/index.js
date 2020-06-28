@@ -1,9 +1,9 @@
 import React from "react";
-import { Text } from "react-native";
+import CommonHeader from "../../components/CommonHeader";
 
 const Mine = () => {
     return (
-        <Text>MINE</Text>
+        <CommonHeader title='Mine' />
     );
 }
 export default Mine;
