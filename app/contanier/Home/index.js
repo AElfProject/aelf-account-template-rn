@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import Toast from 'teaset/components/Toast/Toast'
-import { OverlayModal, CommonHeader } from '../../components';
+import { OverlayModal, CommonHeader, Touchable } from '../../components';
 const Home = () => {
     const ReduxStore = useSelector(state => state.user, shallowEqual);
 
@@ -13,13 +13,13 @@ const Home = () => {
             <TouchableOpacity onPress={() => {
                 OverlayModal.show(
                     (
-                        <TouchableOpacity onPress={() => {
+                        <Touchable onPress={() => {
                             OverlayModal.hide()
                         }} style={{ flex: 1, backgroundColor: 'red', alignItems: 'center', justifyContent: 'center' }}>
                             <TouchableOpacity onPress={() => {
                                 Toast.success('登录成功');
                             }} style={{ height: 100, width: 100, backgroundColor: 'white' }}></TouchableOpacity>
-                        </TouchableOpacity>
+                        </Touchable>
                     )
                 )
                 dispatch({ type: 'SET_TEST', test: 'hhhhhhh' })

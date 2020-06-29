@@ -8,8 +8,7 @@ import PropTypes from 'prop-types'
 
 // Touchable hooks
 
-const Touchable = (props) => {
-
+const Touchable = (props) => {    
     let time = null
     const handlonLongPress = (props) => {
         const { onLongPress } = props
