@@ -4,14 +4,15 @@ import { View } from 'react-native';
 import { sreenHeight, sreenWidth } from '../../utils/device';
 
 let elements = [];
+
 export default class OverlayModal extends React.Component {
     static show(component, overlayProps = {}) {
         let overlayView = (
             <Overlay.PopView
                 modal={false}
-                style={{ flex: 1, backgroundColor: 'white' }}
-                ref={v => elements.push(v)}
                 type='custom'
+                ref={v => elements.push(v)}
+                style={{ flex: 1, backgroundColor: 'white' }}
                 customBounds={{ x: 0, y: sreenHeight, width: sreenWidth, height: 0 }}
                 {...overlayProps}
             >
@@ -35,7 +36,7 @@ export default class OverlayModal extends React.Component {
         elements = []
     }
 
-    componentWillUnmount() {
+    componentWillUnmount() {        
         OverlayModal.destroy()
     }
 }

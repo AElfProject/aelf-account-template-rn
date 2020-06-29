@@ -186,6 +186,7 @@ android {
         }
     }
 }
+apply from: '../../node_modules/react-native-unimodules/gradle.groovy'
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])

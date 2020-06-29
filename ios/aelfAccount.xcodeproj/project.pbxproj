@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* aelfAccountTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* aelfAccountTests.m */; };
+		03D0FEBBFB1AB0BB1434E952 /* libPods-aelfAccount-aelfAccountTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF621780E0E708141A86531 /* libPods-aelfAccount-aelfAccountTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -19,7 +20,6 @@
 		2DCD954D1E0B4F2C00145EB5 /* aelfAccountTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* aelfAccountTests.m */; };
 		835302631C815EC19CA62B2D /* libPods-aelfAccount-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B719F16A490470F41C014B8 /* libPods-aelfAccount-tvOSTests.a */; };
 		C038A68FB5CC1C6332D64326 /* libPods-aelfAccount-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 740518F99F57BFBDF1248B55 /* libPods-aelfAccount-tvOS.a */; };
-		FABF5CDB3B04E82457771B77 /* libPods-aelfAccount-aelfAccountTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B487A79147CF5C176AA928F /* libPods-aelfAccount-aelfAccountTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,10 +55,12 @@
 		24A2C7DD47965391054F7759 /* Pods-aelfAccount-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-aelfAccount-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-aelfAccount-tvOSTests/Pods-aelfAccount-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* aelfAccount-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "aelfAccount-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* aelfAccount-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "aelfAccount-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B487A79147CF5C176AA928F /* libPods-aelfAccount-aelfAccountTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-aelfAccount-aelfAccountTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3777C1D68FA725F4468420F1 /* Pods-aelfAccountTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-aelfAccountTests.release.xcconfig"; path = "Target Support Files/Pods-aelfAccountTests/Pods-aelfAccountTests.release.xcconfig"; sourceTree = "<group>"; };
 		6421171AF07A2956A127BE8E /* Pods-aelfAccount-aelfAccountTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-aelfAccount-aelfAccountTests.debug.xcconfig"; path = "Target Support Files/Pods-aelfAccount-aelfAccountTests/Pods-aelfAccount-aelfAccountTests.debug.xcconfig"; sourceTree = "<group>"; };
+		65EE9F16FCFBD4C35CFE3445 /* Pods-aelfAccountTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-aelfAccountTests.debug.xcconfig"; path = "Target Support Files/Pods-aelfAccountTests/Pods-aelfAccountTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6B719F16A490470F41C014B8 /* libPods-aelfAccount-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-aelfAccount-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		740518F99F57BFBDF1248B55 /* libPods-aelfAccount-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-aelfAccount-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFF621780E0E708141A86531 /* libPods-aelfAccount-aelfAccountTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-aelfAccount-aelfAccountTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEB4FEC56178388E5E1DAD95 /* Pods-aelfAccount-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-aelfAccount-tvOS.release.xcconfig"; path = "Target Support Files/Pods-aelfAccount-tvOS/Pods-aelfAccount-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		BF4F80737AFFE1725255373A /* Pods-aelfAccount-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-aelfAccount-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-aelfAccount-tvOS/Pods-aelfAccount-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		C5B984D5AA611C0F4E213E30 /* Pods-aelfAccount-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-aelfAccount-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-aelfAccount-tvOSTests/Pods-aelfAccount-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -74,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FABF5CDB3B04E82457771B77 /* libPods-aelfAccount-aelfAccountTests.a in Frameworks */,
+				03D0FEBBFB1AB0BB1434E952 /* libPods-aelfAccount-aelfAccountTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,9 +144,9 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				044769FD47173B5FA8E24C2A /* libPods-aelfAccount.a */,
-				3B487A79147CF5C176AA928F /* libPods-aelfAccount-aelfAccountTests.a */,
 				740518F99F57BFBDF1248B55 /* libPods-aelfAccount-tvOS.a */,
 				6B719F16A490470F41C014B8 /* libPods-aelfAccount-tvOSTests.a */,
+				AFF621780E0E708141A86531 /* libPods-aelfAccount-aelfAccountTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -193,6 +195,8 @@
 				BEB4FEC56178388E5E1DAD95 /* Pods-aelfAccount-tvOS.release.xcconfig */,
 				24A2C7DD47965391054F7759 /* Pods-aelfAccount-tvOSTests.debug.xcconfig */,
 				C5B984D5AA611C0F4E213E30 /* Pods-aelfAccount-tvOSTests.release.xcconfig */,
+				65EE9F16FCFBD4C35CFE3445 /* Pods-aelfAccountTests.debug.xcconfig */,
+				3777C1D68FA725F4468420F1 /* Pods-aelfAccountTests.release.xcconfig */,
 			);
 			name = Pods;
 			path = Pods;
@@ -209,7 +213,7 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				A69D9FDCC8CD5F240FEF4E76 /* [CP] Copy Pods Resources */,
+				ECD39DFE4E8AFF4EC51E97D7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -527,7 +531,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A69D9FDCC8CD5F240FEF4E76 /* [CP] Copy Pods Resources */ = {
+		ECD39DFE4E8AFF4EC51E97D7 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
