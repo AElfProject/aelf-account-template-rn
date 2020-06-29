@@ -1,5 +1,5 @@
 import React from 'react'
-import { Overlay } from "teaset";
+import Overlay from "teaset/components/Overlay/Overlay";
 import { View } from 'react-native';
 import { sreenHeight, sreenWidth } from '../../utils/device';
 
@@ -36,7 +36,7 @@ export default class OverlayModal extends React.Component {
         elements = []
     }
 
-    componentWillUnmount() {        
+    componentWillUnmount() {
         OverlayModal.destroy()
     }
 }
