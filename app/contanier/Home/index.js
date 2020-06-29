@@ -2,8 +2,7 @@ import React from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import Toast from 'teaset/components/Toast/Toast'
-import CommonHeader from "../../components/CommonHeader";
-import OverlayModal from "../../components/OverlayModal";
+import { OverlayModal, CommonHeader } from '../../components';
 const Home = () => {
     const ReduxStore = useSelector(state => state.user, shallowEqual);
 
