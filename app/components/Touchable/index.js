@@ -27,8 +27,8 @@ const Touchable = (props) => {
     const { onPressIn, onPress, highlight, children, style } = props
     if (highlight) {
         return (
-            <TouchableHighlight {...props} onPressIn={onPressIn ? handleClickThrottled : null} onPress={onPress ? handleClickThrottled : null} >
-                <View style={style}>
+            <TouchableHighlight style={style} {...props} onPressIn={onPressIn ? handleClickThrottled : null} onPress={onPress ? handleClickThrottled : null} >
+                <View >
                     {children}
                 </View>
             </TouchableHighlight>

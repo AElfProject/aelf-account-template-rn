@@ -1,29 +1,55 @@
-import React from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
-import Toast from 'teaset/components/Toast/Toast'
-import { OverlayModal, CommonHeader, Touchable } from '../../components';
-const Home = () => {
-    const ReduxStore = useSelector(state => state.user, shallowEqual);
+import { OverlayModal, CommonHeader, Touchable, CommonButton, Loading, BounceSpinner, CommonToast } from '../../components';
+import { TextL } from "../../components/CommonText";
 
+const Home = () => {
+    const { test } = useSelector(state => state.user, shallowEqual);
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
     return (
         <>
             <CommonHeader title='Home' />
-            <TouchableOpacity onPress={() => {
+            <CommonButton title='Examples' disabled />
+            <CommonButton title='Modal' onPress={() => {
                 OverlayModal.show(
                     (
                         <Touchable onPress={() => {
                             OverlayModal.hide()
                         }} style={{ flex: 1, backgroundColor: 'red', alignItems: 'center', justifyContent: 'center' }}>
-                            <TouchableOpacity onPress={() => {
-                                Toast.success('登录成功');
-                            }} style={{ height: 100, width: 100, backgroundColor: 'white' }}></TouchableOpacity>
+                            <Touchable onPress={() => {
+                                OverlayModal.hide()
+                            }} style={{ height: 100, width: 100, backgroundColor: 'white' }}></Touchable>
                         </Touchable>
                     )
                 )
-                dispatch({ type: 'SET_TEST', test: 'hhhhhhh' })
-            }} style={{ backgroundColor: 'red', height: 100, width: 100 }}></TouchableOpacity>
+            }} />
+            <CommonButton title='Loading' onPress={() => {
+                Loading.show()
+                setTimeout(() => {
+                    Loading.hide()
+                }, 5000);
+            }} />
+            <CommonButton title='buttonLoading' loading={loading}
+                onPress={() => {
+                    setLoading(true)
+                    setTimeout(() => {
+                        setLoading(false)
+                    }, 5000);
+                }} />
+            <CommonButton title='ToastSuccess' onPress={() => {
+                CommonToast.success('Success');
+            }} />
+            <CommonButton title='ToastFail' onPress={() => {
+                CommonToast.fail('Fail');
+            }} />
+            <CommonButton title='Toast' onPress={() => {
+                CommonToast.text('Toast')
+            }} />
+            <TextL>{test}</TextL>
+            <CommonButton title='Modify Redux' onPress={() => {
+                dispatch({ type: 'SET_TEST', test: test + 'biu ' })
+            }} />
         </>
     );
 }

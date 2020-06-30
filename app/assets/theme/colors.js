@@ -1,5 +1,8 @@
 const Colors = {
-    primaryColor: "#817AFD", //网页主要颜色
+    
+    primaryColor: "#817AFD", //主要颜色
+    bottonPressColor:'#5b29aa',//按钮按下颜色
+    disabledColor:'#d7d7d7', //按钮禁止交互颜色
 
     borderColor: "#d8d8d8", //边框颜色
 
@@ -13,4 +16,5 @@ const Colors = {
     btnColor: "#8FC323", //绿色按钮
 };
 global.Colors = Colors;
+
 export default Colors;
