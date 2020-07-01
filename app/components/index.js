@@ -7,6 +7,7 @@ import BounceSpinner from './BounceSpinner';
 import CommonButton from './CommonButton';
 import Loading from './Loading';
 import CommonToast from './CommonToast';
+import ActionSheet from './ActionSheet'
 export {
     WordRotation,
     Touchable,
@@ -16,5 +17,6 @@ export {
     BounceSpinner,
     CommonButton,
     Loading,
-    CommonToast
+    CommonToast,
+    ActionSheet
 }

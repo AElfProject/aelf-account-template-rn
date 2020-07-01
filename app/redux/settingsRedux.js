@@ -1,40 +1,40 @@
 import { createReducer, createActions } from 'reduxsauce';
 import Immutable from 'seamless-immutable';
 import { createSelector } from 'reselect';
-
+import i18n from 'i18n-js'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-    setTest: ['test']
+    changeLanguage: ['language']
 })
 
-export const UserTypes = Types
+export const settingsTypes = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-    test: 'default'
+    language: null
 })
 
 /* ------------- Selectors ------------- */
 
-const _baseSelector = state => state.user
+const _baseSelector = state => state.settings
 
-export const UserType = {
-    getTest: createSelector(
+export const SettingsType = {
+    getLanguage: createSelector(
         _baseSelector,
-        base => base.test
+        base => base.language
     ),
 }
 
 /* ------------- Reducers ------------- */
-// set test
-export const setTest = (state, { test }) => {
-    return state.merge({ test })
+export const changeLanguage = (state, { language }) => {
+    i18n.switchLanguage(language)
+    return state.merge({ language })
 }
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-    [Types.SET_TEST]: setTest,
+    [Types.CHANGE_LANGUAGE]: changeLanguage,
 })

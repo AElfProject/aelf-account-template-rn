@@ -3,6 +3,7 @@ import { persistReducer, persistStore } from 'redux-persist'
 import reduxPersist from '../config/reduxPersist'
 export const reducers = combineReducers({
     user: require('./userRedux').reducer,
+    settings: require('./settingsRedux').reducer
 })
 
 export default () => {

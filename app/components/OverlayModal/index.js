@@ -2,6 +2,7 @@ import React from 'react'
 import Overlay from "teaset/components/Overlay/Overlay";
 import { View } from 'react-native';
 import { sreenHeight, sreenWidth } from '../../utils/device';
+import Touchable from '../Touchable';
 
 let elements = [];
 const customBounds = {
@@ -17,13 +18,12 @@ export default class OverlayModal extends React.Component {
                 modal={false}
                 type='custom'
                 ref={v => elements.push(v)}
-                style={{ flex: 1, backgroundColor: 'white' }}
+                style={{ backgroundColor: 'white' }}
+                containerStyle={{ flex: 1 }}
                 customBounds={customBounds}
                 {...overlayProps}
             >
-                <View style={{ height: '100%' }}>
-                    {component}
-                </View>
+                {component}
             </Overlay.PopView >
         );
         Overlay.show(overlayView);

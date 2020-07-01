@@ -1,15 +1,38 @@
-import React, { useState } from "react";
+import i18n from 'i18n-js';
+import React, { useState, useCallback, memo } from "react";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
-import { OverlayModal, CommonHeader, Touchable, CommonButton, Loading, BounceSpinner, CommonToast } from '../../components';
+import {
+    OverlayModal, CommonHeader, Touchable, CommonButton,
+    Loading, CommonToast, ActionSheet
+} from '../../components';
 import { TextL } from "../../components/CommonText";
-
-const Home = () => {
-    const { test } = useSelector(state => state.user, shallowEqual);
+import { localLanguage } from '../../I18n/config';
+import { createSelector } from "reselect";
+const selector = createSelector(
+    [
+        state => state.user,
+        state => state.settings,
+    ],
+    (user, settings) => ({
+        language: settings.language,
+        test: user.test
+    })
+)
+const Home = () => {    
     const dispatch = useDispatch();
+    const { test } = useSelector(selector, shallowEqual);
+
+    const setTest = useCallback((test) => dispatch({ type: 'SET_TEST', test }), [dispatch]);
+    const changeLanguage = useCallback((language) => dispatch({ type: 'CHANGE_LANGUAGE', language }), [dispatch]);
     const [loading, setLoading] = useState(false);
+    const items = localLanguage.map((item) => ({
+        ...item, onPress: (item) => {
+            changeLanguage(item.language)
+        }
+    }))
     return (
         <>
-            <CommonHeader title='Home' />
+            <CommonHeader title={i18n.t('home')} />
             <CommonButton title='Examples' disabled />
             <CommonButton title='Modal' onPress={() => {
                 OverlayModal.show(
@@ -47,10 +70,12 @@ const Home = () => {
                 CommonToast.text('Toast')
             }} />
             <TextL>{test}</TextL>
-            <CommonButton title='Modify Redux' onPress={() => {
-                dispatch({ type: 'SET_TEST', test: test + 'biu ' })
+            <CommonButton title='Modify Redux' onPress={() => setTest(test + 'biu ')} />
+            <CommonButton title='Clear Redux' onPress={() => setTest('')} />
+            <CommonButton title={i18n.t('switchLanguage')} onPress={() => {
+                ActionSheet.show(items, { title: i18n.t('cancel') })
             }} />
         </>
     );
 }
-export default Home;
+export default memo(Home);
