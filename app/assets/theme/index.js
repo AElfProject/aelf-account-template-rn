@@ -1,3 +1,3 @@
 import Colors from './colors'
-
-export { Colors }
+import GStyle from './gstyle'
+export { Colors, GStyle }

@@ -5,7 +5,7 @@
 import React from "react";
 import OverlayModal from '../OverlayModal';
 import { View, Text, StyleSheet } from "react-native";
-import { bottomBarHeigth, statusBarHeight, sreenWidth, pixelSize } from "../../utils/device";
+import { bottomBarHeigth, statusBarHeight, sreenWidth } from "../../utils/device";
 import Touchable from "../Touchable";
 import { Colors } from "../../assets/theme";
 /**
@@ -58,7 +58,7 @@ const alert = (title, message, buttons) => {
     (
       <View style={styles.alertBox}>
         <Text style={styles.alertTitle}>{title}</Text>
-        <Text style={styles.alertMessage}>{message}</Text>
+        {message && <Text style={styles.alertMessage}>{message}</Text>}
         <View style={styles.buttonsBox}>
           {Array.isArray(buttons) && buttons.map((item, index) => (
             <Touchable onPress={() => {

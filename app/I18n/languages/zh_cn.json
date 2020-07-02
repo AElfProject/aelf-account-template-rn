@@ -1,7 +1,17 @@
 {
     "home": "主页",
     "mine": "我的",
-    "hello": "你好",
     "switchLanguage": "切换语言",
-    "cancel": "取消"
+    "cancel": "取消",
+    "determine": "确定",
+    "safetyReminder": "安全提醒",
+    "alert": {
+        "locationTips": "您当前所在位置没有通过权限认证，无法正常使用应用；该应用仅支持非中国大陆地区用户使用。"
+    },
+    "login": {
+        "jLook": "随便看看",
+        "login": "登录",
+        "regist": "注册",
+        "premiumTips": "高级账号登录"
+    }
 }

@@ -42,8 +42,12 @@ const Home = () => {
                             <Touchable onPress={() => {
                                 OverlayModal.hide()
                             }} style={{ flex: 1, backgroundColor: 'red', alignItems: 'center', justifyContent: 'center' }}>
-                                <CommonButton title={'APP通用提醒框'} onPress={() => {
-                                    ActionSheet.alert('安全提醒', '您当前所在位置没有通过权限认证，无法正常使用应用；该应用仅支持非中国大陆地区用户使用。', [{ title: '确定' }])
+                                <CommonButton title={'alert'} onPress={() => {
+                                    ActionSheet.alert(
+                                        i18n.t('safetyReminder'),
+                                        i18n.t('alert.locationTips'),
+                                        [{ title: i18n.t('determine') }]
+                                    )
                                 }} />
                                 <CommonButton title='Loading' onPress={() => {
                                     Loading.show()
@@ -86,10 +90,12 @@ const Home = () => {
                 <CommonButton title={i18n.t('switchLanguage')} onPress={() => {
                     ActionSheet.show(items, { title: i18n.t('cancel') })
                 }} />
-                <CommonButton title={'APP通用提醒框'} onPress={() => {
-                    ActionSheet.alert('安全提醒', '您当前所在位置没有通过权限认证，无法正常使用应用；该应用仅支持非中国大陆地区用户使用。', [{ title: '确定' }])
-                    // Alert.alert('alert', 'message', [{ title: '确定' }, { title: '取消' }])
-
+                <CommonButton title={'alert'} onPress={() => {
+                    ActionSheet.alert(
+                        i18n.t('safetyReminder'),
+                        i18n.t('alert.locationTips'),
+                        [{ title: i18n.t('determine') }]
+                    )
                 }} />
             </ScrollView>
         </>

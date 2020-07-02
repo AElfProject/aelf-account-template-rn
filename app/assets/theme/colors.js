@@ -1,6 +1,6 @@
 const Colors = {
     
-    primaryColor: "#817AFD", //主要颜色
+    primaryColor: "#733cb5", //主要颜色
     bottonPressColor:'#5b29aa',//按钮按下颜色
     disabledColor:'#d7d7d7', //按钮禁止交互颜色
 

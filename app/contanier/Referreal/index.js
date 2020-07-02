@@ -27,7 +27,7 @@ const Referreal = () => {
             if (localLanguages == 'zh') localLanguages = 'zh-cn';
         }
         setTimeout(() => {
-            navigationService.reset('Tab')
+            navigationService.reset('Entrance')
         }, time);
     }, [])
     return (
