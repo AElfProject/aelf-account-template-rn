@@ -8,6 +8,7 @@ import OverlayModal from './OverlayModal';
 import CommonButton from './CommonButton';
 import BounceSpinner from './BounceSpinner';
 import ListComponent from './ListComponent';
+import Communication from './Communication';
 export {
     WordRotation,
     Touchable,
@@ -18,5 +19,6 @@ export {
     CommonButton,
     Loading,
     CommonToast,
-    ActionSheet
+    ActionSheet,
+    Communication
 }
