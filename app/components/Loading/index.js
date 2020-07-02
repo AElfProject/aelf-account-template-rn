@@ -25,6 +25,7 @@ export default class Loading extends React.Component {
     }
 
     static hide() {
+        elements = elements.filter(item => item) //Discard invalid data
         let key = elements.pop()
         key && key.close && key.close()
     }

@@ -1,8 +1,6 @@
 import React from 'react'
 import Overlay from "teaset/components/Overlay/Overlay";
-import { View } from 'react-native';
 import { sreenHeight, sreenWidth } from '../../utils/device';
-import Touchable from '../Touchable';
 
 let elements = [];
 const customBounds = {
@@ -30,8 +28,10 @@ export default class OverlayModal extends React.Component {
     }
 
     static hide() {
+        elements = elements.filter(item => item) //Discard invalid data
         let key = elements.pop()
         key && key.close && key.close()
+
     }
 
     static destroy() {

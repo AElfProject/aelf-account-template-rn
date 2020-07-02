@@ -5,9 +5,14 @@
 import React from "react";
 import OverlayModal from '../OverlayModal';
 import { View, Text, StyleSheet } from "react-native";
-import { bottomBarHeigth } from "../../utils/device";
+import { bottomBarHeigth, statusBarHeight, sreenWidth, pixelSize } from "../../utils/device";
 import Touchable from "../Touchable";
 import { Colors } from "../../assets/theme";
+/**
+* show 
+* @param  {Array}   items      [Menu array]
+* @param  {object}  cancelItem [cancel]
+*/
 const show = (items, cancelItem) => {
   OverlayModal.show(
     <>
@@ -42,13 +47,50 @@ const show = (items, cancelItem) => {
     }
   )
 }
-
+/**
+* alert 
+* @param  {string}  title   [title]
+* @param  {string}  message [message]
+* @param  {object}  buttons [buttons]
+*/
+const alert = (title, message, buttons) => {
+  OverlayModal.show(
+    (
+      <View style={styles.alertBox}>
+        <Text style={styles.alertTitle}>{title}</Text>
+        <Text style={styles.alertMessage}>{message}</Text>
+        <View style={styles.buttonsBox}>
+          {Array.isArray(buttons) && buttons.map((item, index) => (
+            <Touchable onPress={() => {
+              OverlayModal.hide()
+              item.onPress && item.onPress()
+            }} key={index} style={styles.buttonItem}>
+              <Text style={styles.buttonText}>{item.title}</Text>
+            </Touchable>
+          ))}
+        </View>
+      </View>
+    ),
+    {
+      modal: true,
+      type: 'zoomOut',
+      style: styles.alertBgstyle,
+      containerStyle: styles.alertContainerStyle
+    }
+  )
+}
 export default {
-  show
+  show,
+  alert
 }
 const styles = StyleSheet.create({
+  alertBgstyle: {
+    backgroundColor: 'rgba(0,0,0,0.2)',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   bgStyle: {
-    backgroundColor: 'rgba(0,0,0,0.3)',
+    backgroundColor: 'rgba(0,0,0,0.2)',
     flexDirection: 'column-reverse',
   },
   containerStyle: {
@@ -66,7 +108,7 @@ const styles = StyleSheet.create({
   },
   itemBox: {
     width: '100%',
-    paddingVertical: 20,
+    paddingVertical: 15,
     overflow: 'hidden',
     borderBottomWidth: 1,
     alignItems: 'center',
@@ -78,12 +120,59 @@ const styles = StyleSheet.create({
   },
   cancelBox: {
     width: '100%',
-    paddingVertical: 20,
+    paddingVertical: 15,
     marginTop: 20,
     borderRadius: 5,
     overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
+  },
+  alertBox: {
+    overflow: 'hidden',
+    borderRadius: 10,
+    alignItems: 'center',
+    width: sreenWidth * 0.85,
+    backgroundColor: 'white'
+  },
+  alertContainerStyle: {
+    marginBottom: statusBarHeight
+  },
+  alertTitle: {
+    marginTop: 20,
+    fontSize: 18,
+    marginBottom: 20
+  },
+  alertMessage: {
+    marginHorizontal: 20,
+    fontSize: 14,
+    color: '#afafaf',
+    marginBottom: 20
+  },
+  buttonItem: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRightWidth: 1,
+    borderRightColor: '#e5e5e5',
+    overflow: 'hidden'
+  },
+  buttonsBox: {
+    height: 50,
+    flexDirection: 'row',
+    borderTopWidth: 1,
+    borderTopColor: '#e5e5e5'
+  },
+  buttonTextBox: {
+    height: '100%',
+    backgroundColor: 'red',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRightWidth: 1,
+    borderRightColor: '#e5e5e5'
+  },
+  buttonText: {
+    color: Colors.primaryColor,
+    fontSize: 16,
   }
 });

@@ -42,9 +42,18 @@ const Home = () => {
                             <Touchable onPress={() => {
                                 OverlayModal.hide()
                             }} style={{ flex: 1, backgroundColor: 'red', alignItems: 'center', justifyContent: 'center' }}>
-                                <Touchable onPress={() => {
-                                    OverlayModal.hide()
-                                }} style={{ height: 100, width: 100, backgroundColor: 'white' }}></Touchable>
+                                <CommonButton title={'APP通用提醒框'} onPress={() => {
+                                    ActionSheet.alert('安全提醒', '您当前所在位置没有通过权限认证，无法正常使用应用；该应用仅支持非中国大陆地区用户使用。', [{ title: '确定' }])
+                                }} />
+                                <CommonButton title='Loading' onPress={() => {
+                                    Loading.show()
+                                    setTimeout(() => {
+                                        Loading.hide()
+                                    }, 5000);
+                                }} />
+                                <CommonButton title={'Hide Modal'} onPress={() => {
+                                    OverlayModal.hide();
+                                }} />
                             </Touchable>
                         )
                     )
@@ -76,6 +85,11 @@ const Home = () => {
                 <CommonButton title='Clear Redux' onPress={() => setTest('')} />
                 <CommonButton title={i18n.t('switchLanguage')} onPress={() => {
                     ActionSheet.show(items, { title: i18n.t('cancel') })
+                }} />
+                <CommonButton title={'APP通用提醒框'} onPress={() => {
+                    ActionSheet.alert('安全提醒', '您当前所在位置没有通过权限认证，无法正常使用应用；该应用仅支持非中国大陆地区用户使用。', [{ title: '确定' }])
+                    // Alert.alert('alert', 'message', [{ title: '确定' }, { title: '取消' }])
+
                 }} />
             </ScrollView>
         </>

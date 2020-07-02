@@ -28,7 +28,7 @@ const CommonButton = (props) => {
             onPress={onPress}
             style={[styles.container, disabled && { backgroundColor: Colors.disabledColor }, style]}
             underlayColor={Colors.bottonPressColor}>
-            <TextL style={[styles.textStyles, textStyle]}>{title || 'button'}</TextL>
+            <TextL numberOfLines={1} style={[styles.textStyles, textStyle]}>{title || 'button'}</TextL>
         </Touchable>
     );
 }
