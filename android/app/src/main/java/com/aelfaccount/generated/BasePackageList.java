@@ -1,4 +1,4 @@
-package com.aelfaccount.generated;
+package com.aelf.aelfaccount.generated;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +13,7 @@ public class BasePackageList {
         new expo.modules.imageloader.ImageLoaderPackage(),
         new expo.modules.imagepicker.ImagePickerPackage(),
         new expo.modules.localauthentication.LocalAuthenticationPackage(),
+        new expo.modules.localization.LocalizationPackage(),
         new expo.modules.permissions.PermissionsPackage()
     );
   }

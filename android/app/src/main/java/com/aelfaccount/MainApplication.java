@@ -1,7 +1,7 @@
-package com.aelfaccount;
+package com.aelf.aelfaccount;
 
 // "com.doingmything" should be your app package name
-import com.aelfaccount.generated.BasePackageList;
+import com.aelf.aelfaccount.generated.BasePackageList;
 
 import android.app.Application;
 import android.content.Context;
@@ -81,7 +81,7 @@ public class MainApplication extends Application implements ReactApplication {
          We use reflection here to pick up the class that initializes Flipper,
         since Flipper library is not available in release mode
         */
-        Class<?> aClass = Class.forName("com.aelfaccount.ReactNativeFlipper");
+        Class<?> aClass = Class.forName("com.aelf.aelfaccount.ReactNativeFlipper");
         aClass
             .getMethod("initializeFlipper", Context.class, ReactInstanceManager.class)
             .invoke(null, context, reactInstanceManager);

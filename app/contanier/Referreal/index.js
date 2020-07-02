@@ -3,7 +3,7 @@ import { ImageBackground } from 'react-native';
 import * as Localization from 'expo-localization';
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import SplashScreen from 'react-native-splash-screen'
 import { pTd } from '../../utils';
 import { languageList } from '../../I18n/config';
 import { launchScreen } from '../../assets/images/indes';
@@ -16,6 +16,7 @@ const Referreal = () => {
     const changeLanguage = useCallback((language) => dispatch({ type: 'CHANGE_LANGUAGE', language }), [dispatch]);
 
     useEffect(() => {
+        SplashScreen.hide();
         if (language) {
             if (languageList.includes(language)) changeLanguage(language);
         } else {

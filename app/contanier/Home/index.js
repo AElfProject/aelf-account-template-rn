@@ -8,6 +8,7 @@ import {
 import { TextL } from "../../components/CommonText";
 import { localLanguage } from '../../I18n/config';
 import { createSelector } from "reselect";
+import { ScrollView } from 'react-native';
 const selector = createSelector(
     [
         state => state.user,
@@ -18,7 +19,7 @@ const selector = createSelector(
         test: user.test
     })
 )
-const Home = () => {    
+const Home = () => {
     const dispatch = useDispatch();
     const { test } = useSelector(selector, shallowEqual);
 
@@ -33,48 +34,50 @@ const Home = () => {
     return (
         <>
             <CommonHeader title={i18n.t('home')} />
-            <CommonButton title='Examples' disabled />
-            <CommonButton title='Modal' onPress={() => {
-                OverlayModal.show(
-                    (
-                        <Touchable onPress={() => {
-                            OverlayModal.hide()
-                        }} style={{ flex: 1, backgroundColor: 'red', alignItems: 'center', justifyContent: 'center' }}>
+            <ScrollView>
+                <CommonButton title='Examples' disabled />
+                <CommonButton title='Modal' onPress={() => {
+                    OverlayModal.show(
+                        (
                             <Touchable onPress={() => {
                                 OverlayModal.hide()
-                            }} style={{ height: 100, width: 100, backgroundColor: 'white' }}></Touchable>
-                        </Touchable>
+                            }} style={{ flex: 1, backgroundColor: 'red', alignItems: 'center', justifyContent: 'center' }}>
+                                <Touchable onPress={() => {
+                                    OverlayModal.hide()
+                                }} style={{ height: 100, width: 100, backgroundColor: 'white' }}></Touchable>
+                            </Touchable>
+                        )
                     )
-                )
-            }} />
-            <CommonButton title='Loading' onPress={() => {
-                Loading.show()
-                setTimeout(() => {
-                    Loading.hide()
-                }, 5000);
-            }} />
-            <CommonButton title='buttonLoading' loading={loading}
-                onPress={() => {
-                    setLoading(true)
+                }} />
+                <CommonButton title='Loading' onPress={() => {
+                    Loading.show()
                     setTimeout(() => {
-                        setLoading(false)
+                        Loading.hide()
                     }, 5000);
                 }} />
-            <CommonButton title='ToastSuccess' onPress={() => {
-                CommonToast.success('Success');
-            }} />
-            <CommonButton title='ToastFail' onPress={() => {
-                CommonToast.fail('Fail');
-            }} />
-            <CommonButton title='Toast' onPress={() => {
-                CommonToast.text('Toast')
-            }} />
-            <TextL>{test}</TextL>
-            <CommonButton title='Modify Redux' onPress={() => setTest(test + 'biu ')} />
-            <CommonButton title='Clear Redux' onPress={() => setTest('')} />
-            <CommonButton title={i18n.t('switchLanguage')} onPress={() => {
-                ActionSheet.show(items, { title: i18n.t('cancel') })
-            }} />
+                <CommonButton title='buttonLoading' loading={loading}
+                    onPress={() => {
+                        setLoading(true)
+                        setTimeout(() => {
+                            setLoading(false)
+                        }, 5000);
+                    }} />
+                <CommonButton title='ToastSuccess' onPress={() => {
+                    CommonToast.success('Success');
+                }} />
+                <CommonButton title='ToastFail' onPress={() => {
+                    CommonToast.fail('Fail');
+                }} />
+                <CommonButton title='Toast' onPress={() => {
+                    CommonToast.text('Toast')
+                }} />
+                <TextL>持久化存储:{test}</TextL>
+                <CommonButton title='Modify Redux' onPress={() => setTest(test + 'biu ')} />
+                <CommonButton title='Clear Redux' onPress={() => setTest('')} />
+                <CommonButton title={i18n.t('switchLanguage')} onPress={() => {
+                    ActionSheet.show(items, { title: i18n.t('cancel') })
+                }} />
+            </ScrollView>
         </>
     );
 }

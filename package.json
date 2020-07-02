@@ -7,7 +7,10 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "firim:android": "cd android/ && fastlane fir_im",
+    "firim:ios": "cd ios/ && fastlane fir_im",
+    "firim": "npm run firim:android && npm run firim:ios"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.11.0",
@@ -33,6 +36,7 @@
     "react-native-safe-area-context": "^3.0.7",
     "react-native-screens": "^2.9.0",
     "react-native-spinkit": "^1.5.0",
+    "react-native-splash-screen": "^3.2.0",
     "react-native-unimodules": "^0.10.1",
     "react-native-vector-icons": "^6.6.0",
     "react-redux": "^7.2.0",
