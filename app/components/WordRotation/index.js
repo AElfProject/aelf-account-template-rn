@@ -1,3 +1,6 @@
+/* eslint-disable react/no-did-update-set-state */
+/* eslint-disable no-shadow */
+/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {
   View,
@@ -48,7 +51,7 @@ export default class WordRotation extends Component {
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     const newText = nextProps.text || nextProps.children || '';
-    if (newText != prevState.text) {
+    if (newText !== prevState.text) {
       prevState.animation.stop();
       return {
         text: newText,
@@ -131,14 +134,15 @@ export default class WordRotation extends Component {
         style={{...styles.bgViewStyle, ...bgViewStyle}}
         onLayout={event => this.bgViewOnLayout(event)}>
         <View
-          style={{
-            ...styles.textContainerStyle,
-            width: textContainerWidth,
-            height: textContainerHeight,
-            opacity: animation === null ? 0 : 1, // Make sure the view only shows when it's animating
-
-            ...textContainerStyle,
-          }}>
+          style={[
+            styles.textContainerStyle,
+            {
+              width: textContainerWidth,
+              height: textContainerHeight,
+              opacity: animation === null ? 0 : 1,
+            },
+            textContainerStyle,
+          ]}>
           <Animated.Text
             style={{
               fontSize: 20,

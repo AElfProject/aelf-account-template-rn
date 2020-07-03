@@ -14,8 +14,9 @@ const PasswordInput = props => {
   const getInputItem = () => {
     const {maxLength, inputItemStyle, iconStyle} = props;
     let inputItem = [];
+    // eslint-disable-next-line radix
     for (let i = 0; i < parseInt(maxLength); i++) {
-      if (i == 0) {
+      if (i === 0) {
         inputItem.push(
           <View key={i} style={[styles.inputItem, inputItemStyle]}>
             {i < text.length ? (
@@ -49,20 +50,14 @@ const PasswordInput = props => {
       underlayColor="transparent">
       <View style={[styles.container, style]}>
         <TextInput
-          style={{
-            height: 45,
-            zIndex: 99,
-            position: 'absolute',
-            width: (sreenWidth / 8) * 6,
-            opacity: 0,
-          }}
+          style={styles.inputStyle}
           ref={input}
           maxLength={maxLength}
           autoFocus={true}
           keyboardType="numeric"
-          onChangeText={text => {
-            setText(text);
-            onChange && onChange(text);
+          onChangeText={value => {
+            setText(value);
+            onChange && onChange(value);
           }}
         />
         {getInputItem()}
@@ -95,5 +90,12 @@ const styles = StyleSheet.create({
     height: 16,
     backgroundColor: '#222',
     borderRadius: 8,
+  },
+  inputStyle: {
+    height: 45,
+    zIndex: 99,
+    position: 'absolute',
+    width: (sreenWidth / 8) * 6,
+    opacity: 0,
   },
 });

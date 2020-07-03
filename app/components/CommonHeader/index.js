@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import navigationService from '../../utils/navigationService';
-import {statusBarHeight, pixelSize, sreenWidth} from '../../utils/device';
+import {statusBarHeight, pixelSize} from '../../utils/device';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {pTd} from '../../utils';
 import {Colors} from '../../assets/theme';
@@ -42,6 +42,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     justifyContent: 'center',
   },
+  titleBox: {
+    alignItems: 'center',
+  },
 });
 const CommonHeader = props => {
   const {
@@ -76,7 +79,7 @@ const CommonHeader = props => {
         {titleElement ? (
           titleElement
         ) : (
-          <View style={{alignItems: 'center'}}>
+          <View style={styles.titleBox}>
             <Text style={[styles.title, titleStyle]}>{title || '详情'}</Text>
           </View>
         )}

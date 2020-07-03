@@ -21,13 +21,13 @@ const SetTransactionPsw = () => {
     transactionPsw: '',
     transactionPswConfirm: '',
   });
-  const {type, transactionPsw, transactionPswConfirm, tip} = state;
+  const {type, transactionPsw, tip} = state;
   const onChange = useCallback(
-    (type, text) => {
-      setState({[type]: text});
-      switch (type) {
+    (types, text) => {
+      setState({[types]: text});
+      switch (types) {
         case 'transactionPsw':
-          if (text.length == 6) {
+          if (text.length === 6) {
             setState({
               type: 'transactionPswConfirm',
               tip: i18n.t('setPsw.setPsw2'),
@@ -35,16 +35,16 @@ const SetTransactionPsw = () => {
           }
           break;
         case 'transactionPswConfirm':
-          if (text.length == 6 && text == transactionPsw) {
+          if (text.length === 6 && text === transactionPsw) {
             CommonToast.success(i18n.t('setSuc'));
             setToken();
-          } else if (text.length == 6 && text != transactionPsw) {
+          } else if (text.length === 6 && text !== transactionPsw) {
             CommonToast.fail(i18n.t('setPsw.pswInconsistent'));
           }
           break;
       }
     },
-    [type, transactionPsw, transactionPswConfirm],
+    [setState, transactionPsw, setToken],
   );
   const setToken = useCallback(async () => {
     try {
@@ -62,7 +62,7 @@ const SetTransactionPsw = () => {
                     navigationService.reset('Tab');
                     CommonToast.success(i18n.t('setSuc'));
                   })
-                  .catch(err => {
+                  .catch(() => {
                     navigationService.reset('Tab');
                     CommonToast.fail(i18n.t('setFail'));
                   });
@@ -88,12 +88,7 @@ const SetTransactionPsw = () => {
   return (
     <View style={GStyle.container}>
       <CommonHeader title={i18n.t('setPsw.title')} canBack />
-      <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: pTd(100),
-        }}>
+      <View style={styles.box}>
         <TextM style={{color: Colors.primaryColor}}>{tip}</TextM>
         <Password
           maxLength={6}
@@ -107,8 +102,9 @@ const SetTransactionPsw = () => {
 };
 export default memo(SetTransactionPsw);
 const styles = StyleSheet.create({
-  rightStyle: {
-    color: Colors.fontColor,
-    marginRight: 15,
+  box: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: pTd(100),
   },
 });

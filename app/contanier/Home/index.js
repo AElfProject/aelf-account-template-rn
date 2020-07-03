@@ -25,9 +25,10 @@ const Home = () => {
   const dispatch = useDispatch();
   const {test} = useSelector(selector, shallowEqual);
 
-  const setTest = useCallback(test => dispatch({type: 'SET_TEST', test}), [
-    dispatch,
-  ]);
+  const setTest = useCallback(
+    value => dispatch({type: 'SET_TEST', test: value}),
+    [dispatch],
+  );
   const changeLanguage = useCallback(
     language => dispatch({type: 'CHANGE_LANGUAGE', language}),
     [dispatch],
@@ -35,8 +36,8 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const items = localLanguage.map(item => ({
     ...item,
-    onPress: item => {
-      changeLanguage(item.language);
+    onPress: value => {
+      changeLanguage(value.language);
     },
   }));
   return (
@@ -52,6 +53,8 @@ const Home = () => {
                 onPress={() => {
                   OverlayModal.hide();
                 }}
+                //示例文件会删除
+                // eslint-disable-next-line react-native/no-inline-styles
                 style={{
                   flex: 1,
                   backgroundColor: 'red',

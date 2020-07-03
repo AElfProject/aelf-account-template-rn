@@ -129,7 +129,9 @@ export const sms = function(phoneNumber = null, body = null) {
     if (isCorrectType('String', body)) {
       // for some strange reason android seems to have issues with ampersands in the body unless it is encoded twice!
       // iOS only needs encoding once
-      if (Platform.OS === 'android') body = encodeURIComponent(body);
+      if (Platform.OS === 'android') {
+        body = encodeURIComponent(body);
+      }
       url +=
         Platform.OS === 'ios'
           ? `&body=${encodeURIComponent(body)}`

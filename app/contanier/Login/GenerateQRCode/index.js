@@ -16,7 +16,7 @@ const GenerateQRCode = () => {
   const rightElement = useMemo(
     () => (
       <Touchable
-        style={{padding: 5}}
+        style={styles.rightBox}
         onPress={() => navigationService.navigate('SetTransactionPsw')}>
         <TextM style={styles.rightStyle}>
           {i18n.t('login.backupQRCode.later')}
@@ -43,7 +43,7 @@ const GenerateQRCode = () => {
           logoBackgroundColor={'#fff'}
           size={200}
         />
-        <Text style={{marginTop: 2}}>Account: </Text>
+        <Text>Account: </Text>
       </View>
       <CommonButton
         title={i18n.t('login.backupQRCode.saveQRCode')}

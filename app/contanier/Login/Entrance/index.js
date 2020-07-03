@@ -20,8 +20,8 @@ const Entrance = () => {
   useSelector(SettingsType.getLanguage); //Language status is controlled with redux
   const items = localLanguage.map(item => ({
     ...item,
-    onPress: item => {
-      changeLanguage(item.language);
+    onPress: value => {
+      changeLanguage(value.language);
     },
   }));
   useEffect(() => {

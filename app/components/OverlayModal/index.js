@@ -1,6 +1,7 @@
 import React from 'react';
 import Overlay from 'teaset/components/Overlay/Overlay';
 import {sreenHeight, sreenWidth} from '../../utils/device';
+import {StyleSheet} from 'react-native';
 
 let elements = [];
 const customBounds = {
@@ -16,8 +17,8 @@ export default class OverlayModal extends React.Component {
         modal={false}
         type="custom"
         ref={v => elements.push(v)}
-        style={{backgroundColor: 'white'}}
-        containerStyle={{flex: 1}}
+        style={styles.bgStyle}
+        containerStyle={styles.containerStyle}
         customBounds={customBounds}
         {...overlayProps}>
         {component}
@@ -43,3 +44,11 @@ export default class OverlayModal extends React.Component {
     OverlayModal.destroy();
   }
 }
+const styles = StyleSheet.create({
+  bgStyle: {
+    backgroundColor: 'white',
+  },
+  containerStyle: {
+    flex: 1,
+  },
+});

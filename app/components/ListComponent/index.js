@@ -119,7 +119,7 @@ export default class ListComponent extends Component {
         ListFooterComponent={!showFooter ? null : this.ListFooterComponent}
         onEndReached={whetherAutomatic ? this.onEndReached : null}
         refreshControl={
-          upPullRefresh != undefined ? (
+          upPullRefresh ? (
             <RefreshControl
               refreshing={refreshing}
               colors={[Colors.primaryColor]}
@@ -134,7 +134,7 @@ export default class ListComponent extends Component {
     ) : (
       <ScrollView
         refreshControl={
-          upPullRefresh != undefined ? (
+          upPullRefresh ? (
             <RefreshControl
               refreshing={refreshing}
               colors={[Colors.primaryColor]}
@@ -145,10 +145,8 @@ export default class ListComponent extends Component {
             refreshing
           )
         }>
-        <View style={{marginTop: 200, alignItems: 'center'}}>
-          <Text style={{color: Colors.primaryColor, fontSize: 30}}>
-            {message || 'Empty~'}
-          </Text>
+        <View style={styles.emptyBox}>
+          <Text style={styles.emptyText}>{message || 'Empty~'}</Text>
         </View>
       </ScrollView>
     );
@@ -164,5 +162,13 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  emptyBox: {
+    marginTop: 200,
+    alignItems: 'center',
+  },
+  emptyText: {
+    color: Colors.primaryColor,
+    fontSize: 30,
   },
 });

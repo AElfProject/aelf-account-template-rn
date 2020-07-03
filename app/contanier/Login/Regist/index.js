@@ -1,3 +1,5 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {memo, useCallback} from 'react';
 import {
   CommonHeader,
@@ -14,6 +16,8 @@ import {TextM, TextS} from '../../../components/CommonText';
 import {passwordReg} from '../../../config';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import navigationService from '../../../utils/navigationService';
+import {pTd} from '../../../utils';
+import {Colors} from '../../../assets/theme';
 const Regist = () => {
   const [state, setState] = useSetState({
     userName: '',
@@ -42,9 +46,9 @@ const Regist = () => {
       setState({pswRule: false});
     }
 
-    if (pswConfirm && psw && pswConfirm != psw) {
+    if (pswConfirm && psw && pswConfirm !== psw) {
       setState({pswDifferent: true});
-    } else if (pswConfirm && psw && pswConfirm == psw) {
+    } else if (pswConfirm && psw && pswConfirm === psw) {
       setState({pswDifferent: false});
     }
   });
@@ -57,9 +61,9 @@ const Regist = () => {
       setState({pswConfirmRule: false});
     }
 
-    if (pswConfirm && psw && psw != pswConfirm) {
+    if (pswConfirm && psw && psw !== pswConfirm) {
       setState({pswDifferent: true});
-    } else if (pswConfirm && psw && psw == pswConfirm) {
+    } else if (pswConfirm && psw && psw === pswConfirm) {
       setState({pswDifferent: false});
     }
   });

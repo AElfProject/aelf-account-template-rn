@@ -12,5 +12,8 @@ const styles = StyleSheet.create({
     color: Colors.fontColor,
     marginRight: 15,
   },
+  rightBox: {
+    padding: 5,
+  },
 });
 export default styles;

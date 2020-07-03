@@ -1,5 +1,6 @@
 import React from 'react';
 import Spinner from 'react-native-spinkit';
+import {Colors} from '../../assets/theme';
 
 const BounceSpinner = props => {
   const {spinnerProps} = props;

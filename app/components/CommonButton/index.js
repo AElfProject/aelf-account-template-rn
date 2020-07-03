@@ -5,13 +5,12 @@ import {TextL} from '../CommonText';
 import {Colors} from '../../assets/theme';
 import {pTd} from '../../utils';
 import Spinner from 'react-native-spinkit';
-
 const CommonButton = props => {
   const {title, onPress, style, textStyle, disabled, loading} = props;
   if (loading) {
     return (
       <Spinner
-        style={{alignSelf: 'center', style}}
+        style={[styles.spinnerStyle, style]}
         type={'ChasingDots'}
         color={Colors.primaryColor}
         size={pTd(80)}
@@ -50,5 +49,8 @@ const styles = StyleSheet.create({
   textStyles: {
     fontWeight: 'bold',
     color: 'white',
+  },
+  spinnerStyle: {
+    alignSelf: 'center',
   },
 });
