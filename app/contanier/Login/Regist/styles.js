@@ -1,7 +1,5 @@
 import {pTd} from '../../../utils';
-import GStyle from '../../../assets/theme/gstyle';
 import {StyleSheet} from 'react-native';
-import {Colors} from '../../../assets/theme';
 
 export default StyleSheet.create({
   pswTip: {
