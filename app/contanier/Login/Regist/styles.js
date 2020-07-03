@@ -20,4 +20,7 @@ export default StyleSheet.create({
   buttonStyles: {
     marginTop: pTd(100),
   },
+  leftTextStyle: {
+    width: 80,
+  },
 });

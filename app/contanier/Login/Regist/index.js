@@ -1,5 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, {memo, useCallback} from 'react';
 import {
   CommonHeader,
@@ -36,7 +34,7 @@ const Regist = () => {
     } else {
       setState({userNameRule: false});
     }
-  });
+  }, [setState, state]);
   const pswBlur = useCallback(() => {
     const {psw, pswConfirm} = state;
     const re = passwordReg;
@@ -51,7 +49,7 @@ const Regist = () => {
     } else if (pswConfirm && psw && pswConfirm === psw) {
       setState({pswDifferent: false});
     }
-  });
+  }, [setState, state]);
   const pswComfirmBlur = useCallback(() => {
     const {pswConfirm, psw} = state;
     const re = passwordReg;
@@ -66,12 +64,12 @@ const Regist = () => {
     } else if (pswConfirm && psw && psw === pswConfirm) {
       setState({pswDifferent: false});
     }
-  });
+  }, [setState, state]);
 
   const registered = useCallback(() => {
     Keyboard.dismiss();
     navigationService.navigate('GenerateQRCode');
-  });
+  }, []);
   const {userNameRule, pswRule, pswConfirmRule, pswDifferent} = state;
   return (
     <View style={GStyle.container}>
@@ -86,7 +84,7 @@ const Regist = () => {
           onPress={() => Keyboard.dismiss()}>
           <Input
             leftTitleBox={styles.leftTitleBox}
-            leftTextStyle={{width: 80}}
+            leftTextStyle={styles.leftTextStyle}
             leftTitle={i18n.t('login.userName')}
             onBlur={userNameBlur}
             onChangeText={userName => setState({userName})}
@@ -99,7 +97,7 @@ const Regist = () => {
           <Input
             secureTextEntry={true}
             leftTitleBox={styles.leftTitleBox}
-            leftTextStyle={{width: 80}}
+            leftTextStyle={styles.leftTextStyle}
             leftTitle={i18n.t('login.newPsw')}
             onBlur={pswBlur}
             onChangeText={psw => setState({psw})}
@@ -112,7 +110,7 @@ const Regist = () => {
           <Input
             secureTextEntry={true}
             leftTitleBox={[styles.leftTitleBox, {marginBottom: 10}]}
-            leftTextStyle={{width: 80}}
+            leftTextStyle={styles.leftTextStyle}
             leftTitle={i18n.t('login.confirmPsw')}
             onBlur={pswComfirmBlur}
             onChangeText={pswConfirm => setState({pswConfirm})}
@@ -123,7 +121,7 @@ const Regist = () => {
             <TextM style={styles.pswTip}>{i18n.t('login.pswFormatErr')}</TextM>
           )}
           {pswDifferent && (
-            <TextM style={{color: 'red', ...GStyle.marginArg(pTd(20))}}>
+            <TextM style={[styles.pswTip, ...GStyle.marginArg(pTd(20))]}>
               {i18n.t('login.inconsistent')}
             </TextM>
           )}
