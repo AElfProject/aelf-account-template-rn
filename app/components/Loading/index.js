@@ -37,7 +37,7 @@ export default class Loading extends React.Component {
   }
 
   componentWillUnmount() {
-    OverlayModal.destroy();
+    Loading.destroy();
   }
 }
 const styles = StyleSheet.create({
