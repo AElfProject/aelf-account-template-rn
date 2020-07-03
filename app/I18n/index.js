@@ -1,6 +1,6 @@
 // @flow
 
-import i18n from 'i18n-js'
+import i18n from 'i18n-js';
 import moment from 'moment/moment';
 import 'moment/locale/zh-cn';
 
@@ -13,9 +13,9 @@ i18n.defaultLocale = 'en';
 i18n.translations = {
   en,
   'zh-cn': zh_cn
-}
+};
 
 i18n.switchLanguage = (language) => {
   i18n.locale = language
   moment.locale(language)
-}
+};

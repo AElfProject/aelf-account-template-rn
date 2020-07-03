@@ -7,28 +7,28 @@ import Referreal from '../Referreal';
 import Tab from './Tab';
 import navigationService from '../../utils/navigationService';
 
-import LoginNav from '../Login/stackNav'
+import LoginNav from '../Login/stackNav';
 const Stack = createStackNavigator();
 
 const stackNav = [
-    { name: 'Referreal', component: Referreal },
-    { name: 'Tab', component: Tab },
-    ...LoginNav,
+	{ name: 'Referreal', component: Referreal },
+	{ name: 'Tab', component: Tab },
+	...LoginNav,
 ];
 const NavigationMain = () => (
-    <NavigationContainer ref={navigationService.setTopLevelNavigator}>
-        <Stack.Navigator
-            initialRouteName='Referreal'
-            screenOptions={{
-                cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-                header: () => null,
-            }}>
-            {
-                stackNav.map((item, index) => (
-                    <Stack.Screen key={index} {...item} />
-                ))
-            }
-        </Stack.Navigator>
-    </NavigationContainer >
+	<NavigationContainer ref={navigationService.setTopLevelNavigator}>
+		<Stack.Navigator
+			initialRouteName='Referreal'
+			screenOptions={{
+				cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+				header: () => null,
+			}}>
+			{
+				stackNav.map((item, index) => (
+					<Stack.Screen key={index} {...item} />
+				))
+			}
+		</Stack.Navigator>
+	</NavigationContainer >
 );
-export default NavigationMain
+export default NavigationMain;

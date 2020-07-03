@@ -1,17 +1,17 @@
 {
-    "home": "Hoom",
-    "mine": "Mine",
-    "switchLanguage": "Switch language",
-    "cancel": "Cancel",
-    "determine": "Determine",
-    "safetyReminder": "Safety reminder",
-    "alert": {
-        "locationTips": "Your current location has not passed the permission authentication, and the application cannot be used normally; the application is only supported by users in non-Mainland China."
-    },
-    "login": {
-        "jLook": "Just look around",
-        "login": "Login",
-        "regist": "Registration",
-        "premiumTips": "Premium account login"
-    }
+	"home": "Hoom",
+	"mine": "Mine",
+	"switchLanguage": "Switch language",
+	"cancel": "Cancel",
+	"determine": "Determine",
+	"safetyReminder": "Safety reminder",
+	"alert": {
+		"locationTips": "Your current location has not passed the permission authentication, and the application cannot be used normally; the application is only supported by users in non-Mainland China."
+	},
+	"login": {
+		"jLook": "Just look around",
+		"login": "Login",
+		"regist": "Registration",
+		"premiumTips": "Premium account login"
+	}
 }

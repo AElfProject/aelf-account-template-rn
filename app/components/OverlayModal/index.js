@@ -7,7 +7,7 @@ const customBounds = {
     x: 0,
     y: sreenHeight,
     width: sreenWidth,
-    height: 0
+    height: 0,
 }
 export default class OverlayModal extends React.Component {
     static show(component, overlayProps = {}) {
@@ -35,13 +35,13 @@ export default class OverlayModal extends React.Component {
     }
 
     static destroy() {
-        for (let item of elements) {
-            item && item.close && item.close()
-        }
-        elements = []
+        elements.forEach((item) => {
+			item && item.close && item.close();
+		});
+        elements = [];
     }
 
     componentWillUnmount() {
-        OverlayModal.destroy()
+        OverlayModal.destroy();
     }
 }

@@ -1,9 +1,9 @@
-import Regist from './Regist'
-import Entrance from './Entrance'
+import Regist from './Regist';
+import Entrance from './Entrance';
 
 const stackNav = [
-    { name: 'Regist', component: Regist },
-    { name: 'Entrance', component: Entrance },
+  { name: 'Regist', component: Regist },
+  { name: 'Entrance', component: Entrance },
 ];
 
-export default stackNav
+export default stackNav;

@@ -5,36 +5,36 @@ import { createSelector } from 'reselect';
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-    setTest: ['test']
-})
+	setTest: ['test']
+});
 
-export const UserTypes = Types
-export default Creators
+export const UserTypes = Types;
+export default Creators;
 
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-    test: 'default'
-})
+	test: 'default',
+});
 
 /* ------------- Selectors ------------- */
 
-const _baseSelector = state => state.user
+const _baseSelector = state => state.user;
 
 export const UserType = {
-    getTest: createSelector(
-        _baseSelector,
-        base => base.test
-    ),
-}
+	getTest: createSelector(
+		_baseSelector,
+		base => base.test
+	),
+};
 
 /* ------------- Reducers ------------- */
 // set test
 export const setTest = (state, { test }) => {
-    return state.merge({ test })
-}
+	return state.merge({ test })
+};
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-    [Types.SET_TEST]: setTest,
-})
+	[Types.SET_TEST]: setTest,
+});

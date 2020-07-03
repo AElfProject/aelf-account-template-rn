@@ -45,8 +45,8 @@ const show = (items, cancelItem) => {
       style: styles.bgStyle,
       containerStyle: styles.containerStyle
     }
-  )
-}
+  );
+};
 /**
 * alert 
 * @param  {string}  title   [title]
@@ -81,8 +81,8 @@ const alert = (title, message, buttons) => {
 }
 export default {
   show,
-  alert
-}
+  alert,
+};
 const styles = StyleSheet.create({
   alertBgstyle: {
     backgroundColor: 'rgba(0,0,0,0.2)',
