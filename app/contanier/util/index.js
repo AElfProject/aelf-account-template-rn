@@ -26,10 +26,10 @@ const isNumber = (val) => {
 const saveImagesToAlbum = (FilePath) => {
   CameraRoll.save(FilePath, { type: 'photo' })
     .then(() => {
-      CommonToast.success(i18n.t('suc'));
+      CommonToast.success(i18n.t('saveSuc'));
     })
     .catch(() => {
-      CommonToast.text(i18n.t('fail'));
+      CommonToast.fail(i18n.t('fail'));
     });
 };
 //Check before saving pictures to album
@@ -54,10 +54,10 @@ const checkImageToAlbum = async (url) => {
           saveImagesToAlbum("file://" + url);
         }
       } else {
-        CommonToast.text(i18n.t('permissDen'));
+        CommonToast.fail(i18n.t('permissDen'));
       }
     } catch (err) {
-      CommonToast.text(i18n.t('fail'));
+      CommonToast.fail(i18n.t('fail'));
     }
   } else {
     saveImagesToAlbum(url);
@@ -72,7 +72,7 @@ const screenshots = (saveView) => {
         }
       })
       .catch(e => {
-        CommonToast.text(i18n.t('fail'));
+        CommonToast.fail(i18n.t('fail'));
       })
   }
 };
@@ -82,27 +82,22 @@ const touchAuth = () => {
     hintMessage: 'Verify your identity',
     fallbackLabel: 'Use password',
     promptMessage: 'Aelf Authenticate'
-  };
-  console.log(options,'======options');
-  
+  };  
   return new Promise((resolve, reject) => {
     LocalAuthentication.isEnrolledAsync()
       .then(success => {
         LocalAuthentication.authenticateAsync(options)
           .then(suc => {
             const { success } = suc
-            console.log(suc, '======');
             if (success) {
               resolve()
             } else {
               reject()
             }
           }).catch(error => {
-            console.log(error, '======');
             reject()
           });
       }).catch(error => {
-        console.log(error, '======error');
         reject()
       });
   })

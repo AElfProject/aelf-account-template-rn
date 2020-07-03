@@ -12,6 +12,7 @@
 	"setSuc": "设置成功",
 	"setFail": "设置失败",
 	"later": "稍后",
+	"saveSuc":"保存成功",
 	"setPsw": {
 		"title": "设置支付密码",
 		"setPsw1": "请设置交易密码",

@@ -12,6 +12,7 @@
 	"setSuc": "Set Success",
 	"setFail": "Set Fail",
 	"later": "Later",
+	"saveSuc":"Saved Success",
 	"setPsw": {
 		"title": "Set Payment Password",
 		"setPsw1": "Please set transaction password for payment",
