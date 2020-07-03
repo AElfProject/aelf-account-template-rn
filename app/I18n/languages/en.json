@@ -12,6 +12,16 @@
 		"jLook": "Just look around",
 		"login": "Login",
 		"regist": "Registration",
-		"premiumTips": "Premium account login"
+		"premiumTips": "Premium account login",
+		"userName":"User Name",
+		"nameErr":"User name format error",
+		"pswFormatErr":"Password format error",
+		"pleaseEnt":"Please enter",
+		"newPsw":"New Password",
+		"confirmPsw":"Confirm Password",
+		"inconsistent":"The password you entered twice is inconsistent",
+		"usernameTips":"The characters in the username can only be letters or numbers;",
+		"pswTips":"The password must be greater than or equal to 12 digits, and contain both uppercase letters, lowercase letters, numbers, and characters;",
+		"pswNotTips":"Once the password is set, it cannot be modified, please keep the set password properly;"
 	}
 }

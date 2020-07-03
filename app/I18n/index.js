@@ -12,7 +12,7 @@ i18n.defaultLocale = 'en';
 
 i18n.translations = {
   en,
-  'zh-cn': zh_cn
+  'zh-cn': zh_cn,
 };
 
 i18n.switchLanguage = (language) => {

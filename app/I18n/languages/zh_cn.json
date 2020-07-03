@@ -12,6 +12,16 @@
 		"jLook": "随便看看",
 		"login": "登录",
 		"regist": "注册",
-		"premiumTips": "高级账号登录"
+		"premiumTips": "高级账号登录",
+		"userName":"用户名",
+		"nameErr":"用户名格式错误",
+		"pswFormatErr":"密码格式错误",
+		"pleaseEnt":"请输入",
+		"newPsw":"新密码",
+		"confirmPsw":"确认密码",
+		"inconsistent":"您两次输入的密码不一致",
+		"usernameTips":"用户名仅支持英文或数字;",
+		"pswTips":"密码必须大于等于12位，并同时包含大小写字母、数字和符号;",
+		"pswNotTips":"密码一经设置不可修改，请妥善保管设置的密码;"
 	}
 }

@@ -33,8 +33,8 @@ export const UserType = {
 export const setTest = (state, { test }) => {
 	return state.merge({ test })
 };
-/* ------------- Hookup Reducers To Types ------------- */
 
+/* ------------- Hookup Reducers To Types ------------- */
 export const reducer = createReducer(INITIAL_STATE, {
 	[Types.SET_TEST]: setTest,
 });

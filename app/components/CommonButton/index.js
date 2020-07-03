@@ -11,7 +11,7 @@ const CommonButton = (props) => {
 	if (loading) {
 		return (
 			<Spinner
-				style={{ alignSelf: 'center' }}
+				style={{ alignSelf: 'center', style }}
 				type={'ChasingDots'}
 				color={Colors.primaryColor}
 				size={pTd(80)}
