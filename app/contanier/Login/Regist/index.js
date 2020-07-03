@@ -7,7 +7,8 @@ import Gstyle from '../../../assets/theme/gstyle';
 import styles from './styles';
 import { TextM, TextS } from '../../../components/CommonText';
 import { passwordReg } from '../../../config';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import navigationService from '../../../utils/navigationService';
 const Regist = () => {
 	const [state, setState] = useSetState({
 		userName: '',
@@ -59,13 +60,15 @@ const Regist = () => {
 	})
 
 	const registered = useCallback(() => {
-
+		Keyboard.dismiss()
+		navigationService.navigate('GenerateQRCode')
 	})
 	const { userNameRule, pswRule, pswConfirmRule, pswDifferent } = state;
 	return (
 		<View style={Gstyle.container}>
 			<CommonHeader title={i18n.t('login.regist')} canBack />
 			<KeyboardAwareScrollView
+				keyboardShouldPersistTaps="handled"
 				keyboardOpeningTime={0}
 				extraHeight={50}>
 				<Touchable
@@ -83,6 +86,7 @@ const Regist = () => {
 					/>
 					{userNameRule && <TextM style={styles.pswTip}>{i18n.t('login.nameErr')}</TextM>}
 					<Input
+						secureTextEntry={true}
 						leftTitleBox={styles.leftTitleBox}
 						leftTextStyle={{ width: 80 }}
 						leftTitle={i18n.t('login.newPsw')}
@@ -93,7 +97,8 @@ const Regist = () => {
 					/>
 					{pswRule && <TextM style={styles.pswTip}>{i18n.t('login.pswFormatErr')}</TextM>}
 					<Input
-						leftTitleBox={styles.leftTitleBox}
+						secureTextEntry={true}
+						leftTitleBox={[styles.leftTitleBox, { marginBottom: 10 }]}
 						leftTextStyle={{ width: 80 }}
 						leftTitle={i18n.t('login.confirmPsw')}
 						onBlur={pswComfirmBlur}
@@ -107,6 +112,7 @@ const Regist = () => {
 					<TextS style={{ color: Colors.fontGray, marginTop: pTd(20) }}>*{i18n.t('login.pswTips')}</TextS>
 					<TextS style={{ color: Colors.fontGray, marginTop: pTd(20) }}>*{i18n.t('login.pswNotTips')}</TextS>
 					<CommonButton
+						// disabled
 						onPress={registered}
 						title={i18n.t('login.regist')}
 						style={styles.buttonStyles} />

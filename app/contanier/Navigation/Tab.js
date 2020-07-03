@@ -12,7 +12,7 @@ const TabNavigatorStack = () => {
 	useSelector(SettingsType.getLanguage);  //Language status is controlled with redux
 	return (
 		<Tab.Navigator
-			initialRouteName='HomeScreen'
+			initialRouteName='HomePage'
 			lazy={false}
 			tabBarOptions={{
 				activeTintColor: Colors.fontColor,
