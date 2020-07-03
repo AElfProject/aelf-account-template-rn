@@ -4,5 +4,4 @@
 
 ```bash
 npm run postinstall
-chmod u+x pre-commit
 ```
