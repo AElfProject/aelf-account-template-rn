@@ -1,13 +1,18 @@
-import { pTd } from "../../../utils";
-import { sreenHeight, sreenWidth, statusBarHeight, bottomBarHeigth } from "../../../utils/device";
-import Gstyle from "../../../assets/theme/gstyle";
-import { StyleSheet } from 'react-native';
-import { Colors } from "../../../assets/theme";
+import {pTd} from '../../../utils';
+import {
+  sreenHeight,
+  sreenWidth,
+  statusBarHeight,
+  bottomBarHeigth,
+} from '../../../utils/device';
+import GStyle from '../../../assets/theme/gstyle';
+import {StyleSheet} from 'react-native';
+import {Colors} from '../../../assets/theme';
 
 export default StyleSheet.create({
   container: {
     flexDirection: 'column-reverse',
-    ...Gstyle.container,
+    ...GStyle.container,
   },
   bgStyle: {
     position: 'absolute',
@@ -16,15 +21,15 @@ export default StyleSheet.create({
     width: sreenWidth,
   },
   loginButton: {
-    marginBottom: pTd(50)
+    marginBottom: pTd(50),
   },
   BottomBox: {
-    marginBottom: bottomBarHeigth + pTd(100)
+    marginBottom: bottomBarHeigth + pTd(100),
   },
   premium: {
     alignSelf: 'center',
     marginTop: pTd(50),
-    color: Colors.primaryColor
+    color: Colors.primaryColor,
   },
   topTool: {
     paddingHorizontal: pTd(50),
@@ -38,9 +43,9 @@ export default StyleSheet.create({
   language: {
     marginTop: pTd(200),
     alignSelf: 'center',
-    color: Colors.primaryColor
+    color: Colors.primaryColor,
   },
   jLooking: {
-    color: Colors.primaryColor
-  }
+    color: Colors.primaryColor,
+  },
 });

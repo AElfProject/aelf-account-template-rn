@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { Colors } from '../../../assets/theme';
+import {StyleSheet} from 'react-native';
+import {Colors} from '../../../assets/theme';
 
 const styles = StyleSheet.create({
   shotView: {
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   },
   rightStyle: {
     color: Colors.fontColor,
-    marginRight:15
-  }
+    marginRight: 15,
+  },
 });
 export default styles;

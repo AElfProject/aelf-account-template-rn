@@ -1,3 +1,3 @@
-import pTd from './unit'
+import pTd from './unit';
 
-export { pTd }
+export {pTd};

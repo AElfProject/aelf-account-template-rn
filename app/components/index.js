@@ -12,17 +12,17 @@ import ListComponent from './ListComponent';
 import Communication from './Communication';
 import Password from './Password';
 export {
-	Input,
-	WordRotation,
-	Touchable,
-	ListComponent,
-	CommonHeader,
-	OverlayModal,
-	BounceSpinner,
-	CommonButton,
-	Loading,
-	CommonToast,
-	ActionSheet,
-	Communication,
-	Password,
-}
+  Input,
+  WordRotation,
+  Touchable,
+  ListComponent,
+  CommonHeader,
+  OverlayModal,
+  BounceSpinner,
+  CommonButton,
+  Loading,
+  CommonToast,
+  ActionSheet,
+  Communication,
+  Password,
+};

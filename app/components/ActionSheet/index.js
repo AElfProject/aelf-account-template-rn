@@ -2,83 +2,83 @@
 
 'use strict';
 
-import React from "react";
+import React from 'react';
 import OverlayModal from '../OverlayModal';
-import { View, Text, StyleSheet } from "react-native";
-import { bottomBarHeigth, statusBarHeight, sreenWidth } from "../../utils/device";
-import Touchable from "../Touchable";
-import { Colors } from "../../assets/theme";
+import {View, Text, StyleSheet} from 'react-native';
+import {bottomBarHeigth, statusBarHeight, sreenWidth} from '../../utils/device';
+import Touchable from '../Touchable';
+import {Colors} from '../../assets/theme';
 /**
-* show 
-* @param  {Array}   items      [Menu array]
-* @param  {object}  cancelItem [cancel]
-*/
+ * show
+ * @param  {Array}   items      [Menu array]
+ * @param  {object}  cancelItem [cancel]
+ */
 const show = (items, cancelItem) => {
   OverlayModal.show(
     <>
       <View style={styles.sheetBox}>
-        {
-          items && items.map((item, index) => {
-            const { title, onPress } = item
+        {items &&
+          items.map((item, index) => {
+            const {title, onPress} = item;
             return (
               <Touchable
                 key={index}
                 style={styles.itemBox}
                 onPress={() => {
-                  OverlayModal.hide()
-                  onPress && onPress(item)
-                }} >
+                  OverlayModal.hide();
+                  onPress && onPress(item);
+                }}>
                 <Text style={styles.itemText}>{title}</Text>
               </Touchable>
-            )
-          })
-        }
+            );
+          })}
       </View>
-      {
-        cancelItem &&
+      {cancelItem && (
         <Touchable onPress={() => OverlayModal.hide()} style={styles.cancelBox}>
           <Text style={styles.concelText}>{cancelItem.title}</Text>
         </Touchable>
-      }
-    </>
-    , {
+      )}
+    </>,
+    {
       style: styles.bgStyle,
-      containerStyle: styles.containerStyle
-    }
+      containerStyle: styles.containerStyle,
+    },
   );
 };
 /**
-* alert 
-* @param  {string}  title   [title]
-* @param  {string}  message [message]
-* @param  {object}  buttons [buttons]
-*/
+ * alert
+ * @param  {string}  title   [title]
+ * @param  {string}  message [message]
+ * @param  {object}  buttons [buttons]
+ */
 const alert = (title, message, buttons) => {
   OverlayModal.show(
-    (
-      <View style={styles.alertBox}>
-        <Text style={styles.alertTitle}>{title}</Text>
-        {message && <Text style={styles.alertMessage}>{message}</Text>}
-        <View style={styles.buttonsBox}>
-          {Array.isArray(buttons) && buttons.map((item, index) => (
-            <Touchable onPress={() => {
-              OverlayModal.hide()
-              item.onPress && item.onPress()
-            }} key={index} style={styles.buttonItem}>
+    <View style={styles.alertBox}>
+      <Text style={styles.alertTitle}>{title}</Text>
+      {message && <Text style={styles.alertMessage}>{message}</Text>}
+      <View style={styles.buttonsBox}>
+        {Array.isArray(buttons) &&
+          buttons.map((item, index) => (
+            <Touchable
+              onPress={() => {
+                OverlayModal.hide();
+                item.onPress && item.onPress();
+              }}
+              key={index}
+              style={styles.buttonItem}>
               <Text style={styles.buttonText}>{item.title}</Text>
             </Touchable>
           ))}
-        </View>
       </View>
-    ),
+    </View>,
     {
       modal: true,
       type: 'zoomOut',
       style: styles.alertBgstyle,
-      containerStyle: styles.alertContainerStyle
-    }
-  )
-}
+      containerStyle: styles.alertContainerStyle,
+    },
+  );
+};
 export default {
   show,
   alert,
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   alertBgstyle: {
     backgroundColor: 'rgba(0,0,0,0.2)',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   bgStyle: {
     backgroundColor: 'rgba(0,0,0,0.2)',
@@ -95,16 +95,16 @@ const styles = StyleSheet.create({
   },
   containerStyle: {
     paddingHorizontal: 20,
-    marginBottom: bottomBarHeigth + 50
+    marginBottom: bottomBarHeigth + 50,
   },
   sheetBox: {
     overflow: 'hidden',
     borderRadius: 5,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   itemText: {
     color: Colors.primaryColor,
-    fontSize: 16
+    fontSize: 16,
   },
   itemBox: {
     width: '100%',
@@ -113,10 +113,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    borderBottomColor: '#e5e5e5'
+    borderBottomColor: '#e5e5e5',
   },
   concelText: {
-    fontSize: 16
+    fontSize: 16,
   },
   cancelBox: {
     width: '100%',
@@ -133,21 +133,21 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     width: sreenWidth * 0.85,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   alertContainerStyle: {
-    marginBottom: statusBarHeight
+    marginBottom: statusBarHeight,
   },
   alertTitle: {
     marginTop: 20,
     fontSize: 18,
-    marginBottom: 20
+    marginBottom: 20,
   },
   alertMessage: {
     marginHorizontal: 20,
     fontSize: 14,
     color: '#afafaf',
-    marginBottom: 20
+    marginBottom: 20,
   },
   buttonItem: {
     flex: 1,
@@ -155,13 +155,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRightWidth: 1,
     borderRightColor: '#e5e5e5',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   buttonsBox: {
     height: 50,
     flexDirection: 'row',
     borderTopWidth: 1,
-    borderTopColor: '#e5e5e5'
+    borderTopColor: '#e5e5e5',
   },
   buttonTextBox: {
     height: '100%',
@@ -169,10 +169,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRightWidth: 1,
-    borderRightColor: '#e5e5e5'
+    borderRightColor: '#e5e5e5',
   },
   buttonText: {
     color: Colors.primaryColor,
     fontSize: 16,
-  }
+  },
 });

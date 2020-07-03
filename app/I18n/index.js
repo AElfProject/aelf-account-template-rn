@@ -15,7 +15,7 @@ i18n.translations = {
   'zh-cn': zh_cn,
 };
 
-i18n.switchLanguage = (language) => {
-  i18n.locale = language
-  moment.locale(language)
+i18n.switchLanguage = language => {
+  i18n.locale = language;
+  moment.locale(language);
 };
