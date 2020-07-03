@@ -32,7 +32,7 @@ const Entrance = () => {
   return (
     <View style={styles.container}>
       <View style={styles.topTool}>
-        <TextL style={styles.jLooking}>{i18n.t('login.jLook')}</TextL>
+        <TextL onPress={() => navigationService.navigate('Tab')} style={styles.jLooking}>{i18n.t('login.jLook')}</TextL>
       </View>
       <Image style={styles.bgStyle} source={launchScreen} />
       <View style={styles.BottomBox}>
