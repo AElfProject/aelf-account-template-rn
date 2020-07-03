@@ -10,6 +10,7 @@ import CommonButton from './CommonButton';
 import BounceSpinner from './BounceSpinner';
 import ListComponent from './ListComponent';
 import Communication from './Communication';
+import Password from './Password';
 export {
 	Input,
 	WordRotation,
@@ -23,4 +24,5 @@ export {
 	CommonToast,
 	ActionSheet,
 	Communication,
+	Password,
 }

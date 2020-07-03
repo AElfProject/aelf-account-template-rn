@@ -21,6 +21,7 @@ const CommonButton = (props) => {
 	return (
 		<Touchable
 			highlight
+			disabled={disabled}
 			onPress={onPress}
 			style={[styles.container, disabled && { backgroundColor: Colors.disabledColor }, style]}
 			underlayColor={Colors.bottonPressColor}>
@@ -32,8 +33,8 @@ const CommonButton = (props) => {
 export default CommonButton;
 const styles = StyleSheet.create({
 	container: {
-		height: pTd(80),
-		borderRadius: pTd(80),
+		height: pTd(90),
+		borderRadius: pTd(45),
 		alignItems: 'center',
 		justifyContent: 'center',
 		width: '85%',

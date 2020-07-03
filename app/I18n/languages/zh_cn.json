@@ -5,6 +5,19 @@
 	"cancel": "取消",
 	"determine": "确定",
 	"safetyReminder": "安全提醒",
+	"suc": "成功",
+	"fail": "失败",
+	"permissDen": "没有权限",
+	"setBiometrics": "设置生物识别",
+	"setSuc": "设置成功",
+	"setFail": "设置失败",
+	"later": "稍后",
+	"setPsw": {
+		"title": "设置支付密码",
+		"setPsw1": "请设置交易密码",
+		"setPsw2": "请确认密码",
+		"pswInconsistent": "两次密码不一致"
+	},
 	"alert": {
 		"locationTips": "您当前所在位置没有通过权限认证，无法正常使用应用；该应用仅支持非中国大陆地区用户使用。"
 	},
@@ -13,15 +26,20 @@
 		"login": "登录",
 		"regist": "注册",
 		"premiumTips": "高级账号登录",
-		"userName":"用户名",
-		"nameErr":"用户名格式错误",
-		"pswFormatErr":"密码格式错误",
-		"pleaseEnt":"请输入",
-		"newPsw":"新密码",
-		"confirmPsw":"确认密码",
-		"inconsistent":"您两次输入的密码不一致",
-		"usernameTips":"用户名仅支持英文或数字;",
-		"pswTips":"密码必须大于等于12位，并同时包含大小写字母、数字和符号;",
-		"pswNotTips":"密码一经设置不可修改，请妥善保管设置的密码;"
+		"userName": "用户名",
+		"nameErr": "用户名格式错误",
+		"pswFormatErr": "密码格式错误",
+		"pleaseEnt": "请输入",
+		"newPsw": "新密码",
+		"confirmPsw": "确认密码",
+		"inconsistent": "您两次输入的密码不一致",
+		"usernameTips": "用户名仅支持英文或数字;",
+		"pswTips": "密码必须大于等于12位，并同时包含大小写字母、数字和符号;",
+		"pswNotTips": "密码一经设置不可修改，请妥善保管设置的密码;",
+		"backupQRCode": {
+			"title": "备份二维码",
+			"later": "稍后备份",
+			"saveQRCode": "保存二维码到相册"
+		}
 	}
 }

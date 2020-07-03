@@ -5,6 +5,19 @@
 	"cancel": "Cancel",
 	"determine": "Determine",
 	"safetyReminder": "Safety reminder",
+	"suc":"Success",
+	"fail":"Failure",
+	"permissDen":"Permission denied",
+	"setBiometrics": "Set Biometrics",
+	"setSuc": "Set Success",
+	"setFail": "Set Fail",
+	"later": "Later",
+	"setPsw": {
+		"title": "Set Payment Password",
+		"setPsw1": "Please set transaction password for payment",
+		"setPsw2": "Please fill in again to confirm",
+		"pswInconsistent": "The passwords you entered are different"
+	},
 	"alert": {
 		"locationTips": "Your current location has not passed the permission authentication, and the application cannot be used normally; the application is only supported by users in non-Mainland China."
 	},
@@ -22,6 +35,11 @@
 		"inconsistent":"The password you entered twice is inconsistent",
 		"usernameTips":"The characters in the username can only be letters or numbers;",
 		"pswTips":"The password must be greater than or equal to 12 digits, and contain both uppercase letters, lowercase letters, numbers, and characters;",
-		"pswNotTips":"Once the password is set, it cannot be modified, please keep the set password properly;"
+		"pswNotTips":"Once the password is set, it cannot be modified, please keep the set password properly;",
+		"backupQRCode": {
+			"title": "QR Code",
+			"later": "Back later",
+			"saveQRCode": "Save QR Code to Album"
+		}
 	}
 }

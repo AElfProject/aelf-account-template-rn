@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import navigationService from "../../utils/navigationService";
-import { statusBarHeight, pixelSize } from '../../utils/device';
+import { statusBarHeight, pixelSize, sreenWidth } from '../../utils/device';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { pTd } from "../../utils";
 import { Colors } from "../../assets/theme";
@@ -18,8 +18,16 @@ const styles = StyleSheet.create({
 		borderBottomWidth: pixelSize,
 		borderColor: "#D8D8D8",
 	},
+	leftStyle: {
+		flex: 1,
+		flexDirection: 'row',
+	},
+	rightStyle: {
+		flex: 1,
+		flexDirection: 'row-reverse',
+	},
 	backWrapStyle: {
-		width: pTd(100),
+		flex: 1,
 		height: '100%',
 		alignItems: "center",
 		justifyContent: "center",
@@ -31,7 +39,7 @@ const styles = StyleSheet.create({
 	},
 	leftBox: {
 		height: '100%',
-		paddingHorizontal: 10,
+		paddingHorizontal: 15,
 		justifyContent: 'center'
 	},
 });
@@ -47,7 +55,7 @@ const CommonHeader = props => {
 				statusBar && statusBar
 			}
 			<View style={[styles.headerWrap, headerStyle]}>
-				<View style={styles.backWrapStyle}>
+				<View style={styles.leftStyle}>
 					{
 						canBack ? (
 							<TouchableOpacity
@@ -60,7 +68,7 @@ const CommonHeader = props => {
 						) : null
 					}
 					{
-						leftElement !== null ? leftElement : null
+						leftElement ? leftElement : null
 					}
 				</View>
 				{
@@ -71,8 +79,8 @@ const CommonHeader = props => {
 					)
 				}
 
-				<View style={styles.backWrapStyle}>
-					{rightElement !== null ? rightElement : null}
+				<View style={styles.rightStyle}>
+					{rightElement ? rightElement : null}
 				</View>
 			</View>
 		</View>
