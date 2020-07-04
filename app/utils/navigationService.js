@@ -4,8 +4,6 @@
 import {CommonActions, StackActions} from '@react-navigation/native';
 
 let _navigator;
-let _routers;
-let _navigation;
 /**
  * 设置顶层路由导航
  * @param navigatorRef
@@ -27,29 +25,6 @@ function navigate(name, params) {
         params,
       }),
     );
-}
-
-/**
- * 返回到顶层
- */
-function popToTop() {
-  // _navigator.dispatch(CommonActions.popToTop())
-}
-
-/**
- * 返回第n个页面
- * @param n
- */
-function popToN(n) {
-  if (n <= 0) {
-    return;
-  }
-  let len = _routers.length;
-  if (len < n || n === len - 1) {
-    this.popToTop();
-    return;
-  }
-  _navigation.goBack(_routers[len - n].key);
 }
 
 /**

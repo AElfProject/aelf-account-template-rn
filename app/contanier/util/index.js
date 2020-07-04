@@ -85,7 +85,7 @@ const touchAuth = () => {
   };
   return new Promise((resolve, reject) => {
     LocalAuthentication.isEnrolledAsync()
-      .then(success => {
+      .then(() => {
         LocalAuthentication.authenticateAsync(options)
           .then(suc => {
             const {success} = suc;

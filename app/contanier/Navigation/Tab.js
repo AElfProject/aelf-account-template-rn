@@ -5,12 +5,12 @@ import HomeScreen from '../Home';
 import MineScreen from '../Mine';
 import {pixelSize} from '../../utils/device';
 import i18n from 'i18n-js';
-import {SettingsType} from '../../redux/settingsRedux';
+import {settingsSelectors} from '../../redux/settingsRedux';
 import {useSelector} from 'react-redux';
 import {Colors} from '../../assets/theme';
 const Tab = createBottomTabNavigator();
 const TabNavigatorStack = () => {
-  useSelector(SettingsType.getLanguage); //Language status is controlled with redux
+  useSelector(settingsSelectors.getLanguage); //Language status is controlled with redux
   return (
     <Tab.Navigator
       initialRouteName="HomePage"

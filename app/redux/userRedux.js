@@ -8,7 +8,7 @@ const {Types, Creators} = createActions({
   setTest: ['test'],
 });
 
-export const UserTypes = Types;
+export const userTypes = Types;
 export default Creators;
 
 /* ------------- Initial State ------------- */
@@ -21,7 +21,7 @@ export const INITIAL_STATE = Immutable({
 
 const _baseSelector = state => state.user;
 
-export const UserType = {
+export const userSelectors = {
   getTest: createSelector(
     _baseSelector,
     base => base.test,

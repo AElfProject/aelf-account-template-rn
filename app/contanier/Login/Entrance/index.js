@@ -9,15 +9,15 @@ import i18n from 'i18n-js';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {localLanguage} from '../../../i18n/config';
 import {useDispatch, useSelector} from 'react-redux';
-import {SettingsType} from '../../../redux/settingsRedux';
+import settingsActions, {settingsSelectors} from '../../../redux/settingsRedux';
 import {advanced} from '../../../config';
 const Entrance = () => {
   const dispatch = useDispatch();
   const changeLanguage = useCallback(
-    language => dispatch({type: 'CHANGE_LANGUAGE', language}),
+    language => dispatch(settingsActions.changeLanguage(language)),
     [dispatch],
   );
-  useSelector(SettingsType.getLanguage); //Language status is controlled with redux
+  useSelector(settingsSelectors.getLanguage); //Language status is controlled with redux
   const items = localLanguage.map(item => ({
     ...item,
     onPress: value => {

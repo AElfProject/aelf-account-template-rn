@@ -10,6 +10,5 @@ const uiWidthPx = 750;
 const pTd = uiElePx => {
   return Math.round((uiElePx * deviceWidthDp) / uiWidthPx);
 };
-/*Gloal pTd*/
 global.pTd = pTd;
 export default pTd;

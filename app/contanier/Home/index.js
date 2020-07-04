@@ -14,6 +14,9 @@ import {TextL} from '../../components/CommonText';
 import {localLanguage} from '../../i18n/config';
 import {createSelector} from 'reselect';
 import {ScrollView} from 'react-native';
+import settingsActions, {settingsSelectors} from '../../redux/settingsRedux';
+import usersActions, {userSelectors} from '../../redux/userRedux';
+import {connect} from 'react-redux';
 const selector = createSelector(
   [state => state.user, state => state.settings],
   (user, settings) => ({
@@ -21,23 +24,27 @@ const selector = createSelector(
     test: user.test,
   }),
 );
-const Home = () => {
+const Home = props => {
+  console.log(props, '=======props');
+
+  //示例，我们可以像下面这样使用redux
   const dispatch = useDispatch();
+
+  const setTest = useCallback(test => dispatch(usersActions.setTest(test)), [
+    dispatch,
+  ]);
+
+  const changeLanguage = useCallback(
+    language => dispatch(settingsActions.changeLanguage(language)),
+    [dispatch],
+  );
   const {test} = useSelector(selector, shallowEqual);
 
-  const setTest = useCallback(
-    value => dispatch({type: 'SET_TEST', test: value}),
-    [dispatch],
-  );
-  const changeLanguage = useCallback(
-    language => dispatch({type: 'CHANGE_LANGUAGE', language}),
-    [dispatch],
-  );
   const [loading, setLoading] = useState(false);
   const items = localLanguage.map(item => ({
     ...item,
     onPress: value => {
-      changeLanguage(value.language);
+      props.changeLanguage(value.language);
     },
   }));
   return (
@@ -153,4 +160,19 @@ const Home = () => {
     </>
   );
 };
-export default memo(Home);
+
+//示例，我们也可以像这样使用redux
+const mapStateToProps = state => {
+  return {
+    language: settingsSelectors.getLanguage(state),
+    test: userSelectors.getTest(state),
+  };
+};
+const mapDispatchToProps = {
+  changeLanguage: settingsActions.changeLanguage,
+  setTest: usersActions.setTest,
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(memo(Home));

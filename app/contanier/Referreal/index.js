@@ -7,7 +7,7 @@ import SplashScreen from 'react-native-splash-screen';
 import {pTd} from '../../utils';
 import {languageList} from '../../i18n/config';
 import {launchScreen} from '../../assets/images/indes';
-import {SettingsType} from '../../redux/settingsRedux';
+import settingsActions, {settingsSelectors} from '../../redux/settingsRedux';
 import navigationService from '../../utils/navigationService';
 const style = {
   flex: 1,
@@ -19,11 +19,10 @@ const style = {
 const time = 2000;
 const Referreal = () => {
   const dispatch = useDispatch();
-  const changeLanguage = useCallback(
-    language => dispatch({type: 'CHANGE_LANGUAGE', language}),
-    [dispatch],
-  );
-  const language = useSelector(SettingsType.getLanguage);
+  const changeLanguage = useCallback(settingsActions.changeLanguage, [
+    dispatch,
+  ]);
+  const language = useSelector(settingsSelectors.getLanguage);
   useEffect(() => {
     SplashScreen.hide();
     if (language) {
@@ -44,7 +43,7 @@ const Referreal = () => {
     setTimeout(() => {
       navigationService.reset('Entrance');
     }, time);
-    /* eslint-disable-next-line react-hooks/exhaustive-deps*/
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <ImageBackground style={style} source={launchScreen}>

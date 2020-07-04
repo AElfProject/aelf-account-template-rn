@@ -23,7 +23,7 @@ PODS:
     - UMCore
     - UMFileSystemInterface
     - UMPermissionsInterface
-  - EXLocalAuthentication (9.1.1):
+  - EXLocalAuthentication (9.0.0):
     - UMConstantsInterface
     - UMCore
   - EXLocalization (8.2.1):
@@ -346,7 +346,7 @@ PODS:
     - React
   - RNScreens (2.9.0):
     - React
-  - RNSVG (12.1.0):
+  - RNSVG (9.13.6):
     - React
   - RNVectorIcons (6.6.0):
     - React
@@ -612,7 +612,7 @@ SPEC CHECKSUMS:
   EXFileSystem: 8d1dc2924d62046275c84d70b88fa3aa7daeb116
   EXImageLoader: 8366cb1a7d207a241a1bfaa4c5ab4859cf72d507
   EXImagePicker: 2d94621fecfbd3cf2384e2e7d31ac661ed368de2
-  EXLocalAuthentication: 8ebacc193ea099fb8e185842f69cbadb9130d1f1
+  EXLocalAuthentication: 238cc8f7d647e7676fba045420266da80bf7c2b2
   EXLocalization: 2c66021723ee3d91b7ce2627cc27979ddd648fe7
   EXPermissions: b6d7134b7215c33420318c2bbb5d362c20ac9726
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245
@@ -659,7 +659,7 @@ SPEC CHECKSUMS:
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReanimated: b5ccb50650ba06f6e749c7c329a1bc3ae0c88b43
   RNScreens: c526239bbe0e957b988dacc8d75ac94ec9cb19da
-  RNSVG: ce9d996113475209013317e48b05c21ee988d42e
+  RNSVG: 8ba35cbeb385a52fd960fd28db9d7d18b4c2974f
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   UMAppLoader: 98b77b58fac12abab963f79f762ceef008c50505
   UMBarCodeScannerInterface: e1299aafa3bede8ba674e84199e9f319a0195cad
