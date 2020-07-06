@@ -48,7 +48,7 @@ const Entrance = () => {
           title={i18n.t('login.login')}
           style={styles.loginButton}
           onPress={() => {
-            navigationService.navigate('Tab');
+            navigationService.navigate('QRCodeLogin');
           }}
         />
         <CommonButton

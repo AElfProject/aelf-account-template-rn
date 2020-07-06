@@ -32,6 +32,7 @@
 		"pswFormatErr":"Password format error",
 		"pleaseEnt":"Please enter",
 		"newPsw":"New Password",
+		"psw":"Password",
 		"confirmPsw":"Confirm Password",
 		"inconsistent":"The password you entered twice is inconsistent",
 		"usernameTips":"The characters in the username can only be letters or numbers;",

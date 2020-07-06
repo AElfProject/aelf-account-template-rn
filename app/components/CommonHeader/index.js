@@ -5,6 +5,8 @@ import {statusBarHeight, pixelSize} from '../../utils/device';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {pTd} from '../../utils';
 import {Colors} from '../../assets/theme';
+import Touchable from '../Touchable';
+import {TextM} from '../CommonText';
 const styles = StyleSheet.create({
   statusBarStyle: {
     paddingTop: statusBarHeight,
@@ -45,6 +47,13 @@ const styles = StyleSheet.create({
   titleBox: {
     alignItems: 'center',
   },
+  rightTitleStyle: {
+    color: Colors.fontColor,
+    marginRight: 15,
+  },
+  rightBox: {
+    padding: 5,
+  },
 });
 const CommonHeader = props => {
   const {
@@ -56,6 +65,8 @@ const CommonHeader = props => {
     headerStyle,
     titleStyle,
     statusBar,
+    rightTitle,
+    rightOnPress,
   } = props;
   return (
     <View
@@ -85,7 +96,15 @@ const CommonHeader = props => {
         )}
 
         <View style={styles.rightStyle}>
-          {rightElement ? rightElement : null}
+          {rightElement ? (
+            rightElement
+          ) : rightTitle ? (
+            <Touchable
+              style={styles.rightBox}
+              onPress={() => rightOnPress && rightOnPress()}>
+              <TextM style={styles.rightTitleStyle}>{rightTitle}</TextM>
+            </Touchable>
+          ) : null}
         </View>
       </View>
     </View>

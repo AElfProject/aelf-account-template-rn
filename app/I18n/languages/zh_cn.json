@@ -32,6 +32,7 @@
 		"pswFormatErr": "密码格式错误",
 		"pleaseEnt": "请输入",
 		"newPsw": "新密码",
+		"psw":"密码",
 		"confirmPsw": "确认密码",
 		"inconsistent": "您两次输入的密码不一致",
 		"usernameTips": "用户名仅支持英文或数字;",

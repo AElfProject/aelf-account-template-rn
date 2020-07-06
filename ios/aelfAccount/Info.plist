@@ -6,6 +6,14 @@
 	<string>This app needs to access your album function to login your account with the QR code picture in your album</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app needs to access your album function to login your account with the QR code picture in your album</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs to access your camera function so that you can scan QR code to log in to your account</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Enabling Face ID allows you quick and secure access to your account.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app needs to access your camera function so that you can scan QR code to log in to your account</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -41,8 +49,6 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
