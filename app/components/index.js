@@ -11,6 +11,7 @@ import BounceSpinner from './BounceSpinner';
 import ListComponent from './ListComponent';
 import Communication from './Communication';
 import Password from './Password';
+import ListItem from './ListItem';
 export {
   Input,
   WordRotation,
@@ -25,4 +26,5 @@ export {
   ActionSheet,
   Communication,
   Password,
+  ListItem,
 };
