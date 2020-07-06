@@ -10,12 +10,11 @@ import {useSetState} from '../../util/hooks';
 import {View, Keyboard} from 'react-native';
 import GStyle from '../../../assets/theme/gstyle';
 import styles from './styles';
-import {TextM, TextS} from '../../../components/CommonText';
+import {TextM} from '../../../components/CommonText';
 import {passwordReg} from '../../../config';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import navigationService from '../../../utils/navigationService';
-import {pTd} from '../../../utils';
-import {Colors} from '../../../assets/theme';
+import NamePasswordTips from '../NamePasswordTips';
 const Regist = () => {
   const [state, setState] = useSetState({
     userName: '',
@@ -121,19 +120,9 @@ const Regist = () => {
             <TextM style={styles.pswTip}>{i18n.t('login.pswFormatErr')}</TextM>
           )}
           {pswDifferent && (
-            <TextM style={[styles.pswTip, ...GStyle.marginArg(pTd(20))]}>
-              {i18n.t('login.inconsistent')}
-            </TextM>
+            <TextM style={styles.pswTip}>{i18n.t('login.inconsistent')}</TextM>
           )}
-          <TextS style={{color: Colors.fontGray, marginTop: pTd(20)}}>
-            *{i18n.t('login.usernameTips')}
-          </TextS>
-          <TextS style={{color: Colors.fontGray, marginTop: pTd(20)}}>
-            *{i18n.t('login.pswTips')}
-          </TextS>
-          <TextS style={{color: Colors.fontGray, marginTop: pTd(20)}}>
-            *{i18n.t('login.pswNotTips')}
-          </TextS>
+          <NamePasswordTips />
           <CommonButton
             // disabled
             onPress={registered}

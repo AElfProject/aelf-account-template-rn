@@ -16,6 +16,7 @@ export default StyleSheet.create({
     height: 65,
   },
   buttonStyles: {
+    width: '100%',
     marginTop: pTd(100),
   },
   leftTextStyle: {

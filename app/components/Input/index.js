@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     height: 50,
     borderBottomWidth: 1,
-    borderBottomColor: '#999',
+    borderColor: '#999',
     paddingHorizontal: 5,
   },
   leftTitleBox: {

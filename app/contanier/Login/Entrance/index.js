@@ -37,7 +37,7 @@ const Entrance = () => {
     <View style={styles.container}>
       <View style={styles.topTool}>
         <TextL
-          onPress={() => navigationService.navigate('Tab')}
+          onPress={() => navigationService.reset('Tab')}
           style={styles.jLooking}>
           {i18n.t('login.jLook')}
         </TextL>
@@ -57,7 +57,11 @@ const Entrance = () => {
             navigationService.navigate('Regist');
           }}
         />
-        <TextL style={styles.premium}>{i18n.t('login.premiumTips')}</TextL>
+        <TextL
+          onPress={() => navigationService.navigate('AdvancedLogin')}
+          style={styles.premium}>
+          {i18n.t('login.premiumTips')}
+        </TextL>
         <TextM
           style={styles.language}
           onPress={() => ActionSheet.show(items, {title: i18n.t('cancel')})}>
