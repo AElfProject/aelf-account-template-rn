@@ -21,10 +21,6 @@ export default StyleSheet.create({
     elevation: 0,
     borderWidth: 2,
   },
-  pswTip: {
-    marginTop: 3,
-    color: 'red',
-  },
   leftTitleBox: {
     paddingTop: 15,
     height: 65,

@@ -2,10 +2,6 @@ import {StyleSheet} from 'react-native';
 import {pTd} from '../../../utils';
 
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
   input: {
     paddingHorizontal: pTd(20),
     marginTop: pTd(20),

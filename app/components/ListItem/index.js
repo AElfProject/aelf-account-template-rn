@@ -1,9 +1,11 @@
+'use strict';
 import React, {memo} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Switch} from 'react-native';
 import {pTd} from '../../utils';
 import {TextL} from '../CommonText';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Touchable from '../Touchable';
+import {Colors} from '../../assets/theme';
 const ListItem = props => {
   const {
     title,
@@ -12,14 +14,32 @@ const ListItem = props => {
     container,
     titleStyle,
     subtitleStyle,
+    disabled,
+    //switch
+    switching,
+    value,
+    onValueChange,
   } = props;
   return (
-    <Touchable onPress={onPress} style={[styles.container, container]}>
+    <Touchable
+      disabled={disabled}
+      onPress={onPress}
+      style={[styles.container, container]}>
       <TextL style={[styles.titleStyle, titleStyle]}>{title}</TextL>
       {subtitle ? (
         <TextL style={[styles.subtitleStyle, subtitleStyle]}>{subtitle}</TextL>
       ) : null}
-      <Icon name={'right'} size={20} />
+      {switching ? (
+        <Switch
+          value={value}
+          thumbColor="white"
+          trackColor={{false: '', true: Colors.primaryColor}}
+          //当切换开关室回调此方法
+          onValueChange={onValueChange}
+        />
+      ) : (
+        <Icon name={'right'} size={20} />
+      )}
     </Touchable>
   );
 };

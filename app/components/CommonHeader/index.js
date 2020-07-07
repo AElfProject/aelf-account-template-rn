@@ -1,3 +1,4 @@
+'use strict';
 import React, {memo} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import navigationService from '../../utils/navigationService';

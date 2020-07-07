@@ -1,5 +1,5 @@
 // @flow
-
+'use strict';
 import i18n from 'i18n-js';
 import moment from 'moment/moment';
 import 'moment/locale/zh-cn';

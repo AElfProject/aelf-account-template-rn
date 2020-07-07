@@ -1,5 +1,9 @@
+'use strict';
 import Input from './Input';
 import Loading from './Loading';
+import Password from './Password';
+import ListItem from './ListItem';
+import MyQRCode from './MyQRCode';
 import Touchable from './Touchable';
 import CommonToast from './CommonToast';
 import ActionSheet from './ActionSheet';
@@ -10,23 +14,22 @@ import CommonButton from './CommonButton';
 import BounceSpinner from './BounceSpinner';
 import ListComponent from './ListComponent';
 import Communication from './Communication';
-import Password from './Password';
-import ListItem from './ListItem';
-import MyQRCode from './MyQRCode';
+import VerifyPassword from './VerifyPassword';
 export {
   Input,
-  WordRotation,
-  Touchable,
-  ListComponent,
-  CommonHeader,
-  OverlayModal,
-  BounceSpinner,
-  CommonButton,
   Loading,
-  CommonToast,
-  ActionSheet,
-  Communication,
   Password,
   ListItem,
   MyQRCode,
+  Touchable,
+  CommonToast,
+  ActionSheet,
+  WordRotation,
+  CommonHeader,
+  OverlayModal,
+  CommonButton,
+  ListComponent,
+  BounceSpinner,
+  Communication,
+  VerifyPassword,
 };

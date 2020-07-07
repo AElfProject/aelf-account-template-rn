@@ -90,7 +90,7 @@ const Regist = () => {
             placeholder={i18n.t('login.pleaseEnt')}
           />
           {userNameRule && (
-            <TextM style={styles.pswTip}>{i18n.t('login.nameErr')}</TextM>
+            <TextM style={GStyle.pswTip}>{i18n.t('login.nameErr')}</TextM>
           )}
           <Input
             secureTextEntry={true}
@@ -102,7 +102,7 @@ const Regist = () => {
             placeholder={i18n.t('login.pleaseEnt')}
           />
           {pswRule && (
-            <TextM style={styles.pswTip}>{i18n.t('login.pswFormatErr')}</TextM>
+            <TextM style={GStyle.pswTip}>{i18n.t('login.pswFormatErr')}</TextM>
           )}
           <Input
             secureTextEntry={true}
@@ -114,10 +114,10 @@ const Regist = () => {
             placeholder={i18n.t('login.pleaseEnt')}
           />
           {pswConfirmRule && (
-            <TextM style={styles.pswTip}>{i18n.t('login.pswFormatErr')}</TextM>
+            <TextM style={GStyle.pswTip}>{i18n.t('login.pswFormatErr')}</TextM>
           )}
           {pswDifferent && (
-            <TextM style={styles.pswTip}>{i18n.t('login.inconsistent')}</TextM>
+            <TextM style={GStyle.pswTip}>{i18n.t('login.inconsistent')}</TextM>
           )}
           <NamePasswordTips />
           <CommonButton

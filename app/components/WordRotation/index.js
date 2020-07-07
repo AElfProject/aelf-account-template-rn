@@ -1,6 +1,7 @@
 /* eslint-disable react/no-did-update-set-state */
 /* eslint-disable no-shadow */
 /* eslint-disable react-native/no-inline-styles */
+'use strict';
 import React, {Component} from 'react';
 import {
   View,

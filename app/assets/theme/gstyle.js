@@ -6,6 +6,14 @@ const GStyle = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.bgColor,
   },
+  secondContainer: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+  },
+  pswTip: {
+    marginTop: 3,
+    color: 'red',
+  },
 
   //-------- margin -----------
   marginArg: function() {

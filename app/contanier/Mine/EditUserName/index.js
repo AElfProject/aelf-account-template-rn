@@ -10,6 +10,7 @@ import styles from './styles';
 import {TextL} from '../../../components/CommonText';
 import i18n from 'i18n-js';
 import {usernameReg} from '../../../config';
+import {GStyle} from '../../../assets/theme';
 const EditUserName = () => {
   const [name, setName] = useState('');
   const onPress = () => {
@@ -20,7 +21,7 @@ const EditUserName = () => {
     }
   };
   return (
-    <View style={styles.container}>
+    <View style={GStyle.secondContainer}>
       <CommonHeader title="编辑用户名" canBack />
       <Input
         style={styles.input}

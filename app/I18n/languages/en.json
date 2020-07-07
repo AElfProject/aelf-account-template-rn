@@ -13,6 +13,8 @@
 	"setFail": "Set Fail",
 	"later": "Later",
 	"saveSuc":"Saved Success",
+	"pswErr":"password is incorrect",
+	"pleasePayPsw":"Please enter the payment password",
 	"setPsw": {
 		"title": "Set Payment Password",
 		"setPsw1": "Please set transaction password for payment",

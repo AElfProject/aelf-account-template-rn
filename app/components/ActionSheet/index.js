@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderRadius: 10,
     alignItems: 'center',
-    width: sreenWidth * 0.85,
+    width: '85%',
     backgroundColor: 'white',
   },
   alertContainerStyle: {
@@ -162,14 +162,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderTopWidth: 1,
     borderTopColor: '#e5e5e5',
-  },
-  buttonTextBox: {
-    height: '100%',
-    backgroundColor: 'red',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRightWidth: 1,
-    borderRightColor: '#e5e5e5',
   },
   buttonText: {
     color: Colors.primaryColor,

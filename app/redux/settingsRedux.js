@@ -6,6 +6,8 @@ import i18n from 'i18n-js';
 const {Types, Creators} = createActions({
   changeLanguage: ['language'],
   changeBarStyle: ['barStyle'],
+  changePayPsw: ['payPsw'],
+  changeBiometrics: ['biometrics'],
 });
 
 export const settingsTypes = Types;
@@ -16,6 +18,8 @@ export default Creators;
 export const INITIAL_STATE = Immutable({
   language: null,
   barStyle: null,
+  payPsw: null,
+  biometrics: null,
 });
 
 /* ------------- Selectors ------------- */
@@ -31,6 +35,14 @@ export const settingsSelectors = {
     _baseSelector,
     base => base.barStyle,
   ),
+  getPayPsw: createSelector(
+    _baseSelector,
+    base => base.payPsw,
+  ),
+  getBiometrics: createSelector(
+    _baseSelector,
+    base => base.biometrics,
+  ),
 };
 
 /* ------------- Reducers ------------- */
@@ -41,8 +53,16 @@ export const changeLanguage = (state, {language}) => {
 export const changeBarStyle = (state, {barStyle}) => {
   return state.merge({barStyle});
 };
+export const changePayPsw = (state, {payPsw}) => {
+  return state.merge({payPsw});
+};
+export const changeBiometrics = (state, {biometrics}) => {
+  return state.merge({biometrics});
+};
 /* ------------- Hookup Reducers To Types ------------- */
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CHANGE_LANGUAGE]: changeLanguage,
   [Types.CHANGE_BAR_STYLE]: changeBarStyle,
+  [Types.CHANGE_PAY_PSW]: changePayPsw,
+  [Types.CHANGE_BIOMETRICS]: changeBiometrics,
 });

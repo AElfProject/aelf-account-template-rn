@@ -1,3 +1,4 @@
+'use strict';
 import React, {memo} from 'react';
 import {View, TouchableOpacity, TouchableHighlight} from 'react-native';
 import PropTypes from 'prop-types';

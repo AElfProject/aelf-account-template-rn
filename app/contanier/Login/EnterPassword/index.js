@@ -52,7 +52,7 @@ const EnterPassword = props => {
           placeholder={i18n.t('login.pleaseEnt')}
         />
         {pswRule && (
-          <TextM style={styles.pswTip}>{i18n.t('login.pswFormatErr')}</TextM>
+          <TextM style={GStyle.pswTip}>{i18n.t('login.pswFormatErr')}</TextM>
         )}
         <CommonButton
           onPress={login}

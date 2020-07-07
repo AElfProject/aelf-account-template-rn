@@ -24,12 +24,12 @@ const Tool = () => {
       },
       {
         title: '安全中心',
-        onPress: () => {},
+        onPress: () => navigationService.navigate('SecurityCenter'),
       },
-      {
-        title: '地址簿',
-        onPress: () => {},
-      },
+      // {
+      //   title: '地址簿',
+      //   onPress: () => {},
+      // },
       {
         title: '通用设置',
         onPress: () => {},
@@ -52,7 +52,7 @@ const Tool = () => {
     ];
     return (
       <ScrollView>
-        <View style={styles.toolContainer}>
+        <View style={GStyle.secondContainer}>
           <View style={styles.toolBox}>
             <Touchable style={styles.toolItem}>
               <FontAwesome5

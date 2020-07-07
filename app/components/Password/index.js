@@ -1,6 +1,4 @@
-/**
- * Created by wayne on 2017/6/21.
- */
+'use strict';
 import React, {useRef, useState, memo, useCallback} from 'react';
 import {StyleSheet, View, TextInput, TouchableHighlight} from 'react-native';
 import {sreenWidth} from '../../utils/device';
@@ -9,7 +7,7 @@ const PasswordInput = props => {
   const input = useRef();
   const [text, setText] = useState('');
   const onPress = useCallback(() => {
-    input && input.focus();
+    input.current && input.current.focus();
   }, [input]);
   const getInputItem = () => {
     const {maxLength, inputItemStyle, iconStyle} = props;

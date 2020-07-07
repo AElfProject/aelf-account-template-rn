@@ -1,5 +1,5 @@
 import React, {memo, useRef} from 'react';
-import {Colors} from '../../../assets/theme';
+import {Colors, GStyle} from '../../../assets/theme';
 import {
   CommonHeader,
   MyQRCode,
@@ -17,7 +17,7 @@ import navigationService from '../../../utils/navigationService';
 const PersonalCenter = () => {
   const viewShot = useRef();
   return (
-    <View style={styles.container}>
+    <View style={GStyle.secondContainer}>
       <CommonHeader title="个人中心" canBack>
         <View style={styles.box}>
           <View style={styles.topBox}>

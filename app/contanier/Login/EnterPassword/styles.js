@@ -19,10 +19,6 @@ export default StyleSheet.create({
   leftTextStyle: {
     width: 80,
   },
-  pswTip: {
-    marginTop: 3,
-    color: 'red',
-  },
   buttonStyles: {
     marginTop: pTd(50),
     width: '100%',

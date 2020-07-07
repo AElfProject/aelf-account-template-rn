@@ -1,3 +1,4 @@
+'use strict';
 import React from 'react';
 import Overlay from 'teaset/components/Overlay/Overlay';
 import {View, StyleSheet} from 'react-native';

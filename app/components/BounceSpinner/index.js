@@ -1,3 +1,4 @@
+'use strict';
 import React, {memo} from 'react';
 import Spinner from 'react-native-spinkit';
 import {Colors} from '../../assets/theme';

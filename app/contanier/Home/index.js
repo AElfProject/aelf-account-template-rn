@@ -25,8 +25,6 @@ const selector = createSelector(
   }),
 );
 const Home = props => {
-  console.log(props, '=======props');
-
   //示例，我们可以像下面这样使用redux
   const dispatch = useDispatch();
 
