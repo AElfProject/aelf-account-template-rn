@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import Spinner from 'react-native-spinkit';
 import {Colors} from '../../assets/theme';
 
@@ -16,4 +16,4 @@ const BounceSpinner = props => {
 BounceSpinner.defaultProps = {
   spinnerProps: {},
 };
-export default BounceSpinner;
+export default memo(BounceSpinner);

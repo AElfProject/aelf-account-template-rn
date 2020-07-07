@@ -12,6 +12,7 @@ import ListComponent from './ListComponent';
 import Communication from './Communication';
 import Password from './Password';
 import ListItem from './ListItem';
+import MyQRCode from './MyQRCode';
 export {
   Input,
   WordRotation,
@@ -27,4 +28,5 @@ export {
   Communication,
   Password,
   ListItem,
+  MyQRCode,
 };

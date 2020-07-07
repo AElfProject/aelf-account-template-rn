@@ -10,6 +10,7 @@ import settingsActions, {settingsSelectors} from '../../redux/settingsRedux';
 import {pTd} from '../../utils';
 import {TextL} from '../../components/CommonText';
 import {Touchable, ListItem} from '../../components';
+import navigationService from '../../utils/navigationService';
 const Tool = () => {
   const Element = useMemo(() => {
     const List = [
@@ -105,10 +106,13 @@ const Mine = props => {
   }, [navigation, changeBarStyle]);
   return (
     <View style={GStyle.container}>
-      <View style={styles.topBGStyles}>
+      <Touchable
+        activeOpacity={1}
+        onPress={() => navigationService.navigate('PersonalCenter')}
+        style={styles.topBGStyles}>
         <TextL style={styles.textTitle}>User Name</TextL>
         <Icon name="qrcode" size={pTd(180)} color="#fff" />
-      </View>
+      </Touchable>
       <View style={styles.balanceBox}>
         <TextL style={styles.textTitle}>Balance</TextL>
       </View>

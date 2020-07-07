@@ -9,6 +9,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
+    "build:android": "cd android/ && ./gradlew assembleRelease",
     "firim:android": "cd android/ && fastlane fir_im",
     "firim:ios": "cd ios/ && fastlane fir_im",
     "firim": "npm run firim:android && npm run firim:ios"
@@ -44,7 +45,7 @@
     "react-native-svg": "^9.3.6",
     "react-native-tab-view": "^2.14.4",
     "react-native-unimodules": "^0.10.1",
-    "react-native-vector-icons": "^6.6.0",
+    "react-native-vector-icons": "6.6.0",
     "react-native-view-shot": "^3.1.2",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",

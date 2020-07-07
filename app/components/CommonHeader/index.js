@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import navigationService from '../../utils/navigationService';
 import {statusBarHeight, pixelSize} from '../../utils/device';
@@ -7,6 +7,7 @@ import {pTd} from '../../utils';
 import {Colors} from '../../assets/theme';
 import Touchable from '../Touchable';
 import {TextM} from '../CommonText';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 const styles = StyleSheet.create({
   statusBarStyle: {
     paddingTop: statusBarHeight,
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
 });
-const CommonHeader = props => {
+const Header = props => {
   const {
     canBack,
     leftElement,
@@ -72,7 +73,9 @@ const CommonHeader = props => {
     <View
       style={[
         styles.statusBarStyle,
-        {backgroundColor: headerStyle?.backgroundColor},
+        headerStyle?.backgroundColor && {
+          backgroundColor: headerStyle.backgroundColor,
+        },
       ]}>
       {statusBar && statusBar}
       <View style={[styles.headerWrap, headerStyle]}>
@@ -110,9 +113,26 @@ const CommonHeader = props => {
     </View>
   );
 };
+const CommonHeader = props => {
+  const {children} = props;
+  if (children) {
+    return (
+      <>
+        <Header {...props} />
+        <KeyboardAwareScrollView
+          keyboardShouldPersistTaps="handled"
+          keyboardOpeningTime={0}
+          extraHeight={50}>
+          {children}
+        </KeyboardAwareScrollView>
+      </>
+    );
+  }
+  return <Header {...props} />;
+};
 
 CommonHeader.defaultProps = {
   rightElement: null,
 };
 
-export default CommonHeader;
+export default memo(CommonHeader);

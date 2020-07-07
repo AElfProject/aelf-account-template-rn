@@ -1,7 +1,7 @@
 import React, {memo, useCallback, useEffect} from 'react';
 import {launchScreen} from '../../../assets/images/indes';
 import {View, Image} from 'react-native';
-import {CommonButton, ActionSheet} from '../../../components';
+import {CommonButton, ActionSheet, CommonToast} from '../../../components';
 import navigationService from '../../../utils/navigationService';
 import {TextL, TextM} from '../../../components/CommonText';
 import styles from './styles';
@@ -11,6 +11,7 @@ import {localLanguage} from '../../../i18n/config';
 import {useDispatch, useSelector} from 'react-redux';
 import settingsActions, {settingsSelectors} from '../../../redux/settingsRedux';
 import {advanced} from '../../../config';
+import {BarCodeScanner} from 'expo-barcode-scanner';
 const Entrance = () => {
   const dispatch = useDispatch();
   const changeLanguage = useCallback(
@@ -33,6 +34,14 @@ const Entrance = () => {
       // )
     }
   }, []);
+  const login = async () => {
+    const {status} = await BarCodeScanner.requestPermissionsAsync();
+    if (status !== 'granted') {
+      CommonToast.text('权限被拒绝');
+    } else {
+      navigationService.navigate('QRCodeLogin');
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={styles.topTool}>
@@ -47,9 +56,7 @@ const Entrance = () => {
         <CommonButton
           title={i18n.t('login.login')}
           style={styles.loginButton}
-          onPress={() => {
-            navigationService.navigate('QRCodeLogin');
-          }}
+          onPress={login}
         />
         <CommonButton
           title={i18n.t('login.regist')}

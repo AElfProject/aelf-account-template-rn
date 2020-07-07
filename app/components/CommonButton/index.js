@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {StyleSheet} from 'react-native';
 import Touchable from '../Touchable';
 import {TextL} from '../CommonText';
@@ -35,7 +35,7 @@ const CommonButton = props => {
   );
 };
 
-export default CommonButton;
+export default memo(CommonButton);
 const styles = StyleSheet.create({
   container: {
     height: pTd(90),

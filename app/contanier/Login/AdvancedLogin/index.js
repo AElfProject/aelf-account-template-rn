@@ -12,7 +12,7 @@ import NamePasswordTips from '../NamePasswordTips';
 import styles, {tabActiveColor} from './styles';
 import i18n from 'i18n-js';
 import {useSetState} from '../../util/hooks';
-import {passwordReg} from '../../../config';
+import {passwordReg, usernameReg} from '../../../config';
 import {TextM} from '../../../components/CommonText';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import navigationService from '../../../utils/navigationService';
@@ -30,7 +30,7 @@ const PrivateKeyLogin = () => {
   });
   const userNameBlur = useCallback(() => {
     const {userName} = state;
-    const re = /^[a-zA-Z0-9]+$/;
+    const re = usernameReg;
     if (!re.test(userName)) {
       setState({userNameRule: true});
     } else {
@@ -73,68 +73,66 @@ const PrivateKeyLogin = () => {
   const {userNameRule, pswRule, pswConfirmRule, pswDifferent} = state;
   return (
     <Touchable
-      style={styles.container}
+      style={GStyle.container}
       activeOpacity={1}
       onPress={() => Keyboard.dismiss()}>
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="handled"
         keyboardOpeningTime={0}
         extraHeight={50}>
-        <Input
-          multiline={true}
-          style={styles.input}
-          onChangeText={topInput => setState({topInput})}
-          placeholder={i18n.t('login.pleaseEnt')}
-          placeholderTextColor="#999"
-        />
-        <Input
-          leftTitleBox={styles.leftTitleBox}
-          leftTextStyle={styles.leftTextStyle}
-          leftTitle={i18n.t('login.userName')}
-          onBlur={userNameBlur}
-          onChangeText={userName => setState({userName})}
-          placeholder={i18n.t('login.pleaseEnt')}
-          placeholderTextColor="#999"
-        />
-        {userNameRule && (
-          <TextM style={styles.pswTip}>{i18n.t('login.nameErr')}</TextM>
-        )}
-        <Input
-          secureTextEntry={true}
-          leftTitleBox={styles.leftTitleBox}
-          leftTextStyle={styles.leftTextStyle}
-          leftTitle={i18n.t('login.newPsw')}
-          onBlur={pswBlur}
-          onChangeText={psw => setState({psw})}
-          placeholder={i18n.t('login.pleaseEnt')}
-          placeholderTextColor="#999"
-        />
-        {pswRule && (
-          <TextM style={styles.pswTip}>{i18n.t('login.pswFormatErr')}</TextM>
-        )}
-        <Input
-          secureTextEntry={true}
-          leftTitleBox={[styles.leftTitleBox, {marginBottom: 10}]}
-          leftTextStyle={styles.leftTextStyle}
-          leftTitle={i18n.t('login.confirmPsw')}
-          onBlur={pswComfirmBlur}
-          onChangeText={pswConfirm => setState({pswConfirm})}
-          placeholder={i18n.t('login.pleaseEnt')}
-          placeholderTextColor="#999"
-        />
-        {pswConfirmRule && (
-          <TextM style={styles.pswTip}>{i18n.t('login.pswFormatErr')}</TextM>
-        )}
-        {pswDifferent && (
-          <TextM style={styles.pswTip}>{i18n.t('login.inconsistent')}</TextM>
-        )}
-        <NamePasswordTips />
-        <CommonButton
-          // disabled
-          onPress={login}
-          title={i18n.t('login.login')}
-          style={styles.buttonStyles}
-        />
+        <View style={styles.container}>
+          <Input
+            multiline={true}
+            style={styles.input}
+            onChangeText={topInput => setState({topInput})}
+            placeholder={i18n.t('login.pleaseEnt')}
+          />
+          <Input
+            leftTitleBox={styles.leftTitleBox}
+            leftTextStyle={styles.leftTextStyle}
+            leftTitle={i18n.t('login.userName')}
+            onBlur={userNameBlur}
+            onChangeText={userName => setState({userName})}
+            placeholder={i18n.t('login.pleaseEnt')}
+          />
+          {userNameRule && (
+            <TextM style={styles.pswTip}>{i18n.t('login.nameErr')}</TextM>
+          )}
+          <Input
+            secureTextEntry={true}
+            leftTitleBox={styles.leftTitleBox}
+            leftTextStyle={styles.leftTextStyle}
+            leftTitle={i18n.t('login.newPsw')}
+            onBlur={pswBlur}
+            onChangeText={psw => setState({psw})}
+            placeholder={i18n.t('login.pleaseEnt')}
+          />
+          {pswRule && (
+            <TextM style={styles.pswTip}>{i18n.t('login.pswFormatErr')}</TextM>
+          )}
+          <Input
+            secureTextEntry={true}
+            leftTitleBox={[styles.leftTitleBox, {marginBottom: 10}]}
+            leftTextStyle={styles.leftTextStyle}
+            leftTitle={i18n.t('login.confirmPsw')}
+            onBlur={pswComfirmBlur}
+            onChangeText={pswConfirm => setState({pswConfirm})}
+            placeholder={i18n.t('login.pleaseEnt')}
+          />
+          {pswConfirmRule && (
+            <TextM style={styles.pswTip}>{i18n.t('login.pswFormatErr')}</TextM>
+          )}
+          {pswDifferent && (
+            <TextM style={styles.pswTip}>{i18n.t('login.inconsistent')}</TextM>
+          )}
+          <NamePasswordTips />
+          <CommonButton
+            // disabled
+            onPress={login}
+            title={i18n.t('login.login')}
+            style={styles.buttonStyles}
+          />
+        </View>
       </KeyboardAwareScrollView>
     </Touchable>
   );
@@ -166,40 +164,40 @@ const KeystoreLogin = () => {
   const {pswRule} = state;
   return (
     <Touchable
-      style={styles.container}
+      style={GStyle.container}
       activeOpacity={1}
       onPress={() => Keyboard.dismiss()}>
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="handled"
         keyboardOpeningTime={0}
         extraHeight={50}>
-        <Input
-          multiline={true}
-          style={styles.input}
-          onChangeText={topInput => setState({topInput})}
-          placeholder={i18n.t('login.pleaseEnt')}
-          placeholderTextColor="#999"
-        />
-        <Input
-          secureTextEntry={true}
-          leftTitleBox={styles.leftTitleBox}
-          leftTextStyle={styles.leftTextStyle}
-          leftTitle={i18n.t('login.psw')}
-          onBlur={pswBlur}
-          onChangeText={psw => setState({psw})}
-          placeholder={i18n.t('login.pleaseEnt')}
-          placeholderTextColor="#999"
-        />
-        {pswRule && (
-          <TextM style={styles.pswTip}>{i18n.t('login.pswFormatErr')}</TextM>
-        )}
-        <NamePasswordTips />
-        <CommonButton
-          // disabled
-          onPress={login}
-          title={i18n.t('login.login')}
-          style={styles.buttonStyles}
-        />
+        <View style={styles.container}>
+          <Input
+            multiline={true}
+            style={styles.input}
+            onChangeText={topInput => setState({topInput})}
+            placeholder={i18n.t('login.pleaseEnt')}
+          />
+          <Input
+            secureTextEntry={true}
+            leftTitleBox={styles.leftTitleBox}
+            leftTextStyle={styles.leftTextStyle}
+            leftTitle={i18n.t('login.psw')}
+            onBlur={pswBlur}
+            onChangeText={psw => setState({psw})}
+            placeholder={i18n.t('login.pleaseEnt')}
+          />
+          {pswRule && (
+            <TextM style={styles.pswTip}>{i18n.t('login.pswFormatErr')}</TextM>
+          )}
+          <NamePasswordTips />
+          <CommonButton
+            // disabled
+            onPress={login}
+            title={i18n.t('login.login')}
+            style={styles.buttonStyles}
+          />
+        </View>
       </KeyboardAwareScrollView>
     </Touchable>
   );

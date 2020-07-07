@@ -11,17 +11,20 @@ import Tab from './Tab';
 import navigationService from '../../utils/navigationService';
 
 import LoginNav from '../Login/stackNav';
+import MineNav from '../Mine/stackNav';
 const Stack = createStackNavigator();
 
 const stackNav = [
   {name: 'Referreal', component: Referreal},
   {name: 'Tab', component: Tab},
   ...LoginNav,
+  ...MineNav,
 ];
 const NavigationMain = () => (
   <NavigationContainer ref={navigationService.setTopLevelNavigator}>
     <Stack.Navigator
       initialRouteName="Referreal"
+      // initialRouteName="Tab"
       screenOptions={{
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         header: () => null,

@@ -5,7 +5,6 @@ export const tabActiveColor = Colors.primaryColor;
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
     paddingHorizontal: pTd(50),
   },
   labelStyle: {
@@ -38,6 +37,7 @@ export default StyleSheet.create({
     width: 80,
   },
   input: {
+    textAlignVertical: 'top',
     marginTop: pTd(50),
     height: pTd(250),
     borderRadius: 5,

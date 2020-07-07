@@ -17,8 +17,8 @@ export default StyleSheet.create({
   bgStyle: {
     position: 'absolute',
     top: pTd(-300),
-    height: sreenHeight,
-    width: sreenWidth,
+    height: '100%',
+    width: '100%',
   },
   loginButton: {
     marginBottom: pTd(50),

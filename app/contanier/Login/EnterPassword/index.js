@@ -50,7 +50,6 @@ const EnterPassword = props => {
           onBlur={pswBlur}
           onChangeText={psw => setState({psw})}
           placeholder={i18n.t('login.pleaseEnt')}
-          placeholderTextColor="#999"
         />
         {pswRule && (
           <TextM style={styles.pswTip}>{i18n.t('login.pswFormatErr')}</TextM>

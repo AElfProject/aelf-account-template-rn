@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {View, TouchableOpacity, TouchableHighlight} from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -46,4 +46,4 @@ Touchable.propTypes = {
 Touchable.defaultProps = {
   onPressWithSecond: 500,
 };
-export default Touchable;
+export default memo(Touchable);

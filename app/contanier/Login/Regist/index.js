@@ -11,7 +11,7 @@ import {View, Keyboard} from 'react-native';
 import GStyle from '../../../assets/theme/gstyle';
 import styles from './styles';
 import {TextM} from '../../../components/CommonText';
-import {passwordReg} from '../../../config';
+import {passwordReg, usernameReg} from '../../../config';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import navigationService from '../../../utils/navigationService';
 import NamePasswordTips from '../NamePasswordTips';
@@ -27,7 +27,7 @@ const Regist = () => {
   });
   const userNameBlur = useCallback(() => {
     const {userName} = state;
-    const re = /^[a-zA-Z0-9]+$/;
+    const re = usernameReg;
     if (!re.test(userName)) {
       setState({userNameRule: true});
     } else {
@@ -88,7 +88,6 @@ const Regist = () => {
             onBlur={userNameBlur}
             onChangeText={userName => setState({userName})}
             placeholder={i18n.t('login.pleaseEnt')}
-            placeholderTextColor="#999"
           />
           {userNameRule && (
             <TextM style={styles.pswTip}>{i18n.t('login.nameErr')}</TextM>
@@ -101,7 +100,6 @@ const Regist = () => {
             onBlur={pswBlur}
             onChangeText={psw => setState({psw})}
             placeholder={i18n.t('login.pleaseEnt')}
-            placeholderTextColor="#999"
           />
           {pswRule && (
             <TextM style={styles.pswTip}>{i18n.t('login.pswFormatErr')}</TextM>
@@ -114,7 +112,6 @@ const Regist = () => {
             onBlur={pswComfirmBlur}
             onChangeText={pswConfirm => setState({pswConfirm})}
             placeholder={i18n.t('login.pleaseEnt')}
-            placeholderTextColor="#999"
           />
           {pswConfirmRule && (
             <TextM style={styles.pswTip}>{i18n.t('login.pswFormatErr')}</TextM>

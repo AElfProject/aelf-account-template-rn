@@ -23,9 +23,7 @@ const Input = props => {
           <Text style={[styles.leftTextStyle, leftTextStyle]}>{leftTitle}</Text>
         )}
         <TextInput
-          placeholderTextColor={
-            placeholderTextColor ? placeholderTextColor : '#999'
-          }
+          placeholderTextColor={placeholderTextColor || '#999'}
           pointerEvents={disabled ? 'none' : pointerEvents}
           opacity={disabled ? 0.6 : opacity}
           {...props}
@@ -37,9 +35,7 @@ const Input = props => {
   }
   return (
     <TextInput
-      placeholderTextColor={
-        placeholderTextColor ? placeholderTextColor : '#999'
-      }
+      placeholderTextColor={placeholderTextColor || '#999'}
       pointerEvents={disabled ? 'none' : pointerEvents}
       opacity={disabled ? 0.6 : opacity}
       {...props}
@@ -50,7 +46,8 @@ const Input = props => {
 export default memo(Input);
 const styles = StyleSheet.create({
   input: {
-    flex: 1,
+    width: '100%',
+    // flex: 1,
     fontSize: 16,
     height: 50,
     borderBottomWidth: 1,
