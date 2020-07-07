@@ -19,9 +19,10 @@ const style = {
 const time = 2000;
 const Referreal = () => {
   const dispatch = useDispatch();
-  const changeLanguage = useCallback(settingsActions.changeLanguage, [
-    dispatch,
-  ]);
+  const changeLanguage = useCallback(
+    language => dispatch(settingsActions.changeLanguage(language)),
+    [dispatch],
+  );
   const language = useSelector(settingsSelectors.getLanguage);
   useEffect(() => {
     SplashScreen.hide();
@@ -39,12 +40,14 @@ const Referreal = () => {
       if (localLanguages === 'zh') {
         localLanguages = 'zh-cn';
       }
+      if (languageList.includes(localLanguages)) {
+        changeLanguage(localLanguages);
+      }
     }
     setTimeout(() => {
       navigationService.reset('Entrance');
     }, time);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [changeLanguage, language]);
   return (
     <ImageBackground style={style} source={launchScreen}>
       <Spinner type={'Circle'} color={'#733cb5'} size={60} />

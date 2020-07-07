@@ -2,18 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>This app needs to access your album function to login your account with the QR code picture in your album</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app needs to access your album function to login your account with the QR code picture in your album</string>
-	<key>NSCameraUsageDescription</key>
-	<string>This app needs to access your camera function so that you can scan QR code to log in to your account</string>
-	<key>NSFaceIDUsageDescription</key>
-	<string>Enabling Face ID allows you quick and secure access to your account.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>This app needs to access your camera function so that you can scan QR code to log in to your account</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -29,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2020070740</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -49,6 +37,18 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs to access your camera function so that you can scan QR code to log in to your account</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Enabling Face ID allows you quick and secure access to your account.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app needs to access your camera function so that you can scan QR code to log in to your account</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app needs to access your album function to login your account with the QR code picture in your album</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs to access your album function to login your account with the QR code picture in your album</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>

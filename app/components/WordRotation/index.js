@@ -1,5 +1,4 @@
 /* eslint-disable react/no-did-update-set-state */
-/* eslint-disable no-shadow */
 /* eslint-disable react-native/no-inline-styles */
 'use strict';
 import React, {Component} from 'react';
@@ -51,10 +50,11 @@ export default class WordRotation extends Component {
     }
   }
   static getDerivedStateFromProps(nextProps, prevState) {
+    let state = null;
     const newText = nextProps.text || nextProps.children || '';
     if (newText !== prevState.text) {
       prevState.animation.stop();
-      return {
+      state = {
         text: newText,
         textWidth: 0,
         textHeight: 0,
@@ -62,9 +62,8 @@ export default class WordRotation extends Component {
         animation: null,
       };
     }
-    return null;
+    return state;
   }
-
   componentDidUpdate(prevProps, prevState) {
     let {textWidth, bgViewWidth, duration, animation} = this.state;
 
@@ -73,10 +72,10 @@ export default class WordRotation extends Component {
         return;
       }
 
-      const {duration, speed} = this.props;
+      const {speed} = this.props;
       if (duration !== undefined) {
         this.setState({
-          duration: duration,
+          duration: this.props.duration,
         });
       } else if (speed !== undefined) {
         this.setState({
@@ -90,7 +89,7 @@ export default class WordRotation extends Component {
           {
             animation: Animated.timing(this.animatedTransformX, {
               toValue: -textWidth,
-              duration: duration,
+              duration: this.props.duration,
               useNativeDriver: true,
               easing: Easing.linear,
             }),
