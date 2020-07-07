@@ -1,11 +1,10 @@
 'use strict';
-
 import React, {useCallback, useRef, useState} from 'react';
 import OverlayModal from '../OverlayModal';
 import {View, Text, StyleSheet} from 'react-native';
 import Touchable from '../Touchable';
 import {Colors, GStyle} from '../../assets/theme';
-import {Password} from '..';
+import Password from '../Password';
 import {pTd} from '../../utils';
 import KeyboardSpace from '../KeyboardSpace';
 import {ScrollView} from 'react-native-gesture-handler';
