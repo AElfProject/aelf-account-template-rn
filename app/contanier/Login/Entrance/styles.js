@@ -1,10 +1,5 @@
 import {pTd} from '../../../utils';
-import {
-  sreenHeight,
-  sreenWidth,
-  statusBarHeight,
-  bottomBarHeigth,
-} from '../../../utils/device';
+import {statusBarHeight, bottomBarHeigth} from '../../../utils/device';
 import GStyle from '../../../assets/theme/gstyle';
 import {StyleSheet} from 'react-native';
 import {Colors} from '../../../assets/theme';
