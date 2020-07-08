@@ -1,18 +1,11 @@
 import React, {memo, useRef} from 'react';
-import {Colors, GStyle} from '../../../assets/theme';
-import {
-  CommonHeader,
-  MyQRCode,
-  CommonButton,
-  ListItem,
-} from '../../../components';
+import {GStyle} from '../../../assets/theme';
+import {CommonHeader, MyQRCode, CommonButton} from '../../../components';
 import styles from './styles';
-import {View, Text} from 'react-native';
-import {TextL, TextM} from '../../../components/CommonText';
-import Entypo from 'react-native-vector-icons/Entypo';
+import {View} from 'react-native';
+import {TextL} from '../../../components/CommonText';
 import i18n from 'i18n-js';
 import {screenshots} from '../../util';
-import navigationService from '../../../utils/navigationService';
 const Receive = () => {
   const viewShot = useRef();
   return (
