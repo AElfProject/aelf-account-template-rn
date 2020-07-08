@@ -1,6 +1,6 @@
 import React, {memo, useCallback, useMemo} from 'react';
 import {View, StyleSheet, Keyboard, Text} from 'react-native';
-import {GStyle, Colors} from '../../../assets/theme';
+import {GStyle, Colors} from '../../../../assets/theme';
 import {
   CommonHeader,
   Password,
@@ -8,15 +8,17 @@ import {
   Touchable,
   Input,
   CommonButton,
-} from '../../../components';
-import {TextM} from '../../../components/CommonText';
-import {pTd} from '../../../utils';
-import navigationService from '../../../utils/navigationService';
-import {useSetState} from '../../util/hooks';
-import settingsActions, {settingsSelectors} from '../../../redux/settingsRedux';
+} from '../../../../components';
+import {TextM} from '../../../../components/CommonText';
+import {pTd} from '../../../../utils';
+import navigationService from '../../../../utils/navigationService';
+import {useSetState} from '../../../util/hooks';
+import settingsActions, {
+  settingsSelectors,
+} from '../../../../redux/settingsRedux';
 import i18n from 'i18n-js';
 import {useDispatch, useSelector, shallowEqual} from 'react-redux';
-import {passwordReg} from '../../../config';
+import {passwordReg} from '../../../../config';
 const SecondChangePaymentPsw = props => {
   const {remember} = props.route.params || {};
   const dispatch = useDispatch();

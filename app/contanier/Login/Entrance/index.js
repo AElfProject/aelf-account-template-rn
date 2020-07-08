@@ -19,11 +19,15 @@ const Entrance = () => {
     [dispatch],
   );
   useSelector(settingsSelectors.getLanguage, shallowEqual); //Language status is controlled with redux
-  const items = localLanguage.map(item => ({
-    ...item,
-    onPress: value => {
+  const onPress = useCallback(
+    value => {
       changeLanguage(value.language);
     },
+    [changeLanguage],
+  );
+  const items = localLanguage.map(item => ({
+    ...item,
+    onPress: onPress,
   }));
   useEffect(() => {
     if (advanced) {

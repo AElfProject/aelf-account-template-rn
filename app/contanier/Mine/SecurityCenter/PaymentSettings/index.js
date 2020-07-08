@@ -1,18 +1,20 @@
 import React, {memo, useMemo, useCallback} from 'react';
 import {View} from 'react-native';
-import {GStyle} from '../../../assets/theme';
+import {GStyle} from '../../../../assets/theme';
 import {
   CommonHeader,
   ListItem,
   ActionSheet,
   CommonToast,
   VerifyPassword,
-} from '../../../components';
-import navigationService from '../../../utils/navigationService';
-import settingsActions, {settingsSelectors} from '../../../redux/settingsRedux';
+} from '../../../../components';
+import navigationService from '../../../../utils/navigationService';
+import settingsActions, {
+  settingsSelectors,
+} from '../../../../redux/settingsRedux';
 import {useSelector, useDispatch, shallowEqual} from 'react-redux';
 import * as LocalAuthentication from 'expo-local-authentication';
-import {touchAuth} from '../../util';
+import {touchAuth} from '../../../util';
 import i18n from 'i18n-js';
 const PaymentSettings = () => {
   const dispatch = useDispatch();

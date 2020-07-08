@@ -7,6 +7,7 @@ import i18n from 'i18n-js';
 import navigationService from '../../../utils/navigationService';
 import settingsActions, {settingsSelectors} from '../../../redux/settingsRedux';
 import {useSelector, shallowEqual, useDispatch} from 'react-redux';
+import {defaultCurrency} from '../../../config';
 const GeneralSettings = () => {
   const dispatch = useDispatch();
   const changeInform = useCallback(
@@ -14,6 +15,10 @@ const GeneralSettings = () => {
     [dispatch],
   );
   const infrom = useSelector(settingsSelectors.getInform, shallowEqual);
+  const currencyUnit = useSelector(
+    settingsSelectors.getCurrencyUnit,
+    shallowEqual,
+  );
   useSelector(settingsSelectors.getLanguage, shallowEqual);
   return (
     <View style={GStyle.secondContainer}>
@@ -32,8 +37,13 @@ const GeneralSettings = () => {
         title={i18n.t('language')}
         subtitle={i18n.t('currentLanguage')}
       />
-      <ListItem title={i18n.t('mineModule.generalSettings.currencyUnit')} />
       <ListItem
+        onPress={() => navigationService.navigate('CurrencyUnit')}
+        title={i18n.t('mineModule.generalSettings.currencyUnit')}
+        subtitle={currencyUnit || defaultCurrency}
+      />
+      <ListItem
+        onPress={() => navigationService.navigate('NetworkManagement')}
         title={i18n.t('mineModule.generalSettings.networkManagement')}
       />
     </View>

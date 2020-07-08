@@ -1,12 +1,12 @@
 import React, {memo, useMemo, useEffect, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
-import {GStyle, Colors} from '../../../assets/theme';
-import {CommonHeader, ActionSheet, CommonButton} from '../../../components';
-import {TextL} from '../../../components/CommonText';
+import {GStyle, Colors} from '../../../../assets/theme';
+import {CommonHeader, ActionSheet, CommonButton} from '../../../../components';
+import {TextL} from '../../../../components/CommonText';
 import Spinner from 'react-native-spinkit';
-import {pTd} from '../../../utils';
-import navigationService from '../../../utils/navigationService';
-import {isIos} from '../../../utils/device';
+import {pTd} from '../../../../utils';
+import navigationService from '../../../../utils/navigationService';
+import {isIos} from '../../../../utils/device';
 
 const ChangePaymentPsw = () => {
   const [safety, setSafety] = useState(null);

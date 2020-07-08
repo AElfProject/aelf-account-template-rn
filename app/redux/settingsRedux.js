@@ -2,6 +2,7 @@ import {createReducer, createActions} from 'reduxsauce';
 import Immutable from 'seamless-immutable';
 import {createSelector} from 'reselect';
 import i18n from 'i18n-js';
+import {defaultCurrency} from '../config';
 /* ------------- Types and Action Creators ------------- */
 const {Types, Creators} = createActions({
   changeLanguage: ['language'],
@@ -9,6 +10,7 @@ const {Types, Creators} = createActions({
   changePayPsw: ['payPsw'],
   changeBiometrics: ['biometrics'],
   changeInform: ['inform'],
+  changeCurrencyUnit: ['currencyUnit'],
 });
 
 export const settingsTypes = Types;
@@ -22,6 +24,7 @@ export const INITIAL_STATE = Immutable({
   payPsw: null,
   biometrics: null,
   inform: null,
+  currencyUnit: defaultCurrency,
 });
 
 /* ------------- Selectors ------------- */
@@ -49,6 +52,10 @@ export const settingsSelectors = {
     _baseSelector,
     base => base.inform,
   ),
+  getCurrencyUnit: createSelector(
+    _baseSelector,
+    base => base.currencyUnit,
+  ),
 };
 
 /* ------------- Reducers ------------- */
@@ -68,6 +75,9 @@ export const changeBiometrics = (state, {biometrics}) => {
 export const changeInform = (state, {inform}) => {
   return state.merge({inform});
 };
+export const changeCurrencyUnit = (state, {currencyUnit}) => {
+  return state.merge({currencyUnit});
+};
 /* ------------- Hookup Reducers To Types ------------- */
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CHANGE_LANGUAGE]: changeLanguage,
@@ -75,4 +85,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.CHANGE_PAY_PSW]: changePayPsw,
   [Types.CHANGE_BIOMETRICS]: changeBiometrics,
   [Types.CHANGE_INFORM]: changeInform,
+  [Types.CHANGE_CURRENCY_UNIT]: changeCurrencyUnit,
 });

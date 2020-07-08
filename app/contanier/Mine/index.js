@@ -56,7 +56,9 @@ const Tool = () => {
       <ScrollView>
         <View style={GStyle.secondContainer}>
           <View style={styles.toolBox}>
-            <Touchable style={styles.toolItem}>
+            <Touchable
+              onPress={() => navigationService.navigate('Receive')}
+              style={styles.toolItem}>
               <FontAwesome5
                 name="arrow-circle-down"
                 size={30}
