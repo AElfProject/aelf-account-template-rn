@@ -8,6 +8,7 @@ const {Types, Creators} = createActions({
   changeBarStyle: ['barStyle'],
   changePayPsw: ['payPsw'],
   changeBiometrics: ['biometrics'],
+  changeInform: ['inform'],
 });
 
 export const settingsTypes = Types;
@@ -20,6 +21,7 @@ export const INITIAL_STATE = Immutable({
   barStyle: null,
   payPsw: null,
   biometrics: null,
+  inform: null,
 });
 
 /* ------------- Selectors ------------- */
@@ -43,6 +45,10 @@ export const settingsSelectors = {
     _baseSelector,
     base => base.biometrics,
   ),
+  getInform: createSelector(
+    _baseSelector,
+    base => base.inform,
+  ),
 };
 
 /* ------------- Reducers ------------- */
@@ -59,10 +65,14 @@ export const changePayPsw = (state, {payPsw}) => {
 export const changeBiometrics = (state, {biometrics}) => {
   return state.merge({biometrics});
 };
+export const changeInform = (state, {inform}) => {
+  return state.merge({inform});
+};
 /* ------------- Hookup Reducers To Types ------------- */
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CHANGE_LANGUAGE]: changeLanguage,
   [Types.CHANGE_BAR_STYLE]: changeBarStyle,
   [Types.CHANGE_PAY_PSW]: changePayPsw,
   [Types.CHANGE_BIOMETRICS]: changeBiometrics,
+  [Types.CHANGE_INFORM]: changeInform,
 });

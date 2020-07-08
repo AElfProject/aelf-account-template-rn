@@ -2,6 +2,8 @@
 	"home": "Hoom",
 	"mine": "Mine",
 	"switchLanguage": "Switch language",
+	"language":"Language",
+	"currentLanguage":"English",
 	"cancel": "Cancel",
 	"determine": "Determine",
 	"safetyReminder": "Safety reminder",
@@ -44,6 +46,27 @@
 			"title": "QR Code",
 			"later": "Back later",
 			"saveQRCode": "Save QR Code to Album"
+		}
+	},
+	"mineModule":{
+		"username":"User Name",
+		"balance":"Balance",
+		"collect":"Receive",
+		"transfer":"Transfer",
+		"exchange":"Exchange",
+		"transactionManagementT":"Transaction Management",
+		"authorizeManagementT":"Authorization Management",
+		"securityCenterT":"Security Center",
+		"generalSettingT":"General Settings",
+		"helpCenterT":"Help Cente",
+		"aboutUsT":"About Us",
+		"version":"Version Numbe:{{number}}",
+		"accountManagementT":"Account Management",
+		"generalSettings":{
+			"infrom":"System Notification",
+			"infromTip":"Account-related transaction notifications, including deposit, withdrawal, and in-app transactions",
+			"currencyUnit":"Currency Unit",
+			"networkManagement":"Network Management"
 		}
 	}
 }

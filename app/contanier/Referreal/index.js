@@ -2,7 +2,7 @@ import Spinner from 'react-native-spinkit';
 import {ImageBackground} from 'react-native';
 import * as Localization from 'expo-localization';
 import React, {useEffect, useCallback} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch, useSelector, shallowEqual} from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 import {pTd} from '../../utils';
 import {languageList} from '../../i18n/config';
@@ -23,7 +23,7 @@ const Referreal = () => {
     language => dispatch(settingsActions.changeLanguage(language)),
     [dispatch],
   );
-  const language = useSelector(settingsSelectors.getLanguage);
+  const language = useSelector(settingsSelectors.getLanguage, shallowEqual);
   useEffect(() => {
     SplashScreen.hide();
     if (language) {

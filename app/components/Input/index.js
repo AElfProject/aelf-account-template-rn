@@ -1,6 +1,7 @@
 'use strict';
 import React, {memo} from 'react';
 import {TextInput, StyleSheet, View, Text} from 'react-native';
+import {Colors} from '../../assets/theme';
 
 const Input = props => {
   const {
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     height: 50,
     borderBottomWidth: 1,
-    borderColor: '#999',
+    borderColor: Colors.borderColor,
     paddingHorizontal: 5,
   },
   leftTitleBox: {
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: '#999',
+    borderBottomColor: Colors.borderColor,
   },
   leftTextStyle: {
     fontSize: 16,

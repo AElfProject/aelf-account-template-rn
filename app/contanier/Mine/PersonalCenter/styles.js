@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {pTd} from '../../../utils';
+import {Colors} from '../../../assets/theme';
 
 export default StyleSheet.create({
   box: {
@@ -34,7 +35,7 @@ export default StyleSheet.create({
   },
   addressTips: {
     marginTop: pTd(30),
-    color: '#a0a0a0',
+    color: Colors.fontGray,
   },
   premium: {
     marginTop: pTd(20),
@@ -44,7 +45,7 @@ export default StyleSheet.create({
     marginTop: pTd(20),
   },
   tips: {
-    color: '#a0a0a0',
+    color: Colors.fontGray,
   },
   tipsBox: {
     backgroundColor: 'white',

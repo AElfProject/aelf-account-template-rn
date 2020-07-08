@@ -10,7 +10,7 @@ import {
 } from '../../../components';
 import navigationService from '../../../utils/navigationService';
 import settingsActions, {settingsSelectors} from '../../../redux/settingsRedux';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector, useDispatch, shallowEqual} from 'react-redux';
 import * as LocalAuthentication from 'expo-local-authentication';
 import {touchAuth} from '../../util';
 import i18n from 'i18n-js';
@@ -20,7 +20,7 @@ const PaymentSettings = () => {
     biometrics => dispatch(settingsActions.changeBiometrics(biometrics)),
     [dispatch],
   );
-  const biometrics = useSelector(settingsSelectors.getBiometrics);
+  const biometrics = useSelector(settingsSelectors.getBiometrics, shallowEqual);
   const onValueChange = useCallback(
     async value => {
       if (value) {
@@ -49,8 +49,8 @@ const PaymentSettings = () => {
           '你确定要关闭生物识别?',
           '关闭后每次支付都无法使用刷脸/指纹支付',
           [
-            {title: '取消'},
             {title: '确定', onPress: () => changeBiometrics(value)},
+            {title: '取消', type: 'cancel'},
           ],
         );
       }

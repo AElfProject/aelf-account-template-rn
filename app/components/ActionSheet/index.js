@@ -66,7 +66,13 @@ const alert = (title, message, buttons) => {
               }}
               key={index}
               style={styles.buttonItem}>
-              <Text style={styles.buttonText}>{item.title}</Text>
+              <Text
+                style={[
+                  styles.buttonText,
+                  item.type === 'cancel' && styles.cancelText,
+                ]}>
+                {item.title}
+              </Text>
             </Touchable>
           ))}
       </View>
@@ -113,7 +119,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    borderBottomColor: '#e5e5e5',
+    borderBottomColor: Colors.borderColor,
   },
   concelText: {
     fontSize: 16,
@@ -146,7 +152,7 @@ const styles = StyleSheet.create({
   alertMessage: {
     marginHorizontal: 20,
     fontSize: 14,
-    color: '#afafaf',
+    color: Colors.fontGray,
     marginBottom: 20,
   },
   buttonItem: {
@@ -154,17 +160,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRightWidth: 1,
-    borderRightColor: '#e5e5e5',
+    borderRightColor: Colors.borderColor,
     overflow: 'hidden',
   },
   buttonsBox: {
     height: 50,
     flexDirection: 'row',
     borderTopWidth: 1,
-    borderTopColor: '#e5e5e5',
+    borderTopColor: Colors.borderColor,
   },
   buttonText: {
     color: Colors.primaryColor,
     fontSize: 16,
+  },
+  cancelText: {
+    color: Colors.fontGray,
   },
 });

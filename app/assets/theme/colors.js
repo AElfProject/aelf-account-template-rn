@@ -3,7 +3,7 @@ const Colors = {
   bottonPressColor: '#5b29aa', //按钮按下颜色
   disabledColor: '#d7d7d7', //按钮禁止交互颜色
 
-  borderColor: '#d8d8d8', //边框颜色
+  borderColor: '#d0d0d0', //边框颜色
 
   fontBlack: '#333333', //字体主要颜色
   fontGray: '#999999', //字体灰

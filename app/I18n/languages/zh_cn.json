@@ -2,6 +2,8 @@
 	"home": "主页",
 	"mine": "我的",
 	"switchLanguage": "切换语言",
+	"language":"语言",
+	"currentLanguage":"简体中文",
 	"cancel": "取消",
 	"determine": "确定",
 	"safetyReminder": "安全提醒",
@@ -44,6 +46,27 @@
 			"title": "备份二维码",
 			"later": "稍后备份",
 			"saveQRCode": "保存二维码到相册"
+		}
+	},
+	"mineModule":{
+		"username":"用户名",
+		"balance":"余额",
+		"collect":"收款",
+		"transfer":"转账",
+		"exchange":"兑换",
+		"transactionManagementT":"交易管理",
+		"authorizeManagementT":"授权管理",
+		"securityCenterT":"安全中心",
+		"generalSettingT":"通用设置",
+		"helpCenterT":"帮助中心",
+		"aboutUsT":"关于我们",
+		"version":"版本号:{{number}}",
+		"accountManagementT":"账号管理",
+		"generalSettings":{
+			"infrom":"系统通知",
+			"infromTip":"账号相关交易通知，包括充值、提现、APP内交易",
+			"currencyUnit":"货币单位",
+			"networkManagement":"网络管理"
 		}
 	}
 }

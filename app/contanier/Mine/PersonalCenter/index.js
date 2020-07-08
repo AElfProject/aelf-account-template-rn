@@ -42,9 +42,9 @@ const PersonalCenter = () => {
               </TextM>
             </View>
           </View>
-          <ListItem container={styles.premium} title="高级账户" />
+          <ListItem style={styles.premium} title="高级账户" />
           <ListItem
-            container={styles.authentication}
+            style={styles.authentication}
             title="身份认证"
             subtitle={
               <Text>

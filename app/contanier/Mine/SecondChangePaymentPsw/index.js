@@ -15,7 +15,7 @@ import navigationService from '../../../utils/navigationService';
 import {useSetState} from '../../util/hooks';
 import settingsActions, {settingsSelectors} from '../../../redux/settingsRedux';
 import i18n from 'i18n-js';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch, useSelector, shallowEqual} from 'react-redux';
 import {passwordReg} from '../../../config';
 const SecondChangePaymentPsw = props => {
   const {remember} = props.route.params || {};
@@ -32,7 +32,7 @@ const SecondChangePaymentPsw = props => {
     payPsw => dispatch(settingsActions.changePayPsw(payPsw)),
     [dispatch],
   );
-  const payPsw = useSelector(settingsSelectors.getPayPsw);
+  const payPsw = useSelector(settingsSelectors.getPayPsw, shallowEqual);
 
   const {tip, type, transactionPsw, psw, pswRule} = state;
   const onChange = useCallback(
@@ -169,6 +169,6 @@ const styles = StyleSheet.create({
   },
   bottomTip: {
     marginTop: pTd(20),
-    color: '#999',
+    color: Colors.fontGray,
   },
 });

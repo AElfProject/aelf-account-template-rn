@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: pixelSize,
-    borderColor: '#D8D8D8',
+    borderColor: Colors.borderColor,
   },
   leftStyle: {
     flex: 1,

@@ -89,6 +89,7 @@ const SetTransactionPsw = () => {
             },
             {
               title: i18n.t('later'),
+              type: 'cancel',
               onPress: () => {
                 navigate(false);
               },

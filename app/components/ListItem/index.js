@@ -1,8 +1,8 @@
 'use strict';
-import React, {memo} from 'react';
-import {StyleSheet, Switch} from 'react-native';
+import React, {memo, useMemo} from 'react';
+import {StyleSheet, Switch, View} from 'react-native';
 import {pTd} from '../../utils';
-import {TextL} from '../CommonText';
+import {TextL, TextS, TextM} from '../CommonText';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Touchable from '../Touchable';
 import {Colors} from '../../assets/theme';
@@ -11,25 +11,21 @@ const ListItem = props => {
     title,
     onPress,
     subtitle,
-    container,
+    style,
     titleStyle,
     subtitleStyle,
     disabled,
+    details,
+    detailsStyle,
     //switch
     switching,
     value,
     onValueChange,
+    rightElement,
   } = props;
-  return (
-    <Touchable
-      disabled={disabled}
-      onPress={onPress}
-      style={[styles.container, container]}>
-      <TextL style={[styles.titleStyle, titleStyle]}>{title}</TextL>
-      {subtitle ? (
-        <TextL style={[styles.subtitleStyle, subtitleStyle]}>{subtitle}</TextL>
-      ) : null}
-      {switching ? (
+  const RightElement = useMemo(() => {
+    if (switching) {
+      return (
         <Switch
           value={value}
           thumbColor="white"
@@ -37,19 +33,45 @@ const ListItem = props => {
           //当切换开关室回调此方法
           onValueChange={onValueChange}
         />
+      );
+    }
+    return (
+      <Icon
+        name={'right'}
+        size={pTd(40)}
+        style={styles.iconStyle}
+        color={Colors.fontGray}
+      />
+    );
+  }, [onValueChange, switching, value]);
+  return (
+    <Touchable
+      disabled={disabled}
+      onPress={onPress}
+      style={[styles.container, style]}>
+      {details ? (
+        <View style={styles.titleStyle}>
+          <TextL style={[titleStyle]}>{title}</TextL>
+          <TextS style={[styles.detailsStyle, detailsStyle]}>{details}</TextS>
+        </View>
       ) : (
-        <Icon name={'right'} size={20} />
+        <TextL style={[styles.titleStyle, titleStyle]}>{title}</TextL>
       )}
+      {subtitle ? (
+        <TextM style={[styles.subtitleStyle, subtitleStyle]}>{subtitle}</TextM>
+      ) : null}
+      {rightElement !== undefined ? rightElement : RightElement}
     </Touchable>
   );
 };
 export default memo(ListItem);
 const styles = StyleSheet.create({
   container: {
+    paddingVertical: pTd(20),
     backgroundColor: 'white',
     borderBottomWidth: 1,
-    borderBottomColor: '#e5e5e5',
-    height: pTd(110),
+    borderBottomColor: Colors.borderColor,
+    minHeight: pTd(110),
     alignItems: 'center',
     flexDirection: 'row',
     paddingHorizontal: pTd(30),
@@ -57,5 +79,15 @@ const styles = StyleSheet.create({
   titleStyle: {
     flex: 1,
   },
-  subtitleStyle: {},
+  subtitleStyle: {
+    fontSize: pTd(30),
+    color: Colors.fontGray,
+  },
+  detailsStyle: {
+    marginTop: pTd(3),
+    color: Colors.fontGray,
+  },
+  iconStyle: {
+    marginTop: pTd(4),
+  },
 });

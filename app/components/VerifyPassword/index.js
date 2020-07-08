@@ -10,12 +10,12 @@ import KeyboardSpace from '../KeyboardSpace';
 import {ScrollView} from 'react-native-gesture-handler';
 import {TextL, TextM} from '../CommonText';
 import {settingsSelectors} from '../../redux/settingsRedux';
-import {useSelector} from 'react-redux';
+import {useSelector, shallowEqual} from 'react-redux';
 import i18n from 'i18n-js';
 import {isIos} from '../../utils/device';
 const Components = props => {
   const [pswTip, setPswTip] = useState(false);
-  const payPsw = useSelector(settingsSelectors.getPayPsw);
+  const payPsw = useSelector(settingsSelectors.getPayPsw, shallowEqual);
   const {callBack} = props;
   const intervalRef = useRef();
   const onChange = useCallback(value => {
@@ -86,21 +86,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRightWidth: 1,
-    borderRightColor: '#e5e5e5',
+    borderRightColor: Colors.borderColor,
     overflow: 'hidden',
   },
   buttonsBox: {
     height: 60,
     flexDirection: 'row',
     borderTopWidth: 1,
-    borderTopColor: '#e5e5e5',
+    borderTopColor: Colors.borderColor,
   },
   buttonText: {
     color: Colors.primaryColor,
     fontSize: 16,
   },
   cancelText: {
-    color: '#a5a5a5',
+    color: Colors.fontGray,
     fontSize: 16,
   },
 });

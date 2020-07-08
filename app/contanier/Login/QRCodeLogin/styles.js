@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {sreenWidth, isIos} from '../../../utils/device';
 import {pTd} from '../../../utils';
+import {Colors} from '../../../assets/theme';
 //Android BarCodeScanner will not display full screen, distinguish platform style
 export const scanHeigth = isIos ? 196 : sreenWidth * 0.67;
 export default StyleSheet.create({
@@ -20,7 +21,7 @@ export default StyleSheet.create({
     alignSelf: 'center',
     width: scanHeigth,
     height: 2,
-    backgroundColor: '#817AFD',
+    backgroundColor: Colors.primaryColor,
     borderRadius: 50,
   },
   rectangleText: {

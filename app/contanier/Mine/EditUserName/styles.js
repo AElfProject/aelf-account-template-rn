@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {pTd} from '../../../utils';
+import {Colors} from '../../../assets/theme';
 
 export default StyleSheet.create({
   input: {
@@ -11,6 +12,6 @@ export default StyleSheet.create({
   tips: {
     padding: pTd(20),
     marginBottom: pTd(30),
-    color: '#999',
+    color: Colors.fontGray,
   },
 });

@@ -8,7 +8,7 @@ import styles from './styles';
 import i18n from 'i18n-js';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {localLanguage} from '../../../i18n/config';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch, useSelector, shallowEqual} from 'react-redux';
 import settingsActions, {settingsSelectors} from '../../../redux/settingsRedux';
 import {advanced} from '../../../config';
 import {BarCodeScanner} from 'expo-barcode-scanner';
@@ -18,7 +18,7 @@ const Entrance = () => {
     language => dispatch(settingsActions.changeLanguage(language)),
     [dispatch],
   );
-  useSelector(settingsSelectors.getLanguage); //Language status is controlled with redux
+  useSelector(settingsSelectors.getLanguage, shallowEqual); //Language status is controlled with redux
   const items = localLanguage.map(item => ({
     ...item,
     onPress: value => {
