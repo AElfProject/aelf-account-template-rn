@@ -6,9 +6,11 @@ import {useDispatch, useSelector, shallowEqual} from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 import {pTd} from '../../utils';
 import {languageList} from '../../i18n/config';
-import {launchScreen} from '../../assets/images/indes';
+import {launchScreen} from '../../assets/images';
 import settingsActions, {settingsSelectors} from '../../redux/settingsRedux';
 import navigationService from '../../utils/navigationService';
+import {Colors} from '../../assets/theme';
+
 const style = {
   flex: 1,
   justifyContent: 'center',
@@ -36,6 +38,7 @@ const Referreal = () => {
       if (Array.isArray(languages)) {
         localLanguages = languages[0];
       }
+      //The local language may be en-xxx or zh-xxx, we intercept the first two to match
       localLanguages = localLanguages.slice(0, 2);
       if (localLanguages === 'zh') {
         localLanguages = 'zh-cn';
@@ -50,7 +53,7 @@ const Referreal = () => {
   }, [changeLanguage, language]);
   return (
     <ImageBackground style={style} source={launchScreen}>
-      <Spinner type={'Circle'} color={'#733cb5'} size={60} />
+      <Spinner type={'Circle'} color={Colors.primaryColor} size={60} />
     </ImageBackground>
   );
 };

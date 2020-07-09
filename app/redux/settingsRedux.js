@@ -2,7 +2,7 @@ import {createReducer, createActions} from 'reduxsauce';
 import Immutable from 'seamless-immutable';
 import {createSelector} from 'reselect';
 import i18n from 'i18n-js';
-import {defaultCurrency} from '../config';
+import {DEFAULT_CURRENCY} from '../config';
 /* ------------- Types and Action Creators ------------- */
 const {Types, Creators} = createActions({
   changeLanguage: ['language'],
@@ -24,7 +24,7 @@ export const INITIAL_STATE = Immutable({
   payPsw: null,
   biometrics: null,
   inform: null,
-  currencyUnit: defaultCurrency,
+  currencyUnit: DEFAULT_CURRENCY,
 });
 
 /* ------------- Selectors ------------- */

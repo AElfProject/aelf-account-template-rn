@@ -18,7 +18,7 @@ import settingsActions, {
 } from '../../../../redux/settingsRedux';
 import i18n from 'i18n-js';
 import {useDispatch, useSelector, shallowEqual} from 'react-redux';
-import {passwordReg} from '../../../../config';
+import {PASSWORD_REG} from '../../../../config';
 const SecondChangePaymentPsw = props => {
   const {remember} = props.route.params || {};
   const dispatch = useDispatch();
@@ -73,15 +73,14 @@ const SecondChangePaymentPsw = props => {
     [changePayPsw, setState, transactionPsw, payPsw],
   );
   const pswBlur = useCallback(() => {
-    const re = passwordReg;
-    if (!re.test(psw)) {
+    if (!PASSWORD_REG.test(psw)) {
       setState({pswRule: true});
     } else {
       setState({pswRule: false});
     }
   }, [setState, psw]);
   const next = useCallback(() => {
-    if (passwordReg.test(psw)) {
+    if (PASSWORD_REG.test(psw)) {
       setState({
         type: 'transactionPsw',
         tip: i18n.t('setPsw.setPsw1'),

@@ -49,6 +49,7 @@ function push(routeName, params) {
   const pushAction = StackActions.push(routeName, params);
   _navigator.dispatch(pushAction);
 }
+
 function pop(count) {
   const pushAction = StackActions.pop(count);
   _navigator.dispatch(pushAction);

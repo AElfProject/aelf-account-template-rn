@@ -12,7 +12,7 @@ import NamePasswordTips from '../NamePasswordTips';
 import styles, {tabActiveColor} from './styles';
 import i18n from 'i18n-js';
 import {useSetState} from '../../util/hooks';
-import {passwordReg, usernameReg} from '../../../config';
+import {PASSWORD_REG, USERNAME_REG} from '../../../config';
 import {TextM} from '../../../components/CommonText';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import navigationService from '../../../utils/navigationService';
@@ -30,8 +30,7 @@ const PrivateKeyLogin = () => {
   });
   const userNameBlur = useCallback(() => {
     const {userName} = state;
-    const re = usernameReg;
-    if (!re.test(userName)) {
+    if (!USERNAME_REG.test(userName)) {
       setState({userNameRule: true});
     } else {
       setState({userNameRule: false});
@@ -39,8 +38,7 @@ const PrivateKeyLogin = () => {
   }, [setState, state]);
   const pswBlur = useCallback(() => {
     const {psw, pswConfirm} = state;
-    const re = passwordReg;
-    if (!re.test(psw)) {
+    if (!PASSWORD_REG.test(psw)) {
       setState({pswRule: true});
     } else {
       setState({pswRule: false});
@@ -54,8 +52,7 @@ const PrivateKeyLogin = () => {
   }, [setState, state]);
   const pswComfirmBlur = useCallback(() => {
     const {pswConfirm, psw} = state;
-    const re = passwordReg;
-    if (!re.test(pswConfirm)) {
+    if (!PASSWORD_REG.test(pswConfirm)) {
       setState({pswConfirmRule: true});
     } else {
       setState({pswConfirmRule: false});
@@ -145,8 +142,7 @@ const KeystoreLogin = () => {
   });
   const pswBlur = useCallback(() => {
     const {psw, pswConfirm} = state;
-    const re = passwordReg;
-    if (!re.test(psw)) {
+    if (!PASSWORD_REG.test(psw)) {
       setState({pswRule: true});
     } else {
       setState({pswRule: false});

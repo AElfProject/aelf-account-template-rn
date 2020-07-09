@@ -4,7 +4,7 @@ import {GStyle, Colors} from '../../../assets/theme';
 import {CommonHeader, ListItem} from '../../../components';
 import i18n from 'i18n-js';
 import {pTd} from '../../../utils';
-import {aelfBlue} from '../../../assets/images/indes';
+import {aelfBlue} from '../../../assets/images';
 import {TextL} from '../../../components/CommonText';
 import Constants from 'expo-constants';
 const AboutUs = () => {

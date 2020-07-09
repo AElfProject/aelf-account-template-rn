@@ -1,3 +1,3 @@
 import Colors from './colors';
-import GStyle from './gstyle';
+import GStyle from './gStyle';
 export {Colors, GStyle};

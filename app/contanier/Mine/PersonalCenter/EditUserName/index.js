@@ -9,13 +9,12 @@ import {
 import styles from './styles';
 import {TextL} from '../../../../components/CommonText';
 import i18n from 'i18n-js';
-import {usernameReg} from '../../../../config';
+import {USERNAME_REG} from '../../../../config';
 import {GStyle} from '../../../../assets/theme';
 const EditUserName = () => {
   const [name, setName] = useState('');
   const onPress = () => {
-    const re = usernameReg;
-    if (re.test(name)) {
+    if (USERNAME_REG.test(name)) {
     } else {
       CommonToast.fail(i18n.t('login.nameErr'));
     }

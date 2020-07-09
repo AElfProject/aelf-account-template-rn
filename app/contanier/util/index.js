@@ -55,7 +55,7 @@ const checkImageToAlbum = async url => {
           saveImagesToAlbum('file://' + url);
         }
       } else {
-        CommonToast.fail(i18n.t('permissDen'));
+        CommonToast.fail(i18n.t('permissionDen'));
       }
     } catch (err) {
       CommonToast.fail(i18n.t('fail'));

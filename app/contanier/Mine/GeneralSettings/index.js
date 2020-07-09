@@ -7,7 +7,7 @@ import i18n from 'i18n-js';
 import navigationService from '../../../utils/navigationService';
 import settingsActions, {settingsSelectors} from '../../../redux/settingsRedux';
 import {useSelector, shallowEqual, useDispatch} from 'react-redux';
-import {defaultCurrency} from '../../../config';
+import {DEFAULT_CURRENCY} from '../../../config';
 const GeneralSettings = () => {
   const dispatch = useDispatch();
   const changeInform = useCallback(
@@ -40,7 +40,7 @@ const GeneralSettings = () => {
       <ListItem
         onPress={() => navigationService.navigate('CurrencyUnit')}
         title={i18n.t('mineModule.generalSettings.currencyUnit')}
-        subtitle={currencyUnit || defaultCurrency}
+        subtitle={currencyUnit || DEFAULT_CURRENCY}
       />
       <ListItem
         onPress={() => navigationService.navigate('NetworkManagement')}

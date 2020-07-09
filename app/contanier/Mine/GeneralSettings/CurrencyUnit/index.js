@@ -9,7 +9,7 @@ import settingsActions, {
   settingsSelectors,
 } from '../../../../redux/settingsRedux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {defaultCurrency} from '../../../../config';
+import {DEFAULT_CURRENCY} from '../../../../config';
 const CurrencyUnit = () => {
   const dispatch = useDispatch();
   const changeCurrencyUnit = useCallback(
@@ -35,7 +35,7 @@ const CurrencyUnit = () => {
     return (
       <View style={styles.itemBox}>
         {itemList.map((item, index) => {
-          const current = item.title === (currencyUnit || defaultCurrency);
+          const current = item.title === (currencyUnit || DEFAULT_CURRENCY);
           return (
             <ListItem
               {...item}

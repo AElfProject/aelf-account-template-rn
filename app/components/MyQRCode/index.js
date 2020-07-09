@@ -1,7 +1,7 @@
 'use strict';
 import React, {memo} from 'react';
 import QRCode from 'react-native-qrcode-svg';
-import {aelfBlue} from '../../assets/images/indes';
+import {aelfBlue} from '../../assets/images';
 import {sreenWidth} from '../../utils/device';
 const MyQRCode = props => {
   const {value} = props;

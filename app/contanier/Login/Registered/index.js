@@ -8,14 +8,14 @@ import {
 import i18n from 'i18n-js';
 import {useSetState} from '../../util/hooks';
 import {View, Keyboard} from 'react-native';
-import GStyle from '../../../assets/theme/gstyle';
+import GStyle from '../../../assets/theme/gStyle';
 import styles from './styles';
 import {TextM} from '../../../components/CommonText';
-import {passwordReg, usernameReg} from '../../../config';
+import {PASSWORD_REG, USERNAME_REG} from '../../../config';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import navigationService from '../../../utils/navigationService';
 import NamePasswordTips from '../NamePasswordTips';
-const Regist = () => {
+const Registered = () => {
   const [state, setState] = useSetState({
     userName: '',
     psw: '',
@@ -27,8 +27,7 @@ const Regist = () => {
   });
   const userNameBlur = useCallback(() => {
     const {userName} = state;
-    const re = usernameReg;
-    if (!re.test(userName)) {
+    if (!USERNAME_REG.test(userName)) {
       setState({userNameRule: true});
     } else {
       setState({userNameRule: false});
@@ -36,8 +35,7 @@ const Regist = () => {
   }, [setState, state]);
   const pswBlur = useCallback(() => {
     const {psw, pswConfirm} = state;
-    const re = passwordReg;
-    if (!re.test(psw)) {
+    if (!PASSWORD_REG.test(psw)) {
       setState({pswRule: true});
     } else {
       setState({pswRule: false});
@@ -51,8 +49,7 @@ const Regist = () => {
   }, [setState, state]);
   const pswComfirmBlur = useCallback(() => {
     const {pswConfirm, psw} = state;
-    const re = passwordReg;
-    if (!re.test(pswConfirm)) {
+    if (!PASSWORD_REG.test(pswConfirm)) {
       setState({pswConfirmRule: true});
     } else {
       setState({pswConfirmRule: false});
@@ -72,7 +69,7 @@ const Regist = () => {
   const {userNameRule, pswRule, pswConfirmRule, pswDifferent} = state;
   return (
     <View style={GStyle.container}>
-      <CommonHeader title={i18n.t('login.regist')} canBack />
+      <CommonHeader title={i18n.t('login.register')} canBack />
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="handled"
         keyboardOpeningTime={0}
@@ -123,7 +120,7 @@ const Regist = () => {
           <CommonButton
             // disabled
             onPress={registered}
-            title={i18n.t('login.regist')}
+            title={i18n.t('login.register')}
             style={styles.buttonStyles}
           />
         </Touchable>
@@ -132,4 +129,4 @@ const Regist = () => {
   );
 };
 
-export default memo(Regist);
+export default memo(Registered);

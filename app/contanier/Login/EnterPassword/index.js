@@ -1,6 +1,6 @@
 import React, {memo, useCallback} from 'react';
 import {View, Keyboard} from 'react-native';
-import GStyle from '../../../assets/theme/gstyle';
+import GStyle from '../../../assets/theme/gStyle';
 import {
   CommonHeader,
   CommonButton,
@@ -11,15 +11,14 @@ import i18n from 'i18n-js';
 import {TextL, TextM} from '../../../components/CommonText';
 import styles from './styles';
 import {useSetState} from '../../util/hooks';
-import {passwordReg} from '../../../config';
+import {PASSWORD_REG} from '../../../config';
 import navigationService from '../../../utils/navigationService';
 const EnterPassword = props => {
   const [state, setState] = useSetState({psw: '', pswRule: false});
   const {params} = props.route;
   const pswBlur = useCallback(() => {
     const {psw} = state;
-    const re = passwordReg;
-    if (!re.test(psw)) {
+    if (!PASSWORD_REG.test(psw)) {
       setState({pswRule: true});
     } else {
       setState({pswRule: false});

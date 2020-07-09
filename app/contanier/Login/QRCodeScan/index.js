@@ -10,12 +10,13 @@ import {BarCodeScanner} from 'expo-barcode-scanner';
 import {GStyle} from '../../../assets/theme';
 import {CommonHeader, CommonToast} from '../../../components';
 import i18n from 'i18n-js';
-import {iconScanRect} from '../../../assets/images/indes';
+import {iconScanRect} from '../../../assets/images';
 import styles, {scanHeigth} from './styles';
 import {useSetState} from '../../util/hooks';
 import * as ImagePicker from 'expo-image-picker';
 import navigationService from '../../../utils/navigationService';
-const QRCodeLogin = () => {
+const QRCodeLogin = props => {
+  const {scanResult} = props.route.params || {};
   const intervalRef = useRef(null);
   const [state, setState] = useSetState({
     scanned: false,
@@ -59,7 +60,11 @@ const QRCodeLogin = () => {
         const {data} = result; //Determine whether to log in the QR code
         if (data && typeof data === 'string' && data.includes('aelf')) {
           CommonToast.success('成功');
-          navigationService.navigate('EnterPassword', JSON.parse(data));
+          if (scanResult) {
+            navigationService.navigate('Transfer', JSON.parse(data));
+          } else {
+            navigationService.navigate('EnterPassword', JSON.parse(data));
+          }
         } else {
           CommonToast.fail('Please use the login QR code');
         }
@@ -67,7 +72,7 @@ const QRCodeLogin = () => {
         CommonToast.fail('Please use the login QR code');
       }
     },
-    [scanned, setState],
+    [scanResult, scanned, setState],
   );
   /* Identify QR code */
   const recoginze = useCallback(
@@ -115,7 +120,7 @@ const QRCodeLogin = () => {
   return (
     <View style={GStyle.container}>
       <CommonHeader
-        title={i18n.t('login.login')}
+        title={scanResult ? '扫码' : i18n.t('login.login')}
         canBack
         rightTitle={'相册'}
         rightOnPress={usePhotoAlbum}

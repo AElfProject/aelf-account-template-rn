@@ -1,5 +1,5 @@
 import React, {memo, useCallback, useEffect} from 'react';
-import {launchScreen} from '../../../assets/images/indes';
+import {launchScreen} from '../../../assets/images';
 import {View, ImageBackground} from 'react-native';
 import {CommonButton, ActionSheet, CommonHeader} from '../../../components';
 import navigationService from '../../../utils/navigationService';
@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import {localLanguage} from '../../../i18n/config';
 import {useDispatch, useSelector, shallowEqual} from 'react-redux';
 import settingsActions, {settingsSelectors} from '../../../redux/settingsRedux';
-import {advanced} from '../../../config';
+import {ADVANCED} from '../../../config';
 import {BarCodeScanner} from 'expo-barcode-scanner';
 import {GStyle} from '../../../assets/theme';
 import {permissionDenied} from '../../util';
@@ -33,7 +33,7 @@ const Entrance = props => {
     onPress: onPress,
   }));
   useEffect(() => {
-    if (advanced) {
+    if (ADVANCED) {
       // ActionSheet.alert(
       //     i18n.t('safetyReminder'),
       //     i18n.t('alert.locationTips'),
@@ -49,7 +49,7 @@ const Entrance = props => {
         i18n.t('login.scanCodeLogin'),
       );
     } else {
-      navigationService.navigate('QRCodeLogin');
+      navigationService.navigate('QRCodeScan');
     }
   };
   return (
@@ -81,9 +81,9 @@ const Entrance = props => {
               onPress={login}
             />
             <CommonButton
-              title={i18n.t('login.regist')}
+              title={i18n.t('login.register')}
               onPress={() => {
-                navigationService.navigate('Regist');
+                navigationService.navigate('Registered');
               }}
             />
             <TextL

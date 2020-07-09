@@ -1,6 +1,6 @@
 import React, {memo, useRef} from 'react';
 import {View, Text} from 'react-native';
-import GStyle from '../../../assets/theme/gstyle';
+import GStyle from '../../../assets/theme/gStyle';
 import {CommonHeader, CommonButton, MyQRCode} from '../../../components';
 import styles from './styles';
 import {screenshots} from '../../util';
