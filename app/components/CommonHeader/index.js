@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   rightTitleStyle: {
+    fontSize: pTd(30),
     color: Colors.fontColor,
     marginRight: 15,
   },

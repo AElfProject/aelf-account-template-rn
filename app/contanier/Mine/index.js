@@ -5,7 +5,7 @@ import styles from './styles';
 import {connect, useSelector, shallowEqual} from 'react-redux';
 import Icon from 'react-native-vector-icons/AntDesign';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-
+import Constants from 'expo-constants';
 import settingsActions, {settingsSelectors} from '../../redux/settingsRedux';
 import {pTd} from '../../utils';
 import {TextL} from '../../components/CommonText';
@@ -18,20 +18,16 @@ const Tool = () => {
     const List = [
       {
         title: i18n.t('mineModule.transactionManagementT'),
-        onPress: () => {},
+        onPress: () => navigationService.navigate('TransactionManagement'),
       },
       {
         title: i18n.t('mineModule.authorizeManagementT'),
-        onPress: () => {},
+        onPress: () => navigationService.navigate('AuthorizeManagement'),
       },
       {
         title: i18n.t('mineModule.securityCenterT'),
         onPress: () => navigationService.navigate('SecurityCenter'),
       },
-      // {
-      //   title: '地址簿',
-      //   onPress: () => {},
-      // },
       {
         title: i18n.t('mineModule.generalSettingT'),
         onPress: () => navigationService.navigate('GeneralSettings'),
@@ -39,16 +35,18 @@ const Tool = () => {
       },
       {
         title: i18n.t('mineModule.helpCenterT'),
-        onPress: () => {},
+        onPress: () => navigationService.navigate('HelpCenter'),
       },
       {
         title: i18n.t('mineModule.aboutUsT'),
-        onPress: () => {},
-        subtitle: i18n.t('mineModule.version', {number: '1.0'}),
+        onPress: () => navigationService.navigate('AboutUs'),
+        subtitle: i18n.t('mineModule.version', {
+          number: Constants.nativeAppVersion,
+        }),
       },
       {
         title: i18n.t('mineModule.accountManagementT'),
-        onPress: () => {},
+        onPress: () => navigationService.navigate('AccountManagement'),
         style: {marginTop: 10},
       },
     ];
@@ -66,7 +64,9 @@ const Tool = () => {
               />
               <TextL>{i18n.t('mineModule.collect')}</TextL>
             </Touchable>
-            <Touchable style={styles.toolItem}>
+            <Touchable
+              onPress={() => navigationService.navigate('Transfer')}
+              style={styles.toolItem}>
               <FontAwesome5
                 name="arrow-circle-up"
                 size={30}

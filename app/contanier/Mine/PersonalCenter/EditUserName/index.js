@@ -5,12 +5,12 @@ import {
   Input,
   CommonButton,
   CommonToast,
-} from '../../../components';
+} from '../../../../components';
 import styles from './styles';
-import {TextL} from '../../../components/CommonText';
+import {TextL} from '../../../../components/CommonText';
 import i18n from 'i18n-js';
-import {usernameReg} from '../../../config';
-import {GStyle} from '../../../assets/theme';
+import {usernameReg} from '../../../../config';
+import {GStyle} from '../../../../assets/theme';
 const EditUserName = () => {
   const [name, setName] = useState('');
   const onPress = () => {

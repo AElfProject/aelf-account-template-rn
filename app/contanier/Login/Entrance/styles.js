@@ -1,19 +1,21 @@
 import {pTd} from '../../../utils';
 import {statusBarHeight, bottomBarHeigth} from '../../../utils/device';
-import GStyle from '../../../assets/theme/gstyle';
 import {StyleSheet} from 'react-native';
 import {Colors} from '../../../assets/theme';
-
+const offset = pTd(500);
 export default StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: 'column-reverse',
-    ...GStyle.container,
+  },
+  headerStyle: {
+    marginTop: offset,
   },
   bgStyle: {
-    position: 'absolute',
-    top: pTd(-300),
-    height: '100%',
+    flex: 1,
     width: '100%',
+    backgroundColor: 'white',
+    marginTop: -offset,
   },
   loginButton: {
     marginBottom: pTd(50),
@@ -30,7 +32,7 @@ export default StyleSheet.create({
     paddingHorizontal: pTd(50),
     position: 'absolute',
     zIndex: 999,
-    top: statusBarHeight + pTd(80),
+    top: statusBarHeight + pTd(80) + offset,
     right: 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -39,6 +41,9 @@ export default StyleSheet.create({
     marginTop: pTd(200),
     alignSelf: 'center',
     color: Colors.primaryColor,
+  },
+  hideLanguage: {
+    color: 'white',
   },
   jLooking: {
     color: Colors.primaryColor,

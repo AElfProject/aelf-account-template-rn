@@ -67,11 +67,12 @@ const ListItem = props => {
 export default memo(ListItem);
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: pTd(20),
+    width: '100%',
+    minHeight: pTd(110),
+    paddingVertical: pTd(30),
     backgroundColor: 'white',
     borderBottomWidth: 1,
     borderBottomColor: Colors.borderColor,
-    minHeight: pTd(110),
     alignItems: 'center',
     flexDirection: 'row',
     paddingHorizontal: pTd(30),
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     color: Colors.fontGray,
   },
   detailsStyle: {
-    marginTop: pTd(3),
+    marginTop: pTd(5),
     color: Colors.fontGray,
   },
   iconStyle: {

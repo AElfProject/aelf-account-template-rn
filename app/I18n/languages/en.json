@@ -1,72 +1,84 @@
 {
-	"home": "Hoom",
-	"mine": "Mine",
-	"switchLanguage": "Switch language",
-	"language":"Language",
-	"currentLanguage":"English",
-	"cancel": "Cancel",
-	"determine": "Determine",
-	"safetyReminder": "Safety reminder",
-	"suc":"Success",
-	"fail":"Failure",
-	"permissDen":"Permission denied",
-	"setBiometrics": "Set Biometrics",
-	"setSuc": "Set Success",
-	"setFail": "Set Fail",
-	"later": "Later",
-	"saveSuc":"Saved Success",
-	"pswErr":"password is incorrect",
-	"pleasePayPsw":"Please enter the payment password",
-	"setPsw": {
-		"title": "Set Payment Password",
-		"setPsw1": "Please set transaction password for payment",
-		"setPsw2": "Please fill in again to confirm",
-		"pswInconsistent": "The passwords you entered are different"
-	},
-	"alert": {
-		"locationTips": "Your current location has not passed the permission authentication, and the application cannot be used normally; the application is only supported by users in non-Mainland China."
-	},
-	"login": {
-		"jLook": "Just look around",
-		"login": "Login",
-		"regist": "Registration",
-		"premiumTips": "Premium account login",
-		"userName":"User Name",
-		"nameErr":"User name format error",
-		"pswFormatErr":"Password format error",
-		"pleaseEnt":"Please enter",
-		"newPsw":"New Password",
-		"psw":"Password",
-		"confirmPsw":"Confirm Password",
-		"inconsistent":"The password you entered twice is inconsistent",
-		"usernameTips":"The characters in the username can only be letters or numbers;",
-		"pswTips":"The password must be greater than or equal to 12 digits, and contain both uppercase letters, lowercase letters, numbers, and characters;",
-		"pswNotTips":"Once the password is set, it cannot be modified, please keep the set password properly;",
-		"backupQRCode": {
-			"title": "QR Code",
-			"later": "Back later",
-			"saveQRCode": "Save QR Code to Album"
-		}
-	},
-	"mineModule":{
-		"username":"User Name",
-		"balance":"Balance",
-		"collect":"Receive",
-		"transfer":"Transfer",
-		"exchange":"Exchange",
-		"transactionManagementT":"Transaction Management",
-		"authorizeManagementT":"Authorization Management",
-		"securityCenterT":"Security Center",
-		"generalSettingT":"General Settings",
-		"helpCenterT":"Help Cente",
-		"aboutUsT":"About Us",
-		"version":"Version Numbe:{{number}}",
-		"accountManagementT":"Account Management",
-		"generalSettings":{
-			"infrom":"System Notification",
-			"infromTip":"Account-related transaction notifications, including deposit, withdrawal, and in-app transactions",
-			"currencyUnit":"Currency Unit",
-			"networkManagement":"Network Management"
-		}
-	}
+  "home": "Hoom",
+  "mine": "Mine",
+  "switchLanguage": "Switch language",
+  "language": "Language",
+  "currentLanguage": "English",
+  "cancel": "Cancel",
+  "determine": "Determine",
+  "safetyReminder": "Safety reminder",
+  "suc": "Success",
+  "fail": "Failure",
+  "permissDen": "Permission denied",
+  "setBiometrics": "Set Biometrics",
+  "setSuc": "Set Success",
+  "setFail": "Set Fail",
+  "later": "Later",
+  "saveSuc": "Saved Success",
+  "pswErr": "password is incorrect",
+  "pleasePayPsw": "Please enter the payment password",
+  "pleasePsw": "Please enter the password of the account {{account}}",
+  "accountPswErr": "The account password is incorrect, please re-enter",
+  "setPsw": {
+    "title": "Set Payment Password",
+    "setPsw1": "Please set transaction password for payment",
+    "setPsw2": "Please fill in again to confirm",
+    "pswInconsistent": "The passwords you entered are different"
+  },
+  "alert": {
+    "locationTips": "Your current location has not passed the permission authentication, and the application cannot be used normally; the application is only supported by users in non-Mainland China."
+  },
+  "login": {
+    "scanCodeLogin": "这将用于扫码登录",
+    "jLook": "Just look around",
+    "login": "Login",
+    "regist": "Registration",
+    "premiumTips": "Premium account login",
+    "userName": "User Name",
+    "nameErr": "User name format error",
+    "pswFormatErr": "Password format error",
+    "pleaseEnt": "Please enter",
+    "newPsw": "New Password",
+    "psw": "Password",
+    "confirmPsw": "Confirm Password",
+    "inconsistent": "The password you entered twice is inconsistent",
+    "usernameTips": "The characters in the username can only be letters or numbers;",
+    "pswTips": "The password must be greater than or equal to 12 digits, and contain both uppercase letters, lowercase letters, numbers, and characters;",
+    "pswNotTips": "Once the password is set, it cannot be modified, please keep the set password properly;",
+    "backupQRCode": {
+      "title": "QR Code",
+      "later": "Back later",
+      "saveQRCode": "Save QR Code to Album"
+    }
+  },
+  "mineModule": {
+    "username": "User Name",
+    "balance": "Balance",
+    "collect": "Receive",
+    "transfer": "Transfer",
+    "exchange": "Exchange",
+    "transactionManagementT": "Transaction Management",
+    "authorizeManagementT": "Authorization Management",
+    "securityCenterT": "Security Center",
+    "generalSettingT": "General Settings",
+    "helpCenterT": "Help Cente",
+    "aboutUsT": "About Us",
+    "version": "Version Numbe:{{number}}",
+    "accountManagementT": "Account Management",
+    "generalSettings": {
+      "infrom": "System Notification",
+      "infromTip": "Account-related transaction notifications, including deposit, withdrawal, and in-app transactions",
+      "currencyUnit": "Currency Unit",
+      "networkManagement": "Network Management"
+    }
+  },
+  "permission": {
+    "camera": "相机",
+    "denied": "权限被拒绝",
+    "iosDeniedDetails": "请允许我们访问您的{{type}}权限",
+    "openSettings": "打开设置",
+    "anDeniedDetails": "请打开您的设置,允许我们访问您的{{type}}权限",
+    "openFailed": "打开失败",
+    "failedDetails": "请在iPhone的“设置-隐私”选项中,允许访问您的{{type}}"
+  }
 }

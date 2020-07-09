@@ -1,72 +1,84 @@
 {
-	"home": "主页",
-	"mine": "我的",
-	"switchLanguage": "切换语言",
-	"language":"语言",
-	"currentLanguage":"简体中文",
-	"cancel": "取消",
-	"determine": "确定",
-	"safetyReminder": "安全提醒",
-	"suc": "成功",
-	"fail": "失败",
-	"permissDen": "没有权限",
-	"setBiometrics": "设置生物识别",
-	"setSuc": "设置成功",
-	"setFail": "设置失败",
-	"later": "稍后",
-	"saveSuc":"保存成功",
-	"pswErr":"密码错误",
-	"pleasePayPsw":"请输入支付密码",
-	"setPsw": {
-		"title": "设置支付密码",
-		"setPsw1": "请设置交易密码",
-		"setPsw2": "请确认密码",
-		"pswInconsistent": "两次密码不一致"
-	},
-	"alert": {
-		"locationTips": "您当前所在位置没有通过权限认证，无法正常使用应用；该应用仅支持非中国大陆地区用户使用。"
-	},
-	"login": {
-		"jLook": "随便看看",
-		"login": "登录",
-		"regist": "注册",
-		"premiumTips": "高级账号登录",
-		"userName": "用户名",
-		"nameErr": "用户名格式错误",
-		"pswFormatErr": "密码格式错误",
-		"pleaseEnt": "请输入",
-		"newPsw": "新密码",
-		"psw":"密码",
-		"confirmPsw": "确认密码",
-		"inconsistent": "您两次输入的密码不一致",
-		"usernameTips": "用户名仅支持英文或数字;",
-		"pswTips": "密码必须大于等于12位，并同时包含大小写字母、数字和符号;",
-		"pswNotTips": "密码一经设置不可修改，请妥善保管设置的密码;",
-		"backupQRCode": {
-			"title": "备份二维码",
-			"later": "稍后备份",
-			"saveQRCode": "保存二维码到相册"
-		}
-	},
-	"mineModule":{
-		"username":"用户名",
-		"balance":"余额",
-		"collect":"收款",
-		"transfer":"转账",
-		"exchange":"兑换",
-		"transactionManagementT":"交易管理",
-		"authorizeManagementT":"授权管理",
-		"securityCenterT":"安全中心",
-		"generalSettingT":"通用设置",
-		"helpCenterT":"帮助中心",
-		"aboutUsT":"关于我们",
-		"version":"版本号:{{number}}",
-		"accountManagementT":"账号管理",
-		"generalSettings":{
-			"infrom":"系统通知",
-			"infromTip":"账号相关交易通知，包括充值、提现、APP内交易",
-			"currencyUnit":"货币单位",
-			"networkManagement":"网络管理"
-		}
-	}
+  "home": "主页",
+  "mine": "我的",
+  "switchLanguage": "切换语言",
+  "language": "语言",
+  "currentLanguage": "简体中文",
+  "cancel": "取消",
+  "determine": "确定",
+  "safetyReminder": "安全提醒",
+  "suc": "成功",
+  "fail": "失败",
+  "permissDen": "没有权限",
+  "setBiometrics": "设置生物识别",
+  "setSuc": "设置成功",
+  "setFail": "设置失败",
+  "later": "稍后",
+  "saveSuc": "保存成功",
+  "pswErr": "密码错误",
+  "pleasePayPsw": "请输入支付密码",
+  "pleasePsw": "请输入账户{{account}}的密码",
+  "accountPswErr": "账号密码有误，请重新输入",
+  "setPsw": {
+    "title": "设置支付密码",
+    "setPsw1": "请设置交易密码",
+    "setPsw2": "请确认密码",
+    "pswInconsistent": "两次密码不一致"
+  },
+  "alert": {
+    "locationTips": "您当前所在位置没有通过权限认证，无法正常使用应用；该应用仅支持非中国大陆地区用户使用。"
+  },
+  "login": {
+    "scanCodeLogin": "这将用于扫码登录",
+    "jLook": "随便看看",
+    "login": "登录",
+    "regist": "注册",
+    "premiumTips": "高级账号登录",
+    "userName": "用户名",
+    "nameErr": "用户名格式错误",
+    "pswFormatErr": "密码格式错误",
+    "pleaseEnt": "请输入",
+    "newPsw": "新密码",
+    "psw": "密码",
+    "confirmPsw": "确认密码",
+    "inconsistent": "您两次输入的密码不一致",
+    "usernameTips": "用户名仅支持英文或数字;",
+    "pswTips": "密码必须大于等于12位，并同时包含大小写字母、数字和符号;",
+    "pswNotTips": "密码一经设置不可修改，请妥善保管设置的密码;",
+    "backupQRCode": {
+      "title": "备份二维码",
+      "later": "稍后备份",
+      "saveQRCode": "保存二维码到相册"
+    }
+  },
+  "mineModule": {
+    "username": "用户名",
+    "balance": "余额",
+    "collect": "收款",
+    "transfer": "转账",
+    "exchange": "兑换",
+    "transactionManagementT": "交易管理",
+    "authorizeManagementT": "授权管理",
+    "securityCenterT": "安全中心",
+    "generalSettingT": "通用设置",
+    "helpCenterT": "帮助中心",
+    "aboutUsT": "关于我们",
+    "version": "版本号:{{number}}",
+    "accountManagementT": "账号管理",
+    "generalSettings": {
+      "infrom": "系统通知",
+      "infromTip": "账号相关交易通知，包括充值、提现、APP内交易",
+      "currencyUnit": "货币单位",
+      "networkManagement": "网络管理"
+    }
+  },
+  "permission": {
+    "camera": "相机",
+    "denied": "权限被拒绝",
+    "iosDeniedDetails": "请允许我们访问您的{{type}}权限",
+    "openSettings": "打开设置",
+    "anDeniedDetails": "请打开您的设置,允许我们访问您的{{type}}权限",
+    "openFailed": "打开失败",
+    "failedDetails": "请在iPhone的“设置-隐私”选项中,允许访问您的{{type}}"
+  }
 }

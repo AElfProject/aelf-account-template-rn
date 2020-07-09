@@ -1,4 +1,5 @@
-import {Dimensions, Platform, StatusBar, PixelRatio} from 'react-native';
+import {Dimensions, Platform, PixelRatio} from 'react-native';
+import Constants from 'expo-constants';
 const X_WIDTH = 375;
 const X_HEIGHT = 812;
 
@@ -9,9 +10,13 @@ const windowHeight = Dimensions.get('window').height;
 
 const pixelSize = (function() {
   let pixelRatio = PixelRatio.get();
-  if (pixelRatio >= 3) return 0.333;
-  else if (pixelRatio >= 2) return 0.5;
-  else return 1;
+  let size = 1;
+  if (pixelRatio >= 3) {
+    size = 0.333;
+  } else if (pixelRatio >= 2) {
+    size = 0.5;
+  }
+  return size;
 })();
 
 const isIphoneX = (function() {
@@ -22,21 +27,13 @@ const isIphoneX = (function() {
   );
 })();
 
-const statusBarHeight = (function() {
-  let BarHeight = StatusBar.currentHeight;
-  if (isIos) {
-    if (isIphoneX) {
-      BarHeight = 44;
-    } else {
-      BarHeight = 20;
-    }
-  }
-  return BarHeight;
-})();
+const statusBarHeight = Constants.statusBarHeight;
 
 const bottomBarHeigth = (function() {
   let Height = 0;
-  if (isIos && isIphoneX) Height = 34;
+  if (isIos && isIphoneX) {
+    Height = 34;
+  }
   return Height;
 })();
 export {

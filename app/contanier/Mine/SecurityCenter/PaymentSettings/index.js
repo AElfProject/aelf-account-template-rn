@@ -34,7 +34,7 @@ const PaymentSettings = () => {
         if (!enrolled) {
           return CommonToast.text('设备未保存指纹或面部数据以用于身份验证');
         }
-        VerifyPassword.show(success => {
+        VerifyPassword.payShow(success => {
           success &&
             touchAuth()
               .then(() => {

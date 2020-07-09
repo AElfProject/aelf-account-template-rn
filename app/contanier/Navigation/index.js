@@ -24,7 +24,6 @@ const NavigationMain = () => (
   <NavigationContainer ref={navigationService.setTopLevelNavigator}>
     <Stack.Navigator
       initialRouteName="Referreal"
-      // initialRouteName="Tab"
       screenOptions={{
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         header: () => null,

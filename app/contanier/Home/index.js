@@ -9,6 +9,7 @@ import {
   Loading,
   CommonToast,
   ActionSheet,
+  VerifyPassword,
 } from '../../components';
 import {TextL} from '../../components/CommonText';
 import {localLanguage} from '../../i18n/config';
@@ -152,6 +153,18 @@ const Home = props => {
               i18n.t('alert.locationTips'),
               [{title: i18n.t('determine')}],
             );
+          }}
+        />
+        <CommonButton
+          title={'pay Password'}
+          onPress={() => {
+            VerifyPassword.payShow();
+          }}
+        />
+        <CommonButton
+          title={'Password'}
+          onPress={() => {
+            VerifyPassword.passwordShow();
           }}
         />
       </ScrollView>

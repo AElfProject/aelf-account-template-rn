@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   leftTitleBox: {
-    height: 50,
+    minHeight: 50,
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,

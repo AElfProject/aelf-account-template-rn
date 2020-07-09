@@ -1,5 +1,5 @@
 'use strict';
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useRef, useState, useMemo} from 'react';
 import OverlayModal from '../OverlayModal';
 import {View, Text, StyleSheet} from 'react-native';
 import Touchable from '../Touchable';
@@ -13,7 +13,25 @@ import {settingsSelectors} from '../../redux/settingsRedux';
 import {useSelector, shallowEqual} from 'react-redux';
 import i18n from 'i18n-js';
 import {isIos} from '../../utils/device';
-const Components = props => {
+import Input from '../Input';
+const BottomView = props => {
+  const {cancel, determine} = props;
+  const Components = useMemo(
+    () => (
+      <View style={styles.buttonsBox}>
+        <Touchable onPress={cancel} style={styles.buttonItem}>
+          <Text style={styles.cancelText}>{i18n.t('cancel')}</Text>
+        </Touchable>
+        <Touchable onPress={determine} style={styles.buttonItem}>
+          <Text style={styles.buttonText}>{i18n.t('determine')}</Text>
+        </Touchable>
+      </View>
+    ),
+    [cancel, determine],
+  );
+  return Components;
+};
+const PayComponents = props => {
   const [pswTip, setPswTip] = useState(false);
   const payPsw = useSelector(settingsSelectors.getPayPsw, shallowEqual);
   const {callBack} = props;
@@ -44,29 +62,72 @@ const Components = props => {
           style={GStyle.marginArg(pTd(50), 0, pTd(30), 0)}
           onChange={value => onChange(value)}
         />
-        {pswTip && <TextM style={GStyle.pswTip}>{i18n.t('pswErr')}</TextM>}
-        <View style={styles.buttonsBox}>
-          <Touchable onPress={cancel} style={styles.buttonItem}>
-            <Text style={styles.cancelText}>{i18n.t('cancel')}</Text>
-          </Touchable>
-          <Touchable onPress={determine} style={styles.buttonItem}>
-            <Text style={styles.buttonText}>{i18n.t('determine')}</Text>
-          </Touchable>
-        </View>
+        {pswTip && (
+          <TextM style={[GStyle.pswTip, styles.tips]}>{i18n.t('pswErr')}</TextM>
+        )}
+        <BottomView cancel={cancel} determine={determine} />
         {isIos ? <KeyboardSpace /> : null}
       </View>
     </ScrollView>
   );
 };
-const show = callBack => {
-  OverlayModal.show(<Components callBack={callBack} />, {
+const PasswordComponents = props => {
+  const [pswTip, setPswTip] = useState(false);
+  const {callBack} = props;
+  const intervalRef = useRef();
+  const onChange = useCallback(value => {
+    intervalRef.current = value;
+  }, []);
+
+  const determine = useCallback(() => {
+    setPswTip(true);
+  }, []);
+
+  const cancel = useCallback(() => {
+    callBack && callBack(false);
+    OverlayModal.hide();
+  }, [callBack]);
+  return (
+    <ScrollView alwaysBounceVertical={false} keyboardShouldPersistTaps="always">
+      <View style={styles.container}>
+        <TextL>{i18n.t('pleasePsw', {account: ''})}</TextL>
+        <Input
+          autoFocus
+          secureTextEntry={true}
+          leftTitleBox={styles.leftTitleBox}
+          leftTextStyle={styles.leftTextStyle}
+          leftTitle={i18n.t('login.psw')}
+          onChangeText={onChange}
+          placeholder={i18n.t('login.pleaseEnt')}
+        />
+        {pswTip && (
+          <TextM style={[GStyle.pswTip, styles.tips]}>
+            {i18n.t('accountPswErr')}
+          </TextM>
+        )}
+        <BottomView cancel={cancel} determine={determine} />
+        {isIos ? <KeyboardSpace /> : null}
+      </View>
+    </ScrollView>
+  );
+};
+const payShow = callBack => {
+  OverlayModal.show(<PayComponents callBack={callBack} />, {
+    style: styles.style,
+    modal: true,
+    containerStyle: styles.containerStyle,
+  });
+};
+const passwordShow = callBack => {
+  OverlayModal.show(<PasswordComponents callBack={callBack} />, {
     style: styles.style,
     modal: true,
     containerStyle: styles.containerStyle,
   });
 };
 export default {
-  show,
+  payShow,
+  passwordShow,
 };
 const styles = StyleSheet.create({
   container: {
@@ -102,5 +163,17 @@ const styles = StyleSheet.create({
   cancelText: {
     color: Colors.fontGray,
     fontSize: 16,
+  },
+  leftTextStyle: {
+    width: 80,
+  },
+  leftTitleBox: {
+    width: '80%',
+    marginVertical: pTd(40),
+    marginBottom: pTd(30),
+  },
+  tips: {
+    flex: 1,
+    marginBottom: pTd(20),
   },
 });

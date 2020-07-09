@@ -1,10 +1,11 @@
-import {Platform, PermissionsAndroid} from 'react-native';
+import {Platform, PermissionsAndroid, Linking} from 'react-native';
 import {download, saveFilePath} from './utilFs';
 import {captureRef} from 'react-native-view-shot';
 import CameraRoll from '@react-native-community/cameraroll';
-import {CommonToast} from '../../components';
+import {CommonToast, ActionSheet} from '../../components';
 import i18n from 'i18n-js';
 import * as LocalAuthentication from 'expo-local-authentication';
+import {isIos} from '../../utils/device';
 module.exports.sleep = time => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -104,4 +105,36 @@ const touchAuth = () => {
       });
   });
 };
-export {isNumber, screenshots, checkImageToAlbum, touchAuth};
+/**
+ * permissionDenied
+ * @param {string} permissionType  permission type
+ * @param {string} use   used for
+ */
+const permissionDenied = (type, use) => {
+  if (isIos) {
+    ActionSheet.alert(
+      i18n.t('permission.denied'),
+      `${i18n.t('permission.iosDeniedDetails', {type})}${use ? ',' + use : ''}`,
+      [
+        {
+          title: i18n.t('permission.openSettings'),
+          onPress: () =>
+            Linking.openURL('app-settings:').catch(e => {
+              ActionSheet.alert(
+                i18n.t('permission.openFailed'),
+                i18n.t('permission.failedDetails', {type}),
+                [{title: i18n.t('determine')}],
+              );
+            }),
+        },
+      ],
+    );
+  } else {
+    ActionSheet.alert(
+      i18n.t('permission.denied'),
+      `${i18n.t('permission.anDeniedDetails', {type})}${use ? ',' + use : ''}`,
+      [{title: i18n.t('determine')}],
+    );
+  }
+};
+export {isNumber, screenshots, checkImageToAlbum, touchAuth, permissionDenied};
