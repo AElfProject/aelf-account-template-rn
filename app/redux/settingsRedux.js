@@ -7,7 +7,7 @@ import {DEFAULT_CURRENCY} from '../config';
 const {Types, Creators} = createActions({
   changeLanguage: ['language'],
   changeBarStyle: ['barStyle'],
-  changePayPsw: ['payPsw'],
+  changePayPw: ['payPw'],
   changeBiometrics: ['biometrics'],
   changeInform: ['inform'],
   changeCurrencyUnit: ['currencyUnit'],
@@ -21,7 +21,7 @@ export default Creators;
 export const INITIAL_STATE = Immutable({
   language: null,
   barStyle: null,
-  payPsw: null,
+  payPw: null,
   biometrics: null,
   inform: null,
   currencyUnit: DEFAULT_CURRENCY,
@@ -40,9 +40,9 @@ export const settingsSelectors = {
     _baseSelector,
     base => base.barStyle,
   ),
-  getPayPsw: createSelector(
+  getPayPw: createSelector(
     _baseSelector,
-    base => base.payPsw,
+    base => base.payPw,
   ),
   getBiometrics: createSelector(
     _baseSelector,
@@ -66,8 +66,8 @@ export const changeLanguage = (state, {language}) => {
 export const changeBarStyle = (state, {barStyle}) => {
   return state.merge({barStyle});
 };
-export const changePayPsw = (state, {payPsw}) => {
-  return state.merge({payPsw});
+export const changePayPw = (state, {payPw}) => {
+  return state.merge({payPw});
 };
 export const changeBiometrics = (state, {biometrics}) => {
   return state.merge({biometrics});
@@ -82,7 +82,7 @@ export const changeCurrencyUnit = (state, {currencyUnit}) => {
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CHANGE_LANGUAGE]: changeLanguage,
   [Types.CHANGE_BAR_STYLE]: changeBarStyle,
-  [Types.CHANGE_PAY_PSW]: changePayPsw,
+  [Types.CHANGE_PAY_PW]: changePayPw,
   [Types.CHANGE_BIOMETRICS]: changeBiometrics,
   [Types.CHANGE_INFORM]: changeInform,
   [Types.CHANGE_CURRENCY_UNIT]: changeCurrencyUnit,

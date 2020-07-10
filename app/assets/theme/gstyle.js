@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {pTd} from '../../utils';
+import {pTd} from '../../utils/common';
 import Colors from './colors';
 const GStyle = StyleSheet.create({
   container: {
@@ -10,7 +10,7 @@ const GStyle = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f5f5f5',
   },
-  pswTip: {
+  pwTip: {
     marginTop: 3,
     color: 'red',
   },

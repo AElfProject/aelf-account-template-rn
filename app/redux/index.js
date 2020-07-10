@@ -1,6 +1,6 @@
 import {combineReducers, createStore} from 'redux';
 import {persistReducer, persistStore} from 'redux-persist';
-import reduxPersist from '../config/reduxPersist';
+import reduxPersist from '../utils/common/reduxPersist';
 export const reducers = combineReducers({
   user: require('./userRedux').reducer,
   settings: require('./settingsRedux').reducer,

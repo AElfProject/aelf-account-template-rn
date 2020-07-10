@@ -5,17 +5,17 @@ import {
 } from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 
-import Referreal from '../Referreal';
+import Referral from '../template/Referral';
 
 import Tab from './Tab';
-import navigationService from '../../utils/navigationService';
+import navigationService from '../../utils/common/navigationService';
 
-import LoginNav from '../Login/stackNav';
-import MineNav from '../Mine/stackNav';
+import LoginNav from '../template/Login/stackNav';
+import MineNav from '../template/Mine/stackNav';
 const Stack = createStackNavigator();
 
 const stackNav = [
-  {name: 'Referreal', component: Referreal},
+  {name: 'Referral', component: Referral},
   {name: 'Tab', component: Tab},
   ...LoginNav,
   ...MineNav,
@@ -23,7 +23,7 @@ const stackNav = [
 const NavigationMain = () => (
   <NavigationContainer ref={navigationService.setTopLevelNavigator}>
     <Stack.Navigator
-      initialRouteName="Referreal"
+      initialRouteName="Referral"
       screenOptions={{
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
         header: () => null,
