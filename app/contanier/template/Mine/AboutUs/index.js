@@ -4,7 +4,7 @@ import {GStyle, Colors} from '../../../../assets/theme';
 import {CommonHeader, ListItem} from '../../../../components/template';
 import i18n from 'i18n-js';
 import {pTd} from '../../../../utils/common';
-import {aelfBlue} from '../../../../assets/images';
+import {aelfLogo} from '../../../../assets/images';
 import {TextL} from '../../../../components/template/CommonText';
 import Constants from 'expo-constants';
 const AboutUs = () => {
@@ -13,7 +13,11 @@ const AboutUs = () => {
       <View style={GStyle.secondContainer}>
         <CommonHeader title={i18n.t('mineModule.aboutUsT')} canBack />
         <View style={styles.logoBox}>
-          <Image source={aelfBlue} style={styles.logoStyle} />
+          <Image
+            resizeMode="contain"
+            source={aelfLogo}
+            style={styles.logoStyle}
+          />
           <TextL>
             {i18n.t('mineModule.version', {
               number: Constants.nativeAppVersion,
@@ -42,8 +46,7 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.borderColor,
   },
   logoStyle: {
-    height: pTd(200),
-    width: pTd(200),
+    width: '50%',
     marginBottom: pTd(20),
   },
   itemBox: {

@@ -6,8 +6,8 @@ import Transfer from './Transfer';
 
 import SecurityCenter from './SecurityCenter';
 import PaymentSettings from './SecurityCenter/PaymentSettings';
-import ChangePaymentPw from './SecurityCenter/ChangePaymentPw';
-import SecondChangePaymentPw from './SecurityCenter/SecondChangePaymentPw';
+import ChangePaymentPwd from './SecurityCenter/ChangePaymentPwd';
+import SecondChangePaymentPwd from './SecurityCenter/SecondChangePaymentPwd';
 
 import GeneralSettings from './GeneralSettings';
 import Language from './GeneralSettings/Language';
@@ -28,8 +28,8 @@ const stackNav = [
 
   {name: 'SecurityCenter', component: SecurityCenter},
   {name: 'PaymentSettings', component: PaymentSettings},
-  {name: 'ChangePaymentPw', component: ChangePaymentPw},
-  {name: 'SecondChangePaymentPw', component: SecondChangePaymentPw},
+  {name: 'ChangePaymentPwd', component: ChangePaymentPwd},
+  {name: 'SecondChangePaymentPwd', component: SecondChangePaymentPwd},
 
   {name: 'GeneralSettings', component: GeneralSettings},
   {name: 'Language', component: Language},

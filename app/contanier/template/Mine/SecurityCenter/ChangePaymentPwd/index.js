@@ -12,7 +12,7 @@ import {pTd} from '../../../../../utils/common';
 import navigationService from '../../../../../utils/common/navigationService';
 import {isIos} from '../../../../../utils/common/device';
 
-const ChangePaymentPw = () => {
+const ChangePaymentPwd = () => {
   const [safety, setSafety] = useState(null);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -58,7 +58,7 @@ const ChangePaymentPw = () => {
               title="不记得"
               style={styles.notButtonStyle}
               onPress={() => {
-                navigationService.navigate('SecondChangePaymentPw', {
+                navigationService.navigate('SecondChangePaymentPwd', {
                   remember: false,
                 });
               }}
@@ -67,7 +67,7 @@ const ChangePaymentPw = () => {
               title="记得"
               style={styles.buttonStyle}
               onPress={() => {
-                navigationService.navigate('SecondChangePaymentPw', {
+                navigationService.navigate('SecondChangePaymentPwd', {
                   remember: true,
                 });
               }}
@@ -85,7 +85,7 @@ const ChangePaymentPw = () => {
   );
 };
 
-export default memo(ChangePaymentPw);
+export default memo(ChangePaymentPwd);
 const styles = StyleSheet.create({
   container: {
     flex: 1,

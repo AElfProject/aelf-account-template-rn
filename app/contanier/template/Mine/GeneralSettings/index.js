@@ -13,10 +13,10 @@ import {DEFAULT_CURRENCY} from '../../../../config';
 const GeneralSettings = () => {
   const dispatch = useDispatch();
   const changeInform = useCallback(
-    infrom => dispatch(settingsActions.changeInform(infrom)),
+    inform => dispatch(settingsActions.changeInform(inform)),
     [dispatch],
   );
-  const infrom = useSelector(settingsSelectors.getInform, shallowEqual);
+  const inform = useSelector(settingsSelectors.getInform, shallowEqual);
   const currencyUnit = useSelector(
     settingsSelectors.getCurrencyUnit,
     shallowEqual,
@@ -28,10 +28,10 @@ const GeneralSettings = () => {
       <ListItem
         disabled
         switching
-        value={infrom}
+        value={inform}
         style={styles.itemBox}
-        title={i18n.t('mineModule.generalSettings.infrom')}
-        details={i18n.t('mineModule.generalSettings.infromTip')}
+        title={i18n.t('mineModule.generalSettings.inform')}
+        details={i18n.t('mineModule.generalSettings.informTip')}
         onValueChange={changeInform}
       />
       <ListItem

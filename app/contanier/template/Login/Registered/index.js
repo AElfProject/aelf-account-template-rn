@@ -18,12 +18,12 @@ import NamePasswordTips from '../NamePasswordTips';
 const Registered = () => {
   const [state, setState] = useSetState({
     userName: '',
-    pw: '',
-    pwConfirm: '',
-    pwDifferent: false,
+    pwd: '',
+    pwdConfirm: '',
+    pwdDifferent: false,
     userNameRule: false,
-    pwRule: false,
-    pwConfirmRule: false,
+    pwdRule: false,
+    pwdConfirmRule: false,
   });
   const userNameBlur = useCallback(() => {
     const {userName} = state;
@@ -33,32 +33,32 @@ const Registered = () => {
       setState({userNameRule: false});
     }
   }, [setState, state]);
-  const pwBlur = useCallback(() => {
-    const {pw, pwConfirm} = state;
-    if (!PASSWORD_REG.test(pw)) {
-      setState({pwRule: true});
+  const pwdBlur = useCallback(() => {
+    const {pwd, pwdConfirm} = state;
+    if (!PASSWORD_REG.test(pwd)) {
+      setState({pwdRule: true});
     } else {
-      setState({pwRule: false});
+      setState({pwdRule: false});
     }
 
-    if (pwConfirm && pw && pwConfirm !== pw) {
-      setState({pwDifferent: true});
-    } else if (pwConfirm && pw && pwConfirm === pw) {
-      setState({pwDifferent: false});
+    if (pwdConfirm && pwd && pwdConfirm !== pwd) {
+      setState({pwdDifferent: true});
+    } else if (pwdConfirm && pwd && pwdConfirm === pwd) {
+      setState({pwdDifferent: false});
     }
   }, [setState, state]);
-  const pwComfirmBlur = useCallback(() => {
-    const {pwConfirm, pw} = state;
-    if (!PASSWORD_REG.test(pwConfirm)) {
-      setState({pwConfirmRule: true});
+  const pwdComfirmBlur = useCallback(() => {
+    const {pwdConfirm, pwd} = state;
+    if (!PASSWORD_REG.test(pwdConfirm)) {
+      setState({pwdConfirmRule: true});
     } else {
-      setState({pwConfirmRule: false});
+      setState({pwdConfirmRule: false});
     }
 
-    if (pwConfirm && pw && pw !== pwConfirm) {
-      setState({pwDifferent: true});
-    } else if (pwConfirm && pw && pw === pwConfirm) {
-      setState({pwDifferent: false});
+    if (pwdConfirm && pwd && pwd !== pwdConfirm) {
+      setState({pwdDifferent: true});
+    } else if (pwdConfirm && pwd && pwd === pwdConfirm) {
+      setState({pwdDifferent: false});
     }
   }, [setState, state]);
 
@@ -66,7 +66,7 @@ const Registered = () => {
     Keyboard.dismiss();
     navigationService.navigate('GenerateQRCode');
   }, []);
-  const {userNameRule, pwRule, pwConfirmRule, pwDifferent} = state;
+  const {userNameRule, pwdRule, pwdConfirmRule, pwdDifferent} = state;
   return (
     <View style={GStyle.container}>
       <CommonHeader title={i18n.t('login.register')} canBack />
@@ -93,27 +93,27 @@ const Registered = () => {
             secureTextEntry={true}
             leftTitleBox={styles.leftTitleBox}
             leftTextStyle={styles.leftTextStyle}
-            leftTitle={i18n.t('login.newPw')}
-            onBlur={pwBlur}
-            onChangeText={pw => setState({pw})}
+            leftTitle={i18n.t('login.newPwd')}
+            onBlur={pwdBlur}
+            onChangeText={pwd => setState({pwd})}
             placeholder={i18n.t('login.pleaseEnt')}
           />
-          {pwRule && (
-            <TextM style={GStyle.pwTip}>{i18n.t('login.pwFormatErr')}</TextM>
+          {pwdRule && (
+            <TextM style={GStyle.pwTip}>{i18n.t('login.pwdFormatErr')}</TextM>
           )}
           <Input
             secureTextEntry={true}
             leftTitleBox={[styles.leftTitleBox, {marginBottom: 10}]}
             leftTextStyle={styles.leftTextStyle}
-            leftTitle={i18n.t('login.confirmPw')}
-            onBlur={pwComfirmBlur}
-            onChangeText={pwConfirm => setState({pwConfirm})}
+            leftTitle={i18n.t('login.confirmPwd')}
+            onBlur={pwdComfirmBlur}
+            onChangeText={pwdConfirm => setState({pwdConfirm})}
             placeholder={i18n.t('login.pleaseEnt')}
           />
-          {pwConfirmRule && (
-            <TextM style={GStyle.pwTip}>{i18n.t('login.pwFormatErr')}</TextM>
+          {pwdConfirmRule && (
+            <TextM style={GStyle.pwTip}>{i18n.t('login.pwdFormatErr')}</TextM>
           )}
-          {pwDifferent && (
+          {pwdDifferent && (
             <TextM style={GStyle.pwTip}>{i18n.t('login.inconsistent')}</TextM>
           )}
           <NamePasswordTips />

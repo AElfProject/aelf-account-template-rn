@@ -66,7 +66,7 @@ const PaymentSettings = () => {
         <CommonHeader title="支付设置" canBack />
         <ListItem
           title="修改支付密码"
-          onPress={() => navigationService.navigate('ChangePaymentPw')}
+          onPress={() => navigationService.navigate('ChangePaymentPwd')}
         />
         <ListItem
           disabled

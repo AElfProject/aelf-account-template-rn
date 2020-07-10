@@ -19,16 +19,16 @@ import settingsActions, {
 import i18n from 'i18n-js';
 import {useDispatch, useSelector, shallowEqual} from 'react-redux';
 import {PASSWORD_REG} from '../../../../../config';
-const SecondChangePaymentPw = props => {
+const SecondChangePaymentPwd = props => {
   const {remember} = props.route.params || {};
   const dispatch = useDispatch();
   const [state, setState] = useSetState({
     tip: '输入当前身份密码，以验证身份',
-    type: 'verificationPw',
-    transactionPw: '',
-    transactionPwConfirm: '',
-    pw: '',
-    pwRule: null,
+    type: 'verificationPwd',
+    transactionPwd: '',
+    transactionPwdConfirm: '',
+    pwd: '',
+    pwdRule: null,
   });
   const changePayPw = useCallback(
     payPw => dispatch(settingsActions.changePayPw(payPw)),
@@ -36,61 +36,61 @@ const SecondChangePaymentPw = props => {
   );
   const payPw = useSelector(settingsSelectors.getPayPw, shallowEqual);
 
-  const {tip, type, transactionPw, pw, pwRule} = state;
+  const {tip, type, transactionPwd, pwd, pwdRule} = state;
   const onChange = useCallback(
     (types, text) => {
       setState({[types]: text});
       if (text.length === 6) {
         switch (types) {
-          case 'verificationPw':
+          case 'verificationPwd':
             if (payPw === text) {
               setState({
-                type: 'transactionPw',
-                tip: i18n.t('setPw.setPw1'),
+                type: 'transactionPwd',
+                tip: i18n.t('setPwd.setPwd1'),
               });
             } else {
               CommonToast.fail('密码错误');
             }
             break;
-          case 'transactionPw':
+          case 'transactionPwd':
             setState({
-              type: 'transactionPwConfirm',
-              tip: i18n.t('setPw.setPw2'),
+              type: 'transactionPwdConfirm',
+              tip: i18n.t('setPwd.setPwd2'),
             });
             break;
-          case 'transactionPwConfirm':
-            if (text === transactionPw) {
+          case 'transactionPwdConfirm':
+            if (text === transactionPwd) {
               CommonToast.success(i18n.t('setSuc'));
               changePayPw(text);
               navigationService.pop(2);
             } else {
-              CommonToast.fail(i18n.t('setPw.pwInconsistent'));
+              CommonToast.fail(i18n.t('setPwd.pwdInconsistent'));
             }
             break;
         }
       }
     },
-    [changePayPw, setState, transactionPw, payPw],
+    [changePayPw, setState, transactionPwd, payPw],
   );
-  const pwBlur = useCallback(() => {
-    if (!PASSWORD_REG.test(pw)) {
-      setState({pwRule: true});
+  const pwdBlur = useCallback(() => {
+    if (!PASSWORD_REG.test(pwd)) {
+      setState({pwdRule: true});
     } else {
-      setState({pwRule: false});
+      setState({pwdRule: false});
     }
-  }, [setState, pw]);
+  }, [setState, pwd]);
   const next = useCallback(() => {
-    if (PASSWORD_REG.test(pw)) {
+    if (PASSWORD_REG.test(pwd)) {
       setState({
-        type: 'transactionPw',
-        tip: i18n.t('setPw.setPw1'),
+        type: 'transactionPwd',
+        tip: i18n.t('setPwd.setPwd1'),
       });
     } else {
-      CommonToast.fail(i18n.t('login.pwFormatErr'));
+      CommonToast.fail(i18n.t('login.pwdFormatErr'));
     }
-  }, [setState, pw]);
+  }, [setState, pwd]);
   const Components = useMemo(() => {
-    if (type !== 'verificationPw' || remember) {
+    if (type !== 'verificationPwd' || remember) {
       return (
         <View style={styles.box}>
           <TextM style={{color: Colors.primaryColor}}>{tip}</TextM>
@@ -113,13 +113,13 @@ const SecondChangePaymentPw = props => {
             secureTextEntry={true}
             leftTitleBox={styles.leftTitleBox}
             leftTextStyle={styles.leftTextStyle}
-            leftTitle={i18n.t('login.pw')}
-            onBlur={pwBlur}
-            onChangeText={value => setState({pw: value})}
+            leftTitle={i18n.t('login.pwd')}
+            onBlur={pwdBlur}
+            onChangeText={value => setState({pwd: value})}
             placeholder={i18n.t('login.pleaseEnt')}
           />
-          {pwRule && (
-            <TextM style={GStyle.pwTip}>{i18n.t('login.pwFormatErr')}</TextM>
+          {pwdRule && (
+            <TextM style={GStyle.pwTip}>{i18n.t('login.pwdFormatErr')}</TextM>
           )}
           <CommonButton
             onPress={next}
@@ -132,7 +132,7 @@ const SecondChangePaymentPw = props => {
         </Touchable>
       );
     }
-  }, [next, onChange, pwBlur, pwRule, remember, setState, tip, type]);
+  }, [type, remember, tip, onChange, pwdBlur, pwdRule, next, setState]);
   return (
     <View style={GStyle.container}>
       <CommonHeader title="修改支付密码" canBack />
@@ -141,7 +141,7 @@ const SecondChangePaymentPw = props => {
   );
 };
 
-export default memo(SecondChangePaymentPw);
+export default memo(SecondChangePaymentPwd);
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -56,14 +56,14 @@ const PayComponents = props => {
   return (
     <ScrollView alwaysBounceVertical={false} keyboardShouldPersistTaps="always">
       <View style={styles.container}>
-        <TextL>{i18n.t('pleasePayPw')}</TextL>
+        <TextL>{i18n.t('pleasePayPwd')}</TextL>
         <Password
           maxLength={6}
           style={GStyle.marginArg(pTd(50), 0, pTd(30), 0)}
           onChange={value => onChange(value)}
         />
         {pwTip && (
-          <TextM style={[GStyle.pwTip, styles.tips]}>{i18n.t('pwErr')}</TextM>
+          <TextM style={[GStyle.pwTip, styles.tips]}>{i18n.t('pwdErr')}</TextM>
         )}
         <BottomView cancel={cancel} determine={determine} />
         {isIos ? <KeyboardSpace /> : null}
@@ -90,19 +90,19 @@ const PasswordComponents = props => {
   return (
     <ScrollView alwaysBounceVertical={false} keyboardShouldPersistTaps="always">
       <View style={styles.container}>
-        <TextL>{i18n.t('pleasePw', {account: ''})}</TextL>
+        <TextL>{i18n.t('pleasePwd', {account: ''})}</TextL>
         <Input
           autoFocus
           secureTextEntry={true}
           leftTitleBox={styles.leftTitleBox}
           leftTextStyle={styles.leftTextStyle}
-          leftTitle={i18n.t('login.pw')}
+          leftTitle={i18n.t('login.pwd')}
           onChangeText={onChange}
           placeholder={i18n.t('login.pleaseEnt')}
         />
         {pwTip && (
           <TextM style={[GStyle.pwTip, styles.tips]}>
-            {i18n.t('accountPwErr')}
+            {i18n.t('accountPwdErr')}
           </TextM>
         )}
         <BottomView cancel={cancel} determine={determine} />

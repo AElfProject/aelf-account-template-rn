@@ -15,15 +15,15 @@
   "setFail": "设置失败",
   "later": "稍后",
   "saveSuc": "保存成功",
-  "pwErr": "密码错误",
-  "pleasePayPw": "请输入支付密码",
-  "pleasePw": "请输入账户{{account}}的密码",
-  "accountPwErr": "账号密码有误，请重新输入",
-  "setPw": {
+  "pwdErr": "密码错误",
+  "pleasePayPwd": "请输入支付密码",
+  "pleasePwd": "请输入账户{{account}}的密码",
+  "accountPwdErr": "账号密码有误，请重新输入",
+  "setPwd": {
     "title": "设置支付密码",
-    "setPw1": "请设置交易密码",
-    "setPw2": "请确认密码",
-    "pwInconsistent": "两次密码不一致"
+    "setPwd1": "请设置交易密码",
+    "setPwd2": "请确认密码",
+    "pwdInconsistent": "两次密码不一致"
   },
   "alert": {
     "locationTips": "您当前所在位置没有通过权限认证，无法正常使用应用；该应用仅支持非中国大陆地区用户使用。"
@@ -36,15 +36,15 @@
     "premiumTips": "高级账号登录",
     "userName": "用户名",
     "nameErr": "用户名格式错误",
-    "pwFormatErr": "密码格式错误",
+    "pwdFormatErr": "密码格式错误",
     "pleaseEnt": "请输入",
-    "newPw": "新密码",
-    "pw": "密码",
-    "confirmPw": "确认密码",
+    "newPwd": "新密码",
+    "pwd": "密码",
+    "confirmPwd": "确认密码",
     "inconsistent": "您两次输入的密码不一致",
     "usernameTips": "用户名仅支持英文或数字;",
-    "pwTips": "密码必须大于等于12位，并同时包含大小写字母、数字和符号;",
-    "pwNotTips": "密码一经设置不可修改，请妥善保管设置的密码;",
+    "pwdTips": "密码必须大于等于12位，并同时包含大小写字母、数字和符号;",
+    "pwdNotTips": "密码一经设置不可修改，请妥善保管设置的密码;",
     "backupQRCode": {
       "title": "备份二维码",
       "later": "稍后备份",
@@ -66,8 +66,8 @@
     "version": "版本号:{{number}}",
     "accountManagementT": "账号管理",
     "generalSettings": {
-      "infrom": "系统通知",
-      "infromTip": "账号相关交易通知，包括充值、提现、APP内交易",
+      "inform": "系统通知",
+      "informTip": "账号相关交易通知，包括充值、提现、APP内交易",
       "currencyUnit": "货币单位",
       "networkManagement": "网络管理"
     }

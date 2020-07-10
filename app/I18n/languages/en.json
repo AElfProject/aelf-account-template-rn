@@ -15,15 +15,15 @@
   "setFail": "Set Fail",
   "later": "Later",
   "saveSuc": "Saved Success",
-  "pwErr": "password is incorrect",
-  "pleasePayPw": "Please enter the payment password",
-  "pleasePw": "Please enter the password of the account {{account}}",
-  "accountPwErr": "The account password is incorrect, please re-enter",
-  "setPw": {
+  "pwdErr": "password is incorrect",
+  "pleasePayPwd": "Please enter the payment password",
+  "pleasePwd": "Please enter the password of the account {{account}}",
+  "accountPwdErr": "The account password is incorrect, please re-enter",
+  "setPwd": {
     "title": "Set Payment Password",
-    "setPw1": "Please set transaction password for payment",
-    "setPw2": "Please fill in again to confirm",
-    "pwInconsistent": "The passwords you entered are different"
+    "setPwd1": "Please set transaction password for payment",
+    "setPwd2": "Please fill in again to confirm",
+    "pwdInconsistent": "The passwords you entered are different"
   },
   "alert": {
     "locationTips": "Your current location has not passed the permission authentication, and the application cannot be used normally; the application is only supported by users in non-Mainland China."
@@ -36,15 +36,15 @@
     "premiumTips": "Premium account login",
     "userName": "User Name",
     "nameErr": "User name format error",
-    "pwFormatErr": "Password format error",
+    "pwdFormatErr": "Password format error",
     "pleaseEnt": "Please enter",
-    "newPw": "New Password",
-    "pw": "Password",
-    "confirmPw": "Confirm Password",
+    "newPwd": "New Password",
+    "pwd": "Password",
+    "confirmPwd": "Confirm Password",
     "inconsistent": "The password you entered twice is inconsistent",
     "usernameTips": "The characters in the username can only be letters or numbers;",
-    "pwTips": "The password must be greater than or equal to 12 digits, and contain both uppercase letters, lowercase letters, numbers, and characters;",
-    "pwNotTips": "Once the password is set, it cannot be modified, please keep the set password properly;",
+    "pwdTips": "The password must be greater than or equal to 12 digits, and contain both uppercase letters, lowercase letters, numbers, and characters;",
+    "pwdNotTips": "Once the password is set, it cannot be modified, please keep the set password properly;",
     "backupQRCode": {
       "title": "QR Code",
       "later": "Back later",
@@ -66,8 +66,8 @@
     "version": "Version Numbe:{{number}}",
     "accountManagementT": "Account Management",
     "generalSettings": {
-      "infrom": "System Notification",
-      "infromTip": "Account-related transaction notifications, including deposit, withdrawal, and in-app transactions",
+      "inform": "System Notification",
+      "informTip": "Account-related transaction notifications, including deposit, withdrawal, and in-app transactions",
       "currencyUnit": "Currency Unit",
       "networkManagement": "Network Management"
     }

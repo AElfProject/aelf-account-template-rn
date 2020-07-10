@@ -16,7 +16,7 @@ import i18n from 'i18n-js';
 import {touchAuth} from '../../../../utils/pages';
 import {useDispatch} from 'react-redux';
 import settingsActions from '../../../../redux/settingsRedux';
-const SetTransactionPw = () => {
+const SetTransactionPwd = () => {
   const dispatch = useDispatch();
   const changePayPw = useCallback(
     payPw => dispatch(settingsActions.changePayPw(payPw)),
@@ -27,7 +27,7 @@ const SetTransactionPw = () => {
     [dispatch],
   );
   const [state, setState] = useSetState({
-    tip: i18n.t('setPw.setPw1'),
+    tip: i18n.t('setPwd.setPwd1'),
     type: 'transactionPw',
     transactionPw: '',
     transactionPwConfirm: '',
@@ -41,7 +41,7 @@ const SetTransactionPw = () => {
           if (text.length === 6) {
             setState({
               type: 'transactionPwConfirm',
-              tip: i18n.t('setPw.setPw2'),
+              tip: i18n.t('setPwd.setPwd2'),
             });
           }
           break;
@@ -51,7 +51,7 @@ const SetTransactionPw = () => {
             changePayPw(text);
             setToken();
           } else if (text.length === 6 && text !== transactionPw) {
-            CommonToast.fail(i18n.t('setPw.pwInconsistent'));
+            CommonToast.fail(i18n.t('setPwd.pwdInconsistent'));
           }
           break;
       }
@@ -107,7 +107,7 @@ const SetTransactionPw = () => {
   }, [navigate]);
   return (
     <View style={GStyle.container}>
-      <CommonHeader title={i18n.t('setPw.title')} canBack />
+      <CommonHeader title={i18n.t('setPwd.title')} canBack />
       <View style={styles.box}>
         <TextM style={{color: Colors.primaryColor}}>{tip}</TextM>
         <Password
@@ -120,7 +120,7 @@ const SetTransactionPw = () => {
     </View>
   );
 };
-export default memo(SetTransactionPw);
+export default memo(SetTransactionPwd);
 const styles = StyleSheet.create({
   box: {
     justifyContent: 'center',

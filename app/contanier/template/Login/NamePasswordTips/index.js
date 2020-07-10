@@ -11,10 +11,10 @@ const NamePasswordTips = () => {
         *{i18n.t('login.usernameTips')}
       </TextS>
       <TextS style={{color: Colors.fontGray, marginTop: pTd(20)}}>
-        *{i18n.t('login.pwTips')}
+        *{i18n.t('login.pwdTips')}
       </TextS>
       <TextS style={{color: Colors.fontGray, marginTop: pTd(20)}}>
-        *{i18n.t('login.pwNotTips')}
+        *{i18n.t('login.pwdNotTips')}
       </TextS>
     </View>
   );

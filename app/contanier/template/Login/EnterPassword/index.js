@@ -14,20 +14,20 @@ import {useSetState} from '../../../../utils/pages/hooks';
 import {PASSWORD_REG} from '../../../../config';
 import navigationService from '../../../../utils/common/navigationService';
 const EnterPassword = props => {
-  const [state, setState] = useSetState({pw: '', pwRule: false});
+  const [state, setState] = useSetState({pwd: '', pwdRule: false});
   const {params} = props.route;
-  const pwBlur = useCallback(() => {
-    const {pw} = state;
-    if (!PASSWORD_REG.test(pw)) {
-      setState({pwRule: true});
+  const pwdBlur = useCallback(() => {
+    const {pwd} = state;
+    if (!PASSWORD_REG.test(pwd)) {
+      setState({pwdRule: true});
     } else {
-      setState({pwRule: false});
+      setState({pwdRule: false});
     }
   }, [setState, state]);
   const login = useCallback(() => {
-    navigationService.navigate('SetTransactionPw');
+    navigationService.navigate('SetTransactionPwd');
   }, []);
-  const {pwRule} = state;
+  const {pwdRule} = state;
   if (!params) {
     return null;
   }
@@ -45,13 +45,13 @@ const EnterPassword = props => {
           secureTextEntry={true}
           leftTitleBox={styles.leftTitleBox}
           leftTextStyle={styles.leftTextStyle}
-          leftTitle={i18n.t('login.pw')}
-          onBlur={pwBlur}
-          onChangeText={pw => setState({pw})}
+          leftTitle={i18n.t('login.pwd')}
+          onBlur={pwdBlur}
+          onChangeText={pwd => setState({pwd})}
           placeholder={i18n.t('login.pleaseEnt')}
         />
-        {pwRule && (
-          <TextM style={GStyle.pwTip}>{i18n.t('login.pwFormatErr')}</TextM>
+        {pwdRule && (
+          <TextM style={GStyle.pwdTip}>{i18n.t('login.pwdFormatErr')}</TextM>
         )}
         <CommonButton
           onPress={login}

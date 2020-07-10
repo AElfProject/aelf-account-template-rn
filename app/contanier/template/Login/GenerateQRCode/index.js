@@ -19,7 +19,7 @@ const GenerateQRCode = () => {
         title={i18n.t('login.backupQRCode.title')}
         canBack
         rightTitle={i18n.t('login.backupQRCode.later')}
-        rightOnPress={() => navigationService.navigate('SetTransactionPw')}
+        rightOnPress={() => navigationService.navigate('SetTransactionPwd')}
       />
       <View ref={viewShot} style={styles.shotView}>
         <MyQRCode />

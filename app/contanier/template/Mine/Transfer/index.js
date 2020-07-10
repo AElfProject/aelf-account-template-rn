@@ -23,24 +23,18 @@ const Transfer = props => {
     }, [params, setState]),
   );
   const {address} = state;
-  const scanResult = useCallback(
-    result => {
-      setState({address: result});
-    },
-    [setState],
-  );
   const rightElement = useMemo(() => {
     return (
       <AntDesign
         onPress={() =>
-          navigationService.navigate('QRCodeScan', {scanResult: scanResult})
+          navigationService.navigate('QRCodeScan', {scanResult: true})
         }
         name="scan1"
         size={25}
         color={Colors.fontColor}
       />
     );
-  }, [scanResult]);
+  }, []);
   return (
     <Touchable
       activeOpacity={1}
@@ -60,14 +54,13 @@ const Transfer = props => {
         <TextL>转账金额</TextL>
         <Input
           style={styles.inputStyle}
-          onChangeText={value => setState({address: value})}
+          // onChangeText={value => setState({address: value})}
           placeholder={i18n.t('login.pleaseEnt')}
         />
         <Input
           leftTitle="备注"
-          style={styles.inputStyle}
-          onChangeText={value => setState({address: value})}
-          placeholder={'（选填）'}
+          // onChangeText={value => setState({address: value})}
+          placeholder={'(选填)'}
         />
       </View>
       <View style={styles.amountBox}>
