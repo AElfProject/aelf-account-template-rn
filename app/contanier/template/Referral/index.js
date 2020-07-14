@@ -10,6 +10,7 @@ import {launchScreen} from '../../../assets/images';
 import settingsActions, {settingsSelectors} from '../../../redux/settingsRedux';
 import navigationService from '../../../utils/common/navigationService';
 import {Colors} from '../../../assets/theme';
+import {userSelectors} from '../../../redux/userRedux';
 
 const style = {
   flex: 1,
@@ -20,6 +21,7 @@ const style = {
 };
 const time = 2000;
 const Referral = () => {
+  const userInfo = useSelector(userSelectors.getUserInfo, shallowEqual);
   const dispatch = useDispatch();
   const changeLanguage = useCallback(
     language => dispatch(settingsActions.changeLanguage(language)),
@@ -27,6 +29,7 @@ const Referral = () => {
   );
   const language = useSelector(settingsSelectors.getLanguage, shallowEqual);
   useEffect(() => {
+    const {address} = userInfo;
     SplashScreen.hide();
     if (language) {
       if (languageList.includes(language)) {
@@ -48,9 +51,13 @@ const Referral = () => {
       }
     }
     setTimeout(() => {
-      navigationService.reset('Entrance');
+      if (address) {
+        navigationService.reset('Tab');
+      } else {
+        navigationService.reset('Entrance');
+      }
     }, time);
-  }, [changeLanguage, language]);
+  }, [changeLanguage, language, userInfo]);
   return (
     <ImageBackground style={style} source={launchScreen}>
       <Spinner type={'Circle'} color={Colors.primaryColor} size={60} />

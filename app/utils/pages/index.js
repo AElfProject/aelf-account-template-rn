@@ -2,10 +2,12 @@ import {Platform, PermissionsAndroid, Linking} from 'react-native';
 import {download, saveFilePath} from './utilFs';
 import {captureRef} from 'react-native-view-shot';
 import CameraRoll from '@react-native-community/cameraroll';
+import Clipboard from '@react-native-community/clipboard';
 import {CommonToast, ActionSheet} from '../../components/template';
 import i18n from 'i18n-js';
 import * as LocalAuthentication from 'expo-local-authentication';
 import {isIos} from '../../utils/common/device';
+import * as ImagePicker from 'expo-image-picker';
 module.exports.sleep = time => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -24,14 +26,18 @@ const isNumber = val => {
   }
 };
 //Save pictures to album
-const saveImagesToAlbum = FilePath => {
-  CameraRoll.save(FilePath, {type: 'photo'})
-    .then(() => {
-      CommonToast.success(i18n.t('saveSuc'));
-    })
-    .catch(() => {
-      CommonToast.fail(i18n.t('fail'));
-    });
+const saveImagesToAlbum = async FilePath => {
+  return new Promise((resolve, reject) => {
+    CameraRoll.save(FilePath, {type: 'photo'})
+      .then(() => {
+        resolve(true);
+        CommonToast.success(i18n.t('saveSuc'));
+      })
+      .catch(err => {
+        reject(err);
+        CommonToast.fail(i18n.t('fail'));
+      });
+  });
 };
 //Check before saving pictures to album
 const checkImageToAlbum = async url => {
@@ -48,11 +54,11 @@ const checkImageToAlbum = async url => {
       ) {
         if (typeof url === 'string' && url.includes('http')) {
           const downFilePath = saveFilePath(new Date().getTime() + '.png');
-          download(url, downFilePath).then(() => {
+          return await await download(url, downFilePath).then(async () => {
             saveImagesToAlbum('file://' + downFilePath);
           });
         } else {
-          saveImagesToAlbum('file://' + url);
+          return await saveImagesToAlbum('file://' + url);
         }
       } else {
         CommonToast.fail(i18n.t('permissionDen'));
@@ -61,21 +67,29 @@ const checkImageToAlbum = async url => {
       CommonToast.fail(i18n.t('fail'));
     }
   } else {
-    saveImagesToAlbum(url);
+    return await saveImagesToAlbum(url);
   }
 };
-const screenshots = saveView => {
-  if (saveView) {
-    captureRef(saveView, {format: 'jpg'})
-      .then(uri => {
-        if (uri) {
-          checkImageToAlbum(uri);
-        }
-      })
-      .catch(e => {
-        CommonToast.fail(i18n.t('fail'));
-      });
+const screenshots = async saveView => {
+  const {status} = await ImagePicker.requestCameraRollPermissionsAsync();
+  if (status !== 'granted') {
+    permissionDenied(i18n.t('permission.cameraRoll'));
+    return false;
   }
+  return new Promise((resolve, reject) => {
+    if (saveView) {
+      captureRef(saveView, {format: 'jpg'})
+        .then(async uri => {
+          if (uri) {
+            resolve(await checkImageToAlbum(uri));
+          }
+        })
+        .catch(e => {
+          reject();
+          CommonToast.fail(i18n.t('fail'));
+        });
+    }
+  });
 };
 /* Biometrics */
 const touchAuth = () => {
@@ -137,4 +151,28 @@ const permissionDenied = (type, use) => {
     );
   }
 };
-export {isNumber, screenshots, checkImageToAlbum, touchAuth, permissionDenied};
+/**
+ * @param {Array} list
+ * @return Array
+ */
+const removeDuplicates = list => {
+  let map = new Map();
+  Array.isArray(list) &&
+    list.forEach(item => {
+      item && map.set(item.address, item);
+    });
+  return [...map.values()];
+};
+const copyText = text => {
+  Clipboard.setString(text);
+  CommonToast.success('Copied');
+};
+export {
+  isNumber,
+  screenshots,
+  checkImageToAlbum,
+  touchAuth,
+  permissionDenied,
+  removeDuplicates,
+  copyText,
+};

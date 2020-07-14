@@ -12,6 +12,9 @@ import {TextL} from '../../../components/template/CommonText';
 import {Touchable, ListItem} from '../../../components/template';
 import navigationService from '../../../utils/common/navigationService';
 import i18n from 'i18n-js';
+import userActions, {userSelectors} from '../../../redux/userRedux';
+import config from '../../../config';
+const {tokenSymbol} = config;
 const Tool = () => {
   const language = useSelector(settingsSelectors.getLanguage, shallowEqual);
   const Element = useMemo(() => {
@@ -95,8 +98,9 @@ const Tool = () => {
   return Element;
 };
 const Mine = props => {
-  const {navigation, changeBarStyle} = props;
-  useSelector(settingsSelectors.getLanguage, shallowEqual);
+  console.log(props, '======props');
+  const {navigation, changeBarStyle, userInfo, getUserBalance} = props;
+  const {userName, balance} = userInfo;
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       changeBarStyle('light-content');
@@ -106,22 +110,31 @@ const Mine = props => {
       changeBarStyle('dark-content');
       StatusBar.setBarStyle('dark-content');
     });
+    getUserBalance();
+    const timer = setInterval(() => {
+      getUserBalance();
+    }, 10000);
     return () => {
+      timer && clearTimeout(timer);
       unsubscribe();
       blurUnsubscribe();
     };
-  }, [navigation, changeBarStyle]);
+  }, [navigation, changeBarStyle, getUserBalance]);
   return (
     <View style={GStyle.container}>
       <Touchable
         activeOpacity={1}
         onPress={() => navigationService.navigate('PersonalCenter')}
         style={styles.topBGStyles}>
-        <TextL style={styles.textTitle}>{i18n.t('mineModule.username')}:</TextL>
+        <TextL style={styles.textTitle}>
+          {i18n.t('mineModule.username')}: {userName}
+        </TextL>
         <Icon name="qrcode" size={pTd(180)} color="#fff" />
       </Touchable>
       <View style={styles.balanceBox}>
-        <TextL style={styles.textTitle}>{i18n.t('mineModule.balance')}:</TextL>
+        <TextL style={styles.textTitle}>
+          {i18n.t('mineModule.balance')}:{balance} {tokenSymbol}
+        </TextL>
       </View>
       <Tool />
     </View>
@@ -129,11 +142,14 @@ const Mine = props => {
 };
 const mapStateToProps = state => {
   return {
+    language: settingsSelectors.getLanguage(state),
     barStyle: settingsSelectors.getBarStyle(state),
+    userInfo: userSelectors.getUserInfo(state),
   };
 };
 const mapDispatchToProps = {
   changeBarStyle: settingsActions.changeBarStyle,
+  getUserBalance: userActions.getUserBalance,
 };
 export default connect(
   mapStateToProps,

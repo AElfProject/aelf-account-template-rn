@@ -9,7 +9,7 @@ import settingsActions, {
   settingsSelectors,
 } from '../../../../../redux/settingsRedux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {DEFAULT_CURRENCY} from '../../../../../config';
+import {DEFAULT_CURRENCY} from '../../../../../config/constant';
 const CurrencyUnit = () => {
   const dispatch = useDispatch();
   const changeCurrencyUnit = useCallback(

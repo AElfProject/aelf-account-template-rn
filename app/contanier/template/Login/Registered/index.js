@@ -1,4 +1,4 @@
-import React, {memo, useCallback} from 'react';
+import React, {memo, useCallback, useEffect} from 'react';
 import {
   CommonHeader,
   Touchable,
@@ -11,10 +11,11 @@ import {View, Keyboard} from 'react-native';
 import GStyle from '../../../../assets/theme/gStyle';
 import styles from './styles';
 import {TextM} from '../../../../components/template/CommonText';
-import {PASSWORD_REG, USERNAME_REG} from '../../../../config';
+import {PASSWORD_REG, USERNAME_REG} from '../../../../config/constant';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import navigationService from '../../../../utils/common/navigationService';
 import NamePasswordTips from '../NamePasswordTips';
+import AElf from 'aelf-sdk';
 const Registered = () => {
   const [state, setState] = useSetState({
     userName: '',
@@ -24,6 +25,7 @@ const Registered = () => {
     userNameRule: false,
     pwdRule: false,
     pwdConfirmRule: false,
+    newWallet: null,
   });
   const userNameBlur = useCallback(() => {
     const {userName} = state;
@@ -64,9 +66,40 @@ const Registered = () => {
 
   const registered = useCallback(() => {
     Keyboard.dismiss();
-    navigationService.navigate('GenerateQRCode');
-  }, []);
-  const {userNameRule, pwdRule, pwdConfirmRule, pwdDifferent} = state;
+    const {userName, pwd, newWallet, pwdConfirm} = state;
+    if (
+      USERNAME_REG.test(userName) &&
+      pwdConfirm === pwd &&
+      PASSWORD_REG.test(pwd)
+    ) {
+      navigationService.navigate('GenerateQRCode', {
+        userName,
+        pwd,
+        wallet: newWallet,
+      });
+    }
+  }, [state]);
+  const generateKeystore = useCallback(async () => {
+    let newWallet;
+    try {
+      newWallet = AElf.wallet.createNewWallet();
+    } catch (error) {
+      console.error(error);
+    }
+    setState({newWallet});
+  }, [setState]);
+  useEffect(() => {
+    generateKeystore();
+  }, [generateKeystore]);
+  const {
+    userNameRule,
+    pwdRule,
+    pwdConfirmRule,
+    pwdDifferent,
+    userName,
+    pwdConfirm,
+    pwd,
+  } = state;
   return (
     <View style={GStyle.container}>
       <CommonHeader title={i18n.t('login.register')} canBack />
@@ -83,7 +116,7 @@ const Registered = () => {
             leftTextStyle={styles.leftTextStyle}
             leftTitle={i18n.t('login.userName')}
             onBlur={userNameBlur}
-            onChangeText={userName => setState({userName})}
+            onChangeText={value => setState({userName: value})}
             placeholder={i18n.t('login.pleaseEnt')}
           />
           {userNameRule && (
@@ -95,7 +128,7 @@ const Registered = () => {
             leftTextStyle={styles.leftTextStyle}
             leftTitle={i18n.t('login.newPwd')}
             onBlur={pwdBlur}
-            onChangeText={pwd => setState({pwd})}
+            onChangeText={value => setState({pwd: value})}
             placeholder={i18n.t('login.pleaseEnt')}
           />
           {pwdRule && (
@@ -107,7 +140,7 @@ const Registered = () => {
             leftTextStyle={styles.leftTextStyle}
             leftTitle={i18n.t('login.confirmPwd')}
             onBlur={pwdComfirmBlur}
-            onChangeText={pwdConfirm => setState({pwdConfirm})}
+            onChangeText={value => setState({pwdConfirm: value})}
             placeholder={i18n.t('login.pleaseEnt')}
           />
           {pwdConfirmRule && (
@@ -118,7 +151,11 @@ const Registered = () => {
           )}
           <NamePasswordTips />
           <CommonButton
-            // disabled
+            disabled={
+              !userName ||
+              !PASSWORD_REG.test(pwdConfirm) ||
+              !PASSWORD_REG.test(pwd)
+            }
             onPress={registered}
             title={i18n.t('login.register')}
             style={styles.buttonStyles}

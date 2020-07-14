@@ -10,8 +10,12 @@ import {View} from 'react-native';
 import {TextL} from '../../../../components/template/CommonText';
 import i18n from 'i18n-js';
 import {screenshots} from '../../../../utils/pages';
+import {userSelectors} from '../../../../redux/userRedux';
+import {shallowEqual, useSelector} from 'react-redux';
 const Receive = () => {
   const viewShot = useRef();
+  const address = useSelector(userSelectors.getAddress, shallowEqual);
+
   return (
     <View style={GStyle.container}>
       <CommonHeader title={i18n.t('mineModule.collect')} canBack>
@@ -28,7 +32,7 @@ const Receive = () => {
             />
           </View>
           <View style={styles.addressBox}>
-            <TextL style={styles.addressStyles}>Address: </TextL>
+            <TextL style={styles.addressStyles}>Address:{address}</TextL>
           </View>
         </View>
       </CommonHeader>

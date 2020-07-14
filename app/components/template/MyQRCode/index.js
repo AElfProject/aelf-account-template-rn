@@ -5,6 +5,9 @@ import {aelfBlue} from '../../../assets/images';
 import {sreenWidth} from '../../../utils/common/device';
 const MyQRCode = props => {
   const {value} = props;
+  if (!value) {
+    return null;
+  }
   return (
     <QRCode
       logo={aelfBlue}

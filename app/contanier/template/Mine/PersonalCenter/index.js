@@ -14,8 +14,14 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import i18n from 'i18n-js';
 import {screenshots} from '../../../../utils/pages';
 import navigationService from '../../../../utils/common/navigationService';
+import {userSelectors} from '../../../../redux/userRedux';
+import {shallowEqual, useSelector} from 'react-redux';
 const PersonalCenter = () => {
   const viewShot = useRef();
+  const {address, userName} = useSelector(
+    userSelectors.getUserInfo,
+    shallowEqual,
+  );
   return (
     <View style={GStyle.secondContainer}>
       <CommonHeader title="个人中心" canBack>
@@ -25,7 +31,7 @@ const PersonalCenter = () => {
               <TextL
                 onPress={() => navigationService.navigate('EditUserName')}
                 style={styles.userNameStyle}>
-                用户名
+                {i18n.t('mineModule.username')}:{userName}{' '}
                 <FontAwesome name="edit" color={Colors.primaryColor} />
               </TextL>
               <MyQRCode />
@@ -36,7 +42,7 @@ const PersonalCenter = () => {
               onPress={() => screenshots(viewShot)}
             />
             <View style={styles.addressBox}>
-              <TextL style={styles.addressStyles}>Address: </TextL>
+              <TextL style={styles.addressStyles}>Address:{address}</TextL>
               <TextM style={styles.addressTips}>
                 此二维码是您的账号，丢失二维码等同于丢失账号，您的资产将无法找回，请务必妥善保管您的二维码账号
               </TextM>

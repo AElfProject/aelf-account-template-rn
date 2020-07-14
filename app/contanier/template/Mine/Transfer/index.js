@@ -1,19 +1,41 @@
-import React, {memo, useMemo, useCallback} from 'react';
+import React, {memo, useMemo, useCallback, useRef} from 'react';
 import {View, StyleSheet, Keyboard} from 'react-native';
 import {GStyle, Colors} from '../../../../assets/theme';
-import {CommonHeader, Input, Touchable} from '../../../../components/template';
+import {
+  CommonHeader,
+  Input,
+  Touchable,
+  CommonButton,
+  CommonToast,
+  Loading,
+} from '../../../../components/template';
 import i18n from 'i18n-js';
-import {TextL} from '../../../../components/template/CommonText';
+import {TextL, TextM} from '../../../../components/template/CommonText';
 import {pTd} from '../../../../utils/common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import navigationService from '../../../../utils/common/navigationService';
 import {useSetState} from '../../../../utils/pages/hooks';
 import {useFocusEffect} from '@react-navigation/native';
+import {useSelector, shallowEqual, useDispatch} from 'react-redux';
+import {userSelectors} from '../../../../redux/userRedux';
+import config from '../../../../config';
+import userActions from '../../../../redux/userRedux';
+import TransactionVerification from '../../../../utils/pages/TransactionVerification';
+import unitConverter from '../../../../utils/pages/unitConverter';
+const {tokenSymbol} = config;
 const Transfer = props => {
+  const input = useRef();
   const {params} = props.route || {};
   const [state, setState] = useSetState({
     address: '',
+    amount: '',
   });
+  const dispatch = useDispatch();
+  const userInfo = useSelector(userSelectors.getUserInfo, shallowEqual);
+  const transfer = useCallback(value => dispatch(userActions.transfer(value)), [
+    dispatch,
+  ]);
+  const {balance} = userInfo;
   useFocusEffect(
     useCallback(() => {
       const {address} = params || {};
@@ -22,7 +44,7 @@ const Transfer = props => {
       }
     }, [params, setState]),
   );
-  const {address} = state;
+  const {address, amount} = state;
   const rightElement = useMemo(() => {
     return (
       <AntDesign
@@ -35,6 +57,35 @@ const Transfer = props => {
       />
     );
   }, []);
+  const onTransfer = useCallback(() => {
+    if (amount && address) {
+      TransactionVerification.show(value => {
+        if (value) {
+          Loading.show();
+          transfer({
+            symbol: tokenSymbol,
+            to: address,
+            amount: unitConverter.toHigher(amount),
+            memo: input.current,
+          });
+        }
+      });
+    } else {
+      CommonToast.text('请输入金额/地址');
+    }
+  }, [address, amount, transfer]);
+  const onChangeAmount = useCallback(
+    value => {
+      value = value.match(/\d/g, '') ? value.match(/\d/g, '').join('') : '';
+      if (value > balance) {
+        CommonToast.text(`当前可用余额为${balance} ${tokenSymbol}`);
+        setState({amount: String(balance)});
+      } else {
+        setState({amount: value});
+      }
+    },
+    [balance, setState],
+  );
   return (
     <Touchable
       activeOpacity={1}
@@ -51,21 +102,33 @@ const Transfer = props => {
         />
       </View>
       <View style={styles.amountBox}>
-        <TextL>转账金额</TextL>
+        <View style={styles.rowBox}>
+          <TextL>转账金额</TextL>
+          <TextM style={styles.colorStyle}>
+            授权余额:{balance} {tokenSymbol}
+          </TextM>
+        </View>
         <Input
+          value={amount}
           style={styles.inputStyle}
-          // onChangeText={value => setState({address: value})}
+          onChangeText={onChangeAmount}
           placeholder={i18n.t('login.pleaseEnt')}
         />
         <Input
           leftTitle="备注"
-          // onChangeText={value => setState({address: value})}
+          onChangeText={value => (input.current = value)}
           placeholder={'(选填)'}
         />
       </View>
-      <View style={styles.amountBox}>
+      <View style={[styles.amountBox, styles.rowBox]}>
         <TextL>矿工费</TextL>
+        <TextM style={styles.colorStyle}>≈ 0.27 {tokenSymbol}</TextM>
       </View>
+      <CommonButton
+        onPress={onTransfer}
+        style={styles.buttonBox}
+        title={i18n.t('mineModule.transfer')}
+      />
     </Touchable>
   );
 };
@@ -83,5 +146,16 @@ const styles = StyleSheet.create({
   },
   inputStyle: {
     paddingHorizontal: 0,
+  },
+  rowBox: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  colorStyle: {
+    color: Colors.fontColor,
+  },
+  buttonBox: {
+    marginTop: pTd(200),
   },
 });

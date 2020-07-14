@@ -16,7 +16,6 @@ import {localLanguage} from '../../../i18n/config';
 import {createSelector} from 'reselect';
 import {ScrollView} from 'react-native';
 import settingsActions, {settingsSelectors} from '../../../redux/settingsRedux';
-import usersActions, {userSelectors} from '../../../redux/userRedux';
 import {connect} from 'react-redux';
 const selector = createSelector(
   [state => state.user, state => state.settings],
@@ -28,10 +27,6 @@ const selector = createSelector(
 const Home = props => {
   //示例，我们可以像下面这样使用redux
   const dispatch = useDispatch();
-
-  const setTest = useCallback(test => dispatch(usersActions.setTest(test)), [
-    dispatch,
-  ]);
 
   const changeLanguage = useCallback(
     language => dispatch(settingsActions.changeLanguage(language)),
@@ -135,11 +130,6 @@ const Home = props => {
         />
         <TextL>持久化存储:{test}</TextL>
         <CommonButton
-          title="Modify Redux"
-          onPress={() => setTest(test + 'biu ')}
-        />
-        <CommonButton title="Clear Redux" onPress={() => setTest('')} />
-        <CommonButton
           title={i18n.t('switchLanguage')}
           onPress={() => {
             ActionSheet.show(items, {title: i18n.t('cancel')});
@@ -176,12 +166,10 @@ const Home = props => {
 const mapStateToProps = state => {
   return {
     language: settingsSelectors.getLanguage(state),
-    test: userSelectors.getTest(state),
   };
 };
 const mapDispatchToProps = {
   changeLanguage: settingsActions.changeLanguage,
-  setTest: usersActions.setTest,
 };
 export default connect(
   mapStateToProps,

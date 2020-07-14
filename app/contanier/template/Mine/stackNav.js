@@ -3,6 +3,7 @@ import EditUserName from './PersonalCenter/EditUserName';
 
 import Receive from './Receive';
 import Transfer from './Transfer';
+import TransactionDetails from './Transfer/TransactionDetails';
 
 import SecurityCenter from './SecurityCenter';
 import PaymentSettings from './SecurityCenter/PaymentSettings';
@@ -25,6 +26,7 @@ const stackNav = [
 
   {name: 'Receive', component: Receive},
   {name: 'Transfer', component: Transfer},
+  {name: 'TransactionDetails', component: TransactionDetails},
 
   {name: 'SecurityCenter', component: SecurityCenter},
   {name: 'PaymentSettings', component: PaymentSettings},

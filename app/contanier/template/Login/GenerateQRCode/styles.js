@@ -1,9 +1,10 @@
 import {StyleSheet} from 'react-native';
 import {Colors} from '../../../../assets/theme';
+import {pTd} from '../../../../utils/common';
 
 const styles = StyleSheet.create({
   shotView: {
-    padding: 10,
+    padding: pTd(30),
     backgroundColor: 'white',
     alignItems: 'center',
     alignSelf: 'center',
@@ -14,6 +15,27 @@ const styles = StyleSheet.create({
   },
   rightBox: {
     padding: 5,
+  },
+  account: {
+    color: Colors.fontColor,
+  },
+  address: {
+    fontSize: pTd(30),
+    marginTop: pTd(50),
+  },
+  nameBox: {
+    paddingHorizontal: pTd(30),
+    paddingVertical: pTd(50),
+    paddingBottom: pTd(30),
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
+  buttonBox: {
+    marginTop: pTd(100),
+  },
+  tips: {
+    marginTop: pTd(50),
+    paddingHorizontal: pTd(50),
   },
 });
 export default styles;

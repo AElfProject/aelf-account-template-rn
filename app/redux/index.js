@@ -1,26 +1,32 @@
-import {combineReducers, createStore} from 'redux';
+import {combineReducers, createStore, applyMiddleware} from 'redux';
 import {persistReducer, persistStore} from 'redux-persist';
 import reduxPersist from '../utils/common/reduxPersist';
+import createSagaMiddleware from 'redux-saga';
+import sagas from '../sagas';
 export const reducers = combineReducers({
   user: require('./userRedux').reducer,
   settings: require('./settingsRedux').reducer,
+  contracts: require('./contractsRedux').reducer,
 });
+let finalReducers = reducers;
+// If rehydration is on use persistReducer otherwise default combineReducers
+if (reduxPersist.active) {
+  const {storeConfig} = reduxPersist;
+  finalReducers = persistReducer(storeConfig, reducers);
+}
+// const store = createStore(finalReducers);
 
-export default () => {
-  let finalReducers = reducers;
-  // If rehydration is on use persistReducer otherwise default combineReducers
-  if (reduxPersist.active) {
-    const {storeConfig} = reduxPersist;
-    finalReducers = persistReducer(storeConfig, reducers);
-  }
-  const store = createStore(finalReducers);
-  if (module.hot) {
-    module.hot.accept(() => {
-      const nextRootReducer = require('./').reducers;
-      store.replaceReducer(nextRootReducer);
-    });
-  }
-  const persistor = persistStore(store);
+//saga
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(finalReducers, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(sagas);
 
-  return {store, persistor};
-};
+if (module.hot) {
+  module.hot.accept(() => {
+    const nextRootReducer = require('./').reducers;
+    store.replaceReducer(nextRootReducer);
+  });
+}
+const persistor = persistStore(store);
+
+export {store, persistor};

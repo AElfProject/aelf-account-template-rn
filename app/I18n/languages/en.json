@@ -74,6 +74,7 @@
   },
   "permission": {
     "camera": "相机",
+    "cameraRoll": "相册读写权限",
     "denied": "权限被拒绝",
     "iosDeniedDetails": "请允许我们访问您的{{type}}权限",
     "openSettings": "打开设置",

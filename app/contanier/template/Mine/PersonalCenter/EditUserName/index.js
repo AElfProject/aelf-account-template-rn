@@ -9,7 +9,7 @@ import {
 import styles from './styles';
 import {TextL} from '../../../../../components/template/CommonText';
 import i18n from 'i18n-js';
-import {USERNAME_REG} from '../../../../../config';
+import {USERNAME_REG} from '../../../../../config/constant';
 import {GStyle} from '../../../../../assets/theme';
 const EditUserName = () => {
   const [name, setName] = useState('');

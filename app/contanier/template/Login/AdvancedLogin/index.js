@@ -12,7 +12,7 @@ import NamePasswordTips from '../NamePasswordTips';
 import styles, {tabActiveColor} from './styles';
 import i18n from 'i18n-js';
 import {useSetState} from '../../../../utils/pages/hooks';
-import {PASSWORD_REG, USERNAME_REG} from '../../../../config';
+import {PASSWORD_REG, USERNAME_REG} from '../../../../config/constant';
 import {TextM} from '../../../../components/template/CommonText';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import navigationService from '../../../../utils/common/navigationService';

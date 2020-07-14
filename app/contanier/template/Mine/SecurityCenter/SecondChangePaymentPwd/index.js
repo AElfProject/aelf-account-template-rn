@@ -18,7 +18,7 @@ import settingsActions, {
 } from '../../../../../redux/settingsRedux';
 import i18n from 'i18n-js';
 import {useDispatch, useSelector, shallowEqual} from 'react-redux';
-import {PASSWORD_REG} from '../../../../../config';
+import {PASSWORD_REG} from '../../../../../config/constant';
 const SecondChangePaymentPwd = props => {
   const {remember} = props.route.params || {};
   const dispatch = useDispatch();

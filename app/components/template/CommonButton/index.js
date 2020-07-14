@@ -1,6 +1,6 @@
 'use strict';
 import React, {memo} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Touchable from '../Touchable';
 import {TextL} from '../CommonText';
 import {Colors} from '../../../assets/theme';
@@ -10,12 +10,13 @@ const CommonButton = props => {
   const {title, onPress, style, textStyle, disabled, loading} = props;
   if (loading) {
     return (
-      <Spinner
-        style={[styles.spinnerStyle, style]}
-        type={'ChasingDots'}
-        color={Colors.primaryColor}
-        size={pTd(80)}
-      />
+      <View style={styles.spinnerBox}>
+        <Spinner
+          type={'ChasingDots'}
+          color={Colors.primaryColor}
+          size={pTd(80)}
+        />
+      </View>
     );
   }
   return (
@@ -52,6 +53,12 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   spinnerStyle: {
+    alignSelf: 'center',
+  },
+  spinnerBox: {
+    justifyContent: 'center',
+    height: pTd(90),
+    alignItems: 'center',
     alignSelf: 'center',
   },
 });

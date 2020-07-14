@@ -5,47 +5,103 @@ import {
   CommonHeader,
   ListItem,
   ActionSheet,
+  VerifyPassword,
 } from '../../../../components/template';
 import navigationService from '../../../../utils/common/navigationService';
 import i18n from 'i18n-js';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {pTd} from '../../../../utils/common';
+import userActions, {userSelectors} from '../../../../redux/userRedux';
+import {useSelector, shallowEqual, useDispatch} from 'react-redux';
 const AccountManagement = () => {
+  const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   const rightElement = useMemo(
     () => <FontAwesome name="check" size={20} color={Colors.fontColor} />,
     [],
   );
-  const onDeletePress = useCallback(item => {
-    ActionSheet.alert(
-      '删除当前账号',
-      '删除账号将删除账号所有数据，请务必确保账号已备份，否则删除后无法找回账号',
-      [{title: '取消', type: 'cancel'}, {title: '确定'}],
-    );
-  }, []);
-  const logOut = () => {
-    ActionSheet.alert(
-      '退出当前账号',
-      '退出账号将删除账号所有数据，请务必确保账号已备份，否则退出后无法找回账号',
-      [
-        {title: '取消', type: 'cancel'},
-        {title: '确定', onPress: () => navigationService.reset('Entrance')},
-      ],
-    );
-  };
+  const deleteUser = useCallback(
+    address => dispatch(userActions.deleteUser(address)),
+    [dispatch],
+  );
+  const logOut = useCallback(address => dispatch(userActions.logOut(address)), [
+    dispatch,
+  ]);
+  const userInfo = useSelector(userSelectors.getUserInfo, shallowEqual);
+  const onDeletePress = useCallback(
+    item => {
+      const {address} = userInfo;
+      const current = item.details === address;
+      if (current) {
+        ActionSheet.alert('请退出当前账号或切换账号', null, [{title: '确定'}]);
+      } else {
+        ActionSheet.alert(
+          '删除当前账号',
+          '删除账号将删除账号所有数据，请务必确保账号已备份，否则删除后无法找回账号',
+          [
+            {title: '取消', type: 'cancel'},
+            {
+              title: '删除',
+              onPress: () => {
+                VerifyPassword.passwordShow(item.keystore, value => {
+                  if (value) {
+                    deleteUser(item.address);
+                  }
+                });
+              },
+            },
+          ],
+        );
+      }
+    },
+    [deleteUser, userInfo],
+  );
+  const dropOut = useCallback(() => {
+    const {saveQRCode, address, keystore} = userInfo;
+    if (saveQRCode) {
+      ActionSheet.alert(
+        '退出当前账号',
+        '退出账号将删除账号所有数据，请务必确保账号已备份，否则退出后无法找回账号',
+        [
+          {title: '取消', type: 'cancel'},
+          {
+            title: '确定',
+            onPress: () => {
+              VerifyPassword.passwordShow(keystore, value => {
+                if (value) {
+                  logOut(address);
+                }
+              });
+            },
+          },
+        ],
+      );
+    } else {
+      ActionSheet.alert(
+        '安全提醒',
+        '您的二维码账号未备份，请务必备份。\n二维码账号和对应密码用于登录应用，需备份以防止应用删除、账号登出、手机丢失等情况导致资产损失。',
+        [
+          {title: '取消', type: 'cancel'},
+          {
+            title: '确定',
+            onPress: () => navigationService.reset('PersonalCenter'),
+          },
+        ],
+      );
+    }
+  }, [logOut, userInfo]);
   const AccountComponents = useMemo(() => {
-    const accountList = [
-      {
-        title: 'User Name 1',
-        details: 'ELF_CnVL7BcRcaYGVovoiz4eiv4ZZFyJR7vjBmqgcZqgmicVXKKpx_AELF',
-      },
-      {
-        title: 'User Name 2',
-        details: 'ELF_CnVL7BcRcaYGVovoiz4eiv4ZZFyJR7vjBmqgcZqgmicVXKKpx_AELF',
-      },
-    ];
+    const {userList, address} = userInfo;
+    const accountList = Array.isArray(userList)
+      ? userList.map(item => ({
+          ...item,
+          title: item.userName,
+          details: item.address,
+        }))
+      : [];
     return accountList.map((item, index) => {
+      const current = item.details === address;
       return (
         <View
           key={index}
@@ -65,13 +121,13 @@ const AccountManagement = () => {
           <ListItem
             style={styles.itemBox}
             detailsStyle={styles.detailsStyle}
-            rightElement={rightElement}
+            rightElement={current ? rightElement : null}
             {...item}
           />
         </View>
       );
     });
-  }, [edit, onDeletePress, rightElement]);
+  }, [edit, onDeletePress, rightElement, userInfo]);
   const Components = useMemo(() => {
     return (
       <View style={GStyle.secondContainer}>
@@ -82,21 +138,21 @@ const AccountManagement = () => {
           rightOnPress={() => {
             LayoutAnimation.easeInEaseOut();
             setEdit(!edit);
-          }}
-        />
-        <View style={styles.container}>
-          {AccountComponents}
-          <ListItem
-            onPress={() =>
-              navigationService.navigate('Entrance', {addAccount: true})
-            }
-            title="添加账号"
-          />
-          <ListItem title="退出当前账号" onPress={logOut} />
-        </View>
+          }}>
+          <View style={styles.container}>
+            {AccountComponents}
+            <ListItem
+              onPress={() =>
+                navigationService.navigate('Entrance', {addAccount: true})
+              }
+              title="添加账号"
+            />
+            <ListItem title="退出当前账号" onPress={dropOut} />
+          </View>
+        </CommonHeader>
       </View>
     );
-  }, [AccountComponents, edit]);
+  }, [AccountComponents, dropOut, edit]);
   return Components;
 };
 

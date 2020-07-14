@@ -14,6 +14,7 @@ import {useSelector, shallowEqual} from 'react-redux';
 import i18n from 'i18n-js';
 import {isIos} from '../../../utils/common/device';
 import Input from '../Input';
+import alef from '../../../utils/pages/aelf';
 const BottomView = props => {
   const {cancel, determine} = props;
   const Components = useMemo(
@@ -36,9 +37,15 @@ const PayComponents = props => {
   const payPw = useSelector(settingsSelectors.getPayPw, shallowEqual);
   const {callBack} = props;
   const intervalRef = useRef();
-  const onChange = useCallback(value => {
-    intervalRef.current = value;
-  }, []);
+  const onChange = useCallback(
+    value => {
+      intervalRef.current = value;
+      if (value.length === 6) {
+        determine();
+      }
+    },
+    [determine],
+  );
 
   const determine = useCallback(() => {
     if (payPw === intervalRef.current) {
@@ -73,15 +80,21 @@ const PayComponents = props => {
 };
 const PasswordComponents = props => {
   const [pwTip, setPwTip] = useState(false);
-  const {callBack} = props;
+  const {callBack, keystore} = props;
   const intervalRef = useRef();
   const onChange = useCallback(value => {
     intervalRef.current = value;
   }, []);
 
   const determine = useCallback(() => {
-    setPwTip(true);
-  }, []);
+    const checkResult = alef.checkPassword(keystore, intervalRef.current);
+    if (checkResult) {
+      callBack && callBack(true);
+      OverlayModal.hide();
+    } else {
+      setPwTip(true);
+    }
+  }, [callBack, keystore]);
 
   const cancel = useCallback(() => {
     callBack && callBack(false);
@@ -118,12 +131,15 @@ const payShow = callBack => {
     containerStyle: styles.containerStyle,
   });
 };
-const passwordShow = callBack => {
-  OverlayModal.show(<PasswordComponents callBack={callBack} />, {
-    style: styles.style,
-    modal: true,
-    containerStyle: styles.containerStyle,
-  });
+const passwordShow = (keystore, callBack) => {
+  OverlayModal.show(
+    <PasswordComponents keystore={keystore} callBack={callBack} />,
+    {
+      style: styles.style,
+      modal: true,
+      containerStyle: styles.containerStyle,
+    },
+  );
 };
 export default {
   payShow,
