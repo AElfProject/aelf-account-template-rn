@@ -96,7 +96,7 @@ const Header = props => {
           titleElement
         ) : (
           <View style={styles.titleBox}>
-            <Text style={[styles.title, titleStyle]}>{title || '详情'}</Text>
+            <Text style={[styles.title, titleStyle]}>{title || ''}</Text>
           </View>
         )}
 

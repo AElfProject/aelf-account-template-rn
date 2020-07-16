@@ -7,14 +7,18 @@ import {
 } from '../../../../components/template';
 import styles from './styles';
 import {View} from 'react-native';
-import {TextL} from '../../../../components/template/CommonText';
+import {TextL, CopyText} from '../../../../components/template/CommonText';
 import i18n from 'i18n-js';
 import {screenshots} from '../../../../utils/pages';
 import {userSelectors} from '../../../../redux/userRedux';
 import {shallowEqual, useSelector} from 'react-redux';
 const Receive = () => {
   const viewShot = useRef();
-  const address = useSelector(userSelectors.getAddress, shallowEqual);
+  const {address, keystore} = useSelector(
+    userSelectors.getUserInfo,
+    shallowEqual,
+  );
+  const QRCodeValue = keystore ? JSON.stringify(keystore) : null;
 
   return (
     <View style={GStyle.container}>
@@ -23,7 +27,7 @@ const Receive = () => {
           <View style={styles.topBox}>
             <View ref={viewShot} style={styles.shotView}>
               <TextL style={styles.userNameStyle}>扫二维码，转入Token</TextL>
-              <MyQRCode />
+              <MyQRCode value={QRCodeValue} />
             </View>
             <CommonButton
               style={styles.buttonStyle}
@@ -32,7 +36,7 @@ const Receive = () => {
             />
           </View>
           <View style={styles.addressBox}>
-            <TextL style={styles.addressStyles}>Address:{address}</TextL>
+            <CopyText copied={address}>Address:{address}</CopyText>
           </View>
         </View>
       </CommonHeader>

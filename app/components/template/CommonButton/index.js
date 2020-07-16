@@ -11,11 +11,7 @@ const CommonButton = props => {
   if (loading) {
     return (
       <View style={styles.spinnerBox}>
-        <Spinner
-          type={'ChasingDots'}
-          color={Colors.primaryColor}
-          size={pTd(80)}
-        />
+        <Spinner type={'Wave'} color={Colors.primaryColor} size={pTd(80)} />
       </View>
     );
   }
@@ -56,9 +52,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   spinnerBox: {
-    justifyContent: 'center',
-    height: pTd(90),
+    height: pTd(100),
     alignItems: 'center',
-    alignSelf: 'center',
+    flexDirection: 'column-reverse',
   },
 });

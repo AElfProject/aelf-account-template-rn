@@ -13,21 +13,18 @@ import {aelfInstance} from '../../../../../utils/common/aelfProvider';
 import {useSetState} from '../../../../../utils/pages/hooks';
 import {TextL} from '../../../../../components/template/CommonText';
 import unitConverter from '../../../../../utils/pages/unitConverter';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {userSelectors} from '../../../../../redux/userRedux';
-import {useSelector, shallowEqual} from 'react-redux';
 import Icon from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {onCopyText} from '../../../../../utils/pages';
 import aelfUtils from '../../../../../utils/pages/aelfUtils';
+import config from '../../../../../config';
+const {contractAddresses} = config;
 const NetworkManagement = props => {
   const [state, setState] = useSetState({
     result: null,
     details: null,
   });
-  const address = useSelector(userSelectors.getAddress, shallowEqual);
   const {result, details} = state;
-  console.log(state, '=====state');
   const {params} = props.route || {};
   useFocusEffect(
     useCallback(() => {
@@ -60,13 +57,16 @@ const NetworkManagement = props => {
     if (!(details && result)) {
       return null;
     }
-    const {amount, symbol, to} = details || {};
+    const {amount, symbol, spender} = details || {};
     const {Status, TransactionId, Logs} = result || {};
+    console.log(details, result);
+    const contract = contractAddresses.find(
+      item => item.contractAdress === spender,
+    );
     const free = aelfUtils.getTransactionFee(Logs || {});
     const List = [
-      {title: 'From', details: address, copy: true},
-      {title: 'To', details: aelfUtils.formatAddress(to), copy: true},
-      {title: 'Memo', details: details.memo},
+      {title: '应用名称', details: contract.name},
+      {title: '合约地址', details: spender, copy: true},
       {title: 'Status', details: Status, color: 'green'},
       {
         title: 'Transaction Id',
@@ -81,13 +81,8 @@ const NetworkManagement = props => {
     return (
       <View style={styles.container}>
         <View style={styles.amountBox}>
-          {amount > 0 ? (
-            <FontAwesome5 name="arrow-circle-up" size={30} color={'red'} />
-          ) : (
-            <FontAwesome5 name="arrow-circle-down" size={30} color={'green'} />
-          )}
           <TextL style={styles.amount}>
-            {unitConverter.toLower(amount)} {symbol}
+            授权金额{unitConverter.toLower(amount)} {symbol}
           </TextL>
         </View>
         {List.map((item, index) => {
@@ -118,7 +113,7 @@ const NetworkManagement = props => {
         })}
       </View>
     );
-  }, [details, address, result]);
+  }, [details, result]);
   const Loading = useMemo(() => {
     return (
       <View style={styles.loadingBox}>
@@ -128,7 +123,7 @@ const NetworkManagement = props => {
   }, []);
   return (
     <View style={GStyle.container}>
-      <CommonHeader title={'交易详情'} canBack>
+      <CommonHeader title={'授权详情'} canBack>
         {result && details ? Element : Loading}
       </CommonHeader>
     </View>
@@ -154,7 +149,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   amount: {
-    marginLeft: pTd(30),
+    color: Colors.fontColor,
   },
   details: {
     marginTop: pTd(10),

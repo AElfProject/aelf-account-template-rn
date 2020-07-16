@@ -6,6 +6,7 @@ import {
   ListItem,
   ActionSheet,
   VerifyPassword,
+  CommonToast,
 } from '../../../../components/template';
 import navigationService from '../../../../utils/common/navigationService';
 import i18n from 'i18n-js';
@@ -23,6 +24,10 @@ const AccountManagement = () => {
   );
   const deleteUser = useCallback(
     address => dispatch(userActions.deleteUser(address)),
+    [dispatch],
+  );
+  const onLoginSuccess = useCallback(
+    data => dispatch(userActions.onLoginSuccess(data)),
     [dispatch],
   );
   const logOut = useCallback(address => dispatch(userActions.logOut(address)), [
@@ -85,12 +90,35 @@ const AccountManagement = () => {
           {title: '取消', type: 'cancel'},
           {
             title: '确定',
-            onPress: () => navigationService.reset('PersonalCenter'),
+            onPress: () => {
+              navigationService.navigate('MinePage');
+              navigationService.navigate('PersonalCenter');
+            },
           },
         ],
       );
     }
   }, [logOut, userInfo]);
+  const onSwitchAccount = useCallback(
+    item => {
+      const {keystore, privateKey, address, userName} = item;
+      VerifyPassword.passwordShow(keystore, async value => {
+        if (value) {
+          onLoginSuccess({
+            address,
+            keystore,
+            userName,
+            balance: 0,
+            saveQRCode: true,
+            privateKey,
+          });
+          CommonToast.success('切换成功');
+          navigationService.reset('Tab');
+        }
+      });
+    },
+    [onLoginSuccess],
+  );
   const AccountComponents = useMemo(() => {
     const {userList, address} = userInfo;
     const accountList = Array.isArray(userList)
@@ -114,11 +142,13 @@ const AccountManagement = () => {
               onPress={() => onDeletePress(item)}
               name="minuscircle"
               size={20}
-              color={'red'}
+              color="red"
               style={styles.deleteStyle}
             />
           )}
           <ListItem
+            disabled={current}
+            onPress={() => onSwitchAccount(item)}
             style={styles.itemBox}
             detailsStyle={styles.detailsStyle}
             rightElement={current ? rightElement : null}
@@ -127,7 +157,7 @@ const AccountManagement = () => {
         </View>
       );
     });
-  }, [edit, onDeletePress, rightElement, userInfo]);
+  }, [edit, onDeletePress, onSwitchAccount, rightElement, userInfo]);
   const Components = useMemo(() => {
     return (
       <View style={GStyle.secondContainer}>

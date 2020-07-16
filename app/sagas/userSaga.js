@@ -15,12 +15,77 @@ import userActions, {userTypes, userSelectors} from '../redux/userRedux';
 import contractsActions from '../redux/contractsRedux';
 import config from '../config';
 import {removeDuplicates, isNumber} from '../utils/pages';
-import {appInit, aelfInstance} from '../utils/common/aelfProvider';
-import {format, formatRestore} from '../utils/common/address';
+import {getContract} from '../utils/common/aelfProvider';
 import navigationService from '../utils/common/navigationService';
-import {Loading} from '../components/template';
+import {Loading, CommonToast} from '../components/template';
 import unitConverter from '../utils/pages/unitConverter';
-const {tokenSymbol} = config;
+import aelfUtils from '../utils/pages/aelfUtils';
+import {isIos} from '../utils/common/device';
+import settingsActions from '../redux/settingsRedux';
+const {
+  tokenSymbol,
+  contractAddresses,
+  keystoreOptions,
+  contractNameAddressSets,
+} = config;
+function* onRegisteredSaga(actios) {
+  Loading.show();
+  yield delay(500);
+  const {pwd, userName, newWallet} = actios;
+  try {
+    const keystoreCustomOptions = isIos
+      ? keystoreOptions.ios
+      : keystoreOptions.android;
+    const keyStore = aelfUtils.getKeystore(
+      {
+        mnemonic: newWallet.mnemonic,
+        privateKey: newWallet.privateKey,
+        address: newWallet.address,
+        nickName: userName,
+      },
+      pwd,
+      keystoreCustomOptions,
+    );
+    yield put(
+      userActions.onLoginSuccess({
+        address: newWallet.address,
+        keystore: keyStore,
+        userName: userName,
+        balance: 0,
+        privateKey: newWallet.privateKey,
+        saveQRCode: false,
+      }),
+    );
+    Loading.hide();
+    CommonToast.success('注册成功');
+    navigationService.reset([{name: 'Tab'}, {name: 'GenerateQRCode'}]);
+  } catch (error) {
+    Loading.hide();
+    console.log(error, 'onRegisteredSaga');
+    return false;
+  }
+}
+function* onAppInitSaga({privateKey}) {
+  try {
+    const userInfo = yield select(userSelectors.getUserInfo);
+    if (userInfo.contracts && Object.keys(userInfo.contracts).length > 0) {
+      return;
+    }
+    privateKey = privateKey || userInfo.privateKey;
+    if (privateKey) {
+      const contract = yield getContract(privateKey, contractNameAddressSets);
+      console.log(contract, '========contract');
+      if (contract && Object.keys(contract).length > 0) {
+        yield put(contractsActions.setContracts({contracts: contract}));
+        yield put(userActions.getAllowanceList());
+        yield put(userActions.getUserBalance());
+      }
+    }
+  } catch (error) {
+    yield put(userActions.onAppInit());
+    console.log(error, 'appInitSaga');
+  }
+}
 function* getUserBalanceSaga() {
   try {
     const userInfo = yield select(userSelectors.getUserInfo);
@@ -34,9 +99,10 @@ function* getUserBalanceSaga() {
         const {tokenContract} = contracts;
         const balance = yield tokenContract.GetBalance.call({
           symbol: tokenSymbol,
-          owner: formatRestore(address),
+          owner: aelfUtils.formatRestoreAddress(address),
         });
         const confirmBlance = unitConverter.toLower(balance.balance);
+        console.log(confirmBlance, '====confirmBlance');
         if (userInfo.balance !== confirmBlance) {
           yield put(
             userActions.setUserBalance(
@@ -44,12 +110,6 @@ function* getUserBalanceSaga() {
             ),
           );
         }
-      } else {
-        console.log(userInfo, '=======userInfo');
-        const contract = yield appInit(privateKey);
-        console.log(contract, '========contract');
-        yield put(contractsActions.setContracts({contracts: contract}));
-        yield put(userActions.getUserBalance());
       }
     }
   } catch (error) {
@@ -57,8 +117,9 @@ function* getUserBalanceSaga() {
   }
 }
 function* onLoginSuccessSaga({data}) {
+  console.log(data, '======data');
   try {
-    data.address = format(data.address);
+    data.address = aelfUtils.formatAddress(data.address);
     let userList = [];
     const List = yield select(userSelectors.getUserList);
     if (Array.isArray(List)) {
@@ -74,11 +135,8 @@ function* onLoginSuccessSaga({data}) {
     };
     userList.unshift(userObj);
     userList = removeDuplicates(userList);
-    const contractsObj = {
-      contracts: data.contracts,
-    };
     yield put(userActions.setUserData({...userObj, userList}));
-    yield put(contractsActions.setContracts(contractsObj));
+    yield put(userActions.setAllowanceList([]));
   } catch (error) {
     console.log(error, 'onLoginSuccessSaga');
   }
@@ -109,6 +167,8 @@ function* logOutSaga({address}) {
     yield put(userActions.deleteUser(address));
     yield put(userActions.setUserData(userObj));
     yield put(contractsActions.setContracts(contractsObj));
+    yield put(settingsActions.reSetSettings());
+    yield put(userActions.setAllowanceList([]));
     navigationService.reset('Entrance');
   } catch (error) {
     console.log(error, 'logOutSaga');
@@ -120,24 +180,79 @@ function* transferSaga({param}) {
     const {contracts} = yield select(userSelectors.getUserInfo);
     const transaction = yield contracts.tokenContract.Transfer(param);
     console.log('transaction: ', transaction);
-    const result = yield aelfInstance.chain.getTxResult(
-      transaction.TransactionId,
-    );
-    console.log('transaction result:', result);
-    yield delay(2000);
+    yield delay(3000);
     Loading.hide();
     yield put(userActions.getUserBalance());
     navigationService.navigate('TransactionDetails', {
       TransactionId: transaction.TransactionId,
     });
-  } catch (error) {}
+  } catch (error) {
+    Loading.hide();
+    console.log(error, 'transferSaga');
+  }
+}
+function* getAllowanceListSaga() {
+  try {
+    const userInfo = yield select(userSelectors.getUserInfo);
+    const {contracts, address} = userInfo;
+    const {tokenContract} = contracts;
+    let allowanceList = [];
+    const promises = contractAddresses.map(
+      ({contractName, contractAdress, name}) => {
+        return tokenContract.GetAllowance.call({
+          symbol: tokenSymbol,
+          owner: address,
+          spender: contractAdress,
+        }).then(value => {
+          allowanceList.push({
+            ...value,
+            name,
+            contractAdress,
+            allowance: unitConverter.toLower(value.allowance),
+          });
+        });
+      },
+    );
+    yield Promise.all(promises);
+    yield put(userActions.setAllowanceList(allowanceList));
+  } catch (error) {
+    console.log(error, 'getAllowanceListSaga');
+  }
+}
+function* onApproveSaga({amount, appContractAddress}) {
+  Loading.show();
+  try {
+    const {
+      contracts: {tokenContract},
+    } = yield select(userSelectors.getUserInfo);
+    const approve = yield tokenContract.Approve({
+      symbol: tokenSymbol,
+      spender: appContractAddress,
+      amount: unitConverter.toHigher(amount),
+    });
+    yield delay(3000);
+    Loading.hide();
+    CommonToast.success('授权成功');
+    yield put(userActions.getAllowanceList());
+    navigationService.navigate('ApproveDetails', {
+      TransactionId: approve.TransactionId,
+    });
+  } catch (error) {
+    Loading.hide();
+    CommonToast.success('授权失败，请稍后重试');
+    console.log(error, 'onApproveSaga');
+  }
 }
 export default function* LoginSaga() {
   yield all([
+    yield takeLatest(userTypes.ON_APP_INIT, onAppInitSaga),
+    yield takeLatest(userTypes.ON_REGISTERED, onRegisteredSaga),
     yield takeLatest(userTypes.GET_USER_BALANCE, getUserBalanceSaga),
     yield takeLatest(userTypes.ON_LOGIN_SUCCESS, onLoginSuccessSaga),
     yield takeLatest(userTypes.DELETE_USER, deleteUserSaga),
     yield takeLatest(userTypes.LOG_OUT, logOutSaga),
     yield takeLatest(userTypes.TRANSFER, transferSaga),
+    yield takeLatest(userTypes.GET_ALLOWANCE_LIST, getAllowanceListSaga),
+    yield takeLatest(userTypes.ON_APPROVE, onApproveSaga),
   ]);
 }

@@ -6,6 +6,7 @@ import {
   CommonButton,
   Input,
   Touchable,
+  CommonToast,
 } from '../../../../components/template';
 import i18n from 'i18n-js';
 import {TextL, TextM} from '../../../../components/template/CommonText';
@@ -13,10 +14,11 @@ import styles from './styles';
 import {useSetState} from '../../../../utils/pages/hooks';
 import {PASSWORD_REG} from '../../../../config/constant';
 import navigationService from '../../../../utils/common/navigationService';
-import AElf from 'aelf-sdk';
-import {appInit} from '../../../../utils/common/aelfProvider';
 import userActions from '../../../../redux/userRedux';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector, shallowEqual} from 'react-redux';
+import {settingsSelectors} from '../../../../redux/settingsRedux';
+import {sleep} from '../../../../utils/pages';
+import aelfUtils from '../../../../utils/pages/aelfUtils';
 const EnterPassword = props => {
   const dispatch = useDispatch();
   const [state, setState] = useSetState({
@@ -25,6 +27,7 @@ const EnterPassword = props => {
     loading,
     pwdErr: false,
   });
+  const payPw = useSelector(settingsSelectors.getPayPw, shallowEqual); //Language status is controlled with redux
   const {pwd, loading, pwdErr} = state;
   const {params} = props.route;
   const onLoginSuccess = useCallback(
@@ -39,13 +42,13 @@ const EnterPassword = props => {
     }
   }, [setState, pwd]);
   const login = useCallback(async () => {
-    setState({pwdErr: false, loading: true});
+    Keyboard.dismiss();
+    setState({pwdErr: false, loading: true, pwdRule: false});
+    await sleep(500);
     try {
-      const {privateKey} = AElf.wallet.keyStore.unlockKeystore(params, pwd);
+      const {privateKey} = aelfUtils.unlockKeystore(params, pwd);
       if (privateKey) {
-        const contracts = await appInit(privateKey);
         onLoginSuccess({
-          contracts: contracts,
           address: params.address,
           keystore: params,
           userName: params.nickName,
@@ -53,14 +56,19 @@ const EnterPassword = props => {
           saveQRCode: true,
           privateKey,
         });
-        navigationService.navigate('SetTransactionPwd');
+        CommonToast.success('登录成功');
+        if (payPw && payPw.length === 6) {
+          navigationService.reset('Tab');
+        } else {
+          navigationService.reset([{name: 'Tab'}, {name: 'SetTransactionPwd'}]);
+        }
         setState({loading: false});
       }
     } catch (error) {
       console.log(error, '======error');
       setState({pwdErr: true, loading: false});
     }
-  }, [onLoginSuccess, params, pwd, setState]);
+  }, [onLoginSuccess, params, payPw, pwd, setState]);
   const {pwdRule} = state;
   if (!params) {
     return null;

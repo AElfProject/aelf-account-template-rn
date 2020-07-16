@@ -38,10 +38,18 @@ function goBack() {
  * 把路由重置到首页
  */
 function reset(name) {
-  const resetAction = CommonActions.reset({
-    index: 0,
-    routes: [{name}],
-  });
+  let resetAction;
+  if (Array.isArray(name)) {
+    resetAction = CommonActions.reset({
+      index: name.length - 1,
+      routes: name,
+    });
+  } else {
+    resetAction = CommonActions.reset({
+      index: 0,
+      routes: [{name}],
+    });
+  }
   _navigator && _navigator.dispatch(resetAction);
 }
 

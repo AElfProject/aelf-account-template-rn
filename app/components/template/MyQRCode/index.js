@@ -3,10 +3,16 @@ import React, {memo} from 'react';
 import QRCode from 'react-native-qrcode-svg';
 import {aelfBlue} from '../../../assets/images';
 import {sreenWidth} from '../../../utils/common/device';
+import {View, StyleSheet} from 'react-native';
+import BounceSpinner from '../BounceSpinner';
 const MyQRCode = props => {
   const {value} = props;
   if (!value) {
-    return null;
+    return (
+      <View style={styles.loadingBox}>
+        <BounceSpinner />
+      </View>
+    );
   }
   return (
     <QRCode
@@ -24,3 +30,11 @@ MyQRCode.defaultProps = {
   value: '1',
 };
 export default memo(MyQRCode);
+const styles = StyleSheet.create({
+  loadingBox: {
+    width: sreenWidth * 0.55,
+    height: sreenWidth * 0.55,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

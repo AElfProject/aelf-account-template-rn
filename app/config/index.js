@@ -19,7 +19,6 @@ const keystoreOptions = {
 
 const explorerURL = 'https://explorer-test-side01.aelf.io';
 const walletURL = 'https://tdvv-wallet-test.aelf.io';
-
 export default {
   commonPrivateKey:
     'b7a6b643f2a66848cb2229bf26c8330d5384e0eac325709a66f4baacc89d3108',
@@ -37,9 +36,21 @@ export default {
     tokenContract: 'AElf.ContractNames.Token',
   },
   // You want to init in the app
-  contractAddresses: {
-    bingoGameContract: '2wRDbyVF28VBQoSPgdSEFaL4x7CaXz8TCBujYhgWc9qTMxBE3n',
-    appContract: '2wRDbyVF28VBQoSPgdSEFaL4x7CaXz8TCBujYhgWc9qTMxBE3n',
+  contractAddresses: [
+    {
+      name: 'bingoGame',
+      contractAdress: '2wRDbyVF28VBQoSPgdSEFaL4x7CaXz8TCBujYhgWc9qTMxBE3n',
+      contractName: 'bingoGameContract',
+    },
+    {
+      name: 'App',
+      contractAdress: '2wRDbyVF28VBQoSPgdSEFaL4x7CaXz8TCBujYhgWc9qTMxBE3n',
+      contractName: 'appContract',
+    },
+  ],
+  contractNameAddressSets: {
+    consensusContract: 'BNPFPPwQ3DE9rwxzdY61Q2utU9FZx9KYUnrYHQqCR6N4LLhUE',
+    tokenContract: '7RzVGiuVWkvL4VfVHdZfQF2Tri3sgLe9U991bohHFfSRZXuGX',
   },
   address: {
     prefix: 'ELF',
@@ -56,4 +67,5 @@ export default {
   passwordReg: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[^]{12,}$/,
   balanceRefreshInterval: 30000,
   splashScreenShowTime: 3000,
+  fetchTimeout: 10000,
 };

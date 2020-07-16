@@ -11,6 +11,7 @@ const {Types, Creators} = createActions({
   changeBiometrics: ['biometrics'],
   changeInform: ['inform'],
   changeCurrencyUnit: ['currencyUnit'],
+  reSetSettings: [],
 });
 
 export const settingsTypes = Types;
@@ -78,6 +79,12 @@ export const changeInform = (state, {inform}) => {
 export const changeCurrencyUnit = (state, {currencyUnit}) => {
   return state.merge({currencyUnit});
 };
+export const reSetSettings = state => {
+  return state.merge({
+    payPw: null,
+    biometrics: null,
+  });
+};
 /* ------------- Hookup Reducers To Types ------------- */
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CHANGE_LANGUAGE]: changeLanguage,
@@ -86,4 +93,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.CHANGE_BIOMETRICS]: changeBiometrics,
   [Types.CHANGE_INFORM]: changeInform,
   [Types.CHANGE_CURRENCY_UNIT]: changeCurrencyUnit,
+  [Types.RE_SET_SETTINGS]: reSetSettings,
 });

@@ -11,9 +11,12 @@ import Spinner from 'react-native-spinkit';
 import {pTd} from '../../../../../utils/common';
 import navigationService from '../../../../../utils/common/navigationService';
 import {isIos} from '../../../../../utils/common/device';
+import {useSelector, shallowEqual} from 'react-redux';
+import {userSelectors} from '../../../../../redux/userRedux';
 
 const ChangePaymentPwd = () => {
   const [safety, setSafety] = useState(null);
+  const userName = useSelector(userSelectors.getUserName, shallowEqual);
   useEffect(() => {
     const timer = setTimeout(() => {
       if (true) {
@@ -51,7 +54,7 @@ const ChangePaymentPwd = () => {
       return (
         <View style={GStyle.container}>
           <TextL style={styles.tips}>
-            您是否记得账号UserName当前使用的支付密码
+            您是否记得账号{userName}当前使用的支付密码
           </TextL>
           <View style={styles.buttonBox}>
             <CommonButton
@@ -76,7 +79,7 @@ const ChangePaymentPwd = () => {
         </View>
       );
     }
-  }, [safety]);
+  }, [safety, userName]);
   return (
     <View style={GStyle.container}>
       <CommonHeader title="修改支付密码" canBack />

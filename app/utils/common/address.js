@@ -8,6 +8,8 @@ const format = addressInput => {
 const formatRestore = addressInput => {
   const head = `${prefix}_`;
   const tail = `_${suffix}`;
-  return addressInput.replace(head, '').replace(tail, '');
+  return addressInput
+    .replace(new RegExp(head, 'g'), '')
+    .replace(new RegExp(tail, 'g'), '');
 };
 export {format, formatRestore};

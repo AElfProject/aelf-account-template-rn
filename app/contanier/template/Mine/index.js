@@ -98,8 +98,13 @@ const Tool = () => {
   return Element;
 };
 const Mine = props => {
-  console.log(props, '======props');
-  const {navigation, changeBarStyle, userInfo, getUserBalance} = props;
+  const {
+    navigation,
+    changeBarStyle,
+    userInfo,
+    getUserBalance,
+    onAppInit,
+  } = props;
   const {userName, balance} = userInfo;
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -110,16 +115,18 @@ const Mine = props => {
       changeBarStyle('dark-content');
       StatusBar.setBarStyle('dark-content');
     });
+    onAppInit();
     getUserBalance();
     const timer = setInterval(() => {
       getUserBalance();
+      onAppInit();
     }, 10000);
     return () => {
       timer && clearTimeout(timer);
       unsubscribe();
       blurUnsubscribe();
     };
-  }, [navigation, changeBarStyle, getUserBalance]);
+  }, [navigation, changeBarStyle, getUserBalance, onAppInit]);
   return (
     <View style={GStyle.container}>
       <Touchable
@@ -150,6 +157,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   changeBarStyle: settingsActions.changeBarStyle,
   getUserBalance: userActions.getUserBalance,
+  onAppInit: userActions.onAppInit,
 };
 export default connect(
   mapStateToProps,

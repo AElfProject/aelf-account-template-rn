@@ -1,4 +1,4 @@
-import React, {memo, useRef} from 'react';
+import React, {memo, useRef, useCallback} from 'react';
 import {Colors, GStyle} from '../../../../assets/theme';
 import {
   CommonHeader,
@@ -8,20 +8,37 @@ import {
 } from '../../../../components/template';
 import styles from './styles';
 import {View, Text} from 'react-native';
-import {TextL, TextM} from '../../../../components/template/CommonText';
+import {
+  TextL,
+  TextM,
+  CopyText,
+} from '../../../../components/template/CommonText';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 import i18n from 'i18n-js';
 import {screenshots} from '../../../../utils/pages';
 import navigationService from '../../../../utils/common/navigationService';
-import {userSelectors} from '../../../../redux/userRedux';
-import {shallowEqual, useSelector} from 'react-redux';
+import userActions, {userSelectors} from '../../../../redux/userRedux';
+import {shallowEqual, useSelector, useDispatch} from 'react-redux';
 const PersonalCenter = () => {
+  const dispatch = useDispatch();
   const viewShot = useRef();
-  const {address, userName} = useSelector(
+  const {address, userName, keystore} = useSelector(
     userSelectors.getUserInfo,
     shallowEqual,
   );
+  const setSaveQRCode = useCallback(
+    value => dispatch(userActions.setSaveQRCode(value)),
+    [dispatch],
+  );
+  const onSaveQRCode = useCallback(async () => {
+    const result = await screenshots(viewShot);
+    if (result) {
+      setSaveQRCode(true);
+    }
+  }, [setSaveQRCode]);
+  const QRCodeValue = keystore ? JSON.stringify(keystore) : null;
+
   return (
     <View style={GStyle.secondContainer}>
       <CommonHeader title="个人中心" canBack>
@@ -34,15 +51,15 @@ const PersonalCenter = () => {
                 {i18n.t('mineModule.username')}:{userName}{' '}
                 <FontAwesome name="edit" color={Colors.primaryColor} />
               </TextL>
-              <MyQRCode />
+              <MyQRCode value={QRCodeValue} />
             </View>
             <CommonButton
               style={styles.buttonStyle}
               title={i18n.t('login.backupQRCode.saveQRCode')}
-              onPress={() => screenshots(viewShot)}
+              onPress={onSaveQRCode}
             />
             <View style={styles.addressBox}>
-              <TextL style={styles.addressStyles}>Address:{address}</TextL>
+              <CopyText copied={address}>Address:{address}</CopyText>
               <TextM style={styles.addressTips}>
                 此二维码是您的账号，丢失二维码等同于丢失账号，您的资产将无法找回，请务必妥善保管您的二维码账号
               </TextM>

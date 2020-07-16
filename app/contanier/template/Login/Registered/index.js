@@ -12,11 +12,12 @@ import GStyle from '../../../../assets/theme/gStyle';
 import styles from './styles';
 import {TextM} from '../../../../components/template/CommonText';
 import {PASSWORD_REG, USERNAME_REG} from '../../../../config/constant';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import navigationService from '../../../../utils/common/navigationService';
 import NamePasswordTips from '../NamePasswordTips';
+import userActions from '../../../../redux/userRedux';
 import AElf from 'aelf-sdk';
+import {useDispatch} from 'react-redux';
 const Registered = () => {
+  const dispatch = useDispatch();
   const [state, setState] = useSetState({
     userName: '',
     pwd: '',
@@ -27,6 +28,11 @@ const Registered = () => {
     pwdConfirmRule: false,
     newWallet: null,
   });
+  const onRegistered = useCallback(
+    (newWallet, pwd, userName) =>
+      dispatch(userActions.onRegistered(newWallet, pwd, userName)),
+    [dispatch],
+  );
   const userNameBlur = useCallback(() => {
     const {userName} = state;
     if (!USERNAME_REG.test(userName)) {
@@ -63,7 +69,6 @@ const Registered = () => {
       setState({pwdDifferent: false});
     }
   }, [setState, state]);
-
   const registered = useCallback(() => {
     Keyboard.dismiss();
     const {userName, pwd, newWallet, pwdConfirm} = state;
@@ -72,13 +77,9 @@ const Registered = () => {
       pwdConfirm === pwd &&
       PASSWORD_REG.test(pwd)
     ) {
-      navigationService.navigate('GenerateQRCode', {
-        userName,
-        pwd,
-        wallet: newWallet,
-      });
+      onRegistered(newWallet, pwd, userName);
     }
-  }, [state]);
+  }, [onRegistered, state]);
   const generateKeystore = useCallback(async () => {
     let newWallet;
     try {
@@ -102,11 +103,7 @@ const Registered = () => {
   } = state;
   return (
     <View style={GStyle.container}>
-      <CommonHeader title={i18n.t('login.register')} canBack />
-      <KeyboardAwareScrollView
-        keyboardShouldPersistTaps="handled"
-        keyboardOpeningTime={0}
-        extraHeight={50}>
+      <CommonHeader title={i18n.t('login.register')} canBack>
         <Touchable
           style={styles.container}
           activeOpacity={1}
@@ -161,7 +158,7 @@ const Registered = () => {
             style={styles.buttonStyles}
           />
         </Touchable>
-      </KeyboardAwareScrollView>
+      </CommonHeader>
     </View>
   );
 };

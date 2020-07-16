@@ -30,9 +30,6 @@ export default StyleSheet.create({
   addressBox: {
     width: '100%',
   },
-  addressStyles: {
-    marginTop: pTd(30),
-  },
   addressTips: {
     marginTop: pTd(30),
     color: Colors.fontGray,

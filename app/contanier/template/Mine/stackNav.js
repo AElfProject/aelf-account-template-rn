@@ -20,6 +20,7 @@ import AboutUs from './AboutUs';
 import HelpCenter from './HelpCenter';
 import TransactionManagement from './TransactionManagement';
 import AuthorizeManagement from './AuthorizeManagement';
+import ApproveDetails from './AuthorizeManagement/ApproveDetails';
 const stackNav = [
   {name: 'PersonalCenter', component: PersonalCenter},
   {name: 'EditUserName', component: EditUserName},
@@ -43,6 +44,7 @@ const stackNav = [
   {name: 'HelpCenter', component: HelpCenter},
   {name: 'TransactionManagement', component: TransactionManagement},
   {name: 'AuthorizeManagement', component: AuthorizeManagement},
+  {name: 'ApproveDetails', component: ApproveDetails},
 ];
 
 export default stackNav;

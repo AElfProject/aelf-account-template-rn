@@ -1,109 +1,77 @@
-import React, {memo, useRef, useState, useCallback, useEffect} from 'react';
-import {View} from 'react-native';
+import React, {memo, useRef, useCallback, useEffect} from 'react';
+import {View, BackHandler} from 'react-native';
 import GStyle from '../../../../assets/theme/gStyle';
 import {
   CommonHeader,
   CommonButton,
   MyQRCode,
+  CommonToast,
 } from '../../../../components/template';
 import styles from './styles';
 import {screenshots} from '../../../../utils/pages';
 import navigationService from '../../../../utils/common/navigationService';
 import i18n from 'i18n-js';
-import {isIos} from '../../../../utils/common/device';
-import config from '../../../../config';
-import AElf from 'aelf-sdk';
 import userActions, {userSelectors} from '../../../../redux/userRedux';
 import {useDispatch, shallowEqual, useSelector} from 'react-redux';
-import {appInit} from '../../../../utils/common/aelfProvider';
-import {
-  TextTitle,
-  TextL,
-  TextM,
-} from '../../../../components/template/CommonText';
+import {TextTitle, TextM} from '../../../../components/template/CommonText';
+import {settingsSelectors} from '../../../../redux/settingsRedux';
 const GenerateQRCode = props => {
   const dispatch = useDispatch();
-  const onLoginSuccess = useCallback(
-    data => dispatch(userActions.onLoginSuccess(data)),
+  const setSaveQRCode = useCallback(
+    value => dispatch(userActions.setSaveQRCode(value)),
     [dispatch],
   );
-  const userInfo = useSelector(userSelectors.getUserInfo, shallowEqual);
-  const {params} = props.route || {};
+  const {userName, keystore} = useSelector(
+    userSelectors.getUserInfo,
+    shallowEqual,
+  );
+  const payPw = useSelector(settingsSelectors.getPayPw, shallowEqual);
   const viewShot = useRef();
-  const [QRCodeValue, setQRCodeValue] = useState(false);
-  const generateKeystore = useCallback(async () => {
-    try {
-      var newWallet = params.wallet;
-      const keystoreCustomOptions = isIos
-        ? config.keystoreOptions.ios
-        : config.keystoreOptions.android;
-      const keyStore = JSON.stringify(
-        AElf.wallet.keyStore.getKeystore(
-          {
-            mnemonic: newWallet.mnemonic,
-            privateKey: newWallet.privateKey,
-            address: newWallet.address,
-            nickName: params.userName,
-          },
-          params.pwd,
-          keystoreCustomOptions,
-        ),
-      );
-      setQRCodeValue(keyStore);
-      return {privateKey: newWallet.privateKey, address: newWallet.address};
-    } catch (error) {
-      console.log(error, '======error');
-      return false;
-    }
-  }, [params.pwd, params.userName, params.wallet]);
-  useEffect(() => {
-    Promise.resolve()
-      .then(res => {
-        return generateKeystore();
-      })
-      .then(async data => {
-        if (data) {
-          const contracts = await appInit(data.privateKey);
-          return onLoginSuccess({
-            contracts: contracts,
-            address: data.address,
-            keystore: data,
-            userName: params.userName,
-            balance: 0,
-            privateKey: data.privateKey,
-          });
-        }
-      })
-      .then(res => {
-        return 0;
-      });
-  }, [generateKeystore, onLoginSuccess, params.userName]);
   const next = useCallback(async () => {
     const result = await screenshots(viewShot);
     if (result) {
-      setTimeout(() => {
+      CommonToast.success('保存成功');
+      setSaveQRCode(true);
+      if (payPw && payPw.length === 6) {
+        navigationService.reset('Tab');
+      } else {
         navigationService.navigate('SetTransactionPwd');
-      }, 100);
+      }
     }
+  }, [payPw, setSaveQRCode]);
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        return true;
+      },
+    );
+    return () => backHandler.remove();
   }, []);
+  const rightOnPress = useCallback(() => {
+    if (payPw && payPw.length === 6) {
+      navigationService.reset('Tab');
+    } else {
+      navigationService.navigate('SetTransactionPwd');
+    }
+  }, [payPw]);
+  const QRCodeValue = keystore ? JSON.stringify(keystore) : null;
   return (
     <View style={GStyle.container}>
       <CommonHeader
         style={styles.headerStyle}
         title={i18n.t('login.backupQRCode.title')}
-        canBack
         rightTitle={i18n.t('login.backupQRCode.later')}
-        rightOnPress={() => navigationService.navigate('SetTransactionPwd')}>
+        rightOnPress={rightOnPress}>
         <View style={styles.nameBox}>
-          <TextTitle style={styles.account}>
-            Account:{params.userName}{' '}
-          </TextTitle>
-          <TextL style={styles.address}>Address:{userInfo.address} </TextL>
+          <TextTitle style={styles.account}>Account:{userName} </TextTitle>
+          {/* <TextL style={styles.address}>Address:{userInfo.address} </TextL> */}
         </View>
         <View ref={viewShot} style={styles.shotView}>
           <MyQRCode value={QRCodeValue} />
         </View>
         <CommonButton
+          disabled={!QRCodeValue}
           style={styles.buttonBox}
           title={i18n.t('login.backupQRCode.saveQRCode')}
           onPress={next}

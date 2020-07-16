@@ -19,6 +19,8 @@ import settingsActions, {
 import i18n from 'i18n-js';
 import {useDispatch, useSelector, shallowEqual} from 'react-redux';
 import {PASSWORD_REG} from '../../../../../config/constant';
+import aelfUtils from '../../../../../utils/pages/aelfUtils';
+import {userSelectors} from '../../../../../redux/userRedux';
 const SecondChangePaymentPwd = props => {
   const {remember} = props.route.params || {};
   const dispatch = useDispatch();
@@ -35,7 +37,7 @@ const SecondChangePaymentPwd = props => {
     [dispatch],
   );
   const payPw = useSelector(settingsSelectors.getPayPw, shallowEqual);
-
+  const keystore = useSelector(userSelectors.getKeystore, shallowEqual);
   const {tip, type, transactionPwd, pwd, pwdRule} = state;
   const onChange = useCallback(
     (types, text) => {
@@ -81,14 +83,19 @@ const SecondChangePaymentPwd = props => {
   }, [setState, pwd]);
   const next = useCallback(() => {
     if (PASSWORD_REG.test(pwd)) {
-      setState({
-        type: 'transactionPwd',
-        tip: i18n.t('setPwd.setPwd1'),
-      });
+      const checkResult = aelfUtils.checkPassword(keystore, pwd);
+      if (checkResult) {
+        setState({
+          type: 'transactionPwd',
+          tip: i18n.t('setPwd.setPwd1'),
+        });
+      } else {
+        CommonToast.fail(i18n.t('accountPwdErr'));
+      }
     } else {
       CommonToast.fail(i18n.t('login.pwdFormatErr'));
     }
-  }, [setState, pwd]);
+  }, [pwd, keystore, setState]);
   const Components = useMemo(() => {
     if (type !== 'verificationPwd' || remember) {
       return (

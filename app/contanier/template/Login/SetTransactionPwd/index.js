@@ -1,11 +1,11 @@
-import React, {memo, useCallback} from 'react';
+import React, {memo, useCallback, useEffect} from 'react';
 import {
   CommonHeader,
   Password,
   CommonToast,
   ActionSheet,
 } from '../../../../components/template';
-import {View, Keyboard, StyleSheet} from 'react-native';
+import {View, Keyboard, StyleSheet, BackHandler} from 'react-native';
 import {useSetState} from '../../../../utils/pages/hooks';
 import {TextM} from '../../../../components/template/CommonText';
 import {Colors, GStyle} from '../../../../assets/theme';
@@ -17,6 +17,15 @@ import {touchAuth} from '../../../../utils/pages';
 import {useDispatch} from 'react-redux';
 import settingsActions from '../../../../redux/settingsRedux';
 const SetTransactionPwd = () => {
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        return true;
+      },
+    );
+    return () => backHandler.remove();
+  }, []);
   const dispatch = useDispatch();
   const changePayPw = useCallback(
     payPw => dispatch(settingsActions.changePayPw(payPw)),
@@ -61,7 +70,7 @@ const SetTransactionPwd = () => {
   const navigate = useCallback(
     value => {
       changeBiometrics(value);
-      navigationService.reset('Tab');
+      navigationService.navigate('Tab');
     },
     [changeBiometrics],
   );
@@ -107,7 +116,7 @@ const SetTransactionPwd = () => {
   }, [navigate]);
   return (
     <View style={GStyle.container}>
-      <CommonHeader title={i18n.t('setPwd.title')} canBack />
+      <CommonHeader title={i18n.t('setPwd.title')} />
       <View style={styles.box}>
         <TextM style={{color: Colors.primaryColor}}>{tip}</TextM>
         <Password

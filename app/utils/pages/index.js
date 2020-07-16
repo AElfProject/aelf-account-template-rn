@@ -3,12 +3,13 @@ import {download, saveFilePath} from './utilFs';
 import {captureRef} from 'react-native-view-shot';
 import CameraRoll from '@react-native-community/cameraroll';
 import Clipboard from '@react-native-community/clipboard';
-import {CommonToast, ActionSheet} from '../../components/template';
+import CommonToast from '../../components/template/CommonToast';
+import ActionSheet from '../../components/template/ActionSheet';
 import i18n from 'i18n-js';
 import * as LocalAuthentication from 'expo-local-authentication';
 import {isIos} from '../../utils/common/device';
 import * as ImagePicker from 'expo-image-picker';
-module.exports.sleep = time => {
+const sleep = time => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve();
@@ -163,9 +164,14 @@ const removeDuplicates = list => {
     });
   return [...map.values()];
 };
-const copyText = text => {
-  Clipboard.setString(text);
-  CommonToast.success('Copied');
+const onCopyText = text => {
+  try {
+    console.log(text);
+    Clipboard.setString(text);
+    CommonToast.success('Copied');
+  } catch (error) {
+    console.log('onCopyText', error);
+  }
 };
 export {
   isNumber,
@@ -174,5 +180,6 @@ export {
   touchAuth,
   permissionDenied,
   removeDuplicates,
-  copyText,
+  onCopyText,
+  sleep,
 };

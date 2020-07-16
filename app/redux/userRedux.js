@@ -3,6 +3,8 @@ import {createSelector} from 'reselect';
 /* ------------- Types and Action Creators ------------- */
 
 const {Types, Creators} = createActions({
+  onAppInit: ['privateKey'],
+  onRegistered: ['newWallet', 'pwd', 'userName'],
   onLoginSuccess: ['data'],
   setUserData: ['data'],
   getUserBalance: [],
@@ -11,6 +13,10 @@ const {Types, Creators} = createActions({
   setUserList: ['userList'],
   logOut: ['address'],
   transfer: ['param'],
+  setSaveQRCode: ['saveQRCode'],
+  getAllowanceList: [],
+  setAllowanceList: ['allowanceList'],
+  onApprove: ['amount', 'appContractAddress'],
 });
 
 export const userTypes = Types;
@@ -25,6 +31,8 @@ export const INITIAL_STATE = {
   userList: [],
   saveQRCode: false,
   keystore: {},
+  allowanceList: [],
+  privateKey: null,
 };
 
 /* ------------- Selectors ------------- */
@@ -55,9 +63,27 @@ export const userSelectors = {
       ...settings,
     }),
   ),
+  allowanceList: createSelector(
+    _baseSelector,
+    base => base.allowanceList,
+  ),
+  getPrivateKey: createSelector(
+    _baseSelector,
+    base => base.privateKey,
+  ),
+  getBalance: createSelector(
+    _baseSelector,
+    base => base.balance,
+  ),
 };
 
 /* ------------- Reducers ------------- */
+export const onRegistered = state => {
+  return state;
+};
+export const onAppInit = state => {
+  return state;
+};
 export const onLoginSuccess = state => {
   return state;
 };
@@ -82,8 +108,22 @@ export const setUserList = (state, {userList}) => {
 export const transfer = state => {
   return state;
 };
+export const setSaveQRCode = (state, {saveQRCode}) => {
+  return Object.assign({}, state, {saveQRCode});
+};
+export const getAllowanceList = state => {
+  return state;
+};
+export const setAllowanceList = (state, {allowanceList}) => {
+  return Object.assign({}, state, {allowanceList});
+};
+export const onApprove = state => {
+  return state;
+};
 /* ------------- Hookup Reducers To Types ------------- */
 export const reducer = createReducer(INITIAL_STATE, {
+  [Types.ON_REGISTERED]: onRegistered,
+  [Types.ON_APP_INIT]: onAppInit,
   [Types.ON_LOGIN_SUCCESS]: onLoginSuccess,
   [Types.SET_USER_DATA]: setUserData,
   [Types.GET_USER_BALANCE]: getUserBalance,
@@ -94,4 +134,8 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOG_OUT]: logOut,
   //transfer
   [Types.TRANSFER]: transfer,
+  [Types.SET_SAVE_QR_CODE]: setSaveQRCode,
+  [Types.GET_ALLOWANCE_LIST]: getAllowanceList,
+  [Types.SET_ALLOWANCE_LIST]: setAllowanceList,
+  [Types.ON_APPROVE]: onApprove,
 });

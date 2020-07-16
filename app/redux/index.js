@@ -8,25 +8,30 @@ export const reducers = combineReducers({
   settings: require('./settingsRedux').reducer,
   contracts: require('./contractsRedux').reducer,
 });
-let finalReducers = reducers;
-// If rehydration is on use persistReducer otherwise default combineReducers
-if (reduxPersist.active) {
-  const {storeConfig} = reduxPersist;
-  finalReducers = persistReducer(storeConfig, reducers);
-}
-// const store = createStore(finalReducers);
+let store;
+export default () => {
+  let finalReducers = reducers;
+  // If rehydration is on use persistReducer otherwise default combineReducers
+  if (reduxPersist.active) {
+    const {storeConfig} = reduxPersist;
+    finalReducers = persistReducer(storeConfig, reducers);
+  }
+  // const store = createStore(finalReducers);
 
-//saga
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(finalReducers, applyMiddleware(sagaMiddleware));
-sagaMiddleware.run(sagas);
+  //saga
+  const sagaMiddleware = createSagaMiddleware();
+  store = createStore(finalReducers, applyMiddleware(sagaMiddleware));
+  sagaMiddleware.run(sagas);
 
-if (module.hot) {
-  module.hot.accept(() => {
-    const nextRootReducer = require('./').reducers;
-    store.replaceReducer(nextRootReducer);
-  });
-}
-const persistor = persistStore(store);
+  if (module.hot) {
+    module.hot.accept(() => {
+      const nextRootReducer = require('./').reducers;
+      store.replaceReducer(nextRootReducer);
+    });
+  }
+  const persistor = persistStore(store);
 
-export {store, persistor};
+  return {store, persistor};
+};
+
+export {store};

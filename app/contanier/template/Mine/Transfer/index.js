@@ -22,6 +22,7 @@ import config from '../../../../config';
 import userActions from '../../../../redux/userRedux';
 import TransactionVerification from '../../../../utils/pages/TransactionVerification';
 import unitConverter from '../../../../utils/pages/unitConverter';
+import aelfUtils from '../../../../utils/pages/aelfUtils';
 const {tokenSymbol} = config;
 const Transfer = props => {
   const input = useRef();
@@ -40,7 +41,7 @@ const Transfer = props => {
     useCallback(() => {
       const {address} = params || {};
       if (address) {
-        setState({address});
+        setState({address: aelfUtils.formatAddress(address)});
       }
     }, [params, setState]),
   );
@@ -91,44 +92,45 @@ const Transfer = props => {
       activeOpacity={1}
       onPress={() => Keyboard.dismiss()}
       style={GStyle.secondContainer}>
-      <CommonHeader title={i18n.t('mineModule.transfer')} canBack />
-      <View style={styles.box}>
-        <TextL>收款地址</TextL>
-        <Input
-          value={address}
-          onChangeText={value => setState({address: value})}
-          rightElement={rightElement}
-          placeholder={i18n.t('login.pleaseEnt')}
-        />
-      </View>
-      <View style={styles.amountBox}>
-        <View style={styles.rowBox}>
-          <TextL>转账金额</TextL>
-          <TextM style={styles.colorStyle}>
-            授权余额:{balance} {tokenSymbol}
-          </TextM>
+      <CommonHeader title={i18n.t('mineModule.transfer')} canBack>
+        <View style={styles.box}>
+          <TextL>收款地址</TextL>
+          <Input
+            value={address}
+            onChangeText={value => setState({address: value})}
+            rightElement={rightElement}
+            placeholder={i18n.t('login.pleaseEnt')}
+          />
         </View>
-        <Input
-          value={amount}
-          style={styles.inputStyle}
-          onChangeText={onChangeAmount}
-          placeholder={i18n.t('login.pleaseEnt')}
+        <View style={styles.amountBox}>
+          <View style={styles.rowBox}>
+            <TextL>转账金额</TextL>
+            <TextM style={styles.colorStyle}>
+              余额:{balance} {tokenSymbol}
+            </TextM>
+          </View>
+          <Input
+            value={amount}
+            style={styles.inputStyle}
+            onChangeText={onChangeAmount}
+            placeholder={i18n.t('login.pleaseEnt')}
+          />
+          <Input
+            leftTitle="备注"
+            onChangeText={value => (input.current = value)}
+            placeholder={'(选填)'}
+          />
+        </View>
+        <View style={[styles.amountBox, styles.rowBox]}>
+          <TextL>矿工费</TextL>
+          <TextM style={styles.colorStyle}>≈ 0.027 {tokenSymbol}</TextM>
+        </View>
+        <CommonButton
+          onPress={onTransfer}
+          style={styles.buttonBox}
+          title={i18n.t('mineModule.transfer')}
         />
-        <Input
-          leftTitle="备注"
-          onChangeText={value => (input.current = value)}
-          placeholder={'(选填)'}
-        />
-      </View>
-      <View style={[styles.amountBox, styles.rowBox]}>
-        <TextL>矿工费</TextL>
-        <TextM style={styles.colorStyle}>≈ 0.27 {tokenSymbol}</TextM>
-      </View>
-      <CommonButton
-        onPress={onTransfer}
-        style={styles.buttonBox}
-        title={i18n.t('mineModule.transfer')}
-      />
+      </CommonHeader>
     </Touchable>
   );
 };

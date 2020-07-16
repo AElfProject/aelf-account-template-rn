@@ -1,20 +1,21 @@
 'use strict';
 import React, {useCallback, useRef, useState, useMemo} from 'react';
 import OverlayModal from '../OverlayModal';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import Touchable from '../Touchable';
 import {Colors, GStyle} from '../../../assets/theme';
 import Password from '../Password';
 import {pTd} from '../../../utils/common';
 import KeyboardSpace from '../KeyboardSpace';
-import {ScrollView} from 'react-native-gesture-handler';
 import {TextL, TextM} from '../CommonText';
 import {settingsSelectors} from '../../../redux/settingsRedux';
 import {useSelector, shallowEqual} from 'react-redux';
 import i18n from 'i18n-js';
 import {isIos} from '../../../utils/common/device';
 import Input from '../Input';
-import alef from '../../../utils/pages/aelf';
+import aelfUtils from '../../../utils/pages/aelfUtils';
+import {sleep} from '../../../utils/pages';
+import BounceSpinner from '../BounceSpinner';
 const BottomView = props => {
   const {cancel, determine} = props;
   const Components = useMemo(
@@ -80,14 +81,18 @@ const PayComponents = props => {
 };
 const PasswordComponents = props => {
   const [pwTip, setPwTip] = useState(false);
+  const [loading, setLoading] = useState(false);
   const {callBack, keystore} = props;
   const intervalRef = useRef();
   const onChange = useCallback(value => {
     intervalRef.current = value;
   }, []);
 
-  const determine = useCallback(() => {
-    const checkResult = alef.checkPassword(keystore, intervalRef.current);
+  const determine = useCallback(async () => {
+    setLoading(true);
+    await sleep(500);
+    const checkResult = aelfUtils.checkPassword(keystore, intervalRef.current);
+    setLoading(false);
     if (checkResult) {
       callBack && callBack(true);
       OverlayModal.hide();
@@ -118,6 +123,71 @@ const PasswordComponents = props => {
             {i18n.t('accountPwdErr')}
           </TextM>
         )}
+        {loading ? (
+          <BounceSpinner type="Wave" />
+        ) : (
+          <BottomView cancel={cancel} determine={determine} />
+        )}
+        {isIos ? <KeyboardSpace /> : null}
+      </View>
+    </ScrollView>
+  );
+};
+const InputComponents = props => {
+  const [errTip, setErrTip] = useState(false);
+  const {
+    callBack,
+    errMessage,
+    title,
+    judgeFunc,
+    inputTip,
+    keyboardType,
+    tip,
+    rightElement,
+  } = props;
+  const intervalRef = useRef();
+  const onChange = useCallback(value => {
+    intervalRef.current = value;
+  }, []);
+  const defaultFun = useCallback(input => {
+    return input > 0;
+  }, []);
+  const determine = useCallback(async () => {
+    setErrTip(false);
+    if (
+      judgeFunc
+        ? judgeFunc(intervalRef.current)
+        : defaultFun(intervalRef.current)
+    ) {
+      OverlayModal.hide();
+      callBack && callBack(true, intervalRef.current);
+    } else {
+      setErrTip(true);
+    }
+  }, [callBack, defaultFun, judgeFunc]);
+
+  const cancel = useCallback(() => {
+    OverlayModal.hide();
+    callBack && callBack(false);
+  }, [callBack]);
+  return (
+    <ScrollView alwaysBounceVertical={false} keyboardShouldPersistTaps="always">
+      <View style={styles.container}>
+        <TextL>{title}</TextL>
+        {tip ? <TextM style={styles.inputTipStyle}>{tip}</TextM> : null}
+        <Input
+          autoFocus
+          leftTitleBox={styles.leftTitleBox}
+          leftTextStyle={styles.leftTextStyle}
+          leftTitle={inputTip}
+          onChangeText={onChange}
+          keyboardType={keyboardType || 'numeric'}
+          placeholder={i18n.t('login.pleaseEnt')}
+          rightElement={rightElement}
+        />
+        {errTip && (
+          <TextM style={[GStyle.pwTip, styles.tips]}>{errMessage}</TextM>
+        )}
         <BottomView cancel={cancel} determine={determine} />
         {isIos ? <KeyboardSpace /> : null}
       </View>
@@ -141,9 +211,17 @@ const passwordShow = (keystore, callBack) => {
     },
   );
 };
+const inputShow = props => {
+  OverlayModal.show(<InputComponents {...props} />, {
+    style: styles.style,
+    modal: true,
+    containerStyle: styles.containerStyle,
+  });
+};
 export default {
   payShow,
   passwordShow,
+  inputShow,
 };
 const styles = StyleSheet.create({
   container: {
@@ -151,6 +229,11 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     backgroundColor: 'white',
+  },
+  loadingBox: {
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   style: {
     flex: 1,
@@ -191,5 +274,11 @@ const styles = StyleSheet.create({
   tips: {
     flex: 1,
     marginBottom: pTd(20),
+  },
+  inputTipStyle: {
+    marginTop: pTd(10),
+    alignSelf: 'flex-end',
+    color: Colors.fontColor,
+    marginRight: pTd(60),
   },
 });
