@@ -29,7 +29,6 @@ export const contractsSelectors = {
 
 /* ------------- Reducers ------------- */
 export const setContracts = (state, {data}) => {
-  console.log(data, '======data');
   return Object.assign({}, state, data);
 };
 /* ------------- Hookup Reducers To Types ------------- */

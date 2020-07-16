@@ -54,6 +54,7 @@ const PersonalCenter = () => {
               <MyQRCode value={QRCodeValue} />
             </View>
             <CommonButton
+              disabled={!QRCodeValue}
               style={styles.buttonStyle}
               title={i18n.t('login.backupQRCode.saveQRCode')}
               onPress={onSaveQRCode}

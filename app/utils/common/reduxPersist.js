@@ -16,11 +16,9 @@ const toImmutable = raw => Immutable(raw);
 
 const immutablePersistenceTransform = {
   out: state => {
-    // console.log({ retrieving: state })
     return toImmutable(state);
   },
   in: raw => {
-    // console.log({ storing: raw })
     return fromImmutable(raw);
   },
 };

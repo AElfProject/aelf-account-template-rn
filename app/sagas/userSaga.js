@@ -102,7 +102,6 @@ function* getUserBalanceSaga() {
           owner: aelfUtils.formatRestoreAddress(address),
         });
         const confirmBlance = unitConverter.toLower(balance.balance);
-        console.log(confirmBlance, '====confirmBlance');
         if (userInfo.balance !== confirmBlance) {
           yield put(
             userActions.setUserBalance(

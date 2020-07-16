@@ -52,7 +52,6 @@ const AuthorizeManagement = () => {
             });
         },
       });
-      console.log(item, '=======item');
     },
     [balance, onApprove, rightElement],
   );

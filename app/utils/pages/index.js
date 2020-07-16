@@ -166,7 +166,6 @@ const removeDuplicates = list => {
 };
 const onCopyText = text => {
   try {
-    console.log(text);
     Clipboard.setString(text);
     CommonToast.success('Copied');
   } catch (error) {

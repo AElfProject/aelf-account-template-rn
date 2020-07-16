@@ -27,7 +27,6 @@ const NetworkManagement = props => {
   });
   const address = useSelector(userSelectors.getAddress, shallowEqual);
   const {result, details} = state;
-  console.log(state, '=====state');
   const {params} = props.route || {};
   useFocusEffect(
     useCallback(() => {

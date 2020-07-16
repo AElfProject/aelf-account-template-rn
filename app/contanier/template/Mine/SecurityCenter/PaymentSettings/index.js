@@ -56,7 +56,6 @@ const PaymentSettings = () => {
           ],
         );
       }
-      console.log(value, '====value');
     },
     [changeBiometrics],
   );

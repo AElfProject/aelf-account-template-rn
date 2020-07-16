@@ -59,7 +59,6 @@ const NetworkManagement = props => {
     }
     const {amount, symbol, spender} = details || {};
     const {Status, TransactionId, Logs} = result || {};
-    console.log(details, result);
     const contract = contractAddresses.find(
       item => item.contractAdress === spender,
     );
