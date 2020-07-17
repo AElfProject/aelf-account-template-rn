@@ -72,6 +72,11 @@ const Transfer = props => {
           )}${balance} ${tokenSymbol}`,
         );
       }
+      if (!aelfUtils.checkAddress(address)) {
+        return CommonToast.text(
+          i18n.t('mineModule.authorizeManagement.incorrectAddress'),
+        );
+      }
       TransactionVerification.show(value => {
         if (value) {
           Loading.show();

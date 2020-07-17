@@ -6,7 +6,8 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 
 import Referral from '../template/Referral';
-
+//Security Lock
+import SecurityLock from '../template/SecurityLock';
 import Tab from './Tab';
 import navigationService from '../../utils/common/navigationService';
 
@@ -16,6 +17,13 @@ const Stack = createStackNavigator();
 
 const stackNav = [
   {name: 'Referral', component: Referral},
+  {
+    name: 'SecurityLock',
+    component: SecurityLock,
+    options: {
+      gestureEnabled: false,
+    },
+  },
   {name: 'Tab', component: Tab},
   ...LoginNav,
   ...MineNav,

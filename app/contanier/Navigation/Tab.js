@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useCallback} from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../template/Home';
@@ -8,8 +8,37 @@ import i18n from 'i18n-js';
 import {settingsSelectors} from '../../redux/settingsRedux';
 import {useSelector, shallowEqual} from 'react-redux';
 import {Colors} from '../../assets/theme';
+import {AppState} from 'react-native';
+import navigationService from '../../utils/common/navigationService';
+import {SECURITY_TIME} from '../../config/constant';
+let timer = null;
 const Tab = createBottomTabNavigator();
 const TabNavigatorStack = () => {
+  const securityLock = useSelector(
+    settingsSelectors.getSecurityLock,
+    shallowEqual,
+  );
+  const appStateChange = useCallback(
+    appState => {
+      if (securityLock) {
+        if (appState === 'active' && timer) {
+          if (new Date().getTime() > timer + SECURITY_TIME) {
+            navigationService.navigate('SecurityLock');
+          }
+          timer = null;
+        } else if (appState === 'background') {
+          timer = new Date().getTime();
+        }
+      }
+    },
+    [securityLock],
+  );
+  useEffect(() => {
+    AppState.addEventListener('change', appStateChange);
+    return () => {
+      AppState.removeEventListener('change', appStateChange);
+    };
+  }, [appStateChange]);
   useSelector(settingsSelectors.getLanguage, shallowEqual); //Language status is controlled with redux
   return (
     <Tab.Navigator

@@ -127,7 +127,8 @@
       "amount": "金额",
       "amountTip": "输入金额不符合要求，请重新输入",
       "approveDetails": "授权详情",
-      "authorizedAmount": "授权金额"
+      "authorizedAmount": "授权金额",
+      "incorrectAddress": "地址不正确"
     },
     "helpCenter": {
       "commonProblem": "常见问题",
@@ -213,5 +214,13 @@
     "transferFailed": "转账失败,请稍后重试",
     "authorizationSucceeded": "授权成功",
     "authorizationFailed": "授权失败，请稍后重试"
+  },
+  "securityLock": {
+    "title": "安全验证",
+    "touchVerification": "点击进行安全验证",
+    "openVerification": "打开安全验证？",
+    "openVerificationTip": "打开后每次打开应用时需要安全验证",
+    "downVerification": "你确定关闭安全验证？",
+    "downVerificationTip": "关闭后每次打开应用都不需要进行安全验证"
   }
 }

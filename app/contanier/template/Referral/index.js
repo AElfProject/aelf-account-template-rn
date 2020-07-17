@@ -1,7 +1,7 @@
 import Spinner from 'react-native-spinkit';
 import {ImageBackground} from 'react-native';
 import * as Localization from 'expo-localization';
-import React, {useEffect, useCallback} from 'react';
+import React, {useEffect, useCallback, memo} from 'react';
 import {useDispatch, useSelector, shallowEqual} from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 import {pTd} from '../../../utils/common';
@@ -22,6 +22,10 @@ const style = {
 const time = 2000;
 const Referral = () => {
   const userInfo = useSelector(userSelectors.getUserInfo, shallowEqual);
+  const securityLock = useSelector(
+    settingsSelectors.getSecurityLock,
+    shallowEqual,
+  );
   const dispatch = useDispatch();
   const changeLanguage = useCallback(
     language => dispatch(settingsActions.changeLanguage(language)),
@@ -52,16 +56,18 @@ const Referral = () => {
     }
     setTimeout(() => {
       if (address) {
-        navigationService.reset('Tab');
+        navigationService.reset(
+          securityLock ? [{name: 'Tab'}, {name: 'SecurityLock'}] : 'Tab',
+        );
       } else {
         navigationService.reset('Entrance');
       }
     }, time);
-  }, [changeLanguage, language, userInfo]);
+  }, [changeLanguage, language, securityLock, userInfo]);
   return (
     <ImageBackground style={style} source={launchScreen}>
       <Spinner type={'Circle'} color={Colors.primaryColor} size={60} />
     </ImageBackground>
   );
 };
-export default Referral;
+export default memo(Referral);

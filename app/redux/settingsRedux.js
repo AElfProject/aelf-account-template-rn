@@ -11,6 +11,7 @@ const {Types, Creators} = createActions({
   changeBiometrics: ['biometrics'],
   changeInform: ['inform'],
   changeCurrencyUnit: ['currencyUnit'],
+  changeSecurityLock: ['securityLock'],
   reSetSettings: [],
 });
 
@@ -26,6 +27,7 @@ export const INITIAL_STATE = Immutable({
   biometrics: null,
   inform: null,
   currencyUnit: DEFAULT_CURRENCY,
+  securityLock: null,
 });
 
 /* ------------- Selectors ------------- */
@@ -57,6 +59,10 @@ export const settingsSelectors = {
     _baseSelector,
     base => base.currencyUnit,
   ),
+  getSecurityLock: createSelector(
+    _baseSelector,
+    base => base.securityLock,
+  ),
 };
 
 /* ------------- Reducers ------------- */
@@ -79,10 +85,14 @@ export const changeInform = (state, {inform}) => {
 export const changeCurrencyUnit = (state, {currencyUnit}) => {
   return state.merge({currencyUnit});
 };
+export const changeSecurityLock = (state, {securityLock}) => {
+  return state.merge({securityLock});
+};
 export const reSetSettings = state => {
   return state.merge({
     payPw: null,
     biometrics: null,
+    securityLock: null,
   });
 };
 /* ------------- Hookup Reducers To Types ------------- */
@@ -93,5 +103,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.CHANGE_BIOMETRICS]: changeBiometrics,
   [Types.CHANGE_INFORM]: changeInform,
   [Types.CHANGE_CURRENCY_UNIT]: changeCurrencyUnit,
+  [Types.CHANGE_SECURITY_LOCK]: changeSecurityLock,
   [Types.RE_SET_SETTINGS]: reSetSettings,
 });

@@ -9,8 +9,20 @@ import LoginAccountLogin from './LoginAccountLogin';
 const stackNav = [
   {name: 'Registered', component: Registered},
   {name: 'Entrance', component: Entrance},
-  {name: 'GenerateQRCode', component: GenerateQRCode},
-  {name: 'SetTransactionPwd', component: SetTransactionPwd},
+  {
+    name: 'GenerateQRCode',
+    component: GenerateQRCode,
+    options: {
+      gestureEnabled: false,
+    },
+  },
+  {
+    name: 'SetTransactionPwd',
+    component: SetTransactionPwd,
+    options: {
+      gestureEnabled: false,
+    },
+  },
   {name: 'QRCodeScan', component: QRCodeScan},
   {name: 'EnterPassword', component: EnterPassword},
   {name: 'AdvancedLogin', component: AdvancedLogin},

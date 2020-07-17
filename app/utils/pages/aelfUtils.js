@@ -27,7 +27,7 @@ const getKeystore = (params, pwd, keystoreOptions) => {
 };
 const formatRestoreAddress = addressInput => {
   if (!addressInput) {
-    return;
+    return '';
   }
   const head = `${prefix}_`;
   const tail = `_${suffix}`;
@@ -37,12 +37,17 @@ const formatRestoreAddress = addressInput => {
 };
 const formatAddress = addressInput => {
   if (!addressInput) {
-    return;
+    return '';
   }
   addressInput = formatRestoreAddress(addressInput);
   return prefix + '_' + addressInput + '_' + suffix;
 };
-
+//checkAddress
+const checkAddress = addressInput => {
+  addressInput = formatRestoreAddress(addressInput);
+  const length = addressInput.length;
+  return length >= 47 && length <= 51;
+};
 const webURLAddress = addressInput => {
   if (!addressInput) {
     return;
@@ -68,4 +73,5 @@ export default {
   getTransactionFee,
   getKeystore,
   unlockKeystore,
+  checkAddress,
 };
