@@ -16,7 +16,6 @@ import {useDispatch, useSelector, shallowEqual} from 'react-redux';
 import settingsActions, {
   settingsSelectors,
 } from '../../../../redux/settingsRedux';
-import {ADVANCED} from '../../../../config/constant';
 import {BarCodeScanner} from 'expo-barcode-scanner';
 import {GStyle} from '../../../../assets/theme';
 import {permissionDenied} from '../../../../utils/pages';
