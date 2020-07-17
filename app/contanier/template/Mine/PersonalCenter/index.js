@@ -7,14 +7,13 @@ import {
   ListItem,
 } from '../../../../components/template';
 import styles from './styles';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import {
   TextL,
   TextM,
   CopyText,
 } from '../../../../components/template/CommonText';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Entypo from 'react-native-vector-icons/Entypo';
 import i18n from 'i18n-js';
 import {screenshots} from '../../../../utils/pages';
 import navigationService from '../../../../utils/common/navigationService';

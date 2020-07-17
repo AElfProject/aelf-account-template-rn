@@ -1,5 +1,5 @@
 /**
- * React-navigation 
+ * React-navigation
  */
 import {CommonActions, StackActions} from '@react-navigation/native';
 

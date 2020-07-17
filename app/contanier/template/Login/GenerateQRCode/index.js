@@ -5,7 +5,6 @@ import {
   CommonHeader,
   CommonButton,
   MyQRCode,
-  CommonToast,
 } from '../../../../components/template';
 import styles from './styles';
 import {screenshots} from '../../../../utils/pages';
