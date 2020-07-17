@@ -1,11 +1,11 @@
 /**
- * React-navigation 路由任意跳转封装
+ * React-navigation 
  */
 import {CommonActions, StackActions} from '@react-navigation/native';
 
 let _navigator;
 /**
- * 设置顶层路由导航
+ * init
  * @param navigatorRef
  */
 function setTopLevelNavigator(navigatorRef) {
@@ -13,7 +13,7 @@ function setTopLevelNavigator(navigatorRef) {
 }
 
 /**
- * 跳转到指定页面
+ * navigate
  * @param name
  * @param params
  */
@@ -28,14 +28,14 @@ function navigate(name, params) {
 }
 
 /**
- * 返回
+ * goBack
  */
 function goBack() {
   _navigator && _navigator.dispatch(CommonActions.goBack());
 }
 
 /**
- * 把路由重置到首页
+ * reset
  */
 function reset(name) {
   let resetAction;

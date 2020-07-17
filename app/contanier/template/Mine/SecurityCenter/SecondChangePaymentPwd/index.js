@@ -25,7 +25,7 @@ const SecondChangePaymentPwd = props => {
   const {remember} = props.route.params || {};
   const dispatch = useDispatch();
   const [state, setState] = useSetState({
-    tip: '输入当前身份密码，以验证身份',
+    tip: i18n.t('mineModule.securityCenter.enterPwdTip'),
     type: 'verificationPwd',
     transactionPwd: '',
     transactionPwdConfirm: '',
@@ -38,6 +38,7 @@ const SecondChangePaymentPwd = props => {
   );
   const payPw = useSelector(settingsSelectors.getPayPw, shallowEqual);
   const keystore = useSelector(userSelectors.getKeystore, shallowEqual);
+  const userName = useSelector(userSelectors.getUserName, shallowEqual);
   const {tip, type, transactionPwd, pwd, pwdRule} = state;
   const onChange = useCallback(
     (types, text) => {
@@ -51,7 +52,7 @@ const SecondChangePaymentPwd = props => {
                 tip: i18n.t('setPwd.setPwd1'),
               });
             } else {
-              CommonToast.fail('密码错误');
+              CommonToast.fail(i18n.t('pwdErr'));
             }
             break;
           case 'transactionPwd':
@@ -62,7 +63,7 @@ const SecondChangePaymentPwd = props => {
             break;
           case 'transactionPwdConfirm':
             if (text === transactionPwd) {
-              CommonToast.success(i18n.t('setSuc'));
+              CommonToast.success(i18n.t('setSuccess'));
               changePayPw(text);
               navigationService.pop(2);
             } else {
@@ -115,7 +116,9 @@ const SecondChangePaymentPwd = props => {
           activeOpacity={1}
           onPress={() => Keyboard.dismiss()}
           style={styles.container}>
-          <Text style={styles.nickNameStyles}>请输入账户的密码</Text>
+          <Text style={styles.nickNameStyles}>
+            {i18n.t('mineModule.securityCenter.enterPwd', {userName})}
+          </Text>
           <Input
             secureTextEntry={true}
             leftTitleBox={styles.leftTitleBox}
@@ -131,18 +134,31 @@ const SecondChangePaymentPwd = props => {
           <CommonButton
             onPress={next}
             style={styles.buttonStyles}
-            title={'下一步'}
+            title={i18n.t('mineModule.securityCenter.next')}
           />
           <TextM style={styles.bottomTip}>
-            * 以上内容仅用于验证身份，APP不存储密码
+            * {i18n.t('mineModule.securityCenter.passwordTip')}
           </TextM>
         </Touchable>
       );
     }
-  }, [type, remember, tip, onChange, pwdBlur, pwdRule, next, setState]);
+  }, [
+    type,
+    remember,
+    tip,
+    onChange,
+    userName,
+    pwdBlur,
+    pwdRule,
+    next,
+    setState,
+  ]);
   return (
     <View style={GStyle.container}>
-      <CommonHeader title="修改支付密码" canBack />
+      <CommonHeader
+        title={i18n.t('mineModule.securityCenter.changePayPwd')}
+        canBack
+      />
       {Components}
     </View>
   );

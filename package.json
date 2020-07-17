@@ -12,7 +12,10 @@
     "build:android": "cd android/ && ./gradlew assembleRelease",
     "firim:android": "cd android/ && fastlane fir_im",
     "firim:ios": "cd ios/ && fastlane fir_im",
-    "firim": "npm run firim:android && npm run firim:ios"
+    "firim": "npm run firim:android && npm run firim:ios",
+    "pushApp:android": "cd android/ && fastlane fir_im && fastlane push_telegram",
+    "pushApp:ios": "cd ios/ && fastlane fir_im && fastlane push_telegram",
+    "pushApp": "npm run firim:android && npm run firim:ios"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.11.0",

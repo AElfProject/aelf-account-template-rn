@@ -6,6 +6,7 @@ import {
   BounceSpinner,
   CommonToast,
   Communication,
+  CommonButton,
 } from '../../../../../components/template';
 import {pTd} from '../../../../../utils/common';
 import {useFocusEffect} from '@react-navigation/native';
@@ -18,6 +19,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {onCopyText} from '../../../../../utils/pages';
 import aelfUtils from '../../../../../utils/pages/aelfUtils';
 import config from '../../../../../config';
+import i18n from 'i18n-js';
 const {contractAddresses} = config;
 const NetworkManagement = props => {
   const [state, setState] = useSetState({
@@ -43,7 +45,7 @@ const NetworkManagement = props => {
               });
             }
           } catch (error) {
-            CommonToast.text('');
+            CommonToast.fail(i18n.t('mineModule.transactionFailed'));
           }
         }
       };
@@ -64,24 +66,32 @@ const NetworkManagement = props => {
     );
     const free = aelfUtils.getTransactionFee(Logs || {});
     const List = [
-      {title: '应用名称', details: contract.name},
-      {title: '合约地址', details: spender, copy: true},
-      {title: 'Status', details: Status, color: 'green'},
       {
-        title: 'Transaction Id',
+        title: i18n.t('mineModule.authorizeManagement.appName'),
+        details: contract.name,
+      },
+      {
+        title: i18n.t('mineModule.authorizeManagement.contractAddress'),
+        details: spender,
+        copy: true,
+      },
+      {title: i18n.t('mineModule.status'), details: Status, color: 'green'},
+      {
+        title: i18n.t('mineModule.transactionID'),
         details: TransactionId,
         copy: true,
         onPress: () => {
           Communication.web(aelfUtils.webURLTx(TransactionId));
         },
       },
-      {title: 'Fee', details: `${free.cost} ${free.symbol}`},
+      {title: i18n.t('mineModule.fee'), details: `${free.cost} ${free.symbol}`},
     ];
     return (
       <View style={styles.container}>
         <View style={styles.amountBox}>
           <TextL style={styles.amount}>
-            授权金额{unitConverter.toLower(amount)} {symbol}
+            {i18n.t('mineModule.authorizeManagement.authorizedAmount')}
+            {unitConverter.toLower(amount)} {symbol}
           </TextL>
         </View>
         {List.map((item, index) => {
@@ -110,6 +120,12 @@ const NetworkManagement = props => {
             </View>
           );
         })}
+        <View style={styles.buttonBox}>
+          <CommonButton
+            title={i18n.t('mineModule.turnExplorer')}
+            onPress={() => Communication.web(aelfUtils.webURLTx(TransactionId))}
+          />
+        </View>
       </View>
     );
   }, [details, result]);
@@ -122,7 +138,9 @@ const NetworkManagement = props => {
   }, []);
   return (
     <View style={GStyle.container}>
-      <CommonHeader title={'授权详情'} canBack>
+      <CommonHeader
+        title={i18n.t('mineModule.authorizeManagement.approveDetails')}
+        canBack>
         {result && details ? Element : Loading}
       </CommonHeader>
     </View>
@@ -156,5 +174,8 @@ const styles = StyleSheet.create({
   detailsStyle: {
     marginTop: pTd(10),
     color: Colors.fontColor,
+  },
+  buttonBox: {
+    marginTop: pTd(50),
   },
 });

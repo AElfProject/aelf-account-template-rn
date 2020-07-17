@@ -24,11 +24,14 @@ const AboutUs = () => {
             })}
           </TextL>
         </View>
-        <ListItem title="检测更新" />
-        <ListItem title="版本日志" style={styles.itemBox} />
+        <ListItem title={i18n.t('mineModule.aboutUs.CheckUpdates')} />
+        <ListItem
+          title={i18n.t('mineModule.aboutUs.versionLog')}
+          style={styles.itemBox}
+        />
         <View style={styles.segmentation} />
-        <ListItem title="用户服务协议" />
-        <ListItem title="用户隐私政策" />
+        <ListItem title={i18n.t('mineModule.aboutUs.serviceAgreement')} />
+        <ListItem title={i18n.t('mineModule.aboutUs.privacyPolicy')} />
       </View>
     );
   }, []);

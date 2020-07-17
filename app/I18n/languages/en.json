@@ -12,6 +12,10 @@
   "permissionDen": "Permission denied",
   "setBiometrics": "Set Biometrics",
   "setSuc": "Set Success",
+  "account": "账户",
+  "scan": "扫码",
+  "album": "相册",
+  "setSuccess": "设置成功",
   "setFail": "Set Fail",
   "later": "Later",
   "saveSuc": "Saved Success",
@@ -19,6 +23,10 @@
   "pleasePayPwd": "Please enter the payment password",
   "pleasePwd": "Please enter the password of the account {{account}}",
   "accountPwdErr": "The account password is incorrect, please re-enter",
+  "switchSuccess": "切换成功",
+  "address": "地址",
+  "delete": "删除",
+  "copied": "复制成功",
   "setPwd": {
     "title": "Set Payment Password",
     "setPwd1": "Please set transaction password for payment",
@@ -29,11 +37,14 @@
     "locationTips": "Your current location has not passed the permission authentication, and the application cannot be used normally; the application is only supported by users in non-Mainland China."
   },
   "login": {
+    "addAccount": "添加账户",
     "scanCodeLogin": "这将用于扫码登录",
     "jLook": "Just look around",
     "login": "Login",
     "register": "Registration",
     "premiumTips": "Premium account login",
+    "loginAccountLogin": "已登录账户",
+    "loginAccountLoginTip": "已登录账户登录",
     "userName": "User Name",
     "nameErr": "User name format error",
     "pwdFormatErr": "Password format error",
@@ -46,33 +57,146 @@
     "pwdTips": "The password must be greater than or equal to 12 digits, and contain both uppercase letters, lowercase letters, numbers, and characters;",
     "pwdNotTips": "Once the password is set, it cannot be modified, please keep the set password properly;",
     "backupQRCode": {
-      "title": "QR Code",
-      "later": "Back later",
-      "saveQRCode": "Save QR Code to Album"
+      "title": "备份二维码",
+      "later": "稍后备份",
+      "saveQRCode": "保存二维码到相册"
+    },
+    "advancedLogin": {
+      "title": "高级账户登录",
+      "PrivateKey": "私钥"
+    },
+    "enterPassword": {
+      "title": "输入密码",
+      "enterAccountPwd": "请输入账户{{userName}}的密码"
+    },
+    "QRCodeTip": "此二维码是您的账户，丢失二维码等同于丢失账户，您的资产将无法找回，请务必妥善保管您的二维码账户",
+    "qRCodeScan": {
+      "imageFailed": "图像加载失败",
+      "scanQRCode": "扫描二维码",
+      "QRCodeErr": "请扫描正确二维码"
     }
   },
   "mineModule": {
-    "username": "User Name",
-    "balance": "Balance",
-    "collect": "Receive",
-    "transfer": "Transfer",
-    "exchange": "Exchange",
-    "transactionManagementT": "Transaction Management",
-    "authorizeManagementT": "Authorization Management",
-    "securityCenterT": "Security Center",
-    "generalSettingT": "General Settings",
-    "helpCenterT": "Help Cente",
-    "aboutUsT": "About Us",
-    "version": "Version Numbe:{{number}}",
-    "accountManagementT": "Account Management",
+    "username": "用户名",
+    "balance": "余额",
+    "collect": "收款",
+    "transfer": "转账",
+    "exchange": "兑换",
+    "transactionManagementT": "交易管理",
+    "authorizeManagementT": "授权管理",
+    "securityCenterT": "安全中心",
+    "generalSettingT": "通用设置",
+    "helpCenterT": "帮助中心",
+    "aboutUsT": "关于我们",
+    "version": "版本号:{{number}}",
+    "accountManagementT": "账户管理",
+    "status": "状态",
+    "transactionID": "交易ID",
+    "fee": "费用",
+    "transactionFailed": "交易失败,节点验证失败",
+    "turnExplorer": "去浏览器查看",
     "generalSettings": {
-      "inform": "System Notification",
-      "informTip": "Account-related transaction notifications, including deposit, withdrawal, and in-app transactions",
-      "currencyUnit": "Currency Unit",
-      "networkManagement": "Network Management"
+      "inform": "系统通知",
+      "informTip": "账户相关交易通知，包括充值、提现、APP内交易",
+      "currencyUnit": "货币单位",
+      "networkManagement": "网络管理"
+    },
+    "aboutUs": {
+      "CheckUpdates": "检测更新",
+      "versionLog": "版本日志",
+      "serviceAgreement": "用户服务协议",
+      "privacyPolicy": "用户隐私政策"
+    },
+    "accountManagement": {
+      "edit": "编辑",
+      "complete": "完成",
+      "addAccount": "添加账户",
+      "logOut": "退出当前账户",
+      "logOutTip": "退出账户将删除账户所有数据，请务必确保账户已备份，否则退出后无法找回账户",
+      "qRCodeNoSaveTip": "您的二维码账户未备份，请务必备份。\n二维码账户和对应密码用于登录应用，需备份以防止应用删除、账户登出、手机丢失等情况导致资产损失。",
+      "switchTip": "请退出当前账户或切换账户",
+      "deleteTitle": "删除当前账户",
+      "deleteTip": "删除账户将删除账户所有数据，请务必确保账户已备份，否则删除后无法找回账户"
+    },
+    "authorizeManagement": {
+      "title": "授权",
+      "appName": "应用名称",
+      "contractAddress": "合约地址",
+      "authorizedBalance": "授权余额",
+      "deauthorize": "去授权",
+      "amount": "金额",
+      "amountTip": "输入金额不符合要求，请重新输入",
+      "approveDetails": "授权详情",
+      "authorizedAmount": "授权金额"
+    },
+    "helpCenter": {
+      "commonProblem": "常见问题",
+      "accountSecurity": "账户安全",
+      "qRCode": "什么是二维码账户？",
+      "qRCodeTip": "为什么无法修改二维码账户密码？",
+      "authentication": "为什么要进行身份认证？",
+      "authorized": "发起交易为什么要授权？",
+      "tradingRules": "交易规则",
+      "receive": "如何收款？",
+      "transfer": "如何转账？",
+      "fiatCurrency": "如何进行法币交易？",
+      "crossChain": "如何进行跨链转账？",
+      "feedback": "问题反馈",
+      "submitFeedback": "提交反馈"
+    },
+    "personalCenter": {
+      "title": "个人中心",
+      "qRCodeTip": "此二维码是您的账户，丢失二维码等同于丢失账户，您的资产将无法找回，请务必妥善保管您的二维码账户",
+      "premiumAccount": "高级账户",
+      "authentication": "身份认证",
+      "notCompleted": "未完善",
+      "authenticationTip": "完成身份信息认证，可获得以下权限：\n* 可进行单笔高于2,000 CNY或累积金额大于10,000 CNY的法币交易",
+      "editUserName": "编辑用户名",
+      "userName": "用户名",
+      "userNameTip": "仅支持英文或数字"
+    },
+    "receive": {
+      "qRCode": "扫二维码，转入Token"
+    },
+    "securityCenter": {
+      "paySettings": "支付设置",
+      "unlockSettings": "解锁设置",
+      "passwordTip": "以上内容仅用于验证身份，APP不存储密码",
+      "changePayPwd": "修改支付密码",
+      "enterPwd": "请输入账户{{userName}}的密码",
+      "enterPwdTip": "输入当前身份密码，以验证身份",
+      "paymentSettings": "支付设置",
+      "biometrics": "生物识别",
+      "notSupportTip": "该设备暂不支持生物识别",
+      "unsavedTip": "设备未保存指纹或面部数据以用于身份验证",
+      "turnOffBiometrics": "你确定要关闭生物识别?",
+      "turnOffBiometricsTip": "关闭后每次支付都无法使用刷脸/指纹支付",
+      "safetyTesting": "正在进行安全检测",
+      "ask": "您是否记得账户{{userName}}当前使用的支付密码",
+      "remember": "记得",
+      "noRemember": "不记得",
+      "nonCompliant": "不符合要求，无法修改密码",
+      "out": "退出",
+      "recheck": "重新检测",
+      "next": "下一步"
+    },
+    "transferM": {
+      "payAddress": "收款地址",
+      "transferAmount": "转账金额",
+      "memo": "备注",
+      "memoTip": "(选填)",
+      "fee": "矿工费",
+      "enterTip": "请输入金额/地址",
+      "availableBalance": "当前可用余额为",
+      "from": "从",
+      "to": "至",
+      "transactionDetails": "交易详情"
     }
   },
   "permission": {
+    "verifyIdentity": "验证您的身份",
+    "usePwd": "使用密码",
+    "authenticate": "AELF 身份验证",
     "camera": "相机",
     "cameraRoll": "相册读写权限",
     "denied": "权限被拒绝",
@@ -81,5 +205,13 @@
     "anDeniedDetails": "请打开您的设置,允许我们访问您的{{type}}权限",
     "openFailed": "打开失败",
     "failedDetails": "请在iPhone的“设置-隐私”选项中,允许访问您的{{type}}"
+  },
+  "noTransactionPwdTip": "还没有设置交易密码，请先去设置支付密码",
+  "userSaga": {
+    "registrationSuccess": "注册成功",
+    "registrationFailed": "注册失败",
+    "transferFailed": "转账失败,请稍后重试",
+    "authorizationSucceeded": "授权成功",
+    "authorizationFailed": "授权失败，请稍后重试"
   }
 }

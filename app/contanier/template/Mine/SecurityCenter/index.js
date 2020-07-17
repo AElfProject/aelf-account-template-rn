@@ -10,10 +10,10 @@ const SecurityCenter = () => {
       <View style={GStyle.secondContainer}>
         <CommonHeader title={i18n.t('mineModule.securityCenterT')} canBack />
         <ListItem
-          title="支付设置"
+          title={i18n.t('mineModule.securityCenter.paySettings')}
           onPress={() => navigationService.navigate('PaymentSettings')}
         />
-        <ListItem title="解锁设置" />
+        {/* <ListItem title={i18n.t('mineModule.securityCenter.unlockSettings')} /> */}
       </View>
     );
   }, []);

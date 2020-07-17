@@ -20,6 +20,7 @@ import {ADVANCED} from '../../../../config/constant';
 import {BarCodeScanner} from 'expo-barcode-scanner';
 import {GStyle} from '../../../../assets/theme';
 import {permissionDenied} from '../../../../utils/pages';
+import {userSelectors} from '../../../../redux/userRedux';
 const Entrance = props => {
   const {addAccount} = props.route.params || {};
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const Entrance = props => {
     language => dispatch(settingsActions.changeLanguage(language)),
     [dispatch],
   );
+  const userList = useSelector(userSelectors.getUserList, shallowEqual);
   useSelector(settingsSelectors.getLanguage, shallowEqual); //Language status is controlled with redux
   const onPress = useCallback(
     value => {
@@ -66,7 +68,7 @@ const Entrance = props => {
         source={launchScreen}>
         {addAccount ? (
           <CommonHeader
-            title="添加账号"
+            title={i18n.t('login.addAccount')}
             headerStyle={styles.headerStyle}
             canBack
           />
@@ -92,11 +94,24 @@ const Entrance = props => {
                 navigationService.navigate('Registered');
               }}
             />
-            <TextL
-              onPress={() => navigationService.navigate('AdvancedLogin')}
-              style={styles.premium}>
-              {i18n.t('login.premiumTips')}
-            </TextL>
+            <View style={styles.premiumBox}>
+              <TextL
+                onPress={() => navigationService.navigate('AdvancedLogin')}
+                style={styles.premium}>
+                {i18n.t('login.premiumTips')}
+              </TextL>
+              {userList && userList.length ? (
+                <View style={styles.loginAccountBox}>
+                  <TextL
+                    onPress={() =>
+                      navigationService.navigate('LoginAccountLogin')
+                    }
+                    style={styles.loginAccount}>
+                    {i18n.t('login.loginAccountLoginTip')}
+                  </TextL>
+                </View>
+              ) : null}
+            </View>
             <TextM
               style={[styles.language, addAccount && styles.hideLanguage]}
               onPress={

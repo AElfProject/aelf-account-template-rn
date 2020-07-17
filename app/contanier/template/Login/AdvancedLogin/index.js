@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, memo} from 'react';
 import {
   CommonHeader,
   Touchable,
@@ -15,7 +15,6 @@ import {useSetState} from '../../../../utils/pages/hooks';
 import {PASSWORD_REG, USERNAME_REG} from '../../../../config/constant';
 import {TextM} from '../../../../components/template/CommonText';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import navigationService from '../../../../utils/common/navigationService';
 const Tab = createMaterialTopTabNavigator();
 const PrivateKeyLogin = () => {
   const [state, setState] = useSetState({
@@ -65,7 +64,7 @@ const PrivateKeyLogin = () => {
     }
   }, [setState, state]);
   const login = useCallback(() => {
-    navigationService.reset('Tab');
+    // navigationService.reset('Tab');
   }, []);
   const {userNameRule, pwdRule, pwdConfirmRule, pwdDifferent} = state;
   return (
@@ -134,7 +133,7 @@ const PrivateKeyLogin = () => {
     </Touchable>
   );
 };
-const KeystoreLogin = () => {
+const KeyStoreLogin = () => {
   const [state, setState] = useSetState({
     topInput: '',
     pwd: '',
@@ -155,7 +154,7 @@ const KeystoreLogin = () => {
     }
   }, [setState, state]);
   const login = useCallback(() => {
-    navigationService.reset('Tab');
+    // navigationService.reset('Tab');
   }, []);
   const {pwdRule} = state;
   return (
@@ -198,18 +197,22 @@ const KeystoreLogin = () => {
     </Touchable>
   );
 };
-const tabNav = [
-  {name: 'Lottery', component: PrivateKeyLogin, options: {title: '私钥'}},
-  {
-    name: 'WaitingDraw',
-    component: KeystoreLogin,
-    options: {title: 'KeyStore'},
-  },
-];
 const AdvancedLogin = () => {
+  const tabNav = [
+    {
+      name: 'PrivateKeyLogin',
+      component: PrivateKeyLogin,
+      options: {title: i18n.t('login.advancedLogin.PrivateKey')},
+    },
+    {
+      name: 'KeyStoreLogin',
+      component: KeyStoreLogin,
+      options: {title: 'KeyStore'},
+    },
+  ];
   return (
     <View style={GStyle.container}>
-      <CommonHeader title="高级账户登录" canBack />
+      <CommonHeader title={i18n.t('login.advancedLogin.title')} canBack />
       <Tab.Navigator
         lazy={false}
         tabBarOptions={{
@@ -228,4 +231,4 @@ const AdvancedLogin = () => {
     </View>
   );
 };
-export default AdvancedLogin;
+export default memo(AdvancedLogin);

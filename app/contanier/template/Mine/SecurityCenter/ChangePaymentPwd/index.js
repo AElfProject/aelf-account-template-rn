@@ -1,4 +1,4 @@
-import React, {memo, useMemo, useEffect, useState} from 'react';
+import React, {memo, useMemo, useState, useCallback} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {GStyle, Colors} from '../../../../../assets/theme';
 import {
@@ -13,31 +13,52 @@ import navigationService from '../../../../../utils/common/navigationService';
 import {isIos} from '../../../../../utils/common/device';
 import {useSelector, shallowEqual} from 'react-redux';
 import {userSelectors} from '../../../../../redux/userRedux';
-
+import i18n from 'i18n-js';
+import {settingsSelectors} from '../../../../../redux/settingsRedux';
+import {useFocusEffect} from '@react-navigation/native';
 const ChangePaymentPwd = () => {
   const [safety, setSafety] = useState(null);
   const userName = useSelector(userSelectors.getUserName, shallowEqual);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (true) {
-        setSafety(true);
-      } else {
-        setSafety(false);
-        ActionSheet.alert('不符合要求，无法修改密码', null, [
-          {title: '退出', onPress: () => navigationService.goBack()},
-          {title: '重新检测', onPress: () => {}},
-        ]);
-      }
-    }, 1000);
-    return () => {
-      timer && clearTimeout(timer);
-    };
-  }, []);
+  const payPw = useSelector(settingsSelectors.getPayPw, shallowEqual);
+  useFocusEffect(
+    useCallback(() => {
+      const timer = setTimeout(() => {
+        if (true) {
+          if (payPw && payPw.length === 6) {
+            setSafety(true);
+          } else {
+            navigationService.navigate('SecondChangePaymentPwd', {
+              remember: false,
+            });
+          }
+        } else {
+          setSafety(false);
+          ActionSheet.alert(
+            i18n.t('mineModule.securityCenter.nonCompliant'),
+            null,
+            [
+              {
+                title: i18n.t('mineModule.securityCenter.out'),
+                onPress: () => navigationService.goBack(),
+              },
+              {
+                title: i18n.t('mineModule.securityCenter.recheck'),
+                onPress: () => {},
+              },
+            ],
+          );
+        }
+      }, 1000);
+      return () => {
+        timer && clearTimeout(timer);
+      };
+    }, [payPw]),
+  );
   const Components = useMemo(() => {
     if (safety === null) {
       return (
         <View style={styles.checkingBox}>
-          <TextL>正在进行安全检测</TextL>
+          <TextL>{i18n.t('mineModule.securityCenter.safetyTesting')}</TextL>
           <Spinner
             type={'ThreeBounce'}
             color={'#000000'}
@@ -54,11 +75,11 @@ const ChangePaymentPwd = () => {
       return (
         <View style={GStyle.container}>
           <TextL style={styles.tips}>
-            您是否记得账号{userName}当前使用的支付密码
+            {i18n.t('mineModule.securityCenter.ask', {userName})}
           </TextL>
           <View style={styles.buttonBox}>
             <CommonButton
-              title="不记得"
+              title={i18n.t('mineModule.securityCenter.noRemember')}
               style={styles.notButtonStyle}
               onPress={() => {
                 navigationService.navigate('SecondChangePaymentPwd', {
@@ -67,7 +88,7 @@ const ChangePaymentPwd = () => {
               }}
             />
             <CommonButton
-              title="记得"
+              title={i18n.t('mineModule.securityCenter.remember')}
               style={styles.buttonStyle}
               onPress={() => {
                 navigationService.navigate('SecondChangePaymentPwd', {
@@ -82,7 +103,10 @@ const ChangePaymentPwd = () => {
   }, [safety, userName]);
   return (
     <View style={GStyle.container}>
-      <CommonHeader title="修改支付密码" canBack />
+      <CommonHeader
+        title={i18n.t('mineModule.securityCenter.changePayPwd')}
+        canBack
+      />
       <View style={styles.container}>{Components}</View>
     </View>
   );

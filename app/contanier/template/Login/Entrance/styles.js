@@ -29,7 +29,18 @@ export default StyleSheet.create({
   premium: {
     alignSelf: 'center',
     marginTop: pTd(50),
-    color: Colors.primaryColor,
+    color: Colors.fontColor,
+  },
+  loginAccountBox: {
+    marginTop: pTd(50),
+    marginLeft: pTd(20),
+    paddingLeft: pTd(20),
+    borderLeftWidth: 1,
+    borderLeftColor: Colors.borderColor,
+  },
+  loginAccount: {
+    alignSelf: 'center',
+    color: Colors.fontColor,
   },
   topTool: {
     paddingHorizontal: pTd(50),
@@ -43,12 +54,16 @@ export default StyleSheet.create({
   language: {
     marginTop: pTd(200),
     alignSelf: 'center',
-    color: Colors.primaryColor,
+    color: Colors.fontColor,
   },
   hideLanguage: {
     color: 'white',
   },
   jLooking: {
-    color: Colors.primaryColor,
+    color: Colors.fontColor,
+  },
+  premiumBox: {
+    justifyContent: 'center',
+    flexDirection: 'row',
   },
 });

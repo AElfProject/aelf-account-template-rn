@@ -6,8 +6,9 @@ import {TextTitle} from '../CommonText';
 import BounceSpinner from '../BounceSpinner';
 import {Colors} from '../../../assets/theme';
 let elements = [];
+let timer = null;
 export default class Loading extends React.Component {
-  static show(text, overlayProps = {}) {
+  static show(text, overlayProps = {}, duration = 20000) {
     let overlayView = (
       <Overlay.PopView
         modal={true}
@@ -22,15 +23,23 @@ export default class Loading extends React.Component {
       </Overlay.PopView>
     );
     Overlay.show(overlayView);
+    timer && clearTimeout(timer);
+    timer = setTimeout(() => {
+      Loading.hide();
+    }, duration);
   }
 
   static hide() {
+    timer && clearTimeout(timer);
+    timer = null;
     elements = elements.filter(item => item); //Discard invalid data
     let key = elements.pop();
     key && key.close && key.close();
   }
 
   static destroy() {
+    timer && clearTimeout(timer);
+    timer = null;
     elements.forEach(item => {
       item && item.close && item.close();
     });

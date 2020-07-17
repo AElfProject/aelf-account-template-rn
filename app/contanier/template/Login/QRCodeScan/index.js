@@ -15,6 +15,7 @@ import styles, {scanHeigth} from './styles';
 import {useSetState} from '../../../../utils/pages/hooks';
 import * as ImagePicker from 'expo-image-picker';
 import navigationService from '../../../../utils/common/navigationService';
+import {permissionDenied} from '../../../../utils/pages';
 const QRCodeLogin = props => {
   const {scanResult} = props.route.params || {};
   const intervalRef = useRef(null);
@@ -59,17 +60,17 @@ const QRCodeLogin = props => {
         }, 1000);
         const {data} = result; //Determine whether to log in the QR code
         if (data && typeof data === 'string' && data.includes('aelf')) {
-          CommonToast.success('成功');
+          CommonToast.success(i18n.t('success'));
           if (scanResult) {
             navigationService.navigate('Transfer', JSON.parse(data));
           } else {
             navigationService.navigate('EnterPassword', JSON.parse(data));
           }
         } else {
-          CommonToast.fail('Please use the login QR code');
+          CommonToast.fail(i18n.t('login.qRCodeScan.QRCodeErr'));
         }
       } catch (error) {
-        CommonToast.fail('Please use the login QR code');
+        CommonToast.fail(i18n.t('login.qRCodeScan.QRCodeErr'));
       }
     },
     [scanResult, scanned, setState],
@@ -85,10 +86,10 @@ const QRCodeLogin = props => {
         if (imageData.length) {
           onBarCodeRead(imageData[0]);
         } else {
-          CommonToast.text('Image load failed.');
+          CommonToast.text(i18n.t('login.qRCodeScan.imageFailed'));
         }
       } catch {
-        CommonToast.text('Image load failed.');
+        CommonToast.text(i18n.t('login.qRCodeScan.imageFailed'));
       }
     },
     [onBarCodeRead],
@@ -99,9 +100,7 @@ const QRCodeLogin = props => {
       const camera = await ImagePicker.requestCameraPermissionsAsync();
       const cameraRoll = await ImagePicker.requestCameraRollPermissionsAsync();
       if (camera.status !== 'granted' && cameraRoll.status !== 'granted') {
-        CommonToast.text(
-          'Sorry, we need camera roll permissions to make this work!',
-        );
+        permissionDenied(i18n.t('permission.cameraRoll'));
       } else {
         const images = await ImagePicker.launchImageLibraryAsync({
           allowMultipleSelection: false,
@@ -109,20 +108,20 @@ const QRCodeLogin = props => {
         if (images.uri) {
           recoginze(images);
         } else {
-          CommonToast.text('Image load failed.');
+          CommonToast.text(i18n.t('login.qRCodeScan.imageFailed'));
         }
       }
     } catch (err) {
-      CommonToast.text('Image load failed.');
+      CommonToast.text(i18n.t('login.qRCodeScan.imageFailed'));
     }
   }, [recoginze]);
 
   return (
     <View style={GStyle.container}>
       <CommonHeader
-        title={scanResult ? '扫码' : i18n.t('login.login')}
+        title={scanResult ? i18n.t('scan') : i18n.t('login.login')}
         canBack
-        rightTitle={'相册'}
+        rightTitle={i18n.t('album')}
         rightOnPress={usePhotoAlbum}
       />
       <BarCodeScanner onBarCodeScanned={onBarCodeRead} style={styles.QRCodeBox}>
@@ -135,7 +134,9 @@ const QRCodeLogin = props => {
               ]}
             />
           </ImageBackground>
-          <Text style={styles.rectangleText}>Scan the QR code</Text>
+          <Text style={styles.rectangleText}>
+            {i18n.t('login.qRCodeScan.scanQRCode')}
+          </Text>
         </View>
       </BarCodeScanner>
     </View>

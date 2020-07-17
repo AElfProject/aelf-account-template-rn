@@ -32,7 +32,7 @@ const saveImagesToAlbum = async FilePath => {
     CameraRoll.save(FilePath, {type: 'photo'})
       .then(() => {
         resolve(true);
-        CommonToast.success(i18n.t('saveSuc'));
+        CommonToast.success(i18n.t('saveSuccess'));
       })
       .catch(err => {
         reject(err);
@@ -95,9 +95,9 @@ const screenshots = async saveView => {
 /* Biometrics */
 const touchAuth = () => {
   const options = {
-    hintMessage: 'Verify your identity',
-    fallbackLabel: 'Use password',
-    promptMessage: 'Aelf Authenticate',
+    hintMessage: i18n.t('permission.verifyIdentity'),
+    fallbackLabel: i18n.t('permission.usePwd'),
+    promptMessage: i18n.t('permission.authenticate'),
   };
   return new Promise((resolve, reject) => {
     LocalAuthentication.isEnrolledAsync()
@@ -167,7 +167,7 @@ const removeDuplicates = list => {
 const onCopyText = text => {
   try {
     Clipboard.setString(text);
-    CommonToast.success('Copied');
+    CommonToast.success(i18n.t('copied'));
   } catch (error) {
     console.log('onCopyText', error);
   }

@@ -39,15 +39,19 @@ const AccountManagement = () => {
       const {address} = userInfo;
       const current = item.details === address;
       if (current) {
-        ActionSheet.alert('请退出当前账号或切换账号', null, [{title: '确定'}]);
+        ActionSheet.alert(
+          i18n.t('mineModule.accountManagement.switchTip'),
+          null,
+          [{title: i18n.t('determine')}],
+        );
       } else {
         ActionSheet.alert(
-          '删除当前账号',
-          '删除账号将删除账号所有数据，请务必确保账号已备份，否则删除后无法找回账号',
+          i18n.t('mineModule.accountManagement.deleteTitle'),
+          i18n.t('mineModule.accountManagement.deleteTip'),
           [
-            {title: '取消', type: 'cancel'},
+            {title: i18n.t('cancel'), type: 'cancel'},
             {
-              title: '删除',
+              title: i18n.t('delete'),
               onPress: () => {
                 VerifyPassword.passwordShow(item.keystore, value => {
                   if (value) {
@@ -62,16 +66,41 @@ const AccountManagement = () => {
     },
     [deleteUser, userInfo],
   );
-  const dropOut = useCallback(() => {
-    const {saveQRCode, address, keystore} = userInfo;
+  const checkSaveQRCode = useCallback(() => {
+    const {saveQRCode} = userInfo;
     if (saveQRCode) {
+      return true;
+    } else {
       ActionSheet.alert(
-        '退出当前账号',
-        '退出账号将删除账号所有数据，请务必确保账号已备份，否则退出后无法找回账号',
+        i18n.t('safetyReminder'),
+        i18n.t('mineModule.accountManagement.qRCodeNoSaveTip'),
         [
-          {title: '取消', type: 'cancel'},
+          {title: i18n.t('cancel'), type: 'cancel'},
           {
-            title: '确定',
+            title: i18n.t('determine'),
+            onPress: () => {
+              navigationService.navigate('MinePage');
+              navigationService.navigate('PersonalCenter');
+            },
+          },
+        ],
+      );
+      return false;
+    }
+  }, [userInfo]);
+  const dropOut = useCallback(() => {
+    const {address, keystore} = userInfo;
+    if (!address) {
+      logOut(address);
+    }
+    if (checkSaveQRCode()) {
+      ActionSheet.alert(
+        i18n.t('mineModule.accountManagement.logOut'),
+        i18n.t('mineModule.accountManagement.logOutTip'),
+        [
+          {title: i18n.t('cancel'), type: 'cancel'},
+          {
+            title: i18n.t('determine'),
             onPress: () => {
               VerifyPassword.passwordShow(keystore, value => {
                 if (value) {
@@ -82,42 +111,29 @@ const AccountManagement = () => {
           },
         ],
       );
-    } else {
-      ActionSheet.alert(
-        '安全提醒',
-        '您的二维码账号未备份，请务必备份。\n二维码账号和对应密码用于登录应用，需备份以防止应用删除、账号登出、手机丢失等情况导致资产损失。',
-        [
-          {title: '取消', type: 'cancel'},
-          {
-            title: '确定',
-            onPress: () => {
-              navigationService.navigate('MinePage');
-              navigationService.navigate('PersonalCenter');
-            },
-          },
-        ],
-      );
     }
-  }, [logOut, userInfo]);
+  }, [checkSaveQRCode, logOut, userInfo]);
   const onSwitchAccount = useCallback(
     item => {
-      const {keystore, privateKey, address, userName} = item;
-      VerifyPassword.passwordShow(keystore, async value => {
-        if (value) {
-          onLoginSuccess({
-            address,
-            keystore,
-            userName,
-            balance: 0,
-            saveQRCode: true,
-            privateKey,
-          });
-          CommonToast.success('切换成功');
-          navigationService.reset('Tab');
-        }
-      });
+      if (checkSaveQRCode()) {
+        const {keystore, privateKey, address, userName} = item;
+        VerifyPassword.passwordShow(keystore, async value => {
+          if (value) {
+            onLoginSuccess({
+              address,
+              keystore,
+              userName,
+              balance: 0,
+              saveQRCode: true,
+              privateKey,
+            });
+            CommonToast.success(i18n.t('switchSuccess'));
+            navigationService.reset('Tab');
+          }
+        });
+      }
     },
-    [onLoginSuccess],
+    [checkSaveQRCode, onLoginSuccess],
   );
   const AccountComponents = useMemo(() => {
     const {userList, address} = userInfo;
@@ -164,7 +180,11 @@ const AccountManagement = () => {
         <CommonHeader
           title={i18n.t('mineModule.accountManagementT')}
           canBack
-          rightTitle={edit ? '完成' : '编辑'}
+          rightTitle={
+            edit
+              ? i18n.t('mineModule.accountManagement.complete')
+              : i18n.t('mineModule.accountManagement.edit')
+          }
           rightOnPress={() => {
             LayoutAnimation.easeInEaseOut();
             setEdit(!edit);
@@ -175,9 +195,12 @@ const AccountManagement = () => {
               onPress={() =>
                 navigationService.navigate('Entrance', {addAccount: true})
               }
-              title="添加账号"
+              title={i18n.t('mineModule.accountManagement.addAccount')}
             />
-            <ListItem title="退出当前账号" onPress={dropOut} />
+            <ListItem
+              title={i18n.t('mineModule.accountManagement.logOut')}
+              onPress={dropOut}
+            />
           </View>
         </CommonHeader>
       </View>

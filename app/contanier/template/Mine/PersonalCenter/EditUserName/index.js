@@ -21,14 +21,19 @@ const EditUserName = () => {
   };
   return (
     <View style={GStyle.secondContainer}>
-      <CommonHeader title="编辑用户名" canBack />
+      <CommonHeader
+        title={i18n.t('mineModule.personalCenter.editUserName')}
+        canBack
+      />
       <Input
         style={styles.input}
         onChangeText={setName}
-        placeholder={'User Name'}
+        placeholder={i18n.t('mineModule.personalCenter.userName')}
       />
-      <TextL style={styles.tips}>仅支持英文或数字</TextL>
-      <CommonButton title="确定" onPress={onPress} />
+      <TextL style={styles.tips}>
+        {i18n.t('mineModule.personalCenter.userNameTip')}
+      </TextL>
+      <CommonButton title={i18n.t('determine')} onPress={onPress} />
     </View>
   );
 };

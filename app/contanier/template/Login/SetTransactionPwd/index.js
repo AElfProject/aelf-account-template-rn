@@ -56,7 +56,7 @@ const SetTransactionPwd = () => {
           break;
         case 'transactionPwConfirm':
           if (text.length === 6 && text === transactionPw) {
-            CommonToast.success(i18n.t('setSuc'));
+            CommonToast.success(i18n.t('setSuccess'));
             changePayPw(text);
             setToken();
           } else if (text.length === 6 && text !== transactionPw) {
@@ -88,7 +88,7 @@ const SetTransactionPwd = () => {
                 touchAuth()
                   .then(() => {
                     navigate(true);
-                    CommonToast.success(i18n.t('setSuc'));
+                    CommonToast.success(i18n.t('setSuccess'));
                   })
                   .catch(() => {
                     navigate(false);

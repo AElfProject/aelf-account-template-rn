@@ -12,8 +12,7 @@ const PasswordInput = props => {
   const getInputItem = () => {
     const {maxLength, inputItemStyle, iconStyle} = props;
     let inputItem = [];
-    // eslint-disable-next-line radix
-    for (let i = 0; i < parseInt(maxLength); i++) {
+    for (let i = 0; i < maxLength; i++) {
       if (i === 0) {
         inputItem.push(
           <View key={i} style={[styles.inputItem, inputItemStyle]}>
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderWidth: 1,
     borderColor: '#ccc',
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
   },
   inputItem: {
     height: sreenWidth / 8,

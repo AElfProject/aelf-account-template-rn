@@ -26,7 +26,9 @@ const Receive = () => {
         <View style={styles.box}>
           <View style={styles.topBox}>
             <View ref={viewShot} style={styles.shotView}>
-              <TextL style={styles.userNameStyle}>扫二维码，转入Token</TextL>
+              <TextL style={styles.userNameStyle}>
+                {i18n.t('mineModule.receive.qRCode')}
+              </TextL>
               <MyQRCode value={QRCodeValue} />
             </View>
             <CommonButton
@@ -37,7 +39,9 @@ const Receive = () => {
             />
           </View>
           <View style={styles.addressBox}>
-            <CopyText copied={address}>Address:{address}</CopyText>
+            <CopyText copied={address}>
+              {i18n.t('address')}: {address}
+            </CopyText>
           </View>
         </View>
       </CommonHeader>

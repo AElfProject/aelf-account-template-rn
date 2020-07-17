@@ -30,7 +30,6 @@ const GenerateQRCode = props => {
   const next = useCallback(async () => {
     const result = await screenshots(viewShot);
     if (result) {
-      CommonToast.success('保存成功');
       setSaveQRCode(true);
       if (payPw && payPw.length === 6) {
         navigationService.reset('Tab');
@@ -64,7 +63,9 @@ const GenerateQRCode = props => {
         rightTitle={i18n.t('login.backupQRCode.later')}
         rightOnPress={rightOnPress}>
         <View style={styles.nameBox}>
-          <TextTitle style={styles.account}>Account:{userName} </TextTitle>
+          <TextTitle style={styles.account}>
+            {i18n.t('account')}:{userName}
+          </TextTitle>
           {/* <TextL style={styles.address}>Address:{userInfo.address} </TextL> */}
         </View>
         <View ref={viewShot} style={styles.shotView}>
@@ -76,9 +77,7 @@ const GenerateQRCode = props => {
           title={i18n.t('login.backupQRCode.saveQRCode')}
           onPress={next}
         />
-        <TextM style={styles.tips}>
-          此二维码是您的账号，丢失二维码等同于丢失账号，您的资产将无法找回，请务必妥善保管您的二维码账号
-        </TextM>
+        <TextM style={styles.tips}>{i18n.t('login.QRCodeTip')}</TextM>
       </CommonHeader>
     </View>
   );

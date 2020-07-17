@@ -41,7 +41,7 @@ const PersonalCenter = () => {
 
   return (
     <View style={GStyle.secondContainer}>
-      <CommonHeader title="个人中心" canBack>
+      <CommonHeader title={i18n.t('mineModule.personalCenter.title')} canBack>
         <View style={styles.box}>
           <View style={styles.topBox}>
             <View ref={viewShot} style={styles.shotView}>
@@ -60,31 +60,34 @@ const PersonalCenter = () => {
               onPress={onSaveQRCode}
             />
             <View style={styles.addressBox}>
-              <CopyText copied={address}>Address:{address}</CopyText>
+              <CopyText copied={address}>
+                {i18n.t('address')}: {address}
+              </CopyText>
               <TextM style={styles.addressTips}>
-                此二维码是您的账号，丢失二维码等同于丢失账号，您的资产将无法找回，请务必妥善保管您的二维码账号
+                {i18n.t('mineModule.personalCenter.qRCodeTip')}
               </TextM>
             </View>
           </View>
-          <ListItem style={styles.premium} title="高级账户" />
           <ListItem
+            style={styles.premium}
+            title={i18n.t('mineModule.personalCenter.premiumAccount')}
+          />
+          {/* <ListItem
             style={styles.authentication}
-            title="身份认证"
+            title={i18n.t('mineModule.personalCenter.authentication')}
             subtitle={
               <Text>
                 <Entypo name="circle-with-cross" />
-                未完善
+                {i18n.t('mineModule.personalCenter.notCompleted')}
               </Text>
             }
             subtitleStyle={styles.subtitleStyle}
           />
           <View style={styles.tipsBox}>
             <TextM style={styles.tips}>
-              {
-                '完成身份信息认证，可获得以下权限：\n* 可进行单笔高于2,000 CNY或累积金额大于10,000 CNY的法币交易'
-              }
+              {i18n.t('mineModule.personalCenter.authenticationTip')}
             </TextM>
-          </View>
+          </View> */}
         </View>
       </CommonHeader>
     </View>

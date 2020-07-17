@@ -56,7 +56,7 @@ const EnterPassword = props => {
           saveQRCode: true,
           privateKey,
         });
-        CommonToast.success('登录成功');
+        CommonToast.success(i18n.t('loginSuccess'));
         if (payPw && payPw.length === 6) {
           navigationService.reset('Tab');
         } else {
@@ -75,13 +75,15 @@ const EnterPassword = props => {
   }
   return (
     <View style={GStyle.container}>
-      <CommonHeader title={'输入密码'} canBack />
+      <CommonHeader title={i18n.t('login.enterPassword.title')} canBack />
       <Touchable
         activeOpacity={1}
         onPress={() => Keyboard.dismiss()}
         style={styles.container}>
         <TextL style={styles.nickNameStyles}>
-          请输入账户{params.nickName}的密码
+          {i18n.t('login.enterPassword.enterAccountPwd', {
+            userName: params.nickName,
+          })}
         </TextL>
         <Input
           secureTextEntry={true}
@@ -95,7 +97,7 @@ const EnterPassword = props => {
         {pwdRule && (
           <TextM style={GStyle.pwTip}>{i18n.t('login.pwdFormatErr')}</TextM>
         )}
-        {pwdErr && <TextM style={GStyle.pwTip}>密码错误</TextM>}
+        {pwdErr && <TextM style={GStyle.pwTip}>{i18n.t('pwdErr')}</TextM>}
         <CommonButton
           loading={loading}
           onPress={login}

@@ -38,10 +38,10 @@ const AuthorizeManagement = () => {
   const onAuthorize = useCallback(
     item => {
       VerifyPassword.inputShow({
-        tip: `Balance: ${balance} ${tokenSymbol}`,
-        title: '授权',
-        inputTip: '金额',
-        errMessage: '输入金额不符合要求，请重新输入',
+        tip: `${i18n.t('mineModule.balance')}: ${balance} ${tokenSymbol}`,
+        title: i18n.t('mineModule.authorizeManagement.title'),
+        inputTip: i18n.t('mineModule.authorizeManagement.amount'),
+        errMessage: i18n.t('mineModule.authorizeManagement.amountTip'),
         rightElement,
         callBack: (value, input) => {
           value &&
@@ -60,7 +60,7 @@ const AuthorizeManagement = () => {
       <View style={styles.itemBox}>
         <View style={styles.rowItem}>
           <TextL style={styles.name} numberOfLines={1}>
-            应用名称
+            {i18n.t('mineModule.authorizeManagement.appName')}
           </TextL>
           <View style={styles.rightBox}>
             <TextL>{item.name}</TextL>
@@ -68,7 +68,7 @@ const AuthorizeManagement = () => {
         </View>
         <View style={styles.rowItem}>
           <TextL style={styles.name} numberOfLines={1}>
-            合约地址
+            {i18n.t('mineModule.authorizeManagement.contractAddress')}
           </TextL>
           <View style={styles.rightBox}>
             <TextL
@@ -80,7 +80,7 @@ const AuthorizeManagement = () => {
         </View>
         <View style={styles.rowItem}>
           <TextL style={styles.name} numberOfLines={1}>
-            授权余额
+            {i18n.t('mineModule.authorizeManagement.authorizedBalance')}
           </TextL>
           <View style={styles.rightBox}>
             <TextL>
@@ -91,7 +91,9 @@ const AuthorizeManagement = () => {
         <Touchable
           onPress={() => onAuthorize(item)}
           style={styles.authorizeBox}>
-          <TextM style={styles.authorizeText}>去授权</TextM>
+          <TextM style={styles.authorizeText}>
+            {i18n.t('mineModule.authorizeManagement.deauthorize')}
+          </TextM>
         </Touchable>
       </View>
     );

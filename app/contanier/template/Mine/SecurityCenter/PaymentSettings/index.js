@@ -28,18 +28,22 @@ const PaymentSettings = () => {
       if (value) {
         const results = await LocalAuthentication.hasHardwareAsync();
         if (!results) {
-          return CommonToast.text('该设备暂不支持生物识别');
+          return CommonToast.text(
+            i18n.t('mineModule.securityCenter.notSupportTip'),
+          );
         }
         const enrolled = await LocalAuthentication.isEnrolledAsync();
         if (!enrolled) {
-          return CommonToast.text('设备未保存指纹或面部数据以用于身份验证');
+          return CommonToast.text(
+            i18n.t('mineModule.securityCenter.unsavedTip'),
+          );
         }
         VerifyPassword.payShow(success => {
           success &&
             touchAuth()
               .then(() => {
                 changeBiometrics(value);
-                CommonToast.success(i18n.t('setSuc'));
+                CommonToast.success(i18n.t('setSuccess'));
               })
               .catch(() => {
                 changeBiometrics(!value);
@@ -48,11 +52,14 @@ const PaymentSettings = () => {
         });
       } else {
         ActionSheet.alert(
-          '你确定要关闭生物识别?',
-          '关闭后每次支付都无法使用刷脸/指纹支付',
+          i18n.t('mineModule.securityCenter.turnOffBiometrics'),
+          i18n.t('mineModule.securityCenter.turnOffBiometricsTip'),
           [
-            {title: '确定', onPress: () => changeBiometrics(value)},
-            {title: '取消', type: 'cancel'},
+            {
+              title: i18n.t('determine'),
+              onPress: () => changeBiometrics(value),
+            },
+            {title: i18n.t('cancel'), type: 'cancel'},
           ],
         );
       }
@@ -62,14 +69,17 @@ const PaymentSettings = () => {
   const Components = useMemo(() => {
     return (
       <View style={GStyle.secondContainer}>
-        <CommonHeader title="支付设置" canBack />
+        <CommonHeader
+          title={i18n.t('mineModule.securityCenter.paySettings')}
+          canBack
+        />
         <ListItem
-          title="修改支付密码"
+          title={i18n.t('mineModule.securityCenter.changePayPwd')}
           onPress={() => navigationService.navigate('ChangePaymentPwd')}
         />
         <ListItem
           disabled
-          title="生物识别"
+          title={i18n.t('mineModule.securityCenter.biometrics')}
           switching
           onValueChange={onValueChange}
           value={biometrics}

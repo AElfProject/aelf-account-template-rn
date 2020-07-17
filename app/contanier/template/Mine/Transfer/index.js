@@ -60,6 +60,18 @@ const Transfer = props => {
   }, []);
   const onTransfer = useCallback(() => {
     if (amount && address) {
+      if (!(amount > 0)) {
+        return CommonToast.text(
+          i18n.t('mineModule.authorizeManagement.amountTip'),
+        );
+      }
+      if (amount > balance) {
+        return CommonToast.text(
+          `${i18n.t(
+            'mineModule.transferM.availableBalance',
+          )}${balance} ${tokenSymbol}`,
+        );
+      }
       TransactionVerification.show(value => {
         if (value) {
           Loading.show();
@@ -72,14 +84,17 @@ const Transfer = props => {
         }
       });
     } else {
-      CommonToast.text('请输入金额/地址');
+      CommonToast.text(i18n.t('mineModule.transferM.enterTip'));
     }
-  }, [address, amount, transfer]);
+  }, [address, amount, balance, transfer]);
   const onChangeAmount = useCallback(
     value => {
-      value = value.match(/\d/g, '') ? value.match(/\d/g, '').join('') : '';
       if (value > balance) {
-        CommonToast.text(`当前可用余额为${balance} ${tokenSymbol}`);
+        CommonToast.text(
+          `${i18n.t(
+            'mineModule.transferM.availableBalance',
+          )}${balance} ${tokenSymbol}`,
+        );
         setState({amount: String(balance)});
       } else {
         setState({amount: value});
@@ -94,7 +109,7 @@ const Transfer = props => {
       style={GStyle.secondContainer}>
       <CommonHeader title={i18n.t('mineModule.transfer')} canBack>
         <View style={styles.box}>
-          <TextL>收款地址</TextL>
+          <TextL>{i18n.t('mineModule.transferM.payAddress')}</TextL>
           <Input
             value={address}
             onChangeText={value => setState({address: value})}
@@ -104,9 +119,9 @@ const Transfer = props => {
         </View>
         <View style={styles.amountBox}>
           <View style={styles.rowBox}>
-            <TextL>转账金额</TextL>
+            <TextL>{i18n.t('mineModule.transferM.transferAmount')}</TextL>
             <TextM style={styles.colorStyle}>
-              余额:{balance} {tokenSymbol}
+              {i18n.t('mineModule.balance')}:{balance} {tokenSymbol}
             </TextM>
           </View>
           <Input
@@ -116,13 +131,13 @@ const Transfer = props => {
             placeholder={i18n.t('login.pleaseEnt')}
           />
           <Input
-            leftTitle="备注"
+            leftTitle={i18n.t('mineModule.transferM.memo')}
             onChangeText={value => (input.current = value)}
-            placeholder={'(选填)'}
+            placeholder={i18n.t('mineModule.transferM.memoTip')}
           />
         </View>
         <View style={[styles.amountBox, styles.rowBox]}>
-          <TextL>矿工费</TextL>
+          <TextL>{i18n.t('mineModule.transferM.fee')}</TextL>
           <TextM style={styles.colorStyle}>≈ 0.027 {tokenSymbol}</TextM>
         </View>
         <CommonButton

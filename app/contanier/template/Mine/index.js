@@ -1,4 +1,4 @@
-import React, {useEffect, memo, useMemo} from 'react';
+import React, {useEffect, memo, useMemo, useCallback} from 'react';
 import {View, StatusBar, ScrollView} from 'react-native';
 import {GStyle, Colors} from '../../../assets/theme';
 import styles from './styles';
@@ -14,6 +14,7 @@ import navigationService from '../../../utils/common/navigationService';
 import i18n from 'i18n-js';
 import userActions, {userSelectors} from '../../../redux/userRedux';
 import config from '../../../config';
+import {useFocusEffect} from '@react-navigation/native';
 const {tokenSymbol} = config;
 const Tool = () => {
   const language = useSelector(settingsSelectors.getLanguage, shallowEqual);
@@ -77,14 +78,14 @@ const Tool = () => {
               />
               <TextL>{i18n.t('mineModule.transfer')}</TextL>
             </Touchable>
-            <Touchable style={styles.toolItem}>
+            {/* <Touchable style={styles.toolItem}>
               <FontAwesome5
                 name="plus-circle"
                 size={30}
                 color={Colors.primaryColor}
               />
               <TextL>{i18n.t('mineModule.exchange')}</TextL>
-            </Touchable>
+            </Touchable> */}
           </View>
           {List.map((item, index) => (
             <ListItem key={index} {...item} />
@@ -105,7 +106,16 @@ const Mine = props => {
     getUserBalance,
     onAppInit,
   } = props;
-  const {userName, balance} = userInfo;
+  const {userName, balance, address} = userInfo;
+  console.log(userInfo, '=====userInfo');
+  console.log(JSON.stringify(userInfo.keystore));
+  useFocusEffect(
+    useCallback(() => {
+      if (!address) {
+        navigationService.reset('Entrance');
+      }
+    }, [address]),
+  );
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       changeBarStyle('light-content');

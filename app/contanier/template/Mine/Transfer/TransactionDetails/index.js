@@ -6,6 +6,7 @@ import {
   BounceSpinner,
   CommonToast,
   Communication,
+  CommonButton,
 } from '../../../../../components/template';
 import {pTd} from '../../../../../utils/common';
 import {useFocusEffect} from '@react-navigation/native';
@@ -20,6 +21,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {onCopyText} from '../../../../../utils/pages';
 import aelfUtils from '../../../../../utils/pages/aelfUtils';
+import i18n from 'i18n-js';
 const NetworkManagement = props => {
   const [state, setState] = useSetState({
     result: null,
@@ -33,6 +35,7 @@ const NetworkManagement = props => {
       let isActive = true;
       const fetch = async () => {
         const {TransactionId} = params || {};
+        console.log(params, '======params');
         if (TransactionId) {
           try {
             const txResult = await aelfInstance.chain.getTxResult(
@@ -45,7 +48,8 @@ const NetworkManagement = props => {
               });
             }
           } catch (error) {
-            CommonToast.text('');
+            console.log(error, '=====error');
+            CommonToast.fail(i18n.t('mineModule.transactionFailed'));
           }
         }
       };
@@ -63,19 +67,27 @@ const NetworkManagement = props => {
     const {Status, TransactionId, Logs} = result || {};
     const free = aelfUtils.getTransactionFee(Logs || {});
     const List = [
-      {title: 'From', details: address, copy: true},
-      {title: 'To', details: aelfUtils.formatAddress(to), copy: true},
-      {title: 'Memo', details: details.memo},
-      {title: 'Status', details: Status, color: 'green'},
       {
-        title: 'Transaction Id',
+        title: i18n.t('mineModule.transferM.from'),
+        details: address,
+        copy: true,
+      },
+      {
+        title: i18n.t('mineModule.transferM.to'),
+        details: aelfUtils.formatAddress(to),
+        copy: true,
+      },
+      {title: i18n.t('mineModule.transferM.memo'), details: details.memo},
+      {title: i18n.t('mineModule.status'), details: Status, color: 'green'},
+      {
+        title: i18n.t('mineModule.transactionID'),
         details: TransactionId,
         copy: true,
         onPress: () => {
           Communication.web(aelfUtils.webURLTx(TransactionId));
         },
       },
-      {title: 'Fee', details: `${free.cost} ${free.symbol}`},
+      {title: i18n.t('mineModule.fee'), details: `${free.cost} ${free.symbol}`},
     ];
     return (
       <View style={styles.container}>
@@ -115,6 +127,12 @@ const NetworkManagement = props => {
             </View>
           );
         })}
+        <View style={styles.buttonBox}>
+          <CommonButton
+            title={i18n.t('mineModule.turnExplorer')}
+            onPress={() => Communication.web(aelfUtils.webURLTx(TransactionId))}
+          />
+        </View>
       </View>
     );
   }, [details, address, result]);
@@ -127,7 +145,9 @@ const NetworkManagement = props => {
   }, []);
   return (
     <View style={GStyle.container}>
-      <CommonHeader title={'交易详情'} canBack>
+      <CommonHeader
+        title={i18n.t('mineModule.transferM.transactionDetails')}
+        canBack>
         {result && details ? Element : Loading}
       </CommonHeader>
     </View>
@@ -161,5 +181,8 @@ const styles = StyleSheet.create({
   detailsStyle: {
     marginTop: pTd(10),
     color: Colors.fontColor,
+  },
+  buttonBox: {
+    marginTop: pTd(50),
   },
 });
