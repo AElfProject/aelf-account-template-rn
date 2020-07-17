@@ -13,6 +13,7 @@ const {Types, Creators} = createActions({
   changeCurrencyUnit: ['currencyUnit'],
   changeSecurityLock: ['securityLock'],
   reSetSettings: [],
+  getLocation: [],
 });
 
 export const settingsTypes = Types;
@@ -95,6 +96,9 @@ export const reSetSettings = state => {
     securityLock: null,
   });
 };
+export const getLocation = state => {
+  return state.merge();
+};
 /* ------------- Hookup Reducers To Types ------------- */
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CHANGE_LANGUAGE]: changeLanguage,
@@ -105,4 +109,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.CHANGE_CURRENCY_UNIT]: changeCurrencyUnit,
   [Types.CHANGE_SECURITY_LOCK]: changeSecurityLock,
   [Types.RE_SET_SETTINGS]: reSetSettings,
+  [Types.GET_LOCATION]: getLocation,
 });

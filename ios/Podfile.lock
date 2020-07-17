@@ -28,6 +28,10 @@ PODS:
     - UMCore
   - EXLocalization (8.2.1):
     - UMCore
+  - EXLocation (8.3.0):
+    - UMCore
+    - UMPermissionsInterface
+    - UMTaskManagerInterface
   - EXPermissions (9.0.1):
     - UMCore
     - UMPermissionsInterface
@@ -389,6 +393,7 @@ DEPENDENCIES:
   - EXImagePicker (from `../node_modules/expo-image-picker/ios`)
   - EXLocalAuthentication (from `../node_modules/expo-local-authentication/ios`)
   - EXLocalization (from `../node_modules/expo-localization/ios`)
+  - EXLocation (from `../node_modules/expo-location/ios`)
   - EXPermissions (from `../node_modules/expo-permissions/ios`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
@@ -501,6 +506,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-local-authentication/ios"
   EXLocalization:
     :path: "../node_modules/expo-localization/ios"
+  EXLocation:
+    :path: "../node_modules/expo-location/ios"
   EXPermissions:
     :path: "../node_modules/expo-permissions/ios"
   FBLazyVector:
@@ -624,6 +631,7 @@ SPEC CHECKSUMS:
   EXImagePicker: 2d94621fecfbd3cf2384e2e7d31ac661ed368de2
   EXLocalAuthentication: 238cc8f7d647e7676fba045420266da80bf7c2b2
   EXLocalization: 2c66021723ee3d91b7ce2627cc27979ddd648fe7
+  EXLocation: 894f762c697a2d91d270ccf1e4b78f2b15d407e3
   EXPermissions: b6d7134b7215c33420318c2bbb5d362c20ac9726
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245
   FBReactNativeSpec: 5465d51ccfeecb7faa12f9ae0024f2044ce4044e

@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2020071751</string>
+	<string>2020071755</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -41,8 +41,12 @@
 	<string>This app needs to access your camera function so that you can scan QR code to log in to your account</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Enabling Face ID allows you quick and secure access to your account.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Allow $(PRODUCT_NAME) to use your location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Allow $(PRODUCT_NAME) to use your location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Allow $(PRODUCT_NAME) to use your location</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app needs to access your camera function so that you can scan QR code to log in to your account</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

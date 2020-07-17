@@ -205,7 +205,8 @@
     "openSettings": "打开设置",
     "anDeniedDetails": "请打开您的设置,允许我们访问您的{{type}}权限",
     "openFailed": "打开失败",
-    "failedDetails": "请在iPhone的“设置-隐私”选项中,允许访问您的{{type}}"
+    "failedDetails": "请在iPhone的“设置-隐私”选项中,允许访问您的{{type}}",
+    "getLocation": "位置"
   },
   "noTransactionPwdTip": "还没有设置交易密码，请先去设置支付密码",
   "userSaga": {

@@ -40,15 +40,13 @@ const Entrance = props => {
     ...item,
     onPress: onPress,
   }));
+  const getLocation = useCallback(
+    () => dispatch(settingsActions.getLocation()),
+    [dispatch],
+  );
   useEffect(() => {
-    if (ADVANCED) {
-      // ActionSheet.alert(
-      //     i18n.t('safetyReminder'),
-      //     i18n.t('alert.locationTips'),
-      //     [{ title: i18n.t('determine') }]
-      // )
-    }
-  }, []);
+    getLocation();
+  }, [getLocation]);
   const login = async () => {
     const {status} = await BarCodeScanner.requestPermissionsAsync();
     if (status !== 'granted') {
