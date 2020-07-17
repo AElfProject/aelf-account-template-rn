@@ -218,9 +218,9 @@
   "securityLock": {
     "title": "安全验证",
     "touchVerification": "点击进行安全验证",
-    "openVerification": "打开安全验证？",
-    "openVerificationTip": "打开后每次打开应用时需要安全验证",
-    "downVerification": "你确定关闭安全验证？",
-    "downVerificationTip": "关闭后每次打开应用都不需要进行安全验证"
+    "openVerification": "确认开启安全验证？",
+    "openVerificationTip": "开启后每次打开应用时需要安全验证",
+    "downVerification": "确认关闭安全验证？",
+    "downVerificationTip": "关闭后每次打开应用都不需要安全验证"
   }
 }
