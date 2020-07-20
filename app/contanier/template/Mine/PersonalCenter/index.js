@@ -1,5 +1,5 @@
 import React, {memo, useRef, useCallback} from 'react';
-import {Colors, GStyle} from '../../../../assets/theme';
+import {GStyle} from '../../../../assets/theme';
 import {
   CommonHeader,
   MyQRCode,
@@ -62,10 +62,10 @@ const PersonalCenter = () => {
               </TextM>
             </View>
           </View>
-          <ListItem
+          {/* <ListItem
             style={styles.premium}
             title={i18n.t('mineModule.personalCenter.premiumAccount')}
-          />
+          /> */}
           {/* <ListItem
             style={styles.authentication}
             title={i18n.t('mineModule.personalCenter.authentication')}

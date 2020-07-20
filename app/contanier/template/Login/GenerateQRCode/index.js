@@ -12,11 +12,7 @@ import navigationService from '../../../../utils/common/navigationService';
 import i18n from 'i18n-js';
 import userActions, {userSelectors} from '../../../../redux/userRedux';
 import {useDispatch, shallowEqual, useSelector} from 'react-redux';
-import {
-  TextTitle,
-  TextM,
-  TextL,
-} from '../../../../components/template/CommonText';
+import {TextM, TextL} from '../../../../components/template/CommonText';
 import {settingsSelectors} from '../../../../redux/settingsRedux';
 const GenerateQRCode = props => {
   const dispatch = useDispatch();
