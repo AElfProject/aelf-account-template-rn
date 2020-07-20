@@ -130,6 +130,7 @@ const Transfer = props => {
             </TextM>
           </View>
           <Input
+            keyboardType="numeric"
             value={amount}
             style={styles.inputStyle}
             onChangeText={onChangeAmount}

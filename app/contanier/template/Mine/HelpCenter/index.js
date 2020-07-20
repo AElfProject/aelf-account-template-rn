@@ -1,65 +1,93 @@
-import React, {memo, useMemo} from 'react';
+import React, {memo, useMemo, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {GStyle, Colors} from '../../../../assets/theme';
-import {CommonHeader, ListItem} from '../../../../components/template';
+import {
+  CommonHeader,
+  Collapsible,
+  Touchable,
+} from '../../../../components/template';
 import i18n from 'i18n-js';
 import {pTd} from '../../../../utils/common';
-import {TextL} from '../../../../components/template/CommonText';
-const HelpCenter = () => {
+import {TextL, TextM} from '../../../../components/template/CommonText';
+import Entypo from 'react-native-vector-icons/Entypo';
+const Item = props => {
+  const {details, collapsed, title, onPress} = props;
   const Components = useMemo(() => {
     return (
-      <View style={GStyle.secondContainer}>
-        <CommonHeader title={i18n.t('mineModule.helpCenterT')} canBack>
-          <TextL style={styles.textMargin}>
-            {i18n.t('mineModule.helpCenter.commonProblem')}
-          </TextL>
-          <View style={styles.box}>
-            <View style={styles.subtitleBox}>
-              <TextL style={styles.subtitleStyle}>
-                {i18n.t('mineModule.helpCenter.accountSecurity')}
-              </TextL>
-            </View>
-            <TextL style={styles.textStyle}>
-              {i18n.t('mineModule.helpCenter.qRCode')}
-            </TextL>
-            <TextL style={styles.textStyle}>
-              {i18n.t('mineModule.helpCenter.qRCodeTip')}
-            </TextL>
-            <TextL style={styles.textStyle}>
-              {i18n.t('mineModule.helpCenter.authentication')}
-            </TextL>
-            <TextL style={styles.textStyle}>
-              {i18n.t('mineModule.helpCenter.authorized')}
-            </TextL>
-          </View>
-          <View style={styles.bottomBox}>
-            <View style={styles.subtitleBox}>
-              <TextL style={styles.subtitleStyle}>
-                {i18n.t('mineModule.helpCenter.tradingRules')}
-              </TextL>
-            </View>
-            <TextL style={styles.textStyle}>
-              {i18n.t('mineModule.helpCenter.receive')}
-            </TextL>
-            <TextL style={styles.textStyle}>
-              {i18n.t('mineModule.helpCenter.transfer')}
-            </TextL>
-            <TextL style={styles.textStyle}>
-              {i18n.t('mineModule.helpCenter.fiatCurrency')}
-            </TextL>
-            <TextL style={styles.textStyle}>
-              {i18n.t('mineModule.helpCenter.crossChain')}
-            </TextL>
-          </View>
-          <TextL style={styles.textMargin}>
-            {i18n.t('mineModule.helpCenter.feedback')}
-          </TextL>
-          <ListItem title={i18n.t('mineModule.helpCenter.submitFeedback')} />
-        </CommonHeader>
-      </View>
+      <Collapsible style={styles.collapsible} collapsed={collapsed}>
+        <TextM style={styles.detailsText}>{details}</TextM>
+      </Collapsible>
     );
-  }, []);
-  return Components;
+  }, [details, collapsed]);
+  return (
+    <View style={styles.bottomBox}>
+      <Touchable onPress={onPress} style={styles.titleBox}>
+        <TextL style={styles.titleStyle}>{title}</TextL>
+        {collapsed ? (
+          <Entypo name="chevron-down" size={pTd(40)} />
+        ) : (
+          <Entypo color={Colors.fontColor} name="chevron-up" size={pTd(40)} />
+        )}
+      </Touchable>
+      {Components}
+    </View>
+  );
+};
+const HelpCenter = () => {
+  const [selected, setSelected] = useState(null);
+  const list = [
+    {
+      title: i18n.t('mineModule.helpCenter.codeAccount'),
+      details: i18n.t('mineModule.helpCenter.codeAccountE'),
+    },
+    {
+      title: i18n.t('mineModule.helpCenter.qRCode'),
+      details: i18n.t('mineModule.helpCenter.qRCodeE'),
+    },
+    {
+      title: i18n.t('mineModule.helpCenter.backupQRCode'),
+      details: i18n.t('mineModule.helpCenter.backupQRCodeE'),
+    },
+    {
+      title: i18n.t('mineModule.helpCenter.forgetPwd'),
+      details: i18n.t('mineModule.helpCenter.forgetPwdE'),
+    },
+    {
+      title: i18n.t('mineModule.helpCenter.receiveTransfer'),
+      details: i18n.t('mineModule.helpCenter.receiveTransferE'),
+    },
+    {
+      title: i18n.t('mineModule.helpCenter.howBiometrics'),
+      details: i18n.t('mineModule.helpCenter.howBiometricsE'),
+    },
+    {
+      title: i18n.t('mineModule.helpCenter.howAuthorization'),
+      details: i18n.t('mineModule.helpCenter.howAuthorizationE'),
+    },
+  ];
+  return (
+    <View style={GStyle.secondContainer}>
+      <CommonHeader title={i18n.t('mineModule.helpCenterT')} canBack>
+        <TextL style={styles.textMargin}>
+          {i18n.t('mineModule.helpCenter.commonProblem')}
+        </TextL>
+        {list.map((item, index) => {
+          return (
+            <Item
+              key={index}
+              {...item}
+              collapsed={!(selected === index)}
+              onPress={() => setSelected(selected === index ? null : index)}
+            />
+          );
+        })}
+        {/* <TextL style={styles.textMargin}>
+          {i18n.t('mineModule.helpCenter.feedback')}
+        </TextL>
+        <ListItem title={i18n.t('mineModule.helpCenter.submitFeedback')} /> */}
+      </CommonHeader>
+    </View>
+  );
 };
 
 export default memo(HelpCenter);
@@ -69,9 +97,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   bottomBox: {
-    padding: pTd(20),
-    borderTopWidth: 1,
-    borderTopColor: Colors.borderColor,
+    padding: pTd(30),
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.borderColor,
     backgroundColor: 'white',
   },
   itemBox: {
@@ -96,5 +124,16 @@ const styles = StyleSheet.create({
   textStyle: {
     marginTop: pTd(20),
     color: Colors.fontGray,
+  },
+  detailsText: {
+    flex: 1,
+    color: Colors.fontGray,
+  },
+  titleBox: {
+    flexDirection: 'row',
+    marginBottom: pTd(10),
+  },
+  titleStyle: {
+    flex: 1,
   },
 });

@@ -92,11 +92,11 @@ const Entrance = props => {
               }}
             />
             <View style={styles.premiumBox}>
-              <TextL
+              {/* <TextL
                 onPress={() => navigationService.navigate('AdvancedLogin')}
                 style={styles.premium}>
                 {i18n.t('login.premiumTips')}
-              </TextL>
+              </TextL> */}
               {userList && userList.length ? (
                 <View style={styles.loginAccountBox}>
                   <TextL

@@ -1,6 +1,8 @@
 import AElf from 'aelf-sdk';
 import config from '../../config';
 import unitConverter from './unitConverter';
+import moment from 'moment';
+import {TIME_FORMAT} from '../../config/constant';
 const {explorerURL, address} = config;
 const {prefix, suffix} = address;
 
@@ -63,7 +65,13 @@ const webURLTx = addressInput => {
   addressInput = formatRestoreAddress(addressInput);
   return `${explorerURL}/tx/${addressInput}`;
 };
-
+const timeConversion = time => {
+  let showTime = '';
+  if (time) {
+    showTime = moment(time).format(TIME_FORMAT);
+  }
+  return showTime;
+};
 export default {
   checkPassword,
   webURLAddress,
@@ -74,4 +82,5 @@ export default {
   getKeystore,
   unlockKeystore,
   checkAddress,
+  timeConversion,
 };

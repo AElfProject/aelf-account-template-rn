@@ -6,16 +6,15 @@ import Touchable from '../Touchable';
 import {Colors, GStyle} from '../../../assets/theme';
 import Password from '../Password';
 import {pTd} from '../../../utils/common';
-import KeyboardSpace from '../KeyboardSpace';
 import {TextL, TextM} from '../CommonText';
 import {settingsSelectors} from '../../../redux/settingsRedux';
 import {useSelector, shallowEqual} from 'react-redux';
 import i18n from 'i18n-js';
-import {isIos} from '../../../utils/common/device';
 import Input from '../Input';
 import aelfUtils from '../../../utils/pages/aelfUtils';
 import {sleep} from '../../../utils/pages';
 import BounceSpinner from '../BounceSpinner';
+import {isIos} from '../../../utils/common/device';
 const BottomView = props => {
   const {cancel, determine} = props;
   const Components = useMemo(
@@ -24,7 +23,7 @@ const BottomView = props => {
         <Touchable onPress={cancel} style={styles.buttonItem}>
           <Text style={styles.cancelText}>{i18n.t('cancel')}</Text>
         </Touchable>
-        <Touchable onPress={determine} style={styles.buttonItem}>
+        <Touchable onPress={determine} style={styles.rightButtonItem}>
           <Text style={styles.buttonText}>{i18n.t('determine')}</Text>
         </Touchable>
       </View>
@@ -74,7 +73,7 @@ const PayComponents = props => {
           <TextM style={[GStyle.pwTip, styles.tips]}>{i18n.t('pwdErr')}</TextM>
         )}
         <BottomView cancel={cancel} determine={determine} />
-        {isIos ? <KeyboardSpace /> : null}
+        {/* {isIos ? <KeyboardSpace /> : null} */}
       </View>
     </ScrollView>
   );
@@ -128,7 +127,6 @@ const PasswordComponents = props => {
         ) : (
           <BottomView cancel={cancel} determine={determine} />
         )}
-        {isIos ? <KeyboardSpace /> : null}
       </View>
     </ScrollView>
   );
@@ -189,7 +187,6 @@ const InputComponents = props => {
           <TextM style={[GStyle.pwTip, styles.tips]}>{errMessage}</TextM>
         )}
         <BottomView cancel={cancel} determine={determine} />
-        {isIos ? <KeyboardSpace /> : null}
       </View>
     </ScrollView>
   );
@@ -198,6 +195,7 @@ const payShow = callBack => {
   OverlayModal.show(<PayComponents callBack={callBack} />, {
     style: styles.style,
     modal: true,
+    autoKeyboardInsets: isIos ? true : false,
     containerStyle: styles.containerStyle,
   });
 };
@@ -207,6 +205,7 @@ const passwordShow = (keystore, callBack) => {
     {
       style: styles.style,
       modal: true,
+      autoKeyboardInsets: isIos ? true : false,
       containerStyle: styles.containerStyle,
     },
   );
@@ -215,6 +214,7 @@ const inputShow = props => {
   OverlayModal.show(<InputComponents {...props} />, {
     style: styles.style,
     modal: true,
+    autoKeyboardInsets: isIos ? true : false,
     containerStyle: styles.containerStyle,
   });
 };
@@ -226,9 +226,11 @@ export default {
 const styles = StyleSheet.create({
   container: {
     paddingTop: pTd(50),
-    width: '100%',
-    alignItems: 'center',
+    width: '90%',
     backgroundColor: 'white',
+    alignSelf: 'center',
+    borderRadius: pTd(20),
+    alignItems: 'center',
   },
   loadingBox: {
     height: 60,
@@ -237,7 +239,7 @@ const styles = StyleSheet.create({
   },
   style: {
     flex: 1,
-    flexDirection: 'column-reverse',
+    justifyContent: 'center',
     backgroundColor: 'rgba(0,0,0,0.2)',
   },
   containerStyle: {},
@@ -249,11 +251,18 @@ const styles = StyleSheet.create({
     borderRightColor: Colors.borderColor,
     overflow: 'hidden',
   },
+  rightButtonItem: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
   buttonsBox: {
     height: 60,
     flexDirection: 'row',
     borderTopWidth: 1,
     borderTopColor: Colors.borderColor,
+    overflow: 'hidden',
   },
   buttonText: {
     color: Colors.primaryColor,

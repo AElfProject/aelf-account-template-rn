@@ -18,7 +18,7 @@ export default StyleSheet.create({
   },
   shotView: {
     justifyContent: 'center',
-    padding: 10,
+    padding: pTd(30),
     backgroundColor: 'white',
     alignItems: 'center',
     alignSelf: 'center',

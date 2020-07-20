@@ -26,16 +26,16 @@ const NetworkManagement = props => {
   const [state, setState] = useSetState({
     result: null,
     details: null,
+    time: null,
   });
   const address = useSelector(userSelectors.getAddress, shallowEqual);
-  const {result, details} = state;
+  const {result, details, time} = state;
   const {params} = props.route || {};
   useFocusEffect(
     useCallback(() => {
       let isActive = true;
       const fetch = async () => {
         const {TransactionId} = params || {};
-        console.log(params, '======params');
         if (TransactionId) {
           try {
             const txResult = await aelfInstance.chain.getTxResult(
@@ -45,6 +45,16 @@ const NetworkManagement = props => {
               setState({
                 result: txResult,
                 details: JSON.parse(txResult.Transaction.Params),
+              });
+            }
+            const blockByHeight = await aelfInstance.chain.getBlockByHeight(
+              txResult.BlockNumber || txResult.Transaction.RefBlockNumber,
+              true,
+            );
+            const {Time} = blockByHeight.Header;
+            if (isActive) {
+              setState({
+                time: Time,
               });
             }
           } catch (error) {
@@ -87,6 +97,7 @@ const NetworkManagement = props => {
           Communication.web(aelfUtils.webURLTx(TransactionId));
         },
       },
+      time ? {title: 'time', details: aelfUtils.timeConversion(time)} : {},
       {title: i18n.t('mineModule.fee'), details: `${free.cost} ${free.symbol}`},
     ];
     return (
@@ -135,7 +146,7 @@ const NetworkManagement = props => {
         </View>
       </View>
     );
-  }, [details, address, result]);
+  }, [details, address, result, time]);
   const Loading = useMemo(() => {
     return (
       <View style={styles.loadingBox}>

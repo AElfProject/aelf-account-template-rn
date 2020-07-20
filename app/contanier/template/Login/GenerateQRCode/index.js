@@ -12,7 +12,11 @@ import navigationService from '../../../../utils/common/navigationService';
 import i18n from 'i18n-js';
 import userActions, {userSelectors} from '../../../../redux/userRedux';
 import {useDispatch, shallowEqual, useSelector} from 'react-redux';
-import {TextTitle, TextM} from '../../../../components/template/CommonText';
+import {
+  TextTitle,
+  TextM,
+  TextL,
+} from '../../../../components/template/CommonText';
 import {settingsSelectors} from '../../../../redux/settingsRedux';
 const GenerateQRCode = props => {
   const dispatch = useDispatch();
@@ -62,12 +66,15 @@ const GenerateQRCode = props => {
         rightTitle={i18n.t('login.backupQRCode.later')}
         rightOnPress={rightOnPress}>
         <View style={styles.nameBox}>
-          <TextTitle style={styles.account}>
+          {/* <TextTitle style={styles.account}>
             {i18n.t('account')}:{userName}
-          </TextTitle>
+          </TextTitle> */}
           {/* <TextL style={styles.address}>Address:{userInfo.address} </TextL> */}
         </View>
         <View ref={viewShot} style={styles.shotView}>
+          <TextL style={styles.userNameStyle}>
+            {i18n.t('mineModule.username')}:{userName}
+          </TextL>
           <MyQRCode value={QRCodeValue} />
         </View>
         <CommonButton

@@ -25,8 +25,9 @@ const NetworkManagement = props => {
   const [state, setState] = useSetState({
     result: null,
     details: null,
+    time,
   });
-  const {result, details} = state;
+  const {result, details, time} = state;
   const {params} = props.route || {};
   useFocusEffect(
     useCallback(() => {
@@ -44,7 +45,18 @@ const NetworkManagement = props => {
                 details: JSON.parse(txResult.Transaction.Params),
               });
             }
+            const blockByHeight = await aelfInstance.chain.getBlockByHeight(
+              txResult.BlockNumber || txResult.Transaction.RefBlockNumber,
+              false,
+            );
+            const {Time} = blockByHeight.Header;
+            if (isActive) {
+              setState({
+                time: Time,
+              });
+            }
           } catch (error) {
+            console.log(error, '=====error');
             CommonToast.fail(i18n.t('mineModule.transactionFailed'));
           }
         }
@@ -84,6 +96,7 @@ const NetworkManagement = props => {
           Communication.web(aelfUtils.webURLTx(TransactionId));
         },
       },
+      time ? {title: 'time', details: aelfUtils.timeConversion(time)} : {},
       {title: i18n.t('mineModule.fee'), details: `${free.cost} ${free.symbol}`},
     ];
     return (
@@ -128,7 +141,7 @@ const NetworkManagement = props => {
         </View>
       </View>
     );
-  }, [details, result]);
+  }, [details, result, time]);
   const Loading = useMemo(() => {
     return (
       <View style={styles.loadingBox}>

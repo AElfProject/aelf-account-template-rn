@@ -4,6 +4,7 @@ import {
   Touchable,
   Input,
   CommonButton,
+  CommonToast,
 } from '../../../../components/template';
 import i18n from 'i18n-js';
 import {useSetState} from '../../../../utils/pages/hooks';
@@ -16,6 +17,7 @@ import NamePasswordTips from '../NamePasswordTips';
 import userActions from '../../../../redux/userRedux';
 import AElf from 'aelf-sdk';
 import {useDispatch} from 'react-redux';
+import BottomTerms from '../../Terms/BottomTerms';
 const Registered = () => {
   const dispatch = useDispatch();
   const [state, setState] = useSetState({
@@ -27,6 +29,7 @@ const Registered = () => {
     pwdRule: false,
     pwdConfirmRule: false,
     newWallet: null,
+    agree: false,
   });
   const onRegistered = useCallback(
     (newWallet, pwd, userName) =>
@@ -71,13 +74,16 @@ const Registered = () => {
   }, [setState, state]);
   const registered = useCallback(() => {
     Keyboard.dismiss();
-    const {userName, pwd, newWallet, pwdConfirm} = state;
+    const {userName, pwd, newWallet, pwdConfirm, agree} = state;
     if (
       USERNAME_REG.test(userName) &&
       pwdConfirm === pwd &&
-      PASSWORD_REG.test(pwd)
+      PASSWORD_REG.test(pwd) &&
+      agree
     ) {
       onRegistered(newWallet, pwd, userName);
+    } else {
+      CommonToast.fail('fail');
     }
   }, [onRegistered, state]);
   const generateKeystore = useCallback(async () => {
@@ -100,6 +106,7 @@ const Registered = () => {
     userName,
     pwdConfirm,
     pwd,
+    agree,
   } = state;
   return (
     <View style={GStyle.container}>
@@ -149,13 +156,18 @@ const Registered = () => {
           <NamePasswordTips />
           <CommonButton
             disabled={
-              !userName ||
-              !PASSWORD_REG.test(pwdConfirm) ||
-              !PASSWORD_REG.test(pwd)
+              !agree ||
+              !USERNAME_REG.test(userName) ||
+              !PASSWORD_REG.test(pwd) ||
+              !pwdConfirm === pwd
             }
             onPress={registered}
             title={i18n.t('login.register')}
             style={styles.buttonStyles}
+          />
+          <BottomTerms
+            value={agree}
+            changeState={() => setState({agree: !agree})}
           />
         </Touchable>
       </CommonHeader>

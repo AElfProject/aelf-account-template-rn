@@ -13,6 +13,7 @@ import navigationService from '../../utils/common/navigationService';
 
 import LoginNav from '../template/Login/stackNav';
 import MineNav from '../template/Mine/stackNav';
+import TermsNav from '../template/Terms/stackNav';
 const Stack = createStackNavigator();
 
 const stackNav = [
@@ -25,6 +26,7 @@ const stackNav = [
     },
   },
   {name: 'Tab', component: Tab},
+  ...TermsNav,
   ...LoginNav,
   ...MineNav,
 ];

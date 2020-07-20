@@ -7,6 +7,7 @@ import {pTd} from '../../../../utils/common';
 import {aelfLogo} from '../../../../assets/images';
 import {TextL} from '../../../../components/template/CommonText';
 import Constants from 'expo-constants';
+import navigationService from '../../../../utils/common/navigationService';
 const AboutUs = () => {
   const Components = useMemo(() => {
     return (
@@ -30,8 +31,14 @@ const AboutUs = () => {
           style={styles.itemBox}
         />
         <View style={styles.segmentation} />
-        <ListItem title={i18n.t('mineModule.aboutUs.serviceAgreement')} />
-        <ListItem title={i18n.t('mineModule.aboutUs.privacyPolicy')} />
+        <ListItem
+          onPress={() => navigationService.navigate('TermsService')}
+          title={i18n.t('mineModule.aboutUs.serviceAgreement')}
+        />
+        <ListItem
+          onPress={() => navigationService.navigate('PrivacyPolicy')}
+          title={i18n.t('mineModule.aboutUs.privacyPolicy')}
+        />
       </View>
     );
   }, []);

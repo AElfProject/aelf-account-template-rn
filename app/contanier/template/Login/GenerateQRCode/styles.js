@@ -37,5 +37,9 @@ const styles = StyleSheet.create({
     marginTop: pTd(50),
     paddingHorizontal: pTd(50),
   },
+  userNameStyle: {
+    fontSize: 18,
+    marginBottom: pTd(20),
+  },
 });
 export default styles;

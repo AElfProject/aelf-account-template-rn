@@ -7,28 +7,27 @@ import {pTd} from '../../../utils/common';
 import {TextL} from '../../../components/template/CommonText';
 import TransactionVerification from '../../../utils/pages/TransactionVerification';
 import navigationService from '../../../utils/common/navigationService';
-import {useFocusEffect} from '@react-navigation/native';
 import i18n from 'i18n-js';
+let timer;
 const SecurityLock = () => {
-  useFocusEffect(
-    useCallback(() => {
-      const timer = setTimeout(() => {
-        verification();
-      }, 300);
-      return () => {
-        timer && clearTimeout(timer);
-      };
-    }, [verification]),
-  );
   useEffect(() => {
+    if (timer) {
+      return;
+    }
+    timer = setTimeout(() => {
+      verification();
+    }, 500);
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       () => {
         return true;
       },
     );
-    return () => backHandler.remove();
-  }, []);
+    return () => {
+      backHandler.remove();
+      timer && clearTimeout(timer);
+    };
+  }, [verification]);
   const verification = useCallback(() => {
     TransactionVerification.show(
       value => value && navigationService.navigate('Tab'),

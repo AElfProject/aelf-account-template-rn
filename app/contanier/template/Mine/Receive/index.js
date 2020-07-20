@@ -19,15 +19,18 @@ const Receive = () => {
     shallowEqual,
   );
   const QRCodeValue = keystore ? JSON.stringify(keystore) : null;
-
+  const userName = useSelector(userSelectors.getUserName, shallowEqual);
   return (
     <View style={GStyle.container}>
       <CommonHeader title={i18n.t('mineModule.collect')} canBack>
         <View style={styles.box}>
           <View style={styles.topBox}>
+            <TextL style={styles.userNameStyle}>
+              {i18n.t('mineModule.receive.qRCode')}
+            </TextL>
             <View ref={viewShot} style={styles.shotView}>
               <TextL style={styles.userNameStyle}>
-                {i18n.t('mineModule.receive.qRCode')}
+                {i18n.t('mineModule.username')}:{userName}
               </TextL>
               <MyQRCode value={QRCodeValue} />
             </View>

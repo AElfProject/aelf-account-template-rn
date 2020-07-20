@@ -45,6 +45,6 @@ Touchable.propTypes = {
 };
 
 Touchable.defaultProps = {
-  onPressWithSecond: 500,
+  onPressWithSecond: 1000,
 };
 export default memo(Touchable);

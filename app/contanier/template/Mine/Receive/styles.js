@@ -14,11 +14,11 @@ export default StyleSheet.create({
   },
   userNameStyle: {
     fontSize: 18,
-    marginBottom: pTd(40),
+    marginBottom: pTd(20),
   },
   shotView: {
     justifyContent: 'center',
-    padding: 10,
+    padding: pTd(30),
     backgroundColor: 'white',
     alignItems: 'center',
     alignSelf: 'center',

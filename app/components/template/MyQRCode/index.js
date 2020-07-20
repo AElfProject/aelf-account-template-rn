@@ -26,9 +26,6 @@ const MyQRCode = props => {
     />
   );
 };
-MyQRCode.defaultProps = {
-  value: '1',
-};
 export default memo(MyQRCode);
 const styles = StyleSheet.create({
   loadingBox: {

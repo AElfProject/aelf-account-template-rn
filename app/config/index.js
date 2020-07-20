@@ -51,4 +51,16 @@ export default {
   tokenDecimal: 3,
   tokenDecimalFormat: 10 ** 3,
   fetchTimeout: 10000,
+  /**
+   * The country you want to remind him of Please enter the iSO country code and refer to the link below
+   * https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements
+   * Note that this is an array
+   */
+  ISOCountryCodeBlackList: ['CN'],
+  /**
+   * safety lock time
+   * 10 minutes by default
+   * milliseconds as a unit
+   */
+  SafeTime: 600000,
 };

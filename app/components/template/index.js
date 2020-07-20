@@ -5,6 +5,7 @@ import Password from './Password';
 import ListItem from './ListItem';
 import MyQRCode from './MyQRCode';
 import Touchable from './Touchable';
+import Collapsible from './Collapsible';
 import CommonToast from './CommonToast';
 import ActionSheet from './ActionSheet';
 import WordRotation from './WordRotation';
@@ -22,6 +23,7 @@ export {
   ListItem,
   MyQRCode,
   Touchable,
+  Collapsible,
   CommonToast,
   ActionSheet,
   WordRotation,

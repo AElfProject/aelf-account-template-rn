@@ -15,10 +15,11 @@ import {settingsTypes} from '../redux/settingsRedux';
 import * as Location from 'expo-location';
 import {permissionDenied} from '../utils/pages';
 import i18n from 'i18n-js';
-import {ISO_COUNTRY_CODE_BLACK_LIST} from '../config/constant';
+import config from '../config';
 import {ActionSheet} from '../components/template';
 function* getLocationSaga() {
-  if (!Array.isArray(ISO_COUNTRY_CODE_BLACK_LIST)) {
+  const blackList = config.ISOCountryCodeBlackList;
+  if (!Array.isArray(blackList)) {
     return;
   }
   try {
@@ -26,12 +27,14 @@ function* getLocationSaga() {
     if (status !== 'granted') {
       return permissionDenied(i18n.t('permission.getLocation'));
     }
-    const location = yield Location.getCurrentPositionAsync({});
+    const location = yield Location.getCurrentPositionAsync({
+      enableHighAccuracy: true,
+    });
     const {coords} = location;
     const geocode = yield Location.reverseGeocodeAsync(coords);
     const {isoCountryCode} = geocode[0] || {};
     console.log(geocode, '=====geocode');
-    if (ISO_COUNTRY_CODE_BLACK_LIST.includes(isoCountryCode)) {
+    if (blackList.includes(isoCountryCode)) {
       ActionSheet.alert(
         i18n.t('safetyReminder'),
         i18n.t('alert.locationTips'),

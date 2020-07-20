@@ -9,7 +9,7 @@ import settingsActions, {
   settingsSelectors,
 } from '../../../../redux/settingsRedux';
 import {useSelector, shallowEqual, useDispatch} from 'react-redux';
-import {DEFAULT_CURRENCY} from '../../../../config/constant';
+// import {DEFAULT_CURRENCY} from '../../../../config/constant';
 const GeneralSettings = () => {
   const dispatch = useDispatch();
   const changeInform = useCallback(
@@ -17,10 +17,10 @@ const GeneralSettings = () => {
     [dispatch],
   );
   const inform = useSelector(settingsSelectors.getInform, shallowEqual);
-  const currencyUnit = useSelector(
-    settingsSelectors.getCurrencyUnit,
-    shallowEqual,
-  );
+  // const currencyUnit = useSelector(
+  //   settingsSelectors.getCurrencyUnit,
+  //   shallowEqual,
+  // );
   useSelector(settingsSelectors.getLanguage, shallowEqual);
   return (
     <View style={GStyle.secondContainer}>
@@ -39,7 +39,7 @@ const GeneralSettings = () => {
         title={i18n.t('language')}
         subtitle={i18n.t('currentLanguage')}
       />
-      <ListItem
+      {/* <ListItem
         onPress={() => navigationService.navigate('CurrencyUnit')}
         title={i18n.t('mineModule.generalSettings.currencyUnit')}
         subtitle={currencyUnit || DEFAULT_CURRENCY}
@@ -47,7 +47,7 @@ const GeneralSettings = () => {
       <ListItem
         onPress={() => navigationService.navigate('NetworkManagement')}
         title={i18n.t('mineModule.generalSettings.networkManagement')}
-      />
+      /> */}
     </View>
   );
 };

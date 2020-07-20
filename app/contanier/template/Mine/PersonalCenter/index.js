@@ -13,10 +13,8 @@ import {
   TextM,
   CopyText,
 } from '../../../../components/template/CommonText';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import i18n from 'i18n-js';
 import {screenshots} from '../../../../utils/pages';
-import navigationService from '../../../../utils/common/navigationService';
 import userActions, {userSelectors} from '../../../../redux/userRedux';
 import {shallowEqual, useSelector, useDispatch} from 'react-redux';
 const PersonalCenter = () => {
@@ -44,11 +42,8 @@ const PersonalCenter = () => {
         <View style={styles.box}>
           <View style={styles.topBox}>
             <View ref={viewShot} style={styles.shotView}>
-              <TextL
-                onPress={() => navigationService.navigate('EditUserName')}
-                style={styles.userNameStyle}>
-                {i18n.t('mineModule.username')}:{userName}{' '}
-                <FontAwesome name="edit" color={Colors.primaryColor} />
+              <TextL style={styles.userNameStyle}>
+                {i18n.t('mineModule.username')}:{userName}
               </TextL>
               <MyQRCode value={QRCodeValue} />
             </View>

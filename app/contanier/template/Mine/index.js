@@ -107,8 +107,6 @@ const Mine = props => {
     onAppInit,
   } = props;
   const {userName, balance, address} = userInfo;
-  console.log(userInfo, '=====userInfo');
-  console.log(JSON.stringify(userInfo.keystore));
   useFocusEffect(
     useCallback(() => {
       if (!address) {

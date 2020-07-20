@@ -10,7 +10,8 @@ import {useSelector, shallowEqual} from 'react-redux';
 import {Colors} from '../../assets/theme';
 import {AppState} from 'react-native';
 import navigationService from '../../utils/common/navigationService';
-import {SECURITY_TIME} from '../../config/constant';
+import config from '../../config';
+const {SafeTime} = config;
 let timer = null;
 const Tab = createBottomTabNavigator();
 const TabNavigatorStack = () => {
@@ -20,13 +21,16 @@ const TabNavigatorStack = () => {
   );
   const appStateChange = useCallback(
     appState => {
-      if (securityLock) {
-        if (appState === 'active' && timer) {
-          if (new Date().getTime() > timer + SECURITY_TIME) {
-            navigationService.navigate('SecurityLock');
-          }
+      if (securityLock && SafeTime) {
+        if (
+          appState === 'active' &&
+          timer &&
+          new Date().getTime() > timer + SafeTime
+        ) {
           timer = null;
-        } else if (appState === 'background') {
+          navigationService.navigate('SecurityLock');
+        }
+        if (appState === 'background') {
           timer = new Date().getTime();
         }
       }
