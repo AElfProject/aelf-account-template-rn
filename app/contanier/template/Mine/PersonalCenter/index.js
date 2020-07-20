@@ -4,7 +4,6 @@ import {
   CommonHeader,
   MyQRCode,
   CommonButton,
-  ListItem,
 } from '../../../../components/template';
 import styles from './styles';
 import {View} from 'react-native';
