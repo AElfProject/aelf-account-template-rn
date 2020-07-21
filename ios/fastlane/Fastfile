@@ -57,7 +57,7 @@ platform :ios do
       telegram(
         token: "",
         chat_id: "",
-        text: "Hello (｀・ω・´)",
+        text: "http://d.firim.vip/iosaelfAccount " + "aelfaccount-" + version_name + " iOS Build" + version,
         proxy: "http://127.0.0.1:1087"
       )
     end
