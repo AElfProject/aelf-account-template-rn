@@ -1,6 +1,6 @@
 {
   "home": "主页",
-  "mine": "我的",
+  "my": "我的",
   "switchLanguage": "切换语言",
   "language": "语言",
   "currentLanguage": "简体中文",
@@ -206,7 +206,8 @@
       "availableBalance": "当前可用余额为",
       "from": "从",
       "to": "至",
-      "transactionDetails": "交易详情"
+      "transactionDetails": "交易详情",
+      "transferSelfTip": "无法给自己转账"
     }
   },
   "permission": {
@@ -221,7 +222,9 @@
     "anDeniedDetails": "请打开您的设置,允许我们访问您的{{type}}权限",
     "openFailed": "打开失败",
     "failedDetails": "请在iPhone的“设置-隐私”选项中,允许访问您的{{type}}",
-    "getLocation": "位置"
+    "getLocation": "位置",
+    "cannotTitle": "无法使用应用",
+    "cannotTip": "您未允许访问位置权限或您的位置不允许使用该应用"
   },
   "noTransactionPwdTip": "还没有设置交易密码，请先去设置支付密码",
   "userSaga": {
@@ -229,7 +232,8 @@
     "registrationFailed": "注册失败",
     "transferFailed": "转账失败,请稍后重试",
     "authorizationSucceeded": "授权成功",
-    "authorizationFailed": "授权失败，请稍后重试"
+    "authorizationFailed": "授权失败，请稍后重试",
+    "getLocationTip": "正在获取您的位置信息"
   },
   "securityLock": {
     "title": "安全验证",

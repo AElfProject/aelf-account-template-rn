@@ -10,23 +10,27 @@
  *    you'll need to define a constant in that file.
  *************************************************************/
 
-import {all, takeLatest} from 'redux-saga/effects';
-import {settingsTypes} from '../redux/settingsRedux';
+import {all, takeLatest, put, delay} from 'redux-saga/effects';
+import settingsActions, {settingsTypes} from '../redux/settingsRedux';
 import * as Location from 'expo-location';
 import {permissionDenied} from '../utils/pages';
 import i18n from 'i18n-js';
 import config from '../config';
-import {ActionSheet} from '../components/template';
+import {ActionSheet, Loading} from '../components/template';
 function* getLocationSaga() {
   const blackList = config.ISOCountryCodeBlackList;
   if (!Array.isArray(blackList)) {
+    yield put(settingsActions.changeCanUse(true));
     return;
   }
   try {
+    yield delay(500);
     const {status} = yield Location.requestPermissionsAsync();
     if (status !== 'granted') {
-      return permissionDenied(i18n.t('permission.getLocation'));
+      permissionDenied(i18n.t('permission.getLocation'));
+      return;
     }
+    Loading.show(i18n.t('userSaga.getLocationTip'));
     const location = yield Location.getCurrentPositionAsync({
       enableHighAccuracy: true,
     });
@@ -40,8 +44,12 @@ function* getLocationSaga() {
         i18n.t('alert.locationTips'),
         [{title: i18n.t('determine')}],
       );
+    } else {
+      yield put(settingsActions.changeCanUse(true));
     }
+    Loading.destroy();
   } catch (error) {
+    Loading.destroy();
     console.log('getLocationSaga', error);
   }
 }

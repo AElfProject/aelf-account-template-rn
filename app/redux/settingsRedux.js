@@ -14,6 +14,7 @@ const {Types, Creators} = createActions({
   changeSecurityLock: ['securityLock'],
   reSetSettings: [],
   getLocation: [],
+  changeCanUse: ['canUse'],
 });
 
 export const settingsTypes = Types;
@@ -29,6 +30,7 @@ export const INITIAL_STATE = Immutable({
   inform: null,
   currencyUnit: DEFAULT_CURRENCY,
   securityLock: null,
+  canUse: null,
 });
 
 /* ------------- Selectors ------------- */
@@ -64,6 +66,10 @@ export const settingsSelectors = {
     _baseSelector,
     base => base.securityLock,
   ),
+  getCanUse: createSelector(
+    _baseSelector,
+    base => base.canUse,
+  ),
 };
 
 /* ------------- Reducers ------------- */
@@ -94,10 +100,14 @@ export const reSetSettings = state => {
     payPw: null,
     biometrics: null,
     securityLock: null,
+    canUse: null,
   });
 };
 export const getLocation = state => {
   return state.merge();
+};
+export const changeCanUse = (state, {canUse}) => {
+  return state.merge({canUse});
 };
 /* ------------- Hookup Reducers To Types ------------- */
 export const reducer = createReducer(INITIAL_STATE, {
@@ -110,4 +120,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.CHANGE_SECURITY_LOCK]: changeSecurityLock,
   [Types.RE_SET_SETTINGS]: reSetSettings,
   [Types.GET_LOCATION]: getLocation,
+  [Types.CHANGE_CAN_USE]: changeCanUse,
 });

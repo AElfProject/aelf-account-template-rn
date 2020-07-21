@@ -55,11 +55,11 @@ const PaymentSettings = () => {
           i18n.t('mineModule.securityCenter.turnOffBiometrics'),
           i18n.t('mineModule.securityCenter.turnOffBiometricsTip'),
           [
+            {title: i18n.t('cancel'), type: 'cancel'},
             {
               title: i18n.t('determine'),
               onPress: () => changeBiometrics(value),
             },
-            {title: i18n.t('cancel'), type: 'cancel'},
           ],
         );
       }

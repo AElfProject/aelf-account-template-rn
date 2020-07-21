@@ -9,6 +9,7 @@ let elements = [];
 let timer = null;
 export default class Loading extends React.Component {
   static show(text, overlayProps = {}, duration = 20000) {
+    Loading.hide();
     let overlayView = (
       <Overlay.PopView
         modal={true}

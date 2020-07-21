@@ -56,7 +56,7 @@ export default {
    * https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements
    * Note that this is an array
    */
-  ISOCountryCodeBlackList: ['CN'],
+  // ISOCountryCodeBlackList: ['CN'],
   /**
    * safety lock time
    * 10 minutes by default

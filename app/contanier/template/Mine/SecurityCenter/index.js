@@ -30,6 +30,7 @@ const SecurityCenter = () => {
           i18n.t('securityLock.openVerification'),
           i18n.t('securityLock.openVerificationTip'),
           [
+            {title: i18n.t('cancel'), type: 'cancel'},
             {
               title: i18n.t('determine'),
               onPress: () => {
@@ -38,7 +39,6 @@ const SecurityCenter = () => {
                 });
               },
             },
-            {title: i18n.t('cancel'), type: 'cancel'},
           ],
         );
       } else {
@@ -46,6 +46,7 @@ const SecurityCenter = () => {
           i18n.t('securityLock.downVerification'),
           i18n.t('securityLock.downVerificationTip'),
           [
+            {title: i18n.t('cancel'), type: 'cancel'},
             {
               title: i18n.t('determine'),
               onPress: () => {
@@ -54,7 +55,6 @@ const SecurityCenter = () => {
                 });
               },
             },
-            {title: i18n.t('cancel'), type: 'cancel'},
           ],
         );
       }

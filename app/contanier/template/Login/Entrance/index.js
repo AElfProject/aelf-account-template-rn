@@ -28,6 +28,8 @@ const Entrance = props => {
     [dispatch],
   );
   const userList = useSelector(userSelectors.getUserList, shallowEqual);
+  const address = useSelector(userSelectors.getAddress, shallowEqual);
+  const canUse = useSelector(settingsSelectors.getCanUse, shallowEqual);
   useSelector(settingsSelectors.getLanguage, shallowEqual); //Language status is controlled with redux
   const onPress = useCallback(
     value => {
@@ -44,9 +46,16 @@ const Entrance = props => {
     [dispatch],
   );
   useEffect(() => {
-    getLocation();
-  }, [getLocation]);
-  const login = async () => {
+    !address && getLocation();
+  }, [address, getLocation]);
+  const onLogin = useCallback(async () => {
+    if (!canUse) {
+      return ActionSheet.alert(
+        i18n.t('permission.cannotTitle'),
+        i18n.t('permission.cannotTip'),
+        [{title: i18n.t('determine')}],
+      );
+    }
     const {status} = await BarCodeScanner.requestPermissionsAsync();
     if (status !== 'granted') {
       permissionDenied(
@@ -56,7 +65,17 @@ const Entrance = props => {
     } else {
       navigationService.navigate('QRCodeScan');
     }
-  };
+  }, [canUse]);
+  const onRegister = useCallback(() => {
+    if (!canUse) {
+      return ActionSheet.alert(
+        i18n.t('permission.cannotTitle'),
+        i18n.t('permission.cannotTip'),
+        [{title: i18n.t('determine')}],
+      );
+    }
+    navigationService.navigate('Registered');
+  }, [canUse]);
   return (
     <View style={GStyle.container}>
       <ImageBackground
@@ -83,13 +102,11 @@ const Entrance = props => {
             <CommonButton
               title={i18n.t('login.login')}
               style={styles.loginButton}
-              onPress={login}
+              onPress={onLogin}
             />
             <CommonButton
               title={i18n.t('login.register')}
-              onPress={() => {
-                navigationService.navigate('Registered');
-              }}
+              onPress={onRegister}
             />
             <View style={styles.premiumBox}>
               {/* <TextL

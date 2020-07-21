@@ -15,7 +15,8 @@
     "firim": "npm run firim:android && npm run firim:ios",
     "pushApp:android": "cd android/ && fastlane fir_im && fastlane push_telegram",
     "pushApp:ios": "cd ios/ && fastlane fir_im && fastlane push_telegram",
-    "pushApp": "npm run firim:android && npm run firim:ios"
+    "pushApp": "npm run pushApp:android && npm run pushApp:ios",
+    "telegram": "cd android/ && fastlane push_telegram && cd .. && cd ios/ && fastlane push_telegram"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.11.0",

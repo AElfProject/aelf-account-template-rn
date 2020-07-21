@@ -1,4 +1,4 @@
-import React, {useEffect, memo, useMemo, useCallback} from 'react';
+import React, {useEffect, memo, useMemo} from 'react';
 import {View, StatusBar, ScrollView} from 'react-native';
 import {GStyle, Colors} from '../../../assets/theme';
 import styles from './styles';
@@ -14,7 +14,6 @@ import navigationService from '../../../utils/common/navigationService';
 import i18n from 'i18n-js';
 import userActions, {userSelectors} from '../../../redux/userRedux';
 import config from '../../../config';
-import {useFocusEffect} from '@react-navigation/native';
 const {tokenSymbol} = config;
 const Tool = () => {
   const language = useSelector(settingsSelectors.getLanguage, shallowEqual);
@@ -106,14 +105,7 @@ const Mine = props => {
     getUserBalance,
     onAppInit,
   } = props;
-  const {userName, balance, address} = userInfo;
-  useFocusEffect(
-    useCallback(() => {
-      if (!address) {
-        navigationService.reset('Entrance');
-      }
-    }, [address]),
-  );
+  const {userName, balance} = userInfo;
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       changeBarStyle('light-content');
@@ -127,10 +119,13 @@ const Mine = props => {
     getUserBalance();
     const timer = setInterval(() => {
       getUserBalance();
-      onAppInit();
     }, 10000);
+    const initTimer = setInterval(() => {
+      onAppInit();
+    }, 20000);
     return () => {
       timer && clearTimeout(timer);
+      initTimer && clearTimeout(initTimer);
       unsubscribe();
       blurUnsubscribe();
     };

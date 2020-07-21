@@ -77,6 +77,12 @@ const Transfer = props => {
           i18n.t('mineModule.authorizeManagement.incorrectAddress'),
         );
       }
+      if (
+        aelfUtils.formatRestoreAddress(address) ===
+        aelfUtils.formatRestoreAddress(userInfo.address)
+      ) {
+        return CommonToast.text(i18n.t('mineModule.transferM.transferSelfTip'));
+      }
       TransactionVerification.show(value => {
         if (value) {
           Loading.show();
@@ -91,7 +97,7 @@ const Transfer = props => {
     } else {
       CommonToast.text(i18n.t('mineModule.transferM.enterTip'));
     }
-  }, [address, amount, balance, transfer]);
+  }, [address, amount, balance, transfer, userInfo.address]);
   const onChangeAmount = useCallback(
     value => {
       if (value > balance) {

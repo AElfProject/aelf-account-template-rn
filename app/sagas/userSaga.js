@@ -23,6 +23,7 @@ import aelfUtils from '../utils/pages/aelfUtils';
 import {isIos} from '../utils/common/device';
 import settingsActions from '../redux/settingsRedux';
 import i18n from 'i18n-js';
+import {Alert} from 'react-native';
 const {
   tokenSymbol,
   contractAddresses,
@@ -188,8 +189,13 @@ function* transferSaga({param}) {
       TransactionId: transaction.TransactionId,
     });
   } catch (error) {
+    yield delay(2000);
     Loading.hide();
-    CommonToast.fail(i18n.t('userSaga.transferFailed'));
+    Alert.alert(
+      i18n.t('userSaga.transferFailed'),
+      JSON.stringify(error || {}),
+      [{text: i18n.t('determine')}],
+    );
     console.log(error, 'transferSaga');
   }
 }

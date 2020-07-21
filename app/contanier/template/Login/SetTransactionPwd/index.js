@@ -83,6 +83,13 @@ const SetTransactionPwd = () => {
           Keyboard.dismiss();
           ActionSheet.alert(i18n.t('setBiometrics'), null, [
             {
+              title: i18n.t('later'),
+              type: 'cancel',
+              onPress: () => {
+                navigate(false);
+              },
+            },
+            {
               title: i18n.t('determine'),
               onPress: () => {
                 touchAuth()
@@ -94,13 +101,6 @@ const SetTransactionPwd = () => {
                     navigate(false);
                     CommonToast.fail(i18n.t('setFail'));
                   });
-              },
-            },
-            {
-              title: i18n.t('later'),
-              type: 'cancel',
-              onPress: () => {
-                navigate(false);
               },
             },
           ]);

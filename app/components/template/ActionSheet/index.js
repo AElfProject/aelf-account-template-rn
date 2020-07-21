@@ -54,8 +54,8 @@ const show = (items, cancelItem) => {
 const alert = (title, message, buttons) => {
   OverlayModal.show(
     <View style={styles.alertBox}>
-      <Text style={styles.alertTitle}>{title}</Text>
-      {message && <Text style={styles.alertMessage}>{message}</Text>}
+      {title ? <Text style={styles.alertTitle}>{title}</Text> : null}
+      {message ? <Text style={styles.alertMessage}>{message}</Text> : null}
       <View style={styles.buttonsBox}>
         {Array.isArray(buttons) &&
           buttons.map((item, index) => (
