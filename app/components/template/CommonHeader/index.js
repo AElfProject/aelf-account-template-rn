@@ -49,6 +49,11 @@ const styles = StyleSheet.create({
   titleBox: {
     alignItems: 'center',
   },
+  leftTitleStyle: {
+    fontSize: pTd(30),
+    color: Colors.fontColor,
+    marginLeft: 15,
+  },
   rightTitleStyle: {
     fontSize: pTd(30),
     color: Colors.fontColor,
@@ -70,6 +75,8 @@ const Header = props => {
     statusBar,
     rightTitle,
     rightOnPress,
+    leftTitle,
+    leftOnPress,
   } = props;
   return (
     <View
@@ -90,7 +97,15 @@ const Header = props => {
               <Icon name={'left'} size={24} color={Colors.fontColor} />
             </TouchableOpacity>
           ) : null}
-          {leftElement ? leftElement : null}
+          {leftElement ? (
+            leftElement
+          ) : leftTitle ? (
+            <Touchable
+              style={styles.rightBox}
+              onPress={() => leftOnPress && leftOnPress()}>
+              <TextM style={styles.leftTitleStyle}>{leftTitle}</TextM>
+            </Touchable>
+          ) : null}
         </View>
         {titleElement ? (
           titleElement
