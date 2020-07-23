@@ -62,5 +62,5 @@ export default {
    * 10 minutes by default
    * milliseconds as a unit
    */
-  SafeTime: 600000,
+  safeTime: 600000,
 };

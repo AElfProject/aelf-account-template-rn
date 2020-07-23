@@ -12,7 +12,7 @@ import {AppState} from 'react-native';
 import navigationService from '../../utils/common/navigationService';
 import config from '../../config';
 import {userSelectors} from '../../redux/userRedux';
-const {SafeTime} = config;
+const {safeTime} = config;
 let timer = null;
 const Tab = createBottomTabNavigator();
 const TabNavigatorStack = () => {
@@ -23,11 +23,11 @@ const TabNavigatorStack = () => {
   const address = useSelector(userSelectors.getAddress, shallowEqual);
   const appStateChange = useCallback(
     appState => {
-      if (securityLock && SafeTime) {
+      if (securityLock && safeTime) {
         if (
           appState === 'active' &&
           timer &&
-          new Date().getTime() > timer + SafeTime
+          new Date().getTime() > timer + safeTime
         ) {
           timer = null;
           navigationService.navigate('SecurityLock');
