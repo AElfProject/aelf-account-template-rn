@@ -60,6 +60,7 @@ function* onRegisteredSaga(actios) {
     );
     Loading.hide();
     CommonToast.success(i18n.t('userSaga.registrationSuccess'));
+    yield delay(500);
     navigationService.reset([{name: 'Tab'}, {name: 'GenerateQRCode'}]);
   } catch (error) {
     Loading.hide();
@@ -119,6 +120,13 @@ function* getUserBalanceSaga() {
 }
 function* onLoginSuccessSaga({data}) {
   try {
+    yield put(
+      contractsActions.setContracts({
+        contracts: {},
+      }),
+    );
+    yield put(userActions.setAllowanceList([]));
+
     data.address = aelfUtils.formatAddress(data.address);
     let userList = [];
     const List = yield select(userSelectors.getUserList);
