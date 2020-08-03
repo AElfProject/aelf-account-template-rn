@@ -13,7 +13,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import {Colors} from '../../../assets/theme';
-import {sreenHeight} from '../../../utils/common/device';
+import {sreenHeight, bottomBarHeigth} from '../../../utils/common/device';
 export default class ListComponent extends Component {
   //renderItem
   static propTypes = {
@@ -40,10 +40,10 @@ export default class ListComponent extends Component {
     };
   }
   componentWillUnmount() {
-    this.timer && clearTimeout(this.timer);
+    this.endRefresh && clearTimeout(this.endRefresh);
   }
   onEndReached = touch => {
-    if (touch === true || (this.canLoadMore && !this.props.loadCompleted)) {
+    if (touch || (this.canLoadMore && !this.props.loadCompleted)) {
       this.setState({bottomLoad: true}, () => {
         this.props.onEndReached && this.props.onEndReached();
         this.canLoadMore = false;
@@ -64,7 +64,7 @@ export default class ListComponent extends Component {
   };
   ListFooterComponent = _ => {
     const {bottomLoad} = this.state;
-    const {loadCompleted, allLoadedTips} = this.props;
+    const {loadCompleted, allLoadedTips, bottomLoadTip} = this.props;
     if (loadCompleted) {
       return (
         <View style={styles.FooterStyles}>
@@ -77,9 +77,9 @@ export default class ListComponent extends Component {
         onPress={() => this.onEndReached(true)}
         style={styles.FooterStyles}>
         {bottomLoad ? (
-          <ActivityIndicator size="large" color={'green'} />
+          <ActivityIndicator size="large" color={Colors.primaryColor} />
         ) : (
-          <Text>Click to load more</Text>
+          <Text>{bottomLoadTip || 'Click to load more'}</Text>
         )}
       </TouchableOpacity>
     );
@@ -162,6 +162,7 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: bottomBarHeigth,
   },
   emptyBox: {
     marginTop: 200,
