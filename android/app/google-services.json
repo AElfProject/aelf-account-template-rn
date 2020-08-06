@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "49227637637",
+    "firebase_url": "https://aelf-account.firebaseio.com",
+    "project_id": "aelf-account",
+    "storage_bucket": "aelf-account.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49227637637:android:82ebb93d4ef91296e4daec",
+        "android_client_info": {
+          "package_name": "com.aelf.aelfaccount"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "49227637637-msj0oue80s4r0judj5dm5eju76q163am.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAglo_XAuE1e3hc4ii9DBOltkHoSe4Akpc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "49227637637-msj0oue80s4r0judj5dm5eju76q163am.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "49227637637-quqid65i55tb28bs2403rb872nmtupfs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aelf.aelfAccount"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
