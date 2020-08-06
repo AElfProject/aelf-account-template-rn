@@ -3,6 +3,13 @@ React Native: 0.62.4 with expo SDK
 
 AccountTemplate is separated from a third-party project for aelf.
 
+
+## eslint & eslint-hooks
+
+```bash
+npm run postinstall
+```
+
 ## Extra Dependencies
 
 Expo: https://docs.expo.io/
@@ -15,16 +22,12 @@ npm install --global expo-cli
 
 Follow this doc: https://reactnative.cn/docs/getting-started.
 
-## eslint & eslint-hooks
-
 ## 2.How to run on device
 
 https://reactnative.dev/docs/running-on-device
 
 `iOS: please config Signing & Capabilities in xCode.`
-```bash
-npm run postinstall
-```
+
 ## 3.Copy from this project
 
 If you copy the package.json from this project.
