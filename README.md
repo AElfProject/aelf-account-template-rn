@@ -58,7 +58,7 @@ FYI: https://reactnative.dev/docs/signed-apk-android#generating-the-release-apk
 
 We set a default keystore for you in android/app/src
 
-`#file: aelf-template-key.keystore  #password: loveaelf`
+`#file: aelf-template-key.keystore  #password: loveaelf #alias: my-key-alias`
 
 ### iOS ipa
 

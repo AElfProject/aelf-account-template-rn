@@ -48,6 +48,7 @@ const Input = props => {
 export default memo(Input);
 const styles = StyleSheet.create({
   input: {
+    color: Colors.fontBlack,
     width: '100%',
     // flex: 1,
     fontSize: 16,
@@ -71,5 +72,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     height: 50,
     paddingHorizontal: 5,
+    color: Colors.fontBlack,
   },
 });
