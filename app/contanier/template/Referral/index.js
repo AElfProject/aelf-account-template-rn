@@ -2,15 +2,15 @@ import Spinner from 'react-native-spinkit';
 import {ImageBackground} from 'react-native';
 import * as Localization from 'expo-localization';
 import React, {useEffect, useCallback, memo} from 'react';
-import {useDispatch, useSelector, shallowEqual} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 import {pTd} from '../../../utils/common';
 import {languageList} from '../../../i18n/config';
 import {launchScreen} from '../../../assets/images';
-import settingsActions, {settingsSelectors} from '../../../redux/settingsRedux';
+import settingsActions from '../../../redux/settingsRedux';
 import navigationService from '../../../utils/common/navigationService';
 import {Colors} from '../../../assets/theme';
-import {userSelectors} from '../../../redux/userRedux';
+import {useStateToProps} from '../../../utils/pages/hooks';
 
 const style = {
   flex: 1,
@@ -21,18 +21,19 @@ const style = {
 };
 const time = 2000;
 const Referral = () => {
-  const userInfo = useSelector(userSelectors.getUserInfo, shallowEqual);
-  const securityLock = useSelector(
-    settingsSelectors.getSecurityLock,
-    shallowEqual,
-  );
   const dispatch = useDispatch();
   const changeLanguage = useCallback(
     language => dispatch(settingsActions.changeLanguage(language)),
     [dispatch],
   );
-  const language = useSelector(settingsSelectors.getLanguage, shallowEqual);
-  const {address} = userInfo;
+  const {address, securityLock, language} = useStateToProps(state => {
+    const {user, settings} = state;
+    return {
+      address: user.address,
+      securityLock: settings.securityLock,
+      language: settings.language,
+    };
+  });
   useEffect(() => {
     SplashScreen.hide();
     if (language) {

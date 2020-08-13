@@ -2,10 +2,14 @@ import i18n from 'i18n-js';
 import React, {memo} from 'react';
 import {CommonHeader, CommonButton} from '../../../components/template';
 import {ScrollView} from 'react-native';
-import {useSelector, shallowEqual} from 'react-redux';
-import {settingsSelectors} from '../../../redux/settingsRedux';
+import {useStateToProps} from '../../../utils/pages/hooks';
 const Home = () => {
-  useSelector(settingsSelectors.getLanguage, shallowEqual); //Language status is controlled with redux
+  useStateToProps(base => {
+    const {settings} = base;
+    return {
+      language: settings.language,
+    };
+  });
   return (
     <>
       <CommonHeader title={i18n.t('home')} />

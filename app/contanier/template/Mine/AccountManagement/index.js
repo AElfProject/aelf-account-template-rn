@@ -13,8 +13,9 @@ import i18n from 'i18n-js';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {pTd} from '../../../../utils/common';
-import userActions, {userSelectors} from '../../../../redux/userRedux';
-import {useSelector, shallowEqual, useDispatch} from 'react-redux';
+import userActions from '../../../../redux/userRedux';
+import {useDispatch} from 'react-redux';
+import {useStateToProps} from '../../../../utils/pages/hooks';
 const AccountManagement = () => {
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
@@ -33,7 +34,12 @@ const AccountManagement = () => {
   const logOut = useCallback(address => dispatch(userActions.logOut(address)), [
     dispatch,
   ]);
-  const userInfo = useSelector(userSelectors.getUserInfo, shallowEqual);
+  const {userInfo} = useStateToProps(base => {
+    const {settings, user} = base;
+    return {
+      userInfo: {...settings, ...user},
+    };
+  });
   const onDeletePress = useCallback(
     item => {
       const {address} = userInfo;

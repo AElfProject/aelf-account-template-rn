@@ -12,14 +12,12 @@ import styles from './styles';
 import i18n from 'i18n-js';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {localLanguage} from '../../../../i18n/config';
-import {useDispatch, useSelector, shallowEqual} from 'react-redux';
-import settingsActions, {
-  settingsSelectors,
-} from '../../../../redux/settingsRedux';
+import {useDispatch} from 'react-redux';
+import settingsActions from '../../../../redux/settingsRedux';
 import {BarCodeScanner} from 'expo-barcode-scanner';
 import {GStyle} from '../../../../assets/theme';
 import {permissionDenied} from '../../../../utils/pages';
-import {userSelectors} from '../../../../redux/userRedux';
+import {useStateToProps} from '../../../../utils/pages/hooks';
 const Entrance = props => {
   const {addAccount} = props.route.params || {};
   const dispatch = useDispatch();
@@ -27,10 +25,15 @@ const Entrance = props => {
     language => dispatch(settingsActions.changeLanguage(language)),
     [dispatch],
   );
-  const userList = useSelector(userSelectors.getUserList, shallowEqual);
-  const address = useSelector(userSelectors.getAddress, shallowEqual);
-  const canUse = useSelector(settingsSelectors.getCanUse, shallowEqual);
-  useSelector(settingsSelectors.getLanguage, shallowEqual); //Language status is controlled with redux
+  const {userList, address, canUse} = useStateToProps(base => {
+    const {user, settings} = base;
+    return {
+      userList: user.userList,
+      address: user.address,
+      canUse: settings.canUse,
+      language: settings.language,
+    };
+  });
   const onPress = useCallback(
     value => {
       changeLanguage(value.language);

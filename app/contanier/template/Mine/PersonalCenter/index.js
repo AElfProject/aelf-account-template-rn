@@ -14,15 +14,20 @@ import {
 } from '../../../../components/template/CommonText';
 import i18n from 'i18n-js';
 import {screenshots} from '../../../../utils/pages';
-import userActions, {userSelectors} from '../../../../redux/userRedux';
-import {shallowEqual, useSelector, useDispatch} from 'react-redux';
+import userActions from '../../../../redux/userRedux';
+import {useDispatch} from 'react-redux';
+import {useStateToProps} from '../../../../utils/pages/hooks';
 const PersonalCenter = () => {
   const dispatch = useDispatch();
   const viewShot = useRef();
-  const {address, userName, keystore} = useSelector(
-    userSelectors.getUserInfo,
-    shallowEqual,
-  );
+  const {address, userName, keystore} = useStateToProps(base => {
+    const {user} = base;
+    return {
+      address: user.address,
+      userName: user.userName,
+      keystore: user.keystore,
+    };
+  });
   const setSaveQRCode = useCallback(
     value => dispatch(userActions.setSaveQRCode(value)),
     [dispatch],

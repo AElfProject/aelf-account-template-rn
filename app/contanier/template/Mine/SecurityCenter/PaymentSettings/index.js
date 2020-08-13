@@ -9,20 +9,24 @@ import {
   VerifyPassword,
 } from '../../../../../components/template';
 import navigationService from '../../../../../utils/common/navigationService';
-import settingsActions, {
-  settingsSelectors,
-} from '../../../../../redux/settingsRedux';
-import {useSelector, useDispatch, shallowEqual} from 'react-redux';
+import settingsActions from '../../../../../redux/settingsRedux';
+import {useDispatch} from 'react-redux';
 import * as LocalAuthentication from 'expo-local-authentication';
 import {touchAuth} from '../../../../../utils/pages';
 import i18n from 'i18n-js';
+import {useStateToProps} from '../../../../../utils/pages/hooks';
 const PaymentSettings = () => {
   const dispatch = useDispatch();
   const changeBiometrics = useCallback(
     biometrics => dispatch(settingsActions.changeBiometrics(biometrics)),
     [dispatch],
   );
-  const biometrics = useSelector(settingsSelectors.getBiometrics, shallowEqual);
+  const {biometrics} = useStateToProps(base => {
+    const {settings} = base;
+    return {
+      biometrics: settings.biometrics,
+    };
+  });
   const onValueChange = useCallback(
     async value => {
       if (value) {

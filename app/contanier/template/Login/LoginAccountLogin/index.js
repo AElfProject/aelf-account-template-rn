@@ -9,12 +9,19 @@ import {
 } from '../../../../components/template';
 import navigationService from '../../../../utils/common/navigationService';
 import i18n from 'i18n-js';
-import {useSelector, shallowEqual, useDispatch} from 'react-redux';
-import userActions, {userSelectors} from '../../../../redux/userRedux';
+import {useDispatch} from 'react-redux';
+import userActions from '../../../../redux/userRedux';
 import {pTd} from '../../../../utils/common';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {useStateToProps} from '../../../../utils/pages/hooks';
 const LoginAccountLogin = () => {
-  const userInfo = useSelector(userSelectors.getUserInfo, shallowEqual);
+  const {userList, address} = useStateToProps(base => {
+    const {user} = base;
+    return {
+      userList: user.userList,
+      address: user.address,
+    };
+  });
   const dispatch = useDispatch();
   const onLoginSuccess = useCallback(
     data => dispatch(userActions.onLoginSuccess(data)),
@@ -45,7 +52,6 @@ const LoginAccountLogin = () => {
     [onLoginSuccess],
   );
   const AccountComponents = useMemo(() => {
-    const {userList, address} = userInfo;
     const accountList = Array.isArray(userList)
       ? userList.map(item => ({
           ...item,
@@ -73,7 +79,7 @@ const LoginAccountLogin = () => {
         </View>
       );
     });
-  }, [onSwitchAccount, rightElement, userInfo]);
+  }, [address, onSwitchAccount, rightElement, userList]);
   return (
     <View style={GStyle.secondContainer}>
       <CommonHeader title={i18n.t('login.loginAccountLogin')} canBack>

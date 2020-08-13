@@ -4,11 +4,15 @@ import {GStyle} from '../../../../assets/theme';
 import {CommonHeader, BounceSpinner} from '../../../../components/template';
 import i18n from 'i18n-js';
 import {WebView} from 'react-native-webview';
-import {userSelectors} from '../../../../redux/userRedux';
-import {shallowEqual, useSelector} from 'react-redux';
 import aelfUtils from '../../../../utils/pages/aelfUtils';
+import {useStateToProps} from '../../../../utils/pages/hooks';
 const TransactionManagement = () => {
-  const address = useSelector(userSelectors.getAddress, shallowEqual);
+  const {address} = useStateToProps(base => {
+    const {user} = base;
+    return {
+      address: user.address,
+    };
+  });
   const Components = useMemo(() => {
     const uri = aelfUtils.webURLAddress(address);
     return (

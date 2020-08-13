@@ -6,12 +6,15 @@ import {TextL, TextTitle} from '../../../../components/template/CommonText';
 import termsService from '../config/termsService';
 import {GStyle} from '../../../../assets/theme';
 import {pTd} from '../../../../utils/common';
-import {settingsSelectors} from '../../../../redux/settingsRedux';
-import {shallowEqual, useSelector} from 'react-redux';
 import {bottomBarHeigth} from '../../../../utils/common/device';
+import {useStateToProps} from '../../../../utils/pages/hooks';
 const TermsService = () => {
-  const language = useSelector(settingsSelectors.getLanguage, shallowEqual);
-
+  const {language} = useStateToProps(base => {
+    const {settings} = base;
+    return {
+      language: settings.language,
+    };
+  });
   const terms = termsService[language || 'en'];
   return (
     <View style={GStyle.container}>

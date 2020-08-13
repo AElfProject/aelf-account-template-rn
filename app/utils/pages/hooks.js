@@ -1,4 +1,6 @@
 import {useState, useCallback} from 'react';
+import {useSelector, shallowEqual} from 'react-redux';
+import {createSelector} from 'reselect';
 
 const useSetState = (initial = {}) => {
   const [state, saveState] = useState(initial);
@@ -7,4 +9,14 @@ const useSetState = (initial = {}) => {
   }, []);
   return [state, setState];
 };
-export {useSetState};
+
+const useStateToProps = combiner => {
+  return useSelector(
+    createSelector(
+      state => state,
+      combiner,
+    ),
+    shallowEqual,
+  );
+};
+export {useSetState, useStateToProps};

@@ -8,8 +8,7 @@ import {
   VerifyPassword,
 } from '../../../../components/template';
 import i18n from 'i18n-js';
-import {useSelector, shallowEqual, useDispatch} from 'react-redux';
-import {userSelectors} from '../../../../redux/userRedux';
+import {useDispatch} from 'react-redux';
 import {TextL, TextM} from '../../../../components/template/CommonText';
 import {pTd} from '../../../../utils/common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -17,6 +16,7 @@ import {onCopyText} from '../../../../utils/pages';
 import userActions from '../../../../redux/userRedux';
 import TransactionVerification from '../../../../utils/pages/TransactionVerification';
 import config from '../../../../config';
+import {useStateToProps} from '../../../../utils/pages/hooks';
 const {tokenSymbol} = config;
 const AuthorizeManagement = () => {
   const dispatch = useDispatch();
@@ -33,8 +33,13 @@ const AuthorizeManagement = () => {
     getAllowanceList();
   }, [getAllowanceList]);
   const rightElement = useMemo(() => <TextL>{tokenSymbol}</TextL>, []);
-  const allowanceList = useSelector(userSelectors.allowanceList, shallowEqual);
-  const balance = useSelector(userSelectors.getBalance, shallowEqual);
+  const {allowanceList, balance} = useStateToProps(base => {
+    const {user} = base;
+    return {
+      allowanceList: user.allowanceList,
+      balance: user.balance,
+    };
+  });
   const onAuthorize = useCallback(
     item => {
       VerifyPassword.inputShow({

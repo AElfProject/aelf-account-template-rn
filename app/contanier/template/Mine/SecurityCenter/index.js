@@ -8,21 +8,22 @@ import {
 } from '../../../../components/template';
 import navigationService from '../../../../utils/common/navigationService';
 import i18n from 'i18n-js';
-import settingsActions, {
-  settingsSelectors,
-} from '../../../../redux/settingsRedux';
-import {shallowEqual, useSelector, useDispatch} from 'react-redux';
+import settingsActions from '../../../../redux/settingsRedux';
+import {useDispatch} from 'react-redux';
 import TransactionVerification from '../../../../utils/pages/TransactionVerification';
+import {useStateToProps} from '../../../../utils/pages/hooks';
 const SecurityCenter = () => {
   const dispatch = useDispatch();
   const changeSecurityLock = useCallback(
     securityLock => dispatch(settingsActions.changeSecurityLock(securityLock)),
     [dispatch],
   );
-  const securityLock = useSelector(
-    settingsSelectors.getSecurityLock,
-    shallowEqual,
-  );
+  const {securityLock} = useStateToProps(base => {
+    const {settings} = base;
+    return {
+      securityLock: settings.securityLock,
+    };
+  });
   const onValueChange = useCallback(
     value => {
       if (value) {

@@ -11,15 +11,18 @@ import Spinner from 'react-native-spinkit';
 import {pTd} from '../../../../../utils/common';
 import navigationService from '../../../../../utils/common/navigationService';
 import {isIos} from '../../../../../utils/common/device';
-import {useSelector, shallowEqual} from 'react-redux';
-import {userSelectors} from '../../../../../redux/userRedux';
 import i18n from 'i18n-js';
-import {settingsSelectors} from '../../../../../redux/settingsRedux';
 import {useFocusEffect} from '@react-navigation/native';
+import {useStateToProps} from '../../../../../utils/pages/hooks';
 const ChangePaymentPwd = () => {
   const [safety, setSafety] = useState(null);
-  const userName = useSelector(userSelectors.getUserName, shallowEqual);
-  const payPw = useSelector(settingsSelectors.getPayPw, shallowEqual);
+  const {userName, payPw} = useStateToProps(base => {
+    const {settings, user} = base;
+    return {
+      userName: user.userName,
+      payPw: settings.payPw,
+    };
+  });
   useFocusEffect(
     useCallback(() => {
       const timer = setTimeout(() => {

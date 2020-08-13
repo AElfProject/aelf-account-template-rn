@@ -14,10 +14,9 @@ import {TextL, TextM} from '../../../../components/template/CommonText';
 import {pTd} from '../../../../utils/common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import navigationService from '../../../../utils/common/navigationService';
-import {useSetState} from '../../../../utils/pages/hooks';
+import {useSetState, useStateToProps} from '../../../../utils/pages/hooks';
 import {useFocusEffect} from '@react-navigation/native';
-import {useSelector, shallowEqual, useDispatch} from 'react-redux';
-import {userSelectors} from '../../../../redux/userRedux';
+import {useDispatch} from 'react-redux';
 import config from '../../../../config';
 import userActions from '../../../../redux/userRedux';
 import TransactionVerification from '../../../../utils/pages/TransactionVerification';
@@ -32,7 +31,12 @@ const Transfer = props => {
     amount: '',
   });
   const dispatch = useDispatch();
-  const userInfo = useSelector(userSelectors.getUserInfo, shallowEqual);
+  const {userInfo} = useStateToProps(base => {
+    const {user} = base;
+    return {
+      userInfo: {...user},
+    };
+  });
   const transfer = useCallback(value => dispatch(userActions.transfer(value)), [
     dispatch,
   ]);

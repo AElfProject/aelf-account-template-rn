@@ -5,10 +5,9 @@ import {CommonHeader, ListItem} from '../../../../components/template';
 import {pTd} from '../../../../utils/common';
 import i18n from 'i18n-js';
 import navigationService from '../../../../utils/common/navigationService';
-import settingsActions, {
-  settingsSelectors,
-} from '../../../../redux/settingsRedux';
-import {useSelector, shallowEqual, useDispatch} from 'react-redux';
+import settingsActions from '../../../../redux/settingsRedux';
+import {useDispatch} from 'react-redux';
+import {useStateToProps} from '../../../../utils/pages/hooks';
 // import {DEFAULT_CURRENCY} from '../../../../config/constant';
 const GeneralSettings = () => {
   const dispatch = useDispatch();
@@ -16,12 +15,13 @@ const GeneralSettings = () => {
     inform => dispatch(settingsActions.changeInform(inform)),
     [dispatch],
   );
-  const inform = useSelector(settingsSelectors.getInform, shallowEqual);
-  // const currencyUnit = useSelector(
-  //   settingsSelectors.getCurrencyUnit,
-  //   shallowEqual,
-  // );
-  useSelector(settingsSelectors.getLanguage, shallowEqual);
+  const {inform} = useStateToProps(base => {
+    const {settings} = base;
+    return {
+      language: settings.language,
+      inform: settings.inform,
+    };
+  });
   return (
     <View style={GStyle.secondContainer}>
       <CommonHeader title={i18n.t('mineModule.generalSettingT')} canBack />

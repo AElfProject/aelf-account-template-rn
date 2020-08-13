@@ -12,15 +12,12 @@ import {
 import {TextM} from '../../../../../components/template/CommonText';
 import {pTd} from '../../../../../utils/common';
 import navigationService from '../../../../../utils/common/navigationService';
-import {useSetState} from '../../../../../utils/pages/hooks';
-import settingsActions, {
-  settingsSelectors,
-} from '../../../../../redux/settingsRedux';
+import {useSetState, useStateToProps} from '../../../../../utils/pages/hooks';
+import settingsActions from '../../../../../redux/settingsRedux';
 import i18n from 'i18n-js';
-import {useDispatch, useSelector, shallowEqual} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {PASSWORD_REG} from '../../../../../config/constant';
 import aelfUtils from '../../../../../utils/pages/aelfUtils';
-import {userSelectors} from '../../../../../redux/userRedux';
 const SecondChangePaymentPwd = props => {
   const {remember} = props.route.params || {};
   const dispatch = useDispatch();
@@ -36,9 +33,14 @@ const SecondChangePaymentPwd = props => {
     payPw => dispatch(settingsActions.changePayPw(payPw)),
     [dispatch],
   );
-  const payPw = useSelector(settingsSelectors.getPayPw, shallowEqual);
-  const keystore = useSelector(userSelectors.getKeystore, shallowEqual);
-  const userName = useSelector(userSelectors.getUserName, shallowEqual);
+  const {payPw, keystore, userName} = useStateToProps(base => {
+    const {settings, user} = base;
+    return {
+      payPw: settings.payPw,
+      keystore: user.keystore,
+      userName: user.userName,
+    };
+  });
   const {tip, type, transactionPwd, pwd, pwdRule} = state;
   const onChange = useCallback(
     (types, text) => {

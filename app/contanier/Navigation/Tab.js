@@ -5,22 +5,23 @@ import HomeScreen from '../template/Home';
 import MineScreen from '../template/Mine';
 import {pixelSize} from '../../utils/common/device';
 import i18n from 'i18n-js';
-import {settingsSelectors} from '../../redux/settingsRedux';
-import {useSelector, shallowEqual} from 'react-redux';
 import {Colors} from '../../assets/theme';
 import {AppState} from 'react-native';
 import navigationService from '../../utils/common/navigationService';
 import config from '../../config';
-import {userSelectors} from '../../redux/userRedux';
+import {useStateToProps} from '../../utils/pages/hooks';
 const {safeTime} = config;
 let timer = null;
 const Tab = createBottomTabNavigator();
 const TabNavigatorStack = () => {
-  const securityLock = useSelector(
-    settingsSelectors.getSecurityLock,
-    shallowEqual,
-  );
-  const address = useSelector(userSelectors.getAddress, shallowEqual);
+  const {address, securityLock} = useStateToProps(state => {
+    const {user, settings} = state;
+    return {
+      address: user.address,
+      securityLock: settings.securityLock,
+      language: settings.language,
+    };
+  });
   const appStateChange = useCallback(
     appState => {
       if (securityLock && safeTime) {
@@ -60,7 +61,6 @@ const TabNavigatorStack = () => {
     }),
     [address],
   );
-  useSelector(settingsSelectors.getLanguage, shallowEqual); //Language status is controlled with redux
   return (
     <Tab.Navigator
       initialRouteName="HomePage"

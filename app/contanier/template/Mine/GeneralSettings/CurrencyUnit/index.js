@@ -4,22 +4,23 @@ import {GStyle} from '../../../../../assets/theme';
 import {CommonHeader, ListItem} from '../../../../../components/template';
 import {pTd} from '../../../../../utils/common';
 import i18n from 'i18n-js';
-import {useDispatch, useSelector, shallowEqual} from 'react-redux';
-import settingsActions, {
-  settingsSelectors,
-} from '../../../../../redux/settingsRedux';
+import {useDispatch} from 'react-redux';
+import settingsActions from '../../../../../redux/settingsRedux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {DEFAULT_CURRENCY} from '../../../../../config/constant';
+import {useStateToProps} from '../../../../../utils/pages/hooks';
 const CurrencyUnit = () => {
   const dispatch = useDispatch();
   const changeCurrencyUnit = useCallback(
     currencyUnit => dispatch(settingsActions.changeCurrencyUnit(currencyUnit)),
     [dispatch],
   );
-  const currencyUnit = useSelector(
-    settingsSelectors.getCurrencyUnit,
-    shallowEqual,
-  );
+  const {currencyUnit} = useStateToProps(base => {
+    const {settings} = base;
+    return {
+      currencyUnit: settings.currencyUnit,
+    };
+  });
   const rightElement = useMemo(
     () => <FontAwesome name="check" size={20} />,
     [],

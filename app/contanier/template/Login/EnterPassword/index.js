@@ -11,12 +11,11 @@ import {
 import i18n from 'i18n-js';
 import {TextL, TextM} from '../../../../components/template/CommonText';
 import styles from './styles';
-import {useSetState} from '../../../../utils/pages/hooks';
+import {useSetState, useStateToProps} from '../../../../utils/pages/hooks';
 import {PASSWORD_REG} from '../../../../config/constant';
 import navigationService from '../../../../utils/common/navigationService';
 import userActions from '../../../../redux/userRedux';
-import {useDispatch, useSelector, shallowEqual} from 'react-redux';
-import {settingsSelectors} from '../../../../redux/settingsRedux';
+import {useDispatch} from 'react-redux';
 import {sleep} from '../../../../utils/pages';
 import aelfUtils from '../../../../utils/pages/aelfUtils';
 const EnterPassword = props => {
@@ -27,7 +26,12 @@ const EnterPassword = props => {
     loading,
     pwdErr: false,
   });
-  const payPw = useSelector(settingsSelectors.getPayPw, shallowEqual); //Language status is controlled with redux
+  const {payPw} = useStateToProps(base => {
+    const {settings} = base;
+    return {
+      payPw: settings.payPw,
+    };
+  });
   const {pwd, loading, pwdErr} = state;
   const {params} = props.route;
   const onLoginSuccess = useCallback(

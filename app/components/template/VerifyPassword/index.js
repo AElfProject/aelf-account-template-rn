@@ -7,14 +7,13 @@ import {Colors, GStyle} from '../../../assets/theme';
 import Password from '../Password';
 import {pTd} from '../../../utils/common';
 import {TextL, TextM} from '../CommonText';
-import {settingsSelectors} from '../../../redux/settingsRedux';
-import {useSelector, shallowEqual} from 'react-redux';
 import i18n from 'i18n-js';
 import Input from '../Input';
 import aelfUtils from '../../../utils/pages/aelfUtils';
 import {sleep} from '../../../utils/pages';
 import BounceSpinner from '../BounceSpinner';
 import {isIos} from '../../../utils/common/device';
+import {useStateToProps} from '../../../utils/pages/hooks';
 const BottomView = props => {
   const {cancel, determine} = props;
   const Components = useMemo(
@@ -34,7 +33,12 @@ const BottomView = props => {
 };
 const PayComponents = props => {
   const [pwTip, setPwTip] = useState(false);
-  const payPw = useSelector(settingsSelectors.getPayPw, shallowEqual);
+  const {payPw} = useStateToProps(base => {
+    const {settings} = base;
+    return {
+      payPw: settings.payPw,
+    };
+  });
   const {callBack} = props;
   const intervalRef = useRef();
   const onChange = useCallback(

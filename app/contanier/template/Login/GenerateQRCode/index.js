@@ -10,21 +10,24 @@ import styles from './styles';
 import {screenshots} from '../../../../utils/pages';
 import navigationService from '../../../../utils/common/navigationService';
 import i18n from 'i18n-js';
-import userActions, {userSelectors} from '../../../../redux/userRedux';
-import {useDispatch, shallowEqual, useSelector} from 'react-redux';
+import userActions from '../../../../redux/userRedux';
+import {useDispatch} from 'react-redux';
 import {TextM, TextL} from '../../../../components/template/CommonText';
-import {settingsSelectors} from '../../../../redux/settingsRedux';
+import {useStateToProps} from '../../../../utils/pages/hooks';
 const GenerateQRCode = props => {
   const dispatch = useDispatch();
   const setSaveQRCode = useCallback(
     value => dispatch(userActions.setSaveQRCode(value)),
     [dispatch],
   );
-  const {userName, keystore} = useSelector(
-    userSelectors.getUserInfo,
-    shallowEqual,
-  );
-  const payPw = useSelector(settingsSelectors.getPayPw, shallowEqual);
+  const {userName, keystore, payPw} = useStateToProps(base => {
+    const {settings, user} = base;
+    return {
+      userName: user.userName,
+      keystore: user.keystore,
+      payPw: settings.payPw,
+    };
+  });
   const viewShot = useRef();
   const next = useCallback(async () => {
     const result = await screenshots(viewShot);

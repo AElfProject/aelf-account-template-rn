@@ -10,16 +10,18 @@ import {View} from 'react-native';
 import {TextL, CopyText} from '../../../../components/template/CommonText';
 import i18n from 'i18n-js';
 import {screenshots} from '../../../../utils/pages';
-import {userSelectors} from '../../../../redux/userRedux';
-import {shallowEqual, useSelector} from 'react-redux';
+import {useStateToProps} from '../../../../utils/pages/hooks';
 const Receive = () => {
   const viewShot = useRef();
-  const {address, keystore} = useSelector(
-    userSelectors.getUserInfo,
-    shallowEqual,
-  );
+  const {address, keystore, userName} = useStateToProps(base => {
+    const {user} = base;
+    return {
+      address: user.address,
+      keystore: user.keystore,
+      userName: user.userName,
+    };
+  });
   const QRCodeValue = keystore ? JSON.stringify(keystore) : null;
-  const userName = useSelector(userSelectors.getUserName, shallowEqual);
   return (
     <View style={GStyle.container}>
       <CommonHeader title={i18n.t('mineModule.collect')} canBack>

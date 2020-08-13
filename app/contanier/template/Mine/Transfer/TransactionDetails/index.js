@@ -11,12 +11,10 @@ import {
 import {pTd} from '../../../../../utils/common';
 import {useFocusEffect} from '@react-navigation/native';
 import {aelfInstance} from '../../../../../utils/common/aelfProvider';
-import {useSetState} from '../../../../../utils/pages/hooks';
+import {useSetState, useStateToProps} from '../../../../../utils/pages/hooks';
 import {TextL} from '../../../../../components/template/CommonText';
 import unitConverter from '../../../../../utils/pages/unitConverter';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {userSelectors} from '../../../../../redux/userRedux';
-import {useSelector, shallowEqual} from 'react-redux';
 import Icon from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {onCopyText} from '../../../../../utils/pages';
@@ -28,7 +26,12 @@ const NetworkManagement = props => {
     details: null,
     time: null,
   });
-  const address = useSelector(userSelectors.getAddress, shallowEqual);
+  const {address} = useStateToProps(base => {
+    const {user} = base;
+    return {
+      address: user.address,
+    };
+  });
   const {result, details, time} = state;
   const {params} = props.route || {};
   useFocusEffect(
