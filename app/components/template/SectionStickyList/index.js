@@ -140,7 +140,6 @@ export default class SectionStickyList extends Component {
       showScrollTop && this.setState({showScrollTop: false});
     }
   };
-  sc;
   renderScrollToTopWrapper = () => {
     const {listFooterHight} = this.props;
     const {showScrollTop} = this.state;
