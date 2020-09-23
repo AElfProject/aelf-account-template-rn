@@ -29,7 +29,7 @@ const isIphoneX = (function() {
 
 const statusBarHeight = Constants.statusBarHeight;
 
-const bottomBarHeigth = (function() {
+const bottomBarHeight = (function() {
   let Height = 0;
   if (isIos && isIphoneX) {
     Height = 34;
@@ -44,5 +44,5 @@ export {
   isIphoneX,
   windowHeight,
   statusBarHeight,
-  bottomBarHeigth,
+  bottomBarHeight,
 };

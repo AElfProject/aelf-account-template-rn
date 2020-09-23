@@ -12,7 +12,7 @@ import {
 import Touchable from '../Touchable';
 import {Colors} from '../../../assets/theme';
 import {pTd} from '../../../utils/common';
-import {bottomBarHeigth} from '../../../utils/common/device';
+import {bottomBarHeight} from '../../../utils/common/device';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 const scrollToTopBottom = 40; //The distance between the icon and the bottom
 const showScrollToTop = 300; //y-axis scroll distance
@@ -210,7 +210,7 @@ export default class SectionStickyList extends Component {
 const styles = StyleSheet.create({
   FooterStyles: {
     paddingVertical: pTd(20),
-    marginBottom: bottomBarHeigth,
+    marginBottom: bottomBarHeight,
     alignItems: 'center',
     justifyContent: 'center',
   },

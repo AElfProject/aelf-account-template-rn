@@ -5,7 +5,7 @@
 import React from 'react';
 import OverlayModal from '../OverlayModal';
 import {View, Text, StyleSheet} from 'react-native';
-import {bottomBarHeigth, statusBarHeight} from '../../../utils/common/device';
+import {bottomBarHeight, statusBarHeight} from '../../../utils/common/device';
 import Touchable from '../Touchable';
 import {Colors} from '../../../assets/theme';
 /**
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   },
   containerStyle: {
     paddingHorizontal: 20,
-    marginBottom: bottomBarHeigth + 50,
+    marginBottom: bottomBarHeight + 50,
   },
   sheetBox: {
     overflow: 'hidden',
