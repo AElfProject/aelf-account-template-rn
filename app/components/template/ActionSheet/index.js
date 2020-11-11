@@ -17,21 +17,20 @@ const show = (items, cancelItem) => {
   OverlayModal.show(
     <>
       <View style={styles.sheetBox}>
-        {items &&
-          items.map((item, index) => {
-            const {title, onPress} = item;
-            return (
-              <Touchable
-                key={index}
-                style={styles.itemBox}
-                onPress={() => {
-                  OverlayModal.hide();
-                  onPress && onPress(item);
-                }}>
-                <Text style={styles.itemText}>{title}</Text>
-              </Touchable>
-            );
-          })}
+        {items?.map((item, index) => {
+          const {title, onPress} = item;
+          return (
+            <Touchable
+              key={index}
+              style={styles.itemBox}
+              onPress={() => {
+                OverlayModal.hide();
+                onPress?.(item);
+              }}>
+              <Text style={styles.itemText}>{title}</Text>
+            </Touchable>
+          );
+        })}
       </View>
       {cancelItem && (
         <Touchable onPress={() => OverlayModal.hide()} style={styles.cancelBox}>
@@ -62,7 +61,7 @@ const alert = (title, message, buttons) => {
             <Touchable
               onPress={() => {
                 OverlayModal.hide();
-                item.onPress && item.onPress();
+                item.onPress?.();
               }}
               key={index}
               style={styles.buttonItem}>

@@ -12,9 +12,9 @@ const Touchable = props => {
     const {onPressIn, onPress, onPressWithSecond} = props;
     let newTime = new Date().getTime();
     if (!time) {
-      onPressIn ? onPressIn(pressProps) : onPress && onPress(pressProps);
+      onPressIn ? onPressIn(pressProps) : onPress?.(pressProps);
     } else if (newTime - time > onPressWithSecond) {
-      onPressIn ? onPressIn(pressProps) : onPress && onPress(pressProps);
+      onPressIn ? onPressIn(pressProps) : onPress?.(pressProps);
     }
     time = newTime;
   };

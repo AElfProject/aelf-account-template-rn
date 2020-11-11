@@ -19,7 +19,7 @@ import {useDispatch} from 'react-redux';
 import {PASSWORD_REG} from '../../../../../config/constant';
 import aelfUtils from '../../../../../utils/pages/aelfUtils';
 const SecondChangePaymentPwd = props => {
-  const {remember} = props.route.params || {};
+  const {remember} = props.route?.params;
   const dispatch = useDispatch();
   const [state, setState] = useSetState({
     tip: i18n.t('mineModule.securityCenter.enterPwdTip'),

@@ -100,9 +100,7 @@ const Header = props => {
           {leftElement ? (
             leftElement
           ) : leftTitle ? (
-            <Touchable
-              style={styles.rightBox}
-              onPress={() => leftOnPress && leftOnPress()}>
+            <Touchable style={styles.rightBox} onPress={() => leftOnPress?.()}>
               <TextM style={styles.leftTitleStyle}>{leftTitle}</TextM>
             </Touchable>
           ) : null}
@@ -119,9 +117,7 @@ const Header = props => {
           {rightElement ? (
             rightElement
           ) : rightTitle ? (
-            <Touchable
-              style={styles.rightBox}
-              onPress={() => rightOnPress && rightOnPress()}>
+            <Touchable style={styles.rightBox} onPress={() => rightOnPress?.()}>
               <TextM style={styles.rightTitleStyle}>{rightTitle}</TextM>
             </Touchable>
           ) : null}

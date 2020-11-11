@@ -9,6 +9,8 @@ import i18n from 'i18n-js';
 import * as LocalAuthentication from 'expo-local-authentication';
 import {isIos} from '../../utils/common/device';
 import * as ImagePicker from 'expo-image-picker';
+const regPos = /^\d+(\.\d+)?$/; //Integer
+const regNeg = /^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$/; //Floating point
 const sleep = time => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -19,8 +21,6 @@ const sleep = time => {
 //Is it a number
 const isNumber = val => {
   try {
-    var regPos = /^\d+(\.\d+)?$/; //Integer
-    var regNeg = /^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$/; //Floating point
     return regPos.test(val) || regNeg.test(val);
   } catch (error) {
     return false;
