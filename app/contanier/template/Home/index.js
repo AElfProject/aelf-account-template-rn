@@ -4,7 +4,7 @@ import {CommonHeader, CommonButton} from '../../../components/template';
 import {ScrollView} from 'react-native';
 import {useStateToProps} from '../../../utils/pages/hooks';
 const Home = () => {
-  useStateToProps(base => {
+  useStateToProps((base) => {
     const {settings} = base;
     return {
       language: settings.language,
