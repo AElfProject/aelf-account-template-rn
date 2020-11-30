@@ -16,7 +16,7 @@ const GStyle = StyleSheet.create({
   },
 
   //-------- margin -----------
-  marginArg: function() {
+  marginArg: function () {
     var margin = {};
 
     switch (arguments.length) {
@@ -55,7 +55,7 @@ const GStyle = StyleSheet.create({
     return margin;
   },
   //-------- padding -----------
-  paddingArg: function() {
+  paddingArg: function () {
     var padding = {};
     switch (arguments.length) {
       case 1:
@@ -93,7 +93,7 @@ const GStyle = StyleSheet.create({
     return padding;
   },
   //-------- raduis -----------
-  radiusArg: function() {
+  radiusArg: function () {
     var borderRaduis = {};
     switch (arguments.length) {
       case 1:
@@ -124,7 +124,7 @@ const GStyle = StyleSheet.create({
     return borderRaduis;
   },
   //-------- BORDER -----------
-  borderArg: function(types) {
+  borderArg: function (types) {
     switch (types) {
       case 'bottom':
         return {
