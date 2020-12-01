@@ -12,10 +12,7 @@ const useSetState = (initial = {}) => {
 
 const useStateToProps = combiner => {
   return useSelector(
-    createSelector(
-      state => state,
-      combiner,
-    ),
+    createSelector(state => state, combiner),
     shallowEqual,
   );
 };

@@ -1,4 +1,4 @@
-import React, {memo, useMemo, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {GStyle, Colors} from '../../../../assets/theme';
 import {
@@ -90,7 +90,7 @@ const HelpCenter = () => {
   );
 };
 
-export default memo(HelpCenter);
+export default HelpCenter;
 const styles = StyleSheet.create({
   box: {
     padding: pTd(20),

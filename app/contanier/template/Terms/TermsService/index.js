@@ -1,5 +1,5 @@
 import i18n from 'i18n-js';
-import React, {memo} from 'react';
+import React from 'react';
 import {CommonHeader} from '../../../../components/template';
 import {ScrollView, View, StyleSheet} from 'react-native';
 import {TextL, TextTitle} from '../../../../components/template/CommonText';
@@ -31,7 +31,7 @@ const TermsService = () => {
     </View>
   );
 };
-export default memo(TermsService);
+export default TermsService;
 const styles = StyleSheet.create({
   title: {
     alignSelf: 'center',

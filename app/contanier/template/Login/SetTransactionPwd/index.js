@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {
   CommonHeader,
   Password,
@@ -129,7 +129,7 @@ const SetTransactionPwd = () => {
     </View>
   );
 };
-export default memo(SetTransactionPwd);
+export default SetTransactionPwd;
 const styles = StyleSheet.create({
   box: {
     justifyContent: 'center',

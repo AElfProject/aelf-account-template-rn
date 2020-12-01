@@ -1,4 +1,4 @@
-import React, {memo, useMemo, useState, useCallback} from 'react';
+import React, {useMemo, useState, useCallback} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {GStyle, Colors} from '../../../../../assets/theme';
 import {
@@ -115,7 +115,7 @@ const ChangePaymentPwd = () => {
   );
 };
 
-export default memo(ChangePaymentPwd);
+export default ChangePaymentPwd;
 const styles = StyleSheet.create({
   container: {
     flex: 1,

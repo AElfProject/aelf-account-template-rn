@@ -1,4 +1,4 @@
-import React, {memo, useMemo, useCallback} from 'react';
+import React, {useMemo, useCallback} from 'react';
 import {View} from 'react-native';
 import {GStyle} from '../../../../../assets/theme';
 import {
@@ -94,4 +94,4 @@ const PaymentSettings = () => {
   return Components;
 };
 
-export default memo(PaymentSettings);
+export default PaymentSettings;

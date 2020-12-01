@@ -1,7 +1,7 @@
 import Spinner from 'react-native-spinkit';
 import {ImageBackground} from 'react-native';
 import * as Localization from 'expo-localization';
-import React, {useEffect, useCallback, memo} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import {useDispatch} from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 import {pTd} from '../../../utils/common';
@@ -74,4 +74,4 @@ const Referral = () => {
     </ImageBackground>
   );
 };
-export default memo(Referral);
+export default Referral;

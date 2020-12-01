@@ -1,4 +1,4 @@
-import React, {memo, useState} from 'react';
+import React, {useState} from 'react';
 import {View} from 'react-native';
 import {
   CommonHeader,
@@ -38,4 +38,4 @@ const EditUserName = () => {
   );
 };
 
-export default memo(EditUserName);
+export default EditUserName;

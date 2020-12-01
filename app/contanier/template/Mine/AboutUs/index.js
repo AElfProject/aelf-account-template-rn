@@ -1,4 +1,4 @@
-import React, {memo, useMemo} from 'react';
+import React, {useMemo} from 'react';
 import {View, StyleSheet, Image} from 'react-native';
 import {GStyle, Colors} from '../../../../assets/theme';
 import {CommonHeader, ListItem} from '../../../../components/template';
@@ -45,7 +45,7 @@ const AboutUs = () => {
   return Components;
 };
 
-export default memo(AboutUs);
+export default AboutUs;
 const styles = StyleSheet.create({
   logoBox: {
     backgroundColor: 'white',

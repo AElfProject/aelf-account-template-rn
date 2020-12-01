@@ -163,7 +163,4 @@ const mapDispatchToProps = {
   getUserBalance: userActions.getUserBalance,
   onAppInit: userActions.onAppInit,
 };
-export default connect(
-  null,
-  mapDispatchToProps,
-)(memo(Mine));
+export default connect(null, mapDispatchToProps)(memo(Mine));

@@ -1,4 +1,4 @@
-import React, {memo, useMemo, useCallback} from 'react';
+import React, {useMemo, useCallback} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {GStyle, Colors} from '../../../../assets/theme';
 import {
@@ -89,7 +89,7 @@ const LoginAccountLogin = () => {
   );
 };
 
-export default memo(LoginAccountLogin);
+export default LoginAccountLogin;
 const styles = StyleSheet.create({
   container: {
     marginTop: pTd(20),

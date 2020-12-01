@@ -1,4 +1,4 @@
-import React, {memo, useRef} from 'react';
+import React, {useRef} from 'react';
 import {GStyle} from '../../../../assets/theme';
 import {
   CommonHeader,
@@ -54,4 +54,4 @@ const Receive = () => {
   );
 };
 
-export default memo(Receive);
+export default Receive;

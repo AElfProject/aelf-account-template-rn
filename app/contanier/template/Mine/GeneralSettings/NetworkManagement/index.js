@@ -1,4 +1,4 @@
-import React, {memo, useMemo} from 'react';
+import React, {useMemo} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {GStyle} from '../../../../../assets/theme';
 import {CommonHeader} from '../../../../../components/template';
@@ -19,7 +19,7 @@ const NetworkManagement = () => {
   );
 };
 
-export default memo(NetworkManagement);
+export default NetworkManagement;
 const styles = StyleSheet.create({
   itemBox: {
     marginTop: pTd(15),

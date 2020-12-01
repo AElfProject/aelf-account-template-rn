@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {
   CommonHeader,
   Touchable,
@@ -175,4 +175,4 @@ const Registered = () => {
   );
 };
 
-export default memo(Registered);
+export default Registered;

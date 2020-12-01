@@ -1,4 +1,4 @@
-import React, {memo, useMemo, useState, useCallback} from 'react';
+import React, {useMemo, useState, useCallback} from 'react';
 import {View, StyleSheet, LayoutAnimation} from 'react-native';
 import {GStyle, Colors} from '../../../../assets/theme';
 import {
@@ -215,7 +215,7 @@ const AccountManagement = () => {
   return Components;
 };
 
-export default memo(AccountManagement);
+export default AccountManagement;
 const styles = StyleSheet.create({
   container: {
     marginTop: pTd(20),

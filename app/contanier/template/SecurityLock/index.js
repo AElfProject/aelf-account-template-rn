@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {View, StyleSheet, BackHandler} from 'react-native';
 import {GStyle, Colors} from '../../../assets/theme';
 import {CommonHeader, Touchable} from '../../../components/template';
@@ -53,7 +53,7 @@ const SecurityLock = () => {
   );
 };
 
-export default memo(SecurityLock);
+export default SecurityLock;
 
 const styles = StyleSheet.create({
   container: {

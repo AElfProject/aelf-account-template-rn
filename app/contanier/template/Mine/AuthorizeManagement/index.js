@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useEffect, useMemo} from 'react';
+import React, {useCallback, useEffect, useMemo} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {GStyle, Colors} from '../../../../assets/theme';
 import {
@@ -111,7 +111,7 @@ const AuthorizeManagement = () => {
   );
 };
 
-export default memo(AuthorizeManagement);
+export default AuthorizeManagement;
 const styles = StyleSheet.create({
   name: {
     color: Colors.fontGray,

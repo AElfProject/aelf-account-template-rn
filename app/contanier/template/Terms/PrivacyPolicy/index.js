@@ -1,5 +1,5 @@
 import i18n from 'i18n-js';
-import React, {memo} from 'react';
+import React from 'react';
 import {CommonHeader} from '../../../../components/template';
 import {ScrollView, View, StyleSheet} from 'react-native';
 import {TextL, TextTitle} from '../../../../components/template/CommonText';
@@ -31,7 +31,7 @@ const PrivacyPolicy = () => {
     </View>
   );
 };
-export default memo(PrivacyPolicy);
+export default PrivacyPolicy;
 const styles = StyleSheet.create({
   title: {
     alignSelf: 'center',

@@ -1,4 +1,4 @@
-import React, {memo, useCallback} from 'react';
+import React, {useCallback} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {GStyle} from '../../../../assets/theme';
 import {CommonHeader, ListItem} from '../../../../components/template';
@@ -52,7 +52,7 @@ const GeneralSettings = () => {
   );
 };
 
-export default memo(GeneralSettings);
+export default GeneralSettings;
 const styles = StyleSheet.create({
   itemBox: {
     borderBottomWidth: 0,

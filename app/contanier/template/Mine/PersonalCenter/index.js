@@ -1,4 +1,4 @@
-import React, {memo, useRef, useCallback} from 'react';
+import React, {useRef, useCallback} from 'react';
 import {GStyle} from '../../../../assets/theme';
 import {
   CommonHeader,
@@ -92,4 +92,4 @@ const PersonalCenter = () => {
   );
 };
 
-export default memo(PersonalCenter);
+export default PersonalCenter;

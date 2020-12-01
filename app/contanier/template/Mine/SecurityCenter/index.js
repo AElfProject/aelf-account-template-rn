@@ -1,4 +1,4 @@
-import React, {memo, useMemo, useCallback} from 'react';
+import React, {useMemo, useCallback} from 'react';
 import {View} from 'react-native';
 import {GStyle} from '../../../../assets/theme';
 import {
@@ -83,4 +83,4 @@ const SecurityCenter = () => {
   return Components;
 };
 
-export default memo(SecurityCenter);
+export default SecurityCenter;

@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useMemo} from 'react';
+import React, {useCallback, useMemo} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {GStyle} from '../../../../../assets/theme';
 import {CommonHeader, ListItem} from '../../../../../components/template';
@@ -57,7 +57,7 @@ const Language = () => {
   );
 };
 
-export default memo(Language);
+export default Language;
 const styles = StyleSheet.create({
   itemBox: {
     marginTop: pTd(15),
